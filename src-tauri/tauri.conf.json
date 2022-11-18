@@ -1,0 +1,80 @@
+{
+  "build": {
+    "beforeBuildCommand": "pnpm run build:web",
+    "beforeDevCommand": "pnpm run dev:web",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": true
+  },
+  "package": {
+    "productName": "Password Generator Pro",
+    "version": "0.0.1"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": true
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "Copyright © Sebastien Rousseau 2022. All rights reserved.",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/32x32.png",
+        "icons/icon.icns",
+        "icons/icon.ico",
+        "icons/Square107x107.png",
+        "icons/Square142x142.png",
+        "icons/Square150x150.png",
+        "icons/Square284x284.png",
+        "icons/Square30x30.png",
+        "icons/Square310x310.png",
+        "icons/Square44x44.png",
+        "icons/Square71x71.png",
+        "icons/Square89x89.png"
+      ],
+      "identifier": "com.sebastienrousseau.password-generator-pro",
+      "longDescription": "A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords.",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "A fast, simple and powerful Password Generator.",
+        "frameworks": [],
+        "minimumSystemVersion": "10.13",
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 618,
+        "resizable": false,
+        "title": "Password Generator Pro",
+        "width": 618
+      }
+    ]
+  }
+}
