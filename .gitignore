@@ -15,8 +15,6 @@ src-tauri/target
 src-tauri/WixTools
 src-tauri/Cargo.lock
 
-dist
-dist-ssr
 *.local
 
 # Editor directories and files
