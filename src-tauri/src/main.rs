@@ -3,18 +3,24 @@
   windows_subsystem = "windows"
 )]
 
+// 32 characters unique characters
+pub const SPECIAL: &[u8] = b"!@#$%^&*()_+-=[]{};':,./<>?";
+
 /// Import the convert_case crate to convert the string to the desired case.
 use convert_case::{Case, Casing};
+
 /// Import the random generator and the integrator random extension traits.
 use rand::{seq::SliceRandom, thread_rng, Rng};
+
 /// Import the tauri manager.
 use tauri::Manager;
-// Import the chrono crate to get the current date and time.
+
+/// Import the chrono crate to get the current date and time.
 use chrono::{DateTime, Utc};
 
 /// Create new modules for the system tray and word list
-mod system_tray;
-mod words;
+mod system_tray; // src-tauri/src/system_tray.rs
+mod words; // src-tauri/src/words.rs
 
 /// The default hash cost to use for generating
 /// bcrypt password hashes.
@@ -34,11 +40,12 @@ struct GeneratedPassword {
 fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, String> {
   // Setup a random number generator
   let mut rng = thread_rng();
-  // Generate a random number between 0 and 255.
-  let mut nb = rng.gen_range(0..255);
+  // Generate a random number between 0 and 99.
+  let mut nb = rng.gen_range(0..99);
   // Create a new vector to store the words in.
   let mut words: Vec<String> = Vec::new();
 
+  let ascii: Vec<char> = SPECIAL.iter().map(|&c| c as char).collect();
   // Generate `len` random words from the word list.
   for _ in 0..len {
     // Choose a random word from the list.
@@ -50,9 +57,14 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
     };
 
     // Convert the word to title case and add a number to the end
-    let word = format!("{}{}", word.to_case(Case::Title), nb);
-    // Generate a new random number between 0 and 255.
-    nb = rng.gen_range(0..255);
+    let word = format!(
+      "{}{}{}",
+      word.to_case(Case::Title),
+      ascii.choose(&mut rng).unwrap(),
+      nb
+    );
+    // Generate a new random number between 0 and 99.
+    nb = rng.gen_range(0..99);
     // Add the word to the vector of words.
     words.push(word);
   }

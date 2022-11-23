@@ -9,7 +9,7 @@
   import { invoke } from '@tauri-apps/api/tauri'
 
   const defaultFormValues = {
-    len: 4,
+    len: 3,
     separator: '-',
   }
 
@@ -120,8 +120,8 @@
         <input
           type="number"
           name="num-words"
-          min="1"
-          max="8"
+          min="3"
+          max="9"
           bind:value={$formData.len}
           class="border-gray-300 p-2 rounded-lg block mt-1 bg-slate-700 w-12"
         />
