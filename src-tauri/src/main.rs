@@ -30,8 +30,8 @@ fn generate_password(nwords: u8, separator: &str) -> Result<GeneratedPassword, S
   // Setup a random number generator
   // TODO - Use a single instance of this, managed by Tauri
   let mut rng = thread_rng();
+  let mut nb = rng.gen_range(0..100);
   let mut words: Vec<String> = Vec::new();
-  let nb = rng.gen_range(0..100);
 
   // Generate `nwords` random words
   for _ in 0..nwords {
@@ -42,8 +42,10 @@ fn generate_password(nwords: u8, separator: &str) -> Result<GeneratedPassword, S
       return Err("No words found".to_string());
     };
 
-    // Add the word to the list
-    words.push(word.to_string() + nb.to_string().as_str());
+    // Add number to the end of the word
+    let word = format!("{}{}", word, nb);
+    nb = rng.gen_range(0..100);
+    words.push(word);
   }
 
   // Join the words together with the separator
@@ -56,7 +58,7 @@ fn generate_password(nwords: u8, separator: &str) -> Result<GeneratedPassword, S
   // Return the password and hash
   Ok(GeneratedPassword {
     password: pass,
-    hash: hash,
+    hash,
   })
 }
 
@@ -67,17 +69,8 @@ fn main() {
     .on_system_tray_event(|app, event| match event {
       tauri::SystemTrayEvent::MenuItemClick { id, .. } => {
         let item_handle = app.tray_handle().get_item(&id);
-        let window = app.get_window("main").unwrap();
+        // let window = app.get_window("main").unwrap();
         match id.as_str() {
-          // "hide" => {
-          //   window.hide().unwrap();
-          //   item_handle.set_title("Show").unwrap();
-          // }
-          // "show" => {
-          //   window.show().unwrap();
-          //   window.set_focus().unwrap();
-          //   item_handle.set_title("Hide").unwrap();
-          // }
           "hide" => {
             println!("hide");
             let window = app.get_window("main").unwrap();
