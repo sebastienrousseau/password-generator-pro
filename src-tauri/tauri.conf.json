@@ -39,10 +39,10 @@
         "icons/Square89x89.png"
       ],
       "identifier": "com.sebastienrousseau.password-generator-pro",
-      "longDescription": "A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords.",
+      "longDescription": "A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords",
       "macOS": {
         "entitlements": null,
-        "exceptionDomain": "A fast, simple and powerful Password Generator.",
+        "exceptionDomain": "",
         "frameworks": [],
         "minimumSystemVersion": "10.13",
         "providerShortName": null,
@@ -58,11 +58,11 @@
       }
     },
     "security": {
-      "csp": null
+      "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
     },
     "systemTray": {
-      "iconPath": "icons/icon.png",
-      "iconAsTemplate": true
+      "iconAsTemplate": true,
+      "iconPath": "icons/icon.png"
     },
     "updater": {
       "active": false
@@ -70,10 +70,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 618,
-        "resizable": false,
+        "height": 600,
+        "resizable": true,
         "title": "Password Generator Pro",
-        "width": 618
+        "width": 530
       }
     ]
   }

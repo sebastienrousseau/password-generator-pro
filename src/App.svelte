@@ -9,7 +9,7 @@
   import { invoke } from '@tauri-apps/api/tauri'
 
   const defaultFormValues = {
-    nwords: 4,
+    len: 4,
     separator: '-',
   }
 
@@ -17,7 +17,7 @@
   let hash: string | undefined
 
   const formData = writable({
-    nwords: defaultFormValues.nwords,
+    len: defaultFormValues.len,
     separator: defaultFormValues.separator,
   })
 
@@ -32,13 +32,13 @@
     console.log('Calling on-generate...')
 
     // Extract the form data
-    const { nwords, separator } = get(formData)
-    console.log('nwords: ', nwords, 'separator: ', separator)
+    const { len, separator } = get(formData)
+    console.log('len: ', len, 'separator: ', separator)
 
     try {
       // Call the backend generator
       const data: { password: string; hash: string } = await invoke('generate_password', {
-        nwords,
+        len,
         separator,
       })
 
@@ -72,7 +72,7 @@
   <div class="my-5 mx-6 font-mono">
     <h1 class="text-3xl text-center font-bold mb-1">Password Generator Pro</h1>
     <p class="text-md text-center mb-7 text-slate-500">
-      A fast, simple and powerful password generator.
+      A fast, simple and powerful password generator
     </p>
 
     <!-- Password Display -->
@@ -121,9 +121,9 @@
           type="number"
           name="num-words"
           min="1"
-          max="6"
-          bind:value={$formData.nwords}
-          class="border-gray-300 p-2 rounded-lg block mt-1 bg-slate-700 w-48"
+          max="8"
+          bind:value={$formData.len}
+          class="border-gray-300 p-2 rounded-lg block mt-1 bg-slate-700 w-12"
         />
       </div>
       <div class="block mb-4">
@@ -133,7 +133,7 @@
           name="separator"
           maxlength="1"
           bind:value={$formData.separator}
-          class="border-gray-300 p-2 rounded-lg block mt-1 bg-slate-700 w-48"
+          class="border-gray-300 p-2 rounded-lg block mt-1 bg-slate-700 w-12"
         />
       </div>
 
