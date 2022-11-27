@@ -23,6 +23,7 @@ import skLocaleJSON from '../../Locales/sk-SK.json';
 import slLocaleJSON from '../../Locales/sl-SI.json';
 import spLocaleJSON from '../../Locales/sp-SP.json';
 import svLocaleJSON from '../../Locales/sv-SE.json';
+import thLocaleJSON from '../../Locales/th-TH.json';
 import trLocaleJSON from '../../Locales/tr-TR.json';
 import ukLocaleJSON from '../../Locales/uk-UA.json';
 import zhLocaleJSON from '../../Locales/zh-CN.json';
@@ -186,6 +187,7 @@ const locales = {
     'sp-VC': spLocaleJSON,
     'sp-VG': spLocaleJSON,
     'sv-SE': svLocaleJSON,
+    'th-TH': thLocaleJSON,
     'tr-TR': trLocaleJSON,
     'uk-UA': ukLocaleJSON,
     'zh-CN': zhLocaleJSON,
