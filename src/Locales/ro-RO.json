@@ -1,0 +1,12 @@
+{
+    "Button": "Generați",
+    "Button2": "Resetare",
+    "Label": "Parola",
+    "Label2": "Bcrypt Hash",
+    "Label3": "Număr de cuvinte",
+    "Label4": "Separatorul",
+    "Placeholder": "Nici o parolă generată",
+    "Placeholder2": "Nu este generat niciun hash",
+    "Subtitle": "Un generator de parole rapid, simplu și puternic",
+    "Title": "Generator de parole"
+}

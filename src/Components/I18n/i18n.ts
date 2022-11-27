@@ -17,6 +17,7 @@ import koLocaleJSON from '../../Locales/ko-KR.json';
 import nlLocaleJSON from '../../Locales/nl-NL.json';
 import plLocaleJSON from '../../Locales/pl-PL.json';
 import ptLocaleJSON from '../../Locales/pt-BR.json';
+import roLocaleJSON from '../../Locales/ro-RO.json';
 import ruLocaleJSON from '../../Locales/ru-RU.json';
 import zhLocaleJSON from '../../Locales/zh-CN.json';
 
@@ -157,6 +158,7 @@ const locales = {
     'pl-PL': plLocaleJSON,
     'pt-BR': ptLocaleJSON,
     'pt-PT': ptLocaleJSON,
+    'ro-RO': roLocaleJSON,
     'ru-RU': ruLocaleJSON,
     'ru-UA': ruLocaleJSON,
     'zh-CN': zhLocaleJSON,
