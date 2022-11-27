@@ -8,7 +8,7 @@
 
   import { invoke } from '@tauri-apps/api/tauri'
 
-  import Translate from './Components/I18n/i18n'
+  import Translate from './Components/i18n'
 
   const systemLanguage = Intl.DateTimeFormat().resolvedOptions().locale
   // const systemLanguage = navigator.languages[0]

@@ -22,4 +22,4 @@ pub const ERR_BUSY: u8 = 0x07; // Device or resource busy
 pub const ERR_LOCKED: u8 = 0x08; // Device or resource locked
 pub const ERR_NOT_FOUND: u8 = 0x09; // Device or resource not found
 pub const ERR_EXISTS: u8 = 0x0a; // Device or resource already exists
-pub const ERR_INVAL: u8 = 0x0b; // Invalid argument
+pub const ERR_INVALID: u8 = 0x0b; // Invalid argument

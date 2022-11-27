@@ -88,7 +88,7 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
 /// and the system tray
 fn main() {
   let locale = get_locale().unwrap_or_else(|| String::from("en-GB"));
-  println!("The current locale is {}", locale);
+  //println!("The current locale is {}", locale);
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![generate_password,])
     .system_tray(tray::system_tray())
