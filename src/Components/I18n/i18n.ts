@@ -14,8 +14,8 @@ import idLocaleJSON from '../../Locales/id-ID.json';
 import itLocaleJSON from '../../Locales/it-IT.json';
 import ivLocaleJSON from '../../Locales/iv-IV.json';
 import jaLocaleJSON from '../../Locales/ja-JP.json';
-import ltLocaleJSON from '../../Locales/lt-LT.json';
 import koLocaleJSON from '../../Locales/ko-KR.json';
+import ltLocaleJSON from '../../Locales/lt-LT.json';
 import nlLocaleJSON from '../../Locales/nl-NL.json';
 import plLocaleJSON from '../../Locales/pl-PL.json';
 import ptLocaleJSON from '../../Locales/pt-BR.json';
@@ -46,6 +46,8 @@ const locales = {
     'ar-OM': arLocaleJSON,
     'ar-QA': arLocaleJSON,
     'ar-SA': arLocaleJSON,
+    'ar-SD': arLocaleJSON,
+    'ar-SS': arLocaleJSON,
     'ar-SY': arLocaleJSON,
     'ar-TD': arLocaleJSON,
     'ar-TN': arLocaleJSON,
@@ -154,11 +156,17 @@ const locales = {
     'en-HM': enLocaleJSON,
     'en-HN': enLocaleJSON,
     'en-HR': enLocaleJSON,
+    'en-HT': enLocaleJSON,
+    'en-HU': enLocaleJSON,
     'en-IE': enLocaleJSON,
     'en-IL': enLocaleJSON,
     'en-IM': enLocaleJSON,
     'en-IN': enLocaleJSON,
     'en-IO': enLocaleJSON,
+    'en-IQ': enLocaleJSON,
+    'en-IR': enLocaleJSON,
+    'en-IS': enLocaleJSON,
+    'en-IT': enLocaleJSON,
     'en-JE': enLocaleJSON,
     'en-JM': enLocaleJSON,
     'en-KE': enLocaleJSON,
@@ -233,6 +241,9 @@ const locales = {
     'es-EC': esLocaleJSON,
     'es-ES': esLocaleJSON,
     'es-FK': esLocaleJSON,
+    'es-GD': esLocaleJSON,
+    'es-GL': esLocaleJSON,
+    'es-GP': esLocaleJSON,
     'es-GQ': esLocaleJSON,
     'es-GT': esLocaleJSON,
     'es-HN': esLocaleJSON,
@@ -352,6 +363,16 @@ const locales = {
     'sp-US': spLocaleJSON,
     'sp-VC': spLocaleJSON,
     'sp-VG': spLocaleJSON,
+    'sp-VI': spLocaleJSON,
+    'sp-VU': spLocaleJSON,
+    'sp-WF': spLocaleJSON,
+    'sp-WS': spLocaleJSON,
+    'sp-YT': spLocaleJSON,
+    'sp-ZA': spLocaleJSON,
+    'sp-ZM': spLocaleJSON,
+    'sp-ZW': spLocaleJSON,
+    'sv-AX': svLocaleJSON,
+    'sv-FI': svLocaleJSON,
     'sv-SE': svLocaleJSON,
     'th-TH': thLocaleJSON,
     'tr-CY': trLocaleJSON,
