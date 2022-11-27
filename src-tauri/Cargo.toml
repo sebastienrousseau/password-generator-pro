@@ -7,10 +7,10 @@ license = "MIT"
 repository = "https://github.com/sebastienrousseau/password-generator-pro"
 default-run = "password-generator-pro"
 edition = "2021"
-rust-version = "1.57"
+rust-version = "1.65"
 
 [build-dependencies]
-tauri-build = { version = "1.2.0", features = [] }
+tauri-build = { version = "1.2.1", features = [] }
 
 [dependencies]
 bcrypt = "0.13.0"

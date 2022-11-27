@@ -4,26 +4,24 @@
 )]
 
 /// Import the convert_case crate to convert the string to the desired case.
-pub use convert_case::{Case, Casing};
+use convert_case::{Case, Casing};
 
 /// Import the random generator and the integrator random extension traits.
-pub use rand::{seq::SliceRandom, thread_rng, Rng};
+use rand::{seq::SliceRandom, thread_rng, Rng};
 
 /// Import the tauri manager.
-pub use tauri::Manager;
+use tauri::Manager;
 
 /// Import the chrono crate to get the current date and time.
-pub use chrono::{DateTime, Utc};
+use chrono::{DateTime, Utc};
 
 /// Import the webbrowser crate to open the website in the default browser.
-pub use webbrowser;
+use webbrowser;
 
-pub use consts::*;
+use consts::*;
 mod consts;
 mod tray;
 mod words;
-
-pub use sys_locale::get_locale;
 
 /// GeneratedPassword stores a randomly generated password
 /// and the bcrypt hash of the password.
@@ -39,12 +37,16 @@ struct GeneratedPassword {
 fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, String> {
   // Setup a random number generator
   let mut rng = thread_rng();
+
   // Generate a random number between 0 and 99.
   let mut nb: i32 = rng.gen_range(0..=999);
+
   // Create a new vector to store the words in.
   let mut words: Vec<String> = Vec::new();
 
+  // Convert the special characters to a vector of chars.
   let ascii: Vec<char> = SPECIAL.iter().map(|&c| c as char).collect();
+
   // Generate `len` random words from the word list.
   for _ in 0..len {
     // Choose a random word from the list.
@@ -87,8 +89,6 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
 /// It also sets up the commands that can be called from the webview
 /// and the system tray
 fn main() {
-  let locale = get_locale().unwrap_or_else(|| String::from("en-GB"));
-  //println!("The current locale is {}", locale);
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![generate_password,])
     .system_tray(tray::system_tray())

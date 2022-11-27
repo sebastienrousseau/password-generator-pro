@@ -10,21 +10,6 @@
 
   import Translate from './Components/i18n'
 
-  const systemLanguage = Intl.DateTimeFormat().resolvedOptions().locale
-  // const systemLanguage = navigator.languages[0]
-  // const systemLanguage = 'en-GB'
-
-  const generate_i18n = Translate('Button', systemLanguage)
-  const label_i18n = Translate('Label', systemLanguage)
-  const label2_i18n = Translate('Label2', systemLanguage)
-  const label3_i18n = Translate('Label3', systemLanguage)
-  const label4_i18n = Translate('Label4', systemLanguage)
-  const placeholder_i18n = Translate('Placeholder', systemLanguage)
-  const placeholder2_i18n = Translate('Placeholder2', systemLanguage)
-  const reset_i18n = Translate('Button2', systemLanguage)
-  const subtitle_i18n = Translate('Subtitle', systemLanguage)
-  const title_i18n = Translate('Title', systemLanguage)
-
   const defaultFormValues = {
     len: 3,
     separator: '-',
@@ -82,6 +67,21 @@
   function onCopyhash() {
     onCopy(hash)
   }
+
+  const systemLanguage = Intl.DateTimeFormat().resolvedOptions().locale
+  // const systemLanguage = navigator.languages[0]
+  // const systemLanguage = 'en-GB'
+
+  const generate_i18n = Translate('Button', systemLanguage)
+  const label_i18n = Translate('Label', systemLanguage)
+  const label2_i18n = Translate('Label2', systemLanguage)
+  const label3_i18n = Translate('Label3', systemLanguage)
+  const label4_i18n = Translate('Label4', systemLanguage)
+  const placeholder_i18n = Translate('Placeholder', systemLanguage)
+  const placeholder2_i18n = Translate('Placeholder2', systemLanguage)
+  const reset_i18n = Translate('Button2', systemLanguage)
+  const subtitle_i18n = Translate('Subtitle', systemLanguage)
+  const title_i18n = Translate('Title', systemLanguage)
 </script>
 
 <main class="absolute w-full h-full bg-slate-800 text-slate-50 uppercase">
@@ -166,7 +166,7 @@
           <span class="mr-2 align-bottom">
             <ResetIcon />
           </span>
-          <span class="uppercase">{reset_i18n}</span>
+          <span class="uppercase"> {reset_i18n} </span>
         </button>
 
         <button
@@ -179,7 +179,7 @@
           <span class="mr-2 align-bottom">
             <GenerateIcon />
           </span>
-          <span class="uppercase">{generate_i18n}</span>
+          <span class="uppercase"> {generate_i18n} </span>
         </button>
       </div>
     </form>
