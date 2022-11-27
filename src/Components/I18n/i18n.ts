@@ -1,3 +1,4 @@
+// TODO: Optimize this in a dynamic way
 import arLocaleJSON from '../../Locales/ar-AE.json';
 import bgLocaleJSON from '../../Locales/bg-BG.json';
 import csLocaleJSON from '../../Locales/cs-CZ.json';
