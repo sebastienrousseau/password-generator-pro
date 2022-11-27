@@ -21,6 +21,7 @@ import roLocaleJSON from '../../Locales/ro-RO.json';
 import ruLocaleJSON from '../../Locales/ru-RU.json';
 import skLocaleJSON from '../../Locales/sk-SK.json';
 import slLocaleJSON from '../../Locales/sl-SI.json';
+import spLocaleJSON from '../../Locales/sp-SP.json';
 import svLocaleJSON from '../../Locales/sv-SE.json';
 import zhLocaleJSON from '../../Locales/zh-CN.json';
 
@@ -166,6 +167,22 @@ const locales = {
     'ru-UA': ruLocaleJSON,
     'sk-SK': skLocaleJSON,
     'sl-SI': slLocaleJSON,
+    'sp-SP': spLocaleJSON,
+    'sp-SR': spLocaleJSON,
+    'sp-SX': spLocaleJSON,
+    'sp-SY': spLocaleJSON,
+    'sp-SZ': spLocaleJSON,
+    'sp-TC': spLocaleJSON,
+    'sp-TK': spLocaleJSON,
+    'sp-TO': spLocaleJSON,
+    'sp-TT': spLocaleJSON,
+    'sp-TV': spLocaleJSON,
+    'sp-TZ': spLocaleJSON,
+    'sp-UG': spLocaleJSON,
+    'sp-UM': spLocaleJSON,
+    'sp-US': spLocaleJSON,
+    'sp-VC': spLocaleJSON,
+    'sp-VG': spLocaleJSON,
     'sv-SE': svLocaleJSON,
     'zh-CN': zhLocaleJSON,
     'zh-HK': zhLocaleJSON,
