@@ -23,6 +23,7 @@ import skLocaleJSON from '../../Locales/sk-SK.json';
 import slLocaleJSON from '../../Locales/sl-SI.json';
 import spLocaleJSON from '../../Locales/sp-SP.json';
 import svLocaleJSON from '../../Locales/sv-SE.json';
+import trLocaleJSON from '../../Locales/tr-TR.json';
 import zhLocaleJSON from '../../Locales/zh-CN.json';
 
 const locales = {
@@ -184,6 +185,7 @@ const locales = {
     'sp-VC': spLocaleJSON,
     'sp-VG': spLocaleJSON,
     'sv-SE': svLocaleJSON,
+    'tr-TR': trLocaleJSON,
     'zh-CN': zhLocaleJSON,
     'zh-HK': zhLocaleJSON,
     'zh-MO': zhLocaleJSON,
