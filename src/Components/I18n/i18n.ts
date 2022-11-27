@@ -20,6 +20,7 @@ import ptLocaleJSON from '../../Locales/pt-BR.json';
 import roLocaleJSON from '../../Locales/ro-RO.json';
 import ruLocaleJSON from '../../Locales/ru-RU.json';
 import skLocaleJSON from '../../Locales/sk-SK.json';
+import slLocaleJSON from '../../Locales/sl-SI.json';
 import zhLocaleJSON from '../../Locales/zh-CN.json';
 
 const locales = {
@@ -163,6 +164,7 @@ const locales = {
     'ru-RU': ruLocaleJSON,
     'ru-UA': ruLocaleJSON,
     'sk-SK': skLocaleJSON,
+    'sl-SI': slLocaleJSON,
     'zh-CN': zhLocaleJSON,
     'zh-HK': zhLocaleJSON,
     'zh-MO': zhLocaleJSON,
