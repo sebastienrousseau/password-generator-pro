@@ -120,7 +120,6 @@ const locales = {
     'en-DG': enLocaleJSON,
     'en-DJ': enLocaleJSON,
     'en-DK': enLocaleJSON,
-    'en-DK': enLocaleJSON,
     'en-DM': enLocaleJSON,
     'en-DO': enLocaleJSON,
     'en-DZ': enLocaleJSON,
