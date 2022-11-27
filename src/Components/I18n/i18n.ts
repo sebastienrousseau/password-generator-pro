@@ -2,6 +2,7 @@ import bgLocaleJSON from '../../Locales/bg-BG.json';
 import csLocaleJSON from '../../Locales/cs-CZ.json';
 import daLocaleJSON from '../../Locales/da-DK.json';
 import deLocaleJSON from '../../Locales/de-DE.json';
+import elLocaleJSON from '../../Locales/el-GR.json';
 import enLocaleJSON from '../../Locales/en-GB.json';
 import esLocaleJSON from '../../Locales/es-ES.json';
 import frLocaleJSON from '../../Locales/fr-FR.json';
@@ -21,6 +22,7 @@ const locales = {
     'de-AT': deLocaleJSON,
     'de-CH': deLocaleJSON,
     'de-DE': deLocaleJSON,
+    'el-GR': elLocaleJSON,
     'en-BG': enLocaleJSON,
     'en-BI': enLocaleJSON,
     'en-BS': enLocaleJSON,
