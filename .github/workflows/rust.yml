@@ -26,8 +26,7 @@ jobs:
               libssl-dev \
               libgtk-3-dev \
               libayatana-appindicator3-dev \
-              librsvg2-dev \
-              webkit2gtk-4.0
+              librsvg2-dev
       - name: Build
         run: cd src-tauri && cargo build --verbose
       - name: Run tests
