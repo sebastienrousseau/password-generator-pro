@@ -6,6 +6,7 @@ import deLocaleJSON from '../../Locales/de-DE.json';
 import elLocaleJSON from '../../Locales/el-GR.json';
 import enLocaleJSON from '../../Locales/en-GB.json';
 import esLocaleJSON from '../../Locales/es-ES.json';
+import fiLocaleJSON from '../../Locales/fi-FI.json';
 import frLocaleJSON from '../../Locales/fr-FR.json';
 import hrLocaleJSON from '../../Locales/hr-HR.json';
 import huLocaleJSON from '../../Locales/hu-HU.json';
@@ -35,6 +36,7 @@ const locales = {
     'ar-CL': arLocaleJSON,
     'ar-DZ': arLocaleJSON,
     'ar-EG': arLocaleJSON,
+    'ar-ER': arLocaleJSON,
     'ar-IQ': arLocaleJSON,
     'ar-JO': arLocaleJSON,
     'ar-KW': arLocaleJSON,
@@ -110,6 +112,7 @@ const locales = {
     'en-CV': enLocaleJSON,
     'en-CX': enLocaleJSON,
     'en-CY': enLocaleJSON,
+    'en-CZ': enLocaleJSON,
     'en-DE': enLocaleJSON,
     'en-DG': enLocaleJSON,
     'en-DJ': enLocaleJSON,
@@ -148,6 +151,9 @@ const locales = {
     'en-GU': enLocaleJSON,
     'en-GY': enLocaleJSON,
     'en-HK': enLocaleJSON,
+    'en-HM': enLocaleJSON,
+    'en-HN': enLocaleJSON,
+    'en-HR': enLocaleJSON,
     'en-IE': enLocaleJSON,
     'en-IL': enLocaleJSON,
     'en-IM': enLocaleJSON,
@@ -226,6 +232,7 @@ const locales = {
     'es-EA': esLocaleJSON,
     'es-EC': esLocaleJSON,
     'es-ES': esLocaleJSON,
+    'es-FK': esLocaleJSON,
     'es-GQ': esLocaleJSON,
     'es-GT': esLocaleJSON,
     'es-HN': esLocaleJSON,
@@ -242,6 +249,8 @@ const locales = {
     'es-UY': esLocaleJSON,
     'es-VE': esLocaleJSON,
     'es-VG': esLocaleJSON,
+    'es-VI': esLocaleJSON,
+    'fi-FI': fiLocaleJSON,
     'fr-BE': frLocaleJSON,
     'fr-BF': frLocaleJSON,
     'fr-BI': frLocaleJSON,
@@ -288,8 +297,8 @@ const locales = {
     'fr-VU': frLocaleJSON,
     'fr-WF': frLocaleJSON,
     'fr-YT': frLocaleJSON,
-    'hu-HU': huLocaleJSON,
     'hr-HR': hrLocaleJSON,
+    'hu-HU': huLocaleJSON,
     'id-ID': idLocaleJSON,
     'it-CH': itLocaleJSON,
     'it-IT': itLocaleJSON,
@@ -345,6 +354,7 @@ const locales = {
     'sp-VG': spLocaleJSON,
     'sv-SE': svLocaleJSON,
     'th-TH': thLocaleJSON,
+    'tr-CY': trLocaleJSON,
     'tr-TR': trLocaleJSON,
     'uk-UA': ukLocaleJSON,
     'zh-CN': zhLocaleJSON,
