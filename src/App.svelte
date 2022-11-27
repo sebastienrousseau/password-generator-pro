@@ -12,7 +12,7 @@
 
   const systemLanguage = Intl.DateTimeFormat().resolvedOptions().locale
   // const systemLanguage = navigator.languages[0]
-  // const systemLanguage = 'hu-HU'
+  // const systemLanguage = 'id-ID'
 
   const generate_i18n = Translate('Button', systemLanguage)
   const label_i18n = Translate('Label', systemLanguage)
