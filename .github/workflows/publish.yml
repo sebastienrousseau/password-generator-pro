@@ -32,4 +32,4 @@ jobs:
       - name: Run tests
         run: cd src-tauri && cargo test --verbose
       - name: Publish
-        run: cd src-tauri && cargo publish --token ${{ secrets.CARGO_TOKEN }}
+        run: cd src-tauri && cargo publish --token ${{ CARGO_TOKEN }}
