@@ -1,3 +1,4 @@
+import arLocaleJSON from '../../Locales/ar-AE.json';
 import bgLocaleJSON from '../../Locales/bg-BG.json';
 import csLocaleJSON from '../../Locales/cs-CZ.json';
 import daLocaleJSON from '../../Locales/da-DK.json';
@@ -19,6 +20,22 @@ import ruLocaleJSON from '../../Locales/ru-RU.json';
 import zhLocaleJSON from '../../Locales/zh-CN.json';
 
 const locales = {
+    'ar-AE': arLocaleJSON,
+    'ar-BH': arLocaleJSON,
+    'ar-DZ': arLocaleJSON,
+    'ar-EG': arLocaleJSON,
+    'ar-IQ': arLocaleJSON,
+    'ar-JO': arLocaleJSON,
+    'ar-KW': arLocaleJSON,
+    'ar-LB': arLocaleJSON,
+    'ar-LY': arLocaleJSON,
+    'ar-MA': arLocaleJSON,
+    'ar-OM': arLocaleJSON,
+    'ar-QA': arLocaleJSON,
+    'ar-SA': arLocaleJSON,
+    'ar-SY': arLocaleJSON,
+    'ar-TN': arLocaleJSON,
+    'ar-YE': arLocaleJSON,
     'bg-BG': bgLocaleJSON,
     'cs-CZ': csLocaleJSON,
     'da-DK': daLocaleJSON,
