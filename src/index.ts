@@ -1,3 +1,4 @@
+// import Storage from './Service/storage';
 import './style.css'
 import App from './App.svelte'
 

@@ -1,19 +1,19 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@sveltejs/vite-plugin-svelte': ^1.2.0
+  '@sveltejs/vite-plugin-svelte': ^1.3.1
   '@tauri-apps/api': ^1.2.0
-  '@tauri-apps/cli': ^1.2.0
+  '@tauri-apps/cli': ^1.2.1
   '@tsconfig/svelte': ^3.0.0
   '@types/node': ^18.11.9
   '@typescript-eslint/eslint-plugin': ^5.43.0
   '@typescript-eslint/parser': ^5.43.0
   autoprefixer: ^10.4.13
-  eslint: ^8.27.0
+  eslint: ^8.28.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^4.0.0
   postcss: ^8.4.19
-  prettier: ^2.7.1
+  prettier: ^2.8.0
   prettier-plugin-svelte: ^2.8.0
   svelte: ^3.53.1
   svelte-check: ^2.9.2
@@ -24,20 +24,20 @@ specifiers:
   vite: ^3.2.4
 
 devDependencies:
-  '@sveltejs/vite-plugin-svelte': registry.npmjs.org/@sveltejs/vite-plugin-svelte/1.2.0_svelte@3.53.1+vite@3.2.4
+  '@sveltejs/vite-plugin-svelte': registry.npmjs.org/@sveltejs/vite-plugin-svelte/1.3.1_svelte@3.53.1+vite@3.2.4
   '@tauri-apps/api': registry.npmjs.org/@tauri-apps/api/1.2.0
-  '@tauri-apps/cli': registry.npmjs.org/@tauri-apps/cli/1.2.0
+  '@tauri-apps/cli': registry.npmjs.org/@tauri-apps/cli/1.2.1
   '@tsconfig/svelte': registry.npmjs.org/@tsconfig/svelte/3.0.0
   '@types/node': registry.npmjs.org/@types/node/18.11.9
-  '@typescript-eslint/eslint-plugin': registry.npmjs.org/@typescript-eslint/eslint-plugin/5.43.0_wze2rj5tow7zwqpgbdx2buoy3m
-  '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser/5.43.0_e3uo4sehh4zr4i6m57mkkxxv7y
+  '@typescript-eslint/eslint-plugin': registry.npmjs.org/@typescript-eslint/eslint-plugin/5.43.0_nqj4bdx4ekws7aecttskpih4py
+  '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser/5.43.0_hsf322ms6xhhd4b5ne6lb74y4a
   autoprefixer: registry.npmjs.org/autoprefixer/10.4.13_postcss@8.4.19
-  eslint: registry.npmjs.org/eslint/8.27.0
-  eslint-config-prettier: registry.npmjs.org/eslint-config-prettier/8.5.0_eslint@8.27.0
-  eslint-plugin-svelte3: registry.npmjs.org/eslint-plugin-svelte3/4.0.0_ktwpzwc5ejqdbyb2mks6m4mhya
+  eslint: registry.npmjs.org/eslint/8.28.0
+  eslint-config-prettier: registry.npmjs.org/eslint-config-prettier/8.5.0_eslint@8.28.0
+  eslint-plugin-svelte3: registry.npmjs.org/eslint-plugin-svelte3/4.0.0_xgu65rlhscpnxffotiaicv6m5i
   postcss: registry.npmjs.org/postcss/8.4.19
-  prettier: registry.npmjs.org/prettier/2.7.1
-  prettier-plugin-svelte: registry.npmjs.org/prettier-plugin-svelte/2.8.0_nryolsexf6k3znhuh4uzpugsem
+  prettier: registry.npmjs.org/prettier/2.8.0
+  prettier-plugin-svelte: registry.npmjs.org/prettier-plugin-svelte/2.8.0_3ndnxlh52lolrqe4kgjgbxb3xa
   svelte: registry.npmjs.org/svelte/3.53.1
   svelte-check: registry.npmjs.org/svelte-check/2.9.2_mocwzvuqzrhb37u7s4hjvvzl3i
   svelte-preprocess: registry.npmjs.org/svelte-preprocess/4.10.7_mvbmsfnr3ibpjsbee6imjcb33m
@@ -164,11 +164,11 @@ packages:
       fastq: registry.npmjs.org/fastq/1.13.0
     dev: true
 
-  registry.npmjs.org/@sveltejs/vite-plugin-svelte/1.2.0_svelte@3.53.1+vite@3.2.4:
-    resolution: {integrity: sha512-DT2oUkWAloH1tO7X5cQ4uDxQofaIS76skyFMElKtoqT6HJao+D82LI5i+0jPaSSmO7ex3Pa6jGYMlWy9ZJ1cdQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@sveltejs/vite-plugin-svelte/-/vite-plugin-svelte-1.2.0.tgz}
-    id: registry.npmjs.org/@sveltejs/vite-plugin-svelte/1.2.0
+  registry.npmjs.org/@sveltejs/vite-plugin-svelte/1.3.1_svelte@3.53.1+vite@3.2.4:
+    resolution: {integrity: sha512-2Uu2sDdIR+XQWF7QWOVSF2jR9EU6Ciw1yWfYnfLYj8HIgnNxkh/8g22Fw2pBUI8QNyW/KxtqJUWBI+8ypamSrQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@sveltejs/vite-plugin-svelte/-/vite-plugin-svelte-1.3.1.tgz}
+    id: registry.npmjs.org/@sveltejs/vite-plugin-svelte/1.3.1
     name: '@sveltejs/vite-plugin-svelte'
-    version: 1.2.0
+    version: 1.3.1
     engines: {node: ^14.18.0 || >= 16}
     peerDependencies:
       diff-match-patch: ^1.0.5
@@ -185,7 +185,7 @@ packages:
       svelte: registry.npmjs.org/svelte/3.53.1
       svelte-hmr: registry.npmjs.org/svelte-hmr/0.15.1_svelte@3.53.1
       vite: registry.npmjs.org/vite/3.2.4_@types+node@18.11.9
-      vitefu: registry.npmjs.org/vitefu/0.2.1_vite@3.2.4
+      vitefu: registry.npmjs.org/vitefu/0.2.2_vite@3.2.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -197,10 +197,10 @@ packages:
     engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: true
 
-  registry.npmjs.org/@tauri-apps/cli-darwin-arm64/1.2.0:
-    resolution: {integrity: sha512-f3LR2RvTU2ulxYdK9Nc3vKaSpDChu52pz0BMWNrSs3dxs4WTVioie98Ufz+GorifkUp3sYXcJte3HzX6wH/QxQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-darwin-arm64/-/cli-darwin-arm64-1.2.0.tgz}
+  registry.npmjs.org/@tauri-apps/cli-darwin-arm64/1.2.1:
+    resolution: {integrity: sha512-WiAxSON52owFI65Whd3NjcKjXdO1zJfafBVZ3v+Y3F2zlXhRPiirXbtefAc3mvN56zDz/pfi018Qb4XesuVzHA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-darwin-arm64/-/cli-darwin-arm64-1.2.1.tgz}
     name: '@tauri-apps/cli-darwin-arm64'
-    version: 1.2.0
+    version: 1.2.1
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -208,10 +208,10 @@ packages:
     dev: true
     optional: true
 
-  registry.npmjs.org/@tauri-apps/cli-darwin-x64/1.2.0:
-    resolution: {integrity: sha512-m07QZaAZCtyobrjddfz/Rxf9GGutnBOpRMbNqVqCk0qKRJzHG1fIsLqkgZh6+qPv0zHpu7xi/FPcqTec72Cp8w==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-darwin-x64/-/cli-darwin-x64-1.2.0.tgz}
+  registry.npmjs.org/@tauri-apps/cli-darwin-x64/1.2.1:
+    resolution: {integrity: sha512-jfumnrn7RYKVtDmHgrQhImoxpqT51bDrO4KxgpIXaYSaf6MdG2JT72dwUovPrURw0JX2Z/Elihq+dYbrsKoV/w==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-darwin-x64/-/cli-darwin-x64-1.2.1.tgz}
     name: '@tauri-apps/cli-darwin-x64'
-    version: 1.2.0
+    version: 1.2.1
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -219,10 +219,10 @@ packages:
     dev: true
     optional: true
 
-  registry.npmjs.org/@tauri-apps/cli-linux-arm-gnueabihf/1.2.0:
-    resolution: {integrity: sha512-Id9eF1JtthZRFVtXAAVtSlI3uMT8cJ7LYmCSIl3mAXEUeaPBxnUs1i9X6/J+2Ho3yLEuuOxJ7PaJd+4v8wnEeg==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-linux-arm-gnueabihf/-/cli-linux-arm-gnueabihf-1.2.0.tgz}
+  registry.npmjs.org/@tauri-apps/cli-linux-arm-gnueabihf/1.2.1:
+    resolution: {integrity: sha512-n4p6Ekn6Wa9X/klUGevEGgoWAGApGGsLrJYE4c8bKTbAUfQ9Nyzjh8gK/GDii1dg9oRW0FdXDa6BJa7aEEj9sA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-linux-arm-gnueabihf/-/cli-linux-arm-gnueabihf-1.2.1.tgz}
     name: '@tauri-apps/cli-linux-arm-gnueabihf'
-    version: 1.2.0
+    version: 1.2.1
     engines: {node: '>= 10'}
     cpu: [arm]
     os: [linux]
@@ -230,10 +230,10 @@ packages:
     dev: true
     optional: true
 
-  registry.npmjs.org/@tauri-apps/cli-linux-arm64-gnu/1.2.0:
-    resolution: {integrity: sha512-NtfPkkpeMPl+i/tB/Fc8ST2rKO2vV8int/RkOvNGLCkhWcl4sbzKBol7tc4q8c8h0X7FXDcF1l/EOuGsZUAA5Q==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-linux-arm64-gnu/-/cli-linux-arm64-gnu-1.2.0.tgz}
+  registry.npmjs.org/@tauri-apps/cli-linux-arm64-gnu/1.2.1:
+    resolution: {integrity: sha512-oAHkQQGfNCh8pQQHuDzzqt+S5sOj3tiUkySaquR2z/AQEHeDGAMrRGLZwOiDw9Xvu7qxFiF9H0e5OMK7BkncDw==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-linux-arm64-gnu/-/cli-linux-arm64-gnu-1.2.1.tgz}
     name: '@tauri-apps/cli-linux-arm64-gnu'
-    version: 1.2.0
+    version: 1.2.1
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -241,10 +241,10 @@ packages:
     dev: true
     optional: true
 
-  registry.npmjs.org/@tauri-apps/cli-linux-arm64-musl/1.2.0:
-    resolution: {integrity: sha512-tz+mOOVsy/TMdq2WJVIJl/iwW3OCWCyD5Fls3fhyJ4XpLfjn4G+C+oU0awXD/0se0ko81aq4D+r8eDx6oBRi0A==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-linux-arm64-musl/-/cli-linux-arm64-musl-1.2.0.tgz}
+  registry.npmjs.org/@tauri-apps/cli-linux-arm64-musl/1.2.1:
+    resolution: {integrity: sha512-1dEZ5fdFYkMyB1U7ZkDJUlwYwCeqy9Y3vXmtZ6pCxrvgs844s8+RIFDuMU42pTN+lUxfFeQARmv0LpS4eF/QWQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-linux-arm64-musl/-/cli-linux-arm64-musl-1.2.1.tgz}
     name: '@tauri-apps/cli-linux-arm64-musl'
-    version: 1.2.0
+    version: 1.2.1
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -252,10 +252,10 @@ packages:
     dev: true
     optional: true
 
-  registry.npmjs.org/@tauri-apps/cli-linux-x64-gnu/1.2.0:
-    resolution: {integrity: sha512-FH/wU+OWZjRQvrq/oequScr72I84XgOuRuMEpt/GqGD341cBJ8ithpoyzuiKsvjS6K0qMyRFzy3eyhQ7gwX+4Q==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-linux-x64-gnu/-/cli-linux-x64-gnu-1.2.0.tgz}
+  registry.npmjs.org/@tauri-apps/cli-linux-x64-gnu/1.2.1:
+    resolution: {integrity: sha512-wkgCD3s5P6tgBPnn0/gDx7MXMx2Hx+jdA+JP8zdCq4cIeYXlxdZG/zXbHb5ldPadNh582lzHiGg+Pmc+wDg2fA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-linux-x64-gnu/-/cli-linux-x64-gnu-1.2.1.tgz}
     name: '@tauri-apps/cli-linux-x64-gnu'
-    version: 1.2.0
+    version: 1.2.1
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -263,10 +263,10 @@ packages:
     dev: true
     optional: true
 
-  registry.npmjs.org/@tauri-apps/cli-linux-x64-musl/1.2.0:
-    resolution: {integrity: sha512-nLg30aBT9fI83sjIqaGPN7twbtE5LJy2DbKzxIlw59F+GT8HBdiM/2mZdTLB3AQb52yVHuGB1TVtWDsl0JHqCA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-linux-x64-musl/-/cli-linux-x64-musl-1.2.0.tgz}
+  registry.npmjs.org/@tauri-apps/cli-linux-x64-musl/1.2.1:
+    resolution: {integrity: sha512-zD+a+5cSlYVU0ECOojWp71ok/9jE0DJufzb9oky17XIKV/oiOAG60z4OYRe+oqxYS1TcBt+pUa1/2zlu/6SRdA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-linux-x64-musl/-/cli-linux-x64-musl-1.2.1.tgz}
     name: '@tauri-apps/cli-linux-x64-musl'
-    version: 1.2.0
+    version: 1.2.1
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -274,10 +274,10 @@ packages:
     dev: true
     optional: true
 
-  registry.npmjs.org/@tauri-apps/cli-win32-ia32-msvc/1.2.0:
-    resolution: {integrity: sha512-eXtgIgY0fawgcOuUjH8Y6PxwPxbK87Zl9XmA7Q0m58T7pIz+gcbgvtH8Bb+liYHoRYItIhQxVm+ui7Y59rI7Cg==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-win32-ia32-msvc/-/cli-win32-ia32-msvc-1.2.0.tgz}
+  registry.npmjs.org/@tauri-apps/cli-win32-ia32-msvc/1.2.1:
+    resolution: {integrity: sha512-nEgdRd8czaKL1RQfj946dsfzlk6atmD95Fm7NVTVOe77PFHTS3ztHeWK7X6jirCaOF3h/F7qpJVCU6JMnq2tfA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-win32-ia32-msvc/-/cli-win32-ia32-msvc-1.2.1.tgz}
     name: '@tauri-apps/cli-win32-ia32-msvc'
-    version: 1.2.0
+    version: 1.2.1
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
@@ -285,10 +285,10 @@ packages:
     dev: true
     optional: true
 
-  registry.npmjs.org/@tauri-apps/cli-win32-x64-msvc/1.2.0:
-    resolution: {integrity: sha512-egyM66R05AIbkaUDptpHurFTIYp3VM4H5OrRd3O2b0oXf8SoiXiyrHbQsHVHHDYyytKmwkdNqjdy+Vev/Vq25Q==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-win32-x64-msvc/-/cli-win32-x64-msvc-1.2.0.tgz}
+  registry.npmjs.org/@tauri-apps/cli-win32-x64-msvc/1.2.1:
+    resolution: {integrity: sha512-ceWiQkmNNRrnfgbLMnndT4QF1IyLK7aOJsMqS/HueshAwmVQWnC1DUE0C58Taetgq38Cavc4gGnZOCHuH6ZuTw==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli-win32-x64-msvc/-/cli-win32-x64-msvc-1.2.1.tgz}
     name: '@tauri-apps/cli-win32-x64-msvc'
-    version: 1.2.0
+    version: 1.2.1
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -296,22 +296,22 @@ packages:
     dev: true
     optional: true
 
-  registry.npmjs.org/@tauri-apps/cli/1.2.0:
-    resolution: {integrity: sha512-DgUnk4p/atWHq2HUx9Vt+/LuRsx4iFlkzdZIUxtFWvpcZih2k0TzmHJbrhM1evh1/7a+SqiwDawmyf3Hz1HxXA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli/-/cli-1.2.0.tgz}
+  registry.npmjs.org/@tauri-apps/cli/1.2.1:
+    resolution: {integrity: sha512-JrFFT1/4V+AGSRjKdgszZwOr+/a1519LDhNxBkbsIg6D/kFK+3kk1qImaQBY9DvvIWK6IV4whc8OAkgxm+Sl3w==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@tauri-apps/cli/-/cli-1.2.1.tgz}
     name: '@tauri-apps/cli'
-    version: 1.2.0
+    version: 1.2.1
     engines: {node: '>= 10'}
     hasBin: true
     optionalDependencies:
-      '@tauri-apps/cli-darwin-arm64': registry.npmjs.org/@tauri-apps/cli-darwin-arm64/1.2.0
-      '@tauri-apps/cli-darwin-x64': registry.npmjs.org/@tauri-apps/cli-darwin-x64/1.2.0
-      '@tauri-apps/cli-linux-arm-gnueabihf': registry.npmjs.org/@tauri-apps/cli-linux-arm-gnueabihf/1.2.0
-      '@tauri-apps/cli-linux-arm64-gnu': registry.npmjs.org/@tauri-apps/cli-linux-arm64-gnu/1.2.0
-      '@tauri-apps/cli-linux-arm64-musl': registry.npmjs.org/@tauri-apps/cli-linux-arm64-musl/1.2.0
-      '@tauri-apps/cli-linux-x64-gnu': registry.npmjs.org/@tauri-apps/cli-linux-x64-gnu/1.2.0
-      '@tauri-apps/cli-linux-x64-musl': registry.npmjs.org/@tauri-apps/cli-linux-x64-musl/1.2.0
-      '@tauri-apps/cli-win32-ia32-msvc': registry.npmjs.org/@tauri-apps/cli-win32-ia32-msvc/1.2.0
-      '@tauri-apps/cli-win32-x64-msvc': registry.npmjs.org/@tauri-apps/cli-win32-x64-msvc/1.2.0
+      '@tauri-apps/cli-darwin-arm64': registry.npmjs.org/@tauri-apps/cli-darwin-arm64/1.2.1
+      '@tauri-apps/cli-darwin-x64': registry.npmjs.org/@tauri-apps/cli-darwin-x64/1.2.1
+      '@tauri-apps/cli-linux-arm-gnueabihf': registry.npmjs.org/@tauri-apps/cli-linux-arm-gnueabihf/1.2.1
+      '@tauri-apps/cli-linux-arm64-gnu': registry.npmjs.org/@tauri-apps/cli-linux-arm64-gnu/1.2.1
+      '@tauri-apps/cli-linux-arm64-musl': registry.npmjs.org/@tauri-apps/cli-linux-arm64-musl/1.2.1
+      '@tauri-apps/cli-linux-x64-gnu': registry.npmjs.org/@tauri-apps/cli-linux-x64-gnu/1.2.1
+      '@tauri-apps/cli-linux-x64-musl': registry.npmjs.org/@tauri-apps/cli-linux-x64-musl/1.2.1
+      '@tauri-apps/cli-win32-ia32-msvc': registry.npmjs.org/@tauri-apps/cli-win32-ia32-msvc/1.2.1
+      '@tauri-apps/cli-win32-x64-msvc': registry.npmjs.org/@tauri-apps/cli-win32-x64-msvc/1.2.1
     dev: true
 
   registry.npmjs.org/@tsconfig/svelte/3.0.0:
@@ -352,7 +352,7 @@ packages:
     version: 7.3.13
     dev: true
 
-  registry.npmjs.org/@typescript-eslint/eslint-plugin/5.43.0_wze2rj5tow7zwqpgbdx2buoy3m:
+  registry.npmjs.org/@typescript-eslint/eslint-plugin/5.43.0_nqj4bdx4ekws7aecttskpih4py:
     resolution: {integrity: sha512-wNPzG+eDR6+hhW4yobEmpR36jrqqQv1vxBq5LJO3fBAktjkvekfr4BRl+3Fn1CM/A+s8/EiGUbOMDoYqWdbtXA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.43.0.tgz}
     id: registry.npmjs.org/@typescript-eslint/eslint-plugin/5.43.0
     name: '@typescript-eslint/eslint-plugin'
@@ -366,12 +366,12 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser/5.43.0_e3uo4sehh4zr4i6m57mkkxxv7y
+      '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser/5.43.0_hsf322ms6xhhd4b5ne6lb74y4a
       '@typescript-eslint/scope-manager': registry.npmjs.org/@typescript-eslint/scope-manager/5.43.0
-      '@typescript-eslint/type-utils': registry.npmjs.org/@typescript-eslint/type-utils/5.43.0_e3uo4sehh4zr4i6m57mkkxxv7y
-      '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils/5.43.0_e3uo4sehh4zr4i6m57mkkxxv7y
+      '@typescript-eslint/type-utils': registry.npmjs.org/@typescript-eslint/type-utils/5.43.0_hsf322ms6xhhd4b5ne6lb74y4a
+      '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils/5.43.0_hsf322ms6xhhd4b5ne6lb74y4a
       debug: registry.npmjs.org/debug/4.3.4
-      eslint: registry.npmjs.org/eslint/8.27.0
+      eslint: registry.npmjs.org/eslint/8.28.0
       ignore: registry.npmjs.org/ignore/5.2.0
       natural-compare-lite: registry.npmjs.org/natural-compare-lite/1.4.0
       regexpp: registry.npmjs.org/regexpp/3.2.0
@@ -382,7 +382,7 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/@typescript-eslint/parser/5.43.0_e3uo4sehh4zr4i6m57mkkxxv7y:
+  registry.npmjs.org/@typescript-eslint/parser/5.43.0_hsf322ms6xhhd4b5ne6lb74y4a:
     resolution: {integrity: sha512-2iHUK2Lh7PwNUlhFxxLI2haSDNyXvebBO9izhjhMoDC+S3XI9qt2DGFUsiJ89m2k7gGYch2aEpYqV5F/+nwZug==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@typescript-eslint/parser/-/parser-5.43.0.tgz}
     id: registry.npmjs.org/@typescript-eslint/parser/5.43.0
     name: '@typescript-eslint/parser'
@@ -399,7 +399,7 @@ packages:
       '@typescript-eslint/types': registry.npmjs.org/@typescript-eslint/types/5.43.0
       '@typescript-eslint/typescript-estree': registry.npmjs.org/@typescript-eslint/typescript-estree/5.43.0_typescript@4.9.3
       debug: registry.npmjs.org/debug/4.3.4
-      eslint: registry.npmjs.org/eslint/8.27.0
+      eslint: registry.npmjs.org/eslint/8.28.0
       typescript: registry.npmjs.org/typescript/4.9.3
     transitivePeerDependencies:
       - supports-color
@@ -415,7 +415,7 @@ packages:
       '@typescript-eslint/visitor-keys': registry.npmjs.org/@typescript-eslint/visitor-keys/5.43.0
     dev: true
 
-  registry.npmjs.org/@typescript-eslint/type-utils/5.43.0_e3uo4sehh4zr4i6m57mkkxxv7y:
+  registry.npmjs.org/@typescript-eslint/type-utils/5.43.0_hsf322ms6xhhd4b5ne6lb74y4a:
     resolution: {integrity: sha512-K21f+KY2/VvYggLf5Pk4tgBOPs2otTaIHy2zjclo7UZGLyFH86VfUOm5iq+OtDtxq/Zwu2I3ujDBykVW4Xtmtg==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@typescript-eslint/type-utils/-/type-utils-5.43.0.tgz}
     id: registry.npmjs.org/@typescript-eslint/type-utils/5.43.0
     name: '@typescript-eslint/type-utils'
@@ -429,9 +429,9 @@ packages:
         optional: true
     dependencies:
       '@typescript-eslint/typescript-estree': registry.npmjs.org/@typescript-eslint/typescript-estree/5.43.0_typescript@4.9.3
-      '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils/5.43.0_e3uo4sehh4zr4i6m57mkkxxv7y
+      '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils/5.43.0_hsf322ms6xhhd4b5ne6lb74y4a
       debug: registry.npmjs.org/debug/4.3.4
-      eslint: registry.npmjs.org/eslint/8.27.0
+      eslint: registry.npmjs.org/eslint/8.28.0
       tsutils: registry.npmjs.org/tsutils/3.21.0_typescript@4.9.3
       typescript: registry.npmjs.org/typescript/4.9.3
     transitivePeerDependencies:
@@ -469,7 +469,7 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/@typescript-eslint/utils/5.43.0_e3uo4sehh4zr4i6m57mkkxxv7y:
+  registry.npmjs.org/@typescript-eslint/utils/5.43.0_hsf322ms6xhhd4b5ne6lb74y4a:
     resolution: {integrity: sha512-8nVpA6yX0sCjf7v/NDfeaOlyaIIqL7OaIGOWSPFqUKK59Gnumd3Wa+2l8oAaYO2lk0sO+SbWFWRSvhu8gLGv4A==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/@typescript-eslint/utils/-/utils-5.43.0.tgz}
     id: registry.npmjs.org/@typescript-eslint/utils/5.43.0
     name: '@typescript-eslint/utils'
@@ -483,9 +483,9 @@ packages:
       '@typescript-eslint/scope-manager': registry.npmjs.org/@typescript-eslint/scope-manager/5.43.0
       '@typescript-eslint/types': registry.npmjs.org/@typescript-eslint/types/5.43.0
       '@typescript-eslint/typescript-estree': registry.npmjs.org/@typescript-eslint/typescript-estree/5.43.0_typescript@4.9.3
-      eslint: registry.npmjs.org/eslint/8.27.0
+      eslint: registry.npmjs.org/eslint/8.28.0
       eslint-scope: registry.npmjs.org/eslint-scope/5.1.1
-      eslint-utils: registry.npmjs.org/eslint-utils/3.0.0_eslint@8.27.0
+      eslint-utils: registry.npmjs.org/eslint-utils/3.0.0_eslint@8.28.0
       semver: registry.npmjs.org/semver/7.3.8
     transitivePeerDependencies:
       - supports-color
@@ -1118,7 +1118,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  registry.npmjs.org/eslint-config-prettier/8.5.0_eslint@8.27.0:
+  registry.npmjs.org/eslint-config-prettier/8.5.0_eslint@8.28.0:
     resolution: {integrity: sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz}
     id: registry.npmjs.org/eslint-config-prettier/8.5.0
     name: eslint-config-prettier
@@ -1127,10 +1127,10 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
     dependencies:
-      eslint: registry.npmjs.org/eslint/8.27.0
+      eslint: registry.npmjs.org/eslint/8.28.0
     dev: true
 
-  registry.npmjs.org/eslint-plugin-svelte3/4.0.0_ktwpzwc5ejqdbyb2mks6m4mhya:
+  registry.npmjs.org/eslint-plugin-svelte3/4.0.0_xgu65rlhscpnxffotiaicv6m5i:
     resolution: {integrity: sha512-OIx9lgaNzD02+MDFNLw0GEUbuovNcglg+wnd/UY0fbZmlQSz7GlQiQ1f+yX0XvC07XPcDOnFcichqI3xCwp71g==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/eslint-plugin-svelte3/-/eslint-plugin-svelte3-4.0.0.tgz}
     id: registry.npmjs.org/eslint-plugin-svelte3/4.0.0
     name: eslint-plugin-svelte3
@@ -1139,7 +1139,7 @@ packages:
       eslint: '>=8.0.0'
       svelte: ^3.2.0
     dependencies:
-      eslint: registry.npmjs.org/eslint/8.27.0
+      eslint: registry.npmjs.org/eslint/8.28.0
       svelte: registry.npmjs.org/svelte/3.53.1
     dev: true
 
@@ -1163,7 +1163,7 @@ packages:
       estraverse: registry.npmjs.org/estraverse/5.3.0
     dev: true
 
-  registry.npmjs.org/eslint-utils/3.0.0_eslint@8.27.0:
+  registry.npmjs.org/eslint-utils/3.0.0_eslint@8.28.0:
     resolution: {integrity: sha512-uuQC43IGctw68pJA1RgbQS8/NP7rch6Cwd4j3ZBtgo4/8Flj4eGE7ZYSZRN3iq5pVUv6GPdW5Z1RFleo84uLDA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/eslint-utils/-/eslint-utils-3.0.0.tgz}
     id: registry.npmjs.org/eslint-utils/3.0.0
     name: eslint-utils
@@ -1172,7 +1172,7 @@ packages:
     peerDependencies:
       eslint: '>=5'
     dependencies:
-      eslint: registry.npmjs.org/eslint/8.27.0
+      eslint: registry.npmjs.org/eslint/8.28.0
       eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys/2.1.0
     dev: true
 
@@ -1190,10 +1190,10 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  registry.npmjs.org/eslint/8.27.0:
-    resolution: {integrity: sha512-0y1bfG2ho7mty+SiILVf9PfuRA49ek4Nc60Wmmu62QlobNR+CeXa4xXIJgcuwSQgZiWaPH+5BDsctpIW0PR/wQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/eslint/-/eslint-8.27.0.tgz}
+  registry.npmjs.org/eslint/8.28.0:
+    resolution: {integrity: sha512-S27Di+EVyMxcHiwDrFzk8dJYAaD+/5SoWKxL1ri/71CRHsnJnRDPNt2Kzj24+MT9FDupf4aqqyqPrvI8MvQ4VQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/eslint/-/eslint-8.28.0.tgz}
     name: eslint
-    version: 8.27.0
+    version: 8.28.0
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     hasBin: true
     dependencies:
@@ -1208,7 +1208,7 @@ packages:
       doctrine: registry.npmjs.org/doctrine/3.0.0
       escape-string-regexp: registry.npmjs.org/escape-string-regexp/4.0.0
       eslint-scope: registry.npmjs.org/eslint-scope/7.1.1
-      eslint-utils: registry.npmjs.org/eslint-utils/3.0.0_eslint@8.27.0
+      eslint-utils: registry.npmjs.org/eslint-utils/3.0.0_eslint@8.28.0
       eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys/3.3.0
       espree: registry.npmjs.org/espree/9.4.1
       esquery: registry.npmjs.org/esquery/1.4.0
@@ -1972,7 +1972,7 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  registry.npmjs.org/prettier-plugin-svelte/2.8.0_nryolsexf6k3znhuh4uzpugsem:
+  registry.npmjs.org/prettier-plugin-svelte/2.8.0_3ndnxlh52lolrqe4kgjgbxb3xa:
     resolution: {integrity: sha512-QlXv/U3bUszks3XYDPsk1fsaQC+fo2lshwKbcbO+lrSVdJ+40mB1BfL8OCAk1W9y4pJxpqO/4gqm6NtF3zNGCw==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/prettier-plugin-svelte/-/prettier-plugin-svelte-2.8.0.tgz}
     id: registry.npmjs.org/prettier-plugin-svelte/2.8.0
     name: prettier-plugin-svelte
@@ -1981,14 +1981,14 @@ packages:
       prettier: ^1.16.4 || ^2.0.0
       svelte: ^3.2.0
     dependencies:
-      prettier: registry.npmjs.org/prettier/2.7.1
+      prettier: registry.npmjs.org/prettier/2.8.0
       svelte: registry.npmjs.org/svelte/3.53.1
     dev: true
 
-  registry.npmjs.org/prettier/2.7.1:
-    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/prettier/-/prettier-2.7.1.tgz}
+  registry.npmjs.org/prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/prettier/-/prettier-2.8.0.tgz}
     name: prettier
-    version: 2.7.1
+    version: 2.8.0
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -2488,11 +2488,11 @@ packages:
       fsevents: registry.npmjs.org/fsevents/2.3.2
     dev: true
 
-  registry.npmjs.org/vitefu/0.2.1_vite@3.2.4:
-    resolution: {integrity: sha512-clkvXTAeUf+XQKm3bhWUhT4pye+3acm6YCTGaWhxxIvZZ/QjnA3JA8Zud+z/mO5y5XYvJJhevs5Sjkv/FI8nRw==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/vitefu/-/vitefu-0.2.1.tgz}
-    id: registry.npmjs.org/vitefu/0.2.1
+  registry.npmjs.org/vitefu/0.2.2_vite@3.2.4:
+    resolution: {integrity: sha512-8CKEIWPm4B4DUDN+h+hVJa9pyNi7rzc5MYmbxhs1wcMakueGFNWB5/DL30USm9qU3xUPnL4/rrLEAwwFiD1tag==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/vitefu/-/vitefu-0.2.2.tgz}
+    id: registry.npmjs.org/vitefu/0.2.2
     name: vitefu
-    version: 0.2.1
+    version: 0.2.2
     peerDependencies:
       vite: ^3.0.0
     peerDependenciesMeta:

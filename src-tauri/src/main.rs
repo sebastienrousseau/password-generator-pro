@@ -3,28 +3,27 @@
   windows_subsystem = "windows"
 )]
 
-// 32 characters unique characters
-pub const SPECIAL: &[u8] = b"!@#$%^&*()_+-=[]{};':,./<>?";
-
 /// Import the convert_case crate to convert the string to the desired case.
-use convert_case::{Case, Casing};
+pub use convert_case::{Case, Casing};
 
 /// Import the random generator and the integrator random extension traits.
-use rand::{seq::SliceRandom, thread_rng, Rng};
+pub use rand::{seq::SliceRandom, thread_rng, Rng};
 
 /// Import the tauri manager.
-use tauri::Manager;
+pub use tauri::Manager;
 
 /// Import the chrono crate to get the current date and time.
-use chrono::{DateTime, Utc};
+pub use chrono::{DateTime, Utc};
 
-/// Create new modules for the system tray and word list
-mod system_tray; // src-tauri/src/system_tray.rs
-mod words; // src-tauri/src/words.rs
+/// Import the webbrowser crate to open the website in the default browser.
+pub use webbrowser;
 
-/// The default hash cost to use for generating
-/// bcrypt password hashes.
-const HASH_COST: u32 = 8;
+pub use consts::*;
+mod consts;
+mod tray;
+mod words;
+
+pub use sys_locale::get_locale;
 
 /// GeneratedPassword stores a randomly generated password
 /// and the bcrypt hash of the password.
@@ -41,7 +40,7 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
   // Setup a random number generator
   let mut rng = thread_rng();
   // Generate a random number between 0 and 99.
-  let mut nb = rng.gen_range(0..99);
+  let mut nb: i32 = rng.gen_range(0..=999);
   // Create a new vector to store the words in.
   let mut words: Vec<String> = Vec::new();
 
@@ -88,9 +87,11 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
 /// It also sets up the commands that can be called from the webview
 /// and the system tray
 fn main() {
+  let locale = get_locale().unwrap_or_else(|| String::from("en-GB"));
+  println!("The current locale is {}", locale);
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![generate_password,])
-    .system_tray(system_tray::system_tray())
+    .system_tray(tray::system_tray())
     .on_system_tray_event(|app, event| match event {
       tauri::SystemTrayEvent::MenuItemClick { id, .. } => {
         // Get the item handle from the id of the item clicked on the system tray menu item list.
@@ -115,8 +116,17 @@ fn main() {
               println!("{} [Info] SystemTrayEvent: showing main window", now);
             }
           }
+          "website" => {
+            // If the id is "website", open the website in the default browser.
+            println!(
+              "{} [Info] SystemTrayEvent: opening password-generator.pro website",
+              now
+            );
+            webbrowser::open("https://password-generator.pro").unwrap();
+          }
           // If the id is "quit", quit the application.
           "quit" => {
+            println!("{} [Info] SystemTrayEvent: quitting application", now);
             std::process::exit(0);
           }
           _ => {}

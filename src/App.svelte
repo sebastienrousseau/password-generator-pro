@@ -2,11 +2,28 @@
   import { writable, get } from 'svelte/store'
 
   import './app.css'
-  import CopyIcon from './lib/CopyIcon.svelte'
-  import ResetIcon from './lib/ResetIcon.svelte'
-  import GenerateIcon from './lib/GenerateIcon.svelte'
+  import CopyIcon from './Icon/CopyIcon.svelte'
+  import GenerateIcon from './Icon/GenerateIcon.svelte'
+  import ResetIcon from './Icon/ResetIcon.svelte'
 
   import { invoke } from '@tauri-apps/api/tauri'
+
+  import Translate from './Components/I18n/i18n'
+
+  const systemLanguage = Intl.DateTimeFormat().resolvedOptions().locale
+  // const systemLanguage = navigator.languages[0]
+  // const systemLanguage = 'pl-PL'
+
+  const generate_i18n = Translate('Button', systemLanguage)
+  const label_i18n = Translate('Label', systemLanguage)
+  const label2_i18n = Translate('Label2', systemLanguage)
+  const label3_i18n = Translate('Label3', systemLanguage)
+  const label4_i18n = Translate('Label4', systemLanguage)
+  const placeholder_i18n = Translate('Placeholder', systemLanguage)
+  const placeholder2_i18n = Translate('Placeholder2', systemLanguage)
+  const reset_i18n = Translate('Button2', systemLanguage)
+  const subtitle_i18n = Translate('Subtitle', systemLanguage)
+  const title_i18n = Translate('Title', systemLanguage)
 
   const defaultFormValues = {
     len: 3,
@@ -70,13 +87,15 @@
 <main class="absolute w-full h-full bg-slate-800 text-slate-50 uppercase">
   <!-- Page Header -->
   <div class="my-5 mx-6 font-mono">
-    <h1 class="text-3xl text-center font-bold mb-1">Password Generator Pro</h1>
+    <h1 class="text-3xl text-center font-bold mb-1">
+      {title_i18n}
+    </h1>
     <p class="text-md text-center mb-7 text-slate-500">
-      A fast, simple and powerful password generator
+      {subtitle_i18n}
     </p>
 
     <!-- Password Display -->
-    <p class="text-md mb-2">Password</p>
+    <p class="text-md mb-2">{label_i18n}</p>
     <div class="flex bg-slate-700 rounded-xl w-96 mb-5 overflow-hidden">
       <span class="px-3 py-2 flex-grow select-all normal-case truncate">
         {#if password}
@@ -84,7 +103,7 @@
             {password}
           </span>
         {:else}
-          <span class="text-slate-400 select-none"> No password generated yet </span>
+          <span class="text-slate-400 select-none">{placeholder_i18n}</span>
         {/if}
       </span>
       <button
@@ -95,7 +114,7 @@
       </button>
     </div>
 
-    <p class="text-md mb-2">Bcrypt Hash</p>
+    <p class="text-md mb-2">{label2_i18n}</p>
     <div class="flex bg-slate-700 rounded-xl w-96 mb-5 overflow-hidden">
       <span class="px-3 py-2 flex-grow select-all normal-case truncate">
         {#if hash}
@@ -103,7 +122,7 @@
             {hash}
           </span>
         {:else}
-          <span class="text-slate-400 select-none"> No hash generated yet </span>
+          <span class="text-slate-400 select-none">{placeholder2_i18n}</span>
         {/if}
       </span>
       <button on:click={onCopyhash} class="py-2 px-1 bg-sky-500 hover:bg-sky-400 active:bg-sky-600">
@@ -116,7 +135,7 @@
     <!-- Page Header -->
     <form class="text-sm">
       <div class="block mb-4">
-        <label for="num-words" class="mb-2"> Number of words </label>
+        <label for="num-words" class="mb-2">{label3_i18n}</label>
         <input
           type="number"
           name="num-words"
@@ -127,7 +146,7 @@
         />
       </div>
       <div class="block mb-4">
-        <label for="num-words" class="mb-2"> Separator </label>
+        <label for="num-words" class="mb-2">{label4_i18n}</label>
         <input
           type="text"
           name="separator"
@@ -147,7 +166,7 @@
           <span class="mr-2 align-bottom">
             <ResetIcon />
           </span>
-          <span class="uppercase"> Reset </span>
+          <span class="uppercase">{reset_i18n}</span>
         </button>
 
         <button
@@ -160,7 +179,7 @@
           <span class="mr-2 align-bottom">
             <GenerateIcon />
           </span>
-          <span class="uppercase"> Generate </span>
+          <span class="uppercase">{generate_i18n}</span>
         </button>
       </div>
     </form>

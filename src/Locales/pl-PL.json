@@ -1,0 +1,12 @@
+{
+    "Button": "Wygeneruj",
+    "Button2": "Resetowanie",
+    "Label": "Hasło",
+    "Label2": "Bcrypt Hash",
+    "Label3": "Liczba słów",
+    "Label4": "Separator",
+    "Placeholder": "Brak wygenerowanego hasła",
+    "Placeholder2": "Brak wygenerowanego hasha",
+    "Subtitle": "Szybki, prosty i potężny generator haseł",
+    "Title": "Generator haseł"
+}
