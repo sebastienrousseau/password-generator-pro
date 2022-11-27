@@ -1,4 +1,5 @@
 import bgLocaleJSON from '../../Locales/bg-BG.json';
+import csLocaleJSON from '../../Locales/cs-CZ.json';
 import deLocaleJSON from '../../Locales/de-DE.json';
 import enLocaleJSON from '../../Locales/en-GB.json';
 import esLocaleJSON from '../../Locales/es-ES.json';
@@ -14,6 +15,7 @@ import zhLocaleJSON from '../../Locales/zh-CN.json';
 
 const locales = {
     'bg-BG': bgLocaleJSON,
+    'cs-CZ': csLocaleJSON,
     'de-AT': deLocaleJSON,
     'de-CH': deLocaleJSON,
     'de-DE': deLocaleJSON,
