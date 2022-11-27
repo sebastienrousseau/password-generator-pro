@@ -12,6 +12,7 @@ import idLocaleJSON from '../../Locales/id-ID.json';
 import itLocaleJSON from '../../Locales/it-IT.json';
 import ivLocaleJSON from '../../Locales/iv-IV.json';
 import jaLocaleJSON from '../../Locales/ja-JP.json';
+import ltLocaleJSON from '../../Locales/lt-LT.json';
 import koLocaleJSON from '../../Locales/ko-KR.json';
 import nlLocaleJSON from '../../Locales/nl-NL.json';
 import plLocaleJSON from '../../Locales/pl-PL.json';
@@ -142,6 +143,7 @@ const locales = {
     'hu-HU': huLocaleJSON,
     'id-ID': idLocaleJSON,
     'it-CH': itLocaleJSON,
+    'lt-LT': ltLocaleJSON,
     'it-IT': itLocaleJSON,
     'it-SM': itLocaleJSON,
     'it-VA': itLocaleJSON,

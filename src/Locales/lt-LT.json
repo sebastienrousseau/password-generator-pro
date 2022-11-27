@@ -1,0 +1,12 @@
+{
+    "Button": "Sukurti",
+    "Button2": "Iš naujo nustatyti",
+    "Label": "Slaptažodis",
+    "Label2": "Bcrypt Hash",
+    "Label3": "Žodžių skaičius",
+    "Label4": "Separatorius",
+    "Placeholder": "Slaptažodis negeneruojamas",
+    "Placeholder2": "Hash negeneruojamas",
+    "Subtitle": "Greitas, paprastas ir galingas slaptažodžių generatorius",
+    "Title": "Slaptažodžių generatorius"
+}
