@@ -75,10 +75,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 790,
         "resizable": true,
         "title": "Password Generator Pro",
-        "width": 530
+        "width": 490
       }
     ]
   }

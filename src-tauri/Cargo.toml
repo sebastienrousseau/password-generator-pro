@@ -1,13 +1,12 @@
 [package]
 name = "password-generator-pro"
-version = "0.0.0"
+version = "0.0.1"
 description = "A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords."
 authors = ["Sebastien Rousseau"]
 license = "MIT"
 repository = "https://github.com/sebastienrousseau/password-generator-pro"
 default-run = "password-generator-pro"
 edition = "2021"
-rust-version = "1.65"
 
 [build-dependencies]
 tauri-build = { version = "1.2.1", features = [] }
@@ -17,10 +16,11 @@ bcrypt = "0.13.0"
 chrono = "0.4.23"
 convert_case = "0.6.0"
 rand = "0.8.5"
-serde = { version = "1.0.147", features = ["derive"] }
+serde = { version = "1.0.148", features = ["derive"] }
 serde_json = "1.0.89"
 sys-locale = "0.2.3"
 tauri = { version = "1.2.1", features = ["api-all", "system-tray", "updater"] }
+time = "0.3.17"
 webbrowser = "0.8.2"
 
 [features]
@@ -38,7 +38,7 @@ incremental = false # Disable incremental compilation
 lto = true # Enables link to optimizations
 opt-level = "s" # Optimize for binary size
 panic = "abort" # Strip expensive panic clean-up logic
-strip = true  # Automatically strip symbols from the binary.
+strip = "symbols"  # Automatically strip symbols from the binary.
 
 # Optimize these packages for perf
 [profile.release.package.flate2]
