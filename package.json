@@ -35,7 +35,6 @@
   },
   "private": true,
   "scripts": {
-    "postinstall": "husky install",
     "build:web": "vite build",
     "build": "tauri build",
     "check": "svelte-check --tsconfig ./tsconfig.json",
@@ -49,6 +48,7 @@
     "lint:ts:check": "prettier --check . && yarn eslint webapp/ && yarn tsc --noemit",
     "lint:ts": "prettier --write . && yarn eslint webapp/ --fix && yarn tsc --noemit",
     "lint": "pnpm run lint:ts && pnpm run lint:rust",
+    "postinstall": "husky install",
     "preview": "vite preview",
     "tauri": "tauri",
     "test:rust": "cd src-tauri && cargo test",
