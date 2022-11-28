@@ -1,0 +1,12 @@
+{
+  "Button": "Izveidot",
+  "Button2": "Atiestatīt",
+  "Label": "Parole",
+  "Label2": "Bcrypt Hash",
+  "Label3": "Vārdu skaits",
+  "Label4": "Separators",
+  "Placeholder": "Parole nav ģenerēta",
+  "Placeholder2": "Nav ģenerēta hash",
+  "Subtitle": "Ātrs, vienkāršs un jaudīgs paroļu ģenerators",
+  "Title": "Paroļu ģenerators"
+}

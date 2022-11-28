@@ -1,0 +1,12 @@
+{
+  "Button": "Générer",
+  "Button2": "Réinitialiser",
+  "Label": "Mot de passe",
+  "Label2": "Hash Bcrypt",
+  "Label3": "Nombre de mots",
+  "Label4": "Séparateur",
+  "Placeholder": "Aucun mot de passe généré",
+  "Placeholder2": "Aucun hash généré",
+  "Subtitle": "Un générateur de mots de passe rapide, simple et puissant",
+  "Title": "Générateur de mot de passe"
+}

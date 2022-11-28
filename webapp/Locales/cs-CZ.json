@@ -1,0 +1,12 @@
+{
+  "Button": "Generovat",
+  "Button2": "Obnovení",
+  "Label": "Heslo",
+  "Label2": "Bcrypt Hash",
+  "Label3": "Počet slov",
+  "Label4": "Oddělovač",
+  "Placeholder": "Nebylo vygenerováno žádné heslo",
+  "Placeholder2": "Nebyl vygenerován žádný hash",
+  "Subtitle": "Rychlý, jednoduchý a výkonný generátor hesel",
+  "Title": "Generátor hesel"
+}

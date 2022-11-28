@@ -1,0 +1,12 @@
+{
+  "Button": "Generer",
+  "Button2": "Nulstil",
+  "Label": "Adgangskode",
+  "Label2": "Bcrypt Hash",
+  "Label3": "Antal ord",
+  "Label4": "Separator",
+  "Placeholder": "Ingen adgangskode genereret",
+  "Placeholder2": "Ingen hash genereret",
+  "Subtitle": "En hurtig, enkel og kraftfuld adgangskodegenerator",
+  "Title": "Kodeordsgenerator"
+}

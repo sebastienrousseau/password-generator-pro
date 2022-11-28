@@ -1,0 +1,12 @@
+{
+  "Button": "Generirati",
+  "Button2": "Resetiraj",
+  "Label": "Zaporka",
+  "Label2": "Bcrypt Hash",
+  "Label3": "Broj riječi",
+  "Label4": "Separator",
+  "Placeholder": "Nije generirana lozinka",
+  "Placeholder2": "Nije generiran hash",
+  "Subtitle": "Brz, jednostavan i moćan generator zaporki",
+  "Title": "Generator zaporki"
+}

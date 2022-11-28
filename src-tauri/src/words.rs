@@ -52,7 +52,7 @@
 //  * consisting of any three words from this list with two separator
 //  * characters will pass the minimum length check.  In other words, this
 //  * default assumes that no word is shorter than 3 characters.
-pub const WORD_LIST: &'static [&'static str] = &[
+pub const WORD_LIST: &[&str] = &[
   "Adam", "Afghan", "Alaska", "Alice", "Allah", "Amazon", "Andrew", "Anglo", "Angola", "Antony",
   "April", "Arab", "Arctic", "Athens", "Austin", "Bach", "Baltic", "Basque", "Berlin", "Bible",
   "Bombay", "Bonn", "Boston", "Brazil", "Briton", "Buddha", "Burma", "Caesar", "Cairo", "Canada",

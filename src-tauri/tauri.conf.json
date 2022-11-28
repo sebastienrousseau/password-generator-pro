@@ -3,6 +3,7 @@
     "beforeBuildCommand": "pnpm run build:web",
     "beforeDevCommand": "pnpm run dev:web",
     "devPath": "http://localhost:1420",
+    "distDir": "../dist",
     "withGlobalTauri": true
   },
   "package": {
@@ -65,7 +66,11 @@
       "iconPath": "icons/icon.png"
     },
     "updater": {
-      "active": false
+      "active": true,
+      "endpoints": [
+        "https://github.com/sebastienrousseau/password-generator-pro/releases/latest/download/update-{{target}}.json"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEUyOEU1QTBBNEVEM0VENTAKUldSUTdkTk9DbHFPNGt0d3hsY1ZSdURWb1BvWVJKd01yYzBxNWhxS3RnU2czRWJub0piK0FVcGcK"
     },
     "windows": [
       {

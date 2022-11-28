@@ -1,0 +1,12 @@
+{
+  "Button": "生成",
+  "Button2": "复位",
+  "Label": "密码",
+  "Label2": "Bcrypt Hash",
+  "Label3": "字数",
+  "Label4": "分离器",
+  "Placeholder": "没有生成密码",
+  "Placeholder2": "没有生成哈希值",
+  "Subtitle": "一个快速、简单和强大的密码生成器",
+  "Title": "密码生成器"
+}

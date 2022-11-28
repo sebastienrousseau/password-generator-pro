@@ -16,8 +16,6 @@ use tauri::Manager;
 use chrono::{DateTime, Utc};
 
 /// Import the webbrowser crate to open the website in the default browser.
-use webbrowser;
-
 use consts::*;
 mod consts;
 mod tray;
@@ -74,8 +72,8 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
   let pass = words.join(separator);
 
   // Hash the password
-  let hash = bcrypt::hash(pass.as_bytes(), HASH_COST)
-    .or_else(|_| Err("Failed to hash password".to_string()))?;
+  let hash =
+    bcrypt::hash(pass.as_bytes(), HASH_COST).map_err(|_| "Failed to hash password".to_string())?;
 
   // Return the password and hash
   Ok(GeneratedPassword {
@@ -92,8 +90,8 @@ fn main() {
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![generate_password,])
     .system_tray(tray::system_tray())
-    .on_system_tray_event(|app, event| match event {
-      tauri::SystemTrayEvent::MenuItemClick { id, .. } => {
+    .on_system_tray_event(|app, event| {
+      if let tauri::SystemTrayEvent::MenuItemClick { id, .. } = event {
         // Get the item handle from the id of the item clicked on the system tray menu item list.
         let item_handle = app.tray_handle().get_item(&id);
 
@@ -132,7 +130,6 @@ fn main() {
           _ => {}
         }
       }
-      _ => {}
     })
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

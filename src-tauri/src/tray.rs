@@ -12,7 +12,6 @@ pub(crate) fn system_tray() -> SystemTray {
     .add_item(hide)
     .add_item(website)
     .add_item(quit);
-  let tray = SystemTray::new().with_menu(tray_menu);
 
-  return tray;
+  SystemTray::new().with_menu(tray_menu)
 }

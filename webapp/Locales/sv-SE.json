@@ -1,0 +1,12 @@
+{
+  "Button": "Generera",
+  "Button2": "Återställ",
+  "Label": "Lösenord",
+  "Label2": "Bcrypt Hash",
+  "Label3": "Antal ord",
+  "Label4": "Avskiljare",
+  "Placeholder": "Inget lösenord genereras",
+  "Placeholder2": "Ingen hash genereras",
+  "Subtitle": "En snabb, enkel och kraftfull lösenordsgenerator",
+  "Title": "Lösenordsgenerator"
+}

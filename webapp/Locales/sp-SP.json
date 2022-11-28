@@ -1,0 +1,12 @@
+{
+  "Button": "Generar",
+  "Button2": "Reiniciar",
+  "Label": "Contraseña",
+  "Label2": "Hash de Bcrypt",
+  "Label3": "Número de palabras",
+  "Label4": "Separador",
+  "Placeholder": "No se genera ninguna contraseña",
+  "Placeholder2": "No se genera hash",
+  "Subtitle": "Un generador de contraseñas rápido, sencillo y potente",
+  "Title": "Generador de contraseñas"
+}

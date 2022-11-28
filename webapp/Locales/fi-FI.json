@@ -1,0 +1,12 @@
+{
+  "Button": "Tuottaa",
+  "Button2": "Nollaa",
+  "Label": "Salasana",
+  "Label2": "Bcrypt Hash",
+  "Label3": "Sanojen määrä",
+  "Label4": "Erotin",
+  "Placeholder": "Salasanaa ei luotu",
+  "Placeholder2": "Ei tiivistettä luotu",
+  "Subtitle": "Nopea, yksinkertainen ja tehokas salasanageneraattori",
+  "Title": "Salasanageneraattori"
+}
