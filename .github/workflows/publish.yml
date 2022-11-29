@@ -50,7 +50,7 @@ jobs:
               libayatana-appindicator3-dev \
               librsvg2-dev
       - name: install app dependencies and build it
-        run: pnpm && pnpm run build
+        run: pnpm run build
       - name: Build
         run: cd src-tauri && cargo build --verbose
       - name: Run tests
