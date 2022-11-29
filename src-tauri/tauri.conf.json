@@ -7,7 +7,7 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "password-generator-pro",
+    "productName": "Password Generator",
     "version": "../package.json"
   },
   "tauri": {
@@ -17,7 +17,7 @@
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
-      "copyright": "Copyright © Password Generator Pro 2022. All rights reserved.",
+      "copyright": "Copyright © Password Generator 2022. All rights reserved.",
       "deb": {
         "depends": []
       },
@@ -77,7 +77,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": false,
-        "title": "Password Generator Pro",
+        "title": "Password Generator",
         "width": 800
       }
     ]

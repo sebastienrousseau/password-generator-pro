@@ -1,4 +1,4 @@
-;(function () {
+; (function () {
   const e = document.createElement('link').relList
   if (e && e.supports && e.supports('modulepreload')) return
   for (const o of document.querySelectorAll('link[rel="modulepreload"]')) r(o)
@@ -15,8 +15,8 @@
       o.crossorigin === 'use-credentials'
         ? (i.credentials = 'include')
         : o.crossorigin === 'anonymous'
-        ? (i.credentials = 'omit')
-        : (i.credentials = 'same-origin'),
+          ? (i.credentials = 'omit')
+          : (i.credentials = 'same-origin'),
       i
     )
   }
@@ -27,7 +27,7 @@
     fetch(o.href, i)
   }
 })()
-function p() {}
+function p() { }
 function Te(t) {
   return t()
 }
@@ -92,7 +92,7 @@ function Xe(t) {
   return Array.from(t.childNodes)
 }
 function Ue(t, e) {
-  ;(e = '' + e), t.wholeText !== e && (t.data = e)
+  ; (e = '' + e), t.wholeText !== e && (t.data = e)
 }
 function ae(t, e) {
   t.value = e == null ? '' : e
@@ -118,25 +118,25 @@ let ce = 0
 function De() {
   const t = $e
   do {
-    for (; ce < K.length; ) {
+    for (; ce < K.length;) {
       const e = K[ce]
       ce++, X(e), et(e.$$)
     }
-    for (X(null), K.length = 0, ce = 0; Be.length; ) Be.pop()()
+    for (X(null), K.length = 0, ce = 0; Be.length;) Be.pop()()
     for (let e = 0; e < fe.length; e += 1) {
       const n = fe[e]
       he.has(n) || (he.add(n), n())
     }
     fe.length = 0
   } while (K.length)
-  for (; qe.length; ) qe.pop()()
-  ;(be = !1), he.clear(), X(t)
+  for (; qe.length;) qe.pop()()
+    ; (be = !1), he.clear(), X(t)
 }
 function et(t) {
   if (t.fragment !== null) {
     t.update(), Y(t.before_update)
     const e = t.dirty
-    ;(t.dirty = [-1]), t.fragment && t.fragment.p(t.ctx, e), t.after_update.forEach(_e)
+      ; (t.dirty = [-1]), t.fragment && t.fragment.p(t.ctx, e), t.after_update.forEach(_e)
   }
 }
 const de = new Set()
@@ -161,19 +161,19 @@ function J(t, e, n, r) {
   const { fragment: o, after_update: i } = t.$$
   o && o.m(e, n),
     r ||
-      _e(() => {
-        const f = t.$$.on_mount.map(Te).filter(Ve)
-        t.$$.on_destroy ? t.$$.on_destroy.push(...f) : Y(f), (t.$$.on_mount = [])
-      }),
+    _e(() => {
+      const f = t.$$.on_mount.map(Te).filter(Ve)
+      t.$$.on_destroy ? t.$$.on_destroy.push(...f) : Y(f), (t.$$.on_mount = [])
+    }),
     i.forEach(_e)
 }
 function Q(t, e) {
   const n = t.$$
   n.fragment !== null &&
     (Y(n.on_destroy),
-    n.fragment && n.fragment.d(e),
-    (n.on_destroy = n.fragment = null),
-    (n.ctx = []))
+      n.fragment && n.fragment.d(e),
+      (n.on_destroy = n.fragment = null),
+      (n.ctx = []))
 }
 function nt(t, e) {
   t.$$.dirty[0] === -1 && (K.push(t), Ze(), t.$$.dirty.fill(0)),
@@ -205,20 +205,20 @@ function pe(t, e, n, r, o, i, f, d = [-1]) {
   if (
     ((a.ctx = n
       ? n(t, e.props || {}, (h, $, ..._) => {
-          const O = _.length ? _[0] : $
-          return (
-            a.ctx &&
-              o(a.ctx[h], (a.ctx[h] = O)) &&
-              (!a.skip_bound && a.bound[h] && a.bound[h](O), y && nt(t, h)),
-            $
-          )
-        })
+        const O = _.length ? _[0] : $
+        return (
+          a.ctx &&
+          o(a.ctx[h], (a.ctx[h] = O)) &&
+          (!a.skip_bound && a.bound[h] && a.bound[h](O), y && nt(t, h)),
+          $
+        )
+      })
       : []),
-    a.update(),
-    (y = !0),
-    Y(a.before_update),
-    (a.fragment = r ? r(a.ctx) : !1),
-    e.target)
+      a.update(),
+      (y = !0),
+      Y(a.before_update),
+      (a.fragment = r ? r(a.ctx) : !1),
+      e.target)
   ) {
     if (e.hydrate) {
       const h = Xe(e.target)
@@ -281,7 +281,7 @@ function st(t) {
   let e, n
   return {
     c() {
-      ;(e = T('svg')),
+      ; (e = T('svg')),
         (n = T('path')),
         s(n, 'stroke-linecap', 'round'),
         s(n, 'stroke-linejoin', 'round'),
@@ -321,7 +321,7 @@ function ot(t) {
   let e, n
   return {
     c() {
-      ;(e = T('svg')),
+      ; (e = T('svg')),
         (n = T('path')),
         s(n, 'stroke-linecap', 'round'),
         s(n, 'stroke-linejoin', 'round'),
@@ -357,7 +357,7 @@ function at(t) {
   let e, n
   return {
     c() {
-      ;(e = T('svg')),
+      ; (e = T('svg')),
         (n = T('path')),
         s(n, 'stroke-linecap', 'round'),
         s(n, 'stroke-linejoin', 'round'),
@@ -413,8 +413,8 @@ function we(t, e = !1) {
 async function Ke(t, e = {}) {
   return new Promise((n, r) => {
     let o = we((f) => {
-        n(f), Reflect.deleteProperty(window, `_${i}`)
-      }, !0),
+      n(f), Reflect.deleteProperty(window, `_${i}`)
+    }, !0),
       i = we((f) => {
         r(f), Reflect.deleteProperty(window, `_${o}`)
       }, !0)
@@ -431,7 +431,7 @@ function mt(t) {
   let e
   return {
     c() {
-      ;(e = c('span')),
+      ; (e = c('span')),
         (e.textContent = 'No password generated yet'),
         s(e, 'class', 'text-slate-400 select-none')
     },
@@ -448,7 +448,7 @@ function gt(t) {
   let e, n
   return {
     c() {
-      ;(e = c('span')), (n = ye(t[0])), s(e, 'id', 'generated-password')
+      ; (e = c('span')), (n = ye(t[0])), s(e, 'id', 'generated-password')
     },
     m(r, o) {
       R(r, e, o), l(e, n)
@@ -465,7 +465,7 @@ function ht(t) {
   let e
   return {
     c() {
-      ;(e = c('span')),
+      ; (e = c('span')),
         (e.textContent = 'No hash generated yet'),
         s(e, 'class', 'text-slate-400 select-none')
     },
@@ -482,7 +482,7 @@ function bt(t) {
   let e, n
   return {
     c() {
-      ;(e = c('span')), (n = ye(t[1])), s(e, 'id', 'generated-hash')
+      ; (e = c('span')), (n = ye(t[1])), s(e, 'id', 'generated-hash')
     },
     m(r, o) {
       R(r, e, o), l(e, n)
@@ -563,10 +563,10 @@ function _t(t) {
     (q = new ct({})),
     {
       c() {
-        ;(e = c('main')),
+        ; (e = c('main')),
           (n = c('div')),
           (r = c('h1')),
-          (r.textContent = 'Password Generator Pro'),
+          (r.textContent = 'Password Generator'),
           (o = m()),
           (i = c('p')),
           (i.textContent = 'A fast, simple and powerful password generator.'),
@@ -720,14 +720,14 @@ function _t(t) {
           l(N, re),
           (se = !0),
           ge ||
-            ((Se = [
-              F($, 'click', t[6]),
-              F(H, 'click', t[7]),
-              F(w, 'input', t[8]),
-              F(v, 'input', t[9]),
-              F(E, 'click', t[4]),
-              F(N, 'click', t[10]),
-            ]),
+          ((Se = [
+            F($, 'click', t[6]),
+            F(H, 'click', t[7]),
+            F(w, 'input', t[8]),
+            F(v, 'input', t[9]),
+            F(E, 'click', t[4]),
+            F(N, 'click', t[10]),
+          ]),
             (ge = !0))
       },
       p(u, [j]) {
@@ -739,10 +739,10 @@ function _t(t) {
       i(u) {
         se ||
           (W(_.$$.fragment, u),
-          W(S.$$.fragment, u),
-          W(B.$$.fragment, u),
-          W(q.$$.fragment, u),
-          (se = !0))
+            W(S.$$.fragment, u),
+            W(B.$$.fragment, u),
+            W(q.$$.fragment, u),
+            (se = !0))
       },
       o(u) {
         ie(_.$$.fragment, u),
@@ -787,10 +787,10 @@ function wt(t, e, n) {
     Ge(f)
   }
   function $() {
-    ;(r.len = He(this.value)), d.set(r)
+    ; (r.len = He(this.value)), d.set(r)
   }
   function _() {
-    ;(r.separator = this.value), d.set(r)
+    ; (r.separator = this.value), d.set(r)
   }
   return [
     i,

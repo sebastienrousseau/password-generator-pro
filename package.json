@@ -28,7 +28,7 @@
     "vite": "^3.2.4",
     "vitest": "^0.25.3"
   },
-  "name": "password-generator",
+  "name": "password-generator-pro",
   "prettier": {
     "printWidth": 100,
     "semi": false,
@@ -42,7 +42,7 @@
   "private": true,
   "scripts": {
     "build:web": "vite build",
-    "build": "tauri build",
+    "build": "tauri build -- --verbose",
     "cargo:clean": "cd src-tauri && cargo clean",
     "cargo:docs": "cd src-tauri && cargo doc --all --no-deps",
     "cargo:test": "cd src-tauri && cargo test",
