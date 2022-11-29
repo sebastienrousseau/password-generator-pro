@@ -7,8 +7,8 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "Password Generator Pro",
-    "version": "0.0.1"
+    "productName": "password-generator-pro",
+    "version": "../package.json"
   },
   "tauri": {
     "allowlist": {
@@ -71,10 +71,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 790,
-        "resizable": true,
+        "height": 600,
+        "resizable": false,
         "title": "Password Generator Pro",
-        "width": 490
+        "width": 800
       }
     ]
   }
