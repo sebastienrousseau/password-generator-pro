@@ -66,11 +66,7 @@
       "iconPath": "icons/icon.png"
     },
     "updater": {
-      "active": true,
-      "endpoints": [
-        "https://github.com/sebastienrousseau/password-generator-pro/releases/latest/download/update-{{target}}.json"
-      ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQwQjY1QTE5NDNDQjMxMjQKUldRa01jdERHVnEyMERVTlFrUW9sR2xuSVJ1ZldtMUJiYjVqdy9CQXlJakVjSzZnSitpdmwyWFoK"
+      "active": false
     },
     "windows": [
       {
