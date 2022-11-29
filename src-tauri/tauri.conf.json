@@ -17,7 +17,7 @@
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
-      "copyright": "Copyright © Sebastien Rousseau 2022. All rights reserved.",
+      "copyright": "Copyright © Password Generator Pro 2022. All rights reserved.",
       "deb": {
         "depends": []
       },
@@ -41,10 +41,10 @@
       "identifier": "com.sebastienrousseau.password-generator-pro",
       "longDescription": "A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords",
       "macOS": {
-        "entitlements": null,
+        "entitlements": "entitlements.plist",
         "exceptionDomain": "",
         "frameworks": [],
-        "minimumSystemVersion": "10.13",
+        "minimumSystemVersion": "10.7",
         "providerShortName": null,
         "signingIdentity": null
       },

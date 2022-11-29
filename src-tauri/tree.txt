@@ -1,4 +1,4 @@
-password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
+password-generator-pro v0.0.1 (/Users/seb/Team Rousseau Dropbox/Sebastien Rousseau/Users/seb/Code/password-generator-pro/src-tauri)
 |-- bcrypt v0.13.0
 |   |-- base64 v0.13.1
 |   |-- blowfish v0.9.1
@@ -18,6 +18,7 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   `-- zeroize v1.5.7
 |-- chrono v0.4.23
 |   |-- iana-time-zone v0.1.53
+|   |   `-- core-foundation-sys v0.8.3
 |   |-- num-integer v0.1.45
 |   |   `-- num-traits v0.2.15
 |   |       [build-dependencies]
@@ -66,26 +67,24 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |   |-- log v0.4.17
 |   |   |   `-- cfg-if v1.0.0
 |   |   |-- native-tls v0.2.11
-|   |   |   |-- log v0.4.17 (*)
-|   |   |   |-- openssl v0.10.43
+|   |   |   |-- lazy_static v1.4.0
+|   |   |   |-- libc v0.2.137
+|   |   |   |-- security-framework v2.7.0
 |   |   |   |   |-- bitflags v1.3.2
-|   |   |   |   |-- cfg-if v1.0.0
-|   |   |   |   |-- foreign-types v0.3.2
-|   |   |   |   |   `-- foreign-types-shared v0.1.1
+|   |   |   |   |-- core-foundation v0.9.3
+|   |   |   |   |   |-- core-foundation-sys v0.8.3
+|   |   |   |   |   `-- libc v0.2.137
+|   |   |   |   |-- core-foundation-sys v0.8.3
 |   |   |   |   |-- libc v0.2.137
-|   |   |   |   |-- once_cell v1.16.0
-|   |   |   |   |-- openssl-macros v0.1.0 (proc-macro)
-|   |   |   |   |   |-- proc-macro2 v1.0.47 (*)
-|   |   |   |   |   |-- quote v1.0.21 (*)
-|   |   |   |   |   `-- syn v1.0.104 (*)
-|   |   |   |   `-- openssl-sys v0.9.78
+|   |   |   |   `-- security-framework-sys v2.6.1
+|   |   |   |       |-- core-foundation-sys v0.8.3
 |   |   |   |       `-- libc v0.2.137
-|   |   |   |       [build-dependencies]
-|   |   |   |       |-- autocfg v1.1.0
-|   |   |   |       |-- cc v1.0.77
-|   |   |   |       `-- pkg-config v0.3.26
-|   |   |   |-- openssl-probe v0.1.5
-|   |   |   `-- openssl-sys v0.9.78 (*)
+|   |   |   |-- security-framework-sys v2.6.1 (*)
+|   |   |   `-- tempfile v3.3.0
+|   |   |       |-- cfg-if v1.0.0
+|   |   |       |-- fastrand v1.8.0
+|   |   |       |-- libc v0.2.137
+|   |   |       `-- remove_dir_all v0.5.3
 |   |   |-- serde v1.0.148 (*)
 |   |   |-- serde_json v1.0.89 (*)
 |   |   |-- serde_urlencoded v0.7.1
@@ -104,10 +103,42 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |       |-- percent-encoding v2.2.0
 |   |       `-- serde v1.0.148 (*)
 |   |-- base64 v0.13.1
+|   |-- cocoa v0.24.1
+|   |   |-- bitflags v1.3.2
+|   |   |-- block v0.1.6
+|   |   |-- cocoa-foundation v0.1.0
+|   |   |   |-- bitflags v1.3.2
+|   |   |   |-- block v0.1.6
+|   |   |   |-- core-foundation v0.9.3 (*)
+|   |   |   |-- core-graphics-types v0.1.1
+|   |   |   |   |-- bitflags v1.3.2
+|   |   |   |   |-- core-foundation v0.9.3 (*)
+|   |   |   |   |-- foreign-types v0.3.2
+|   |   |   |   |   `-- foreign-types-shared v0.1.1
+|   |   |   |   `-- libc v0.2.137
+|   |   |   |-- foreign-types v0.3.2 (*)
+|   |   |   |-- libc v0.2.137
+|   |   |   `-- objc v0.2.7
+|   |   |       |-- malloc_buf v0.0.6
+|   |   |       |   `-- libc v0.2.137
+|   |   |       `-- objc_exception v0.1.2
+|   |   |           [build-dependencies]
+|   |   |           `-- cc v1.0.77
+|   |   |-- core-foundation v0.9.3 (*)
+|   |   |-- core-graphics v0.22.3
+|   |   |   |-- bitflags v1.3.2
+|   |   |   |-- core-foundation v0.9.3 (*)
+|   |   |   |-- core-graphics-types v0.1.1 (*)
+|   |   |   |-- foreign-types v0.3.2 (*)
+|   |   |   `-- libc v0.2.137
+|   |   |-- foreign-types v0.3.2 (*)
+|   |   |-- libc v0.2.137
+|   |   `-- objc v0.2.7 (*)
 |   |-- dirs-next v2.0.0
 |   |   |-- cfg-if v1.0.0
 |   |   `-- dirs-sys-next v0.1.2
 |   |       `-- libc v0.2.137
+|   |-- embed_plist v1.2.2
 |   |-- encoding_rs v0.8.31
 |   |   `-- cfg-if v1.0.0
 |   |-- flate2 v1.0.25 (*)
@@ -123,177 +154,7 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |   `-- slab v0.4.7
 |   |       [build-dependencies]
 |   |       `-- autocfg v1.1.0
-|   |-- glib v0.15.12
-|   |   |-- bitflags v1.3.2
-|   |   |-- futures-channel v0.3.25
-|   |   |   `-- futures-core v0.3.25
-|   |   |-- futures-core v0.3.25
-|   |   |-- futures-executor v0.3.25
-|   |   |   |-- futures-core v0.3.25
-|   |   |   |-- futures-task v0.3.25
-|   |   |   `-- futures-util v0.3.25 (*)
-|   |   |-- futures-task v0.3.25
-|   |   |-- glib-macros v0.15.11 (proc-macro)
-|   |   |   |-- anyhow v1.0.66
-|   |   |   |-- heck v0.4.0
-|   |   |   |-- proc-macro-crate v1.2.1
-|   |   |   |   |-- once_cell v1.16.0
-|   |   |   |   |-- thiserror v1.0.37
-|   |   |   |   |   `-- thiserror-impl v1.0.37 (proc-macro)
-|   |   |   |   |       |-- proc-macro2 v1.0.47 (*)
-|   |   |   |   |       |-- quote v1.0.21 (*)
-|   |   |   |   |       `-- syn v1.0.104 (*)
-|   |   |   |   `-- toml v0.5.9
-|   |   |   |       `-- serde v1.0.148 (*)
-|   |   |   |-- proc-macro-error v1.0.4
-|   |   |   |   |-- proc-macro-error-attr v1.0.4 (proc-macro)
-|   |   |   |   |   |-- proc-macro2 v1.0.47 (*)
-|   |   |   |   |   `-- quote v1.0.21 (*)
-|   |   |   |   |   [build-dependencies]
-|   |   |   |   |   `-- version_check v0.9.4
-|   |   |   |   |-- proc-macro2 v1.0.47 (*)
-|   |   |   |   |-- quote v1.0.21 (*)
-|   |   |   |   `-- syn v1.0.104 (*)
-|   |   |   |   [build-dependencies]
-|   |   |   |   `-- version_check v0.9.4
-|   |   |   |-- proc-macro2 v1.0.47 (*)
-|   |   |   |-- quote v1.0.21 (*)
-|   |   |   `-- syn v1.0.104 (*)
-|   |   |-- glib-sys v0.15.10
-|   |   |   `-- libc v0.2.137
-|   |   |   [build-dependencies]
-|   |   |   `-- system-deps v6.0.3
-|   |   |       |-- cfg-expr v0.11.0
-|   |   |       |   `-- smallvec v1.10.0
-|   |   |       |-- heck v0.4.0
-|   |   |       |-- pkg-config v0.3.26
-|   |   |       |-- toml v0.5.9 (*)
-|   |   |       `-- version-compare v0.1.1
-|   |   |-- gobject-sys v0.15.10
-|   |   |   |-- glib-sys v0.15.10 (*)
-|   |   |   `-- libc v0.2.137
-|   |   |   [build-dependencies]
-|   |   |   `-- system-deps v6.0.3 (*)
-|   |   |-- libc v0.2.137
-|   |   |-- once_cell v1.16.0
-|   |   |-- smallvec v1.10.0
-|   |   `-- thiserror v1.0.37 (*)
 |   |-- glob v0.3.0
-|   |-- gtk v0.15.5
-|   |   |-- atk v0.15.1
-|   |   |   |-- atk-sys v0.15.1
-|   |   |   |   |-- glib-sys v0.15.10 (*)
-|   |   |   |   |-- gobject-sys v0.15.10 (*)
-|   |   |   |   `-- libc v0.2.137
-|   |   |   |   [build-dependencies]
-|   |   |   |   `-- system-deps v6.0.3 (*)
-|   |   |   |-- bitflags v1.3.2
-|   |   |   |-- glib v0.15.12 (*)
-|   |   |   `-- libc v0.2.137
-|   |   |-- bitflags v1.3.2
-|   |   |-- cairo-rs v0.15.12
-|   |   |   |-- bitflags v1.3.2
-|   |   |   |-- cairo-sys-rs v0.15.1
-|   |   |   |   |-- glib-sys v0.15.10 (*)
-|   |   |   |   `-- libc v0.2.137
-|   |   |   |   [build-dependencies]
-|   |   |   |   `-- system-deps v6.0.3 (*)
-|   |   |   |-- glib v0.15.12 (*)
-|   |   |   |-- libc v0.2.137
-|   |   |   `-- thiserror v1.0.37 (*)
-|   |   |-- field-offset v0.3.4
-|   |   |   `-- memoffset v0.6.5
-|   |   |       [build-dependencies]
-|   |   |       `-- autocfg v1.1.0
-|   |   |   [build-dependencies]
-|   |   |   `-- rustc_version v0.3.3
-|   |   |       `-- semver v0.11.0
-|   |   |           `-- semver-parser v0.10.2
-|   |   |               `-- pest v2.5.0
-|   |   |                   |-- thiserror v1.0.37 (*)
-|   |   |                   `-- ucd-trie v0.1.5
-|   |   |-- futures-channel v0.3.25 (*)
-|   |   |-- gdk v0.15.4
-|   |   |   |-- bitflags v1.3.2
-|   |   |   |-- cairo-rs v0.15.12 (*)
-|   |   |   |-- gdk-pixbuf v0.15.11
-|   |   |   |   |-- bitflags v1.3.2
-|   |   |   |   |-- gdk-pixbuf-sys v0.15.10
-|   |   |   |   |   |-- gio-sys v0.15.10
-|   |   |   |   |   |   |-- glib-sys v0.15.10 (*)
-|   |   |   |   |   |   |-- gobject-sys v0.15.10 (*)
-|   |   |   |   |   |   `-- libc v0.2.137
-|   |   |   |   |   |   [build-dependencies]
-|   |   |   |   |   |   `-- system-deps v6.0.3 (*)
-|   |   |   |   |   |-- glib-sys v0.15.10 (*)
-|   |   |   |   |   |-- gobject-sys v0.15.10 (*)
-|   |   |   |   |   `-- libc v0.2.137
-|   |   |   |   |   [build-dependencies]
-|   |   |   |   |   `-- system-deps v6.0.3 (*)
-|   |   |   |   |-- gio v0.15.12
-|   |   |   |   |   |-- bitflags v1.3.2
-|   |   |   |   |   |-- futures-channel v0.3.25 (*)
-|   |   |   |   |   |-- futures-core v0.3.25
-|   |   |   |   |   |-- futures-io v0.3.25
-|   |   |   |   |   |-- gio-sys v0.15.10 (*)
-|   |   |   |   |   |-- glib v0.15.12 (*)
-|   |   |   |   |   |-- libc v0.2.137
-|   |   |   |   |   |-- once_cell v1.16.0
-|   |   |   |   |   `-- thiserror v1.0.37 (*)
-|   |   |   |   |-- glib v0.15.12 (*)
-|   |   |   |   `-- libc v0.2.137
-|   |   |   |-- gdk-sys v0.15.1
-|   |   |   |   |-- cairo-sys-rs v0.15.1 (*)
-|   |   |   |   |-- gdk-pixbuf-sys v0.15.10 (*)
-|   |   |   |   |-- gio-sys v0.15.10 (*)
-|   |   |   |   |-- glib-sys v0.15.10 (*)
-|   |   |   |   |-- gobject-sys v0.15.10 (*)
-|   |   |   |   |-- libc v0.2.137
-|   |   |   |   `-- pango-sys v0.15.10
-|   |   |   |       |-- glib-sys v0.15.10 (*)
-|   |   |   |       |-- gobject-sys v0.15.10 (*)
-|   |   |   |       `-- libc v0.2.137
-|   |   |   |       [build-dependencies]
-|   |   |   |       `-- system-deps v6.0.3 (*)
-|   |   |   |   [build-dependencies]
-|   |   |   |   |-- pkg-config v0.3.26
-|   |   |   |   `-- system-deps v6.0.3 (*)
-|   |   |   |-- gio v0.15.12 (*)
-|   |   |   |-- glib v0.15.12 (*)
-|   |   |   |-- libc v0.2.137
-|   |   |   `-- pango v0.15.10
-|   |   |       |-- bitflags v1.3.2
-|   |   |       |-- glib v0.15.12 (*)
-|   |   |       |-- libc v0.2.137
-|   |   |       |-- once_cell v1.16.0
-|   |   |       `-- pango-sys v0.15.10 (*)
-|   |   |-- gdk-pixbuf v0.15.11 (*)
-|   |   |-- gio v0.15.12 (*)
-|   |   |-- glib v0.15.12 (*)
-|   |   |-- gtk-sys v0.15.3
-|   |   |   |-- atk-sys v0.15.1 (*)
-|   |   |   |-- cairo-sys-rs v0.15.1 (*)
-|   |   |   |-- gdk-pixbuf-sys v0.15.10 (*)
-|   |   |   |-- gdk-sys v0.15.1 (*)
-|   |   |   |-- gio-sys v0.15.10 (*)
-|   |   |   |-- glib-sys v0.15.10 (*)
-|   |   |   |-- gobject-sys v0.15.10 (*)
-|   |   |   |-- libc v0.2.137
-|   |   |   `-- pango-sys v0.15.10 (*)
-|   |   |   [build-dependencies]
-|   |   |   `-- system-deps v6.0.3 (*)
-|   |   |-- gtk3-macros v0.15.4 (proc-macro)
-|   |   |   |-- anyhow v1.0.66
-|   |   |   |-- proc-macro-crate v1.2.1 (*)
-|   |   |   |-- proc-macro-error v1.0.4 (*)
-|   |   |   |-- proc-macro2 v1.0.47 (*)
-|   |   |   |-- quote v1.0.21 (*)
-|   |   |   `-- syn v1.0.104 (*)
-|   |   |-- libc v0.2.137
-|   |   |-- once_cell v1.16.0
-|   |   `-- pango v0.15.10 (*)
-|   |   [build-dependencies]
-|   |   `-- pkg-config v0.3.26
 |   |-- http v0.2.8 (*)
 |   |-- ignore v0.4.18
 |   |   |-- crossbeam-utils v0.8.14
@@ -320,11 +181,20 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |       `-- same-file v1.0.6
 |   |-- minisign-verify v0.2.1
 |   |-- notify-rust v4.5.10
-|   |   `-- dbus v0.9.6
-|   |       |-- libc v0.2.137
-|   |       `-- libdbus-sys v0.2.2
-|   |           [build-dependencies]
-|   |           `-- pkg-config v0.3.26
+|   |   `-- mac-notification-sys v0.5.6
+|   |       |-- dirs-next v2.0.0 (*)
+|   |       |-- objc-foundation v0.1.1
+|   |       |   |-- block v0.1.6
+|   |       |   |-- objc v0.2.7 (*)
+|   |       |   `-- objc_id v0.1.1
+|   |       |       `-- objc v0.2.7 (*)
+|   |       |-- objc_id v0.1.1 (*)
+|   |       `-- time v0.3.17
+|   |           |-- itoa v1.0.4
+|   |           `-- time-core v0.1.0
+|   |       [build-dependencies]
+|   |       `-- cc v1.0.77
+|   |-- objc v0.2.7 (*)
 |   |-- once_cell v1.16.0
 |   |-- open v3.2.0
 |   |   `-- pathdiff v0.2.1
@@ -339,11 +209,12 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |   `-- cty v0.2.2
 |   |-- regex v1.7.0 (*)
 |   |-- rfd v0.10.0
-|   |   |-- glib-sys v0.15.10 (*)
-|   |   |-- gobject-sys v0.15.10 (*)
-|   |   |-- gtk-sys v0.15.3 (*)
-|   |   |-- lazy_static v1.4.0
+|   |   |-- block v0.1.6
+|   |   |-- dispatch v0.2.0
 |   |   |-- log v0.4.17 (*)
+|   |   |-- objc v0.2.7 (*)
+|   |   |-- objc-foundation v0.1.1 (*)
+|   |   |-- objc_id v0.1.1 (*)
 |   |   `-- raw-window-handle v0.5.0 (*)
 |   |-- semver v1.0.14
 |   |   `-- serde v1.0.148 (*)
@@ -399,6 +270,17 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |   |   |   |   `-- serde v1.0.148 (*)
 |   |   |   |   `-- treediff v3.0.2
 |   |   |   |       `-- serde_json v1.0.89 (*)
+|   |   |   |-- plist v1.3.1
+|   |   |   |   |-- base64 v0.13.1
+|   |   |   |   |-- indexmap v1.9.2
+|   |   |   |   |   `-- hashbrown v0.12.3
+|   |   |   |   |   [build-dependencies]
+|   |   |   |   |   `-- autocfg v1.1.0
+|   |   |   |   |-- line-wrap v0.1.1
+|   |   |   |   |   `-- safemem v0.3.3
+|   |   |   |   |-- serde v1.0.148 (*)
+|   |   |   |   |-- time v0.3.17 (*)
+|   |   |   |   `-- xml-rs v0.8.4
 |   |   |   |-- png v0.17.7 (*)
 |   |   |   |-- proc-macro2 v1.0.47 (*)
 |   |   |   |-- quote v1.0.21 (*)
@@ -409,6 +291,7 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |   |   |-- sha2 v0.10.6
 |   |   |   |   |-- cfg-if v1.0.0
 |   |   |   |   |-- cpufeatures v0.2.5
+|   |   |   |   |   `-- libc v0.2.137
 |   |   |   |   `-- digest v0.10.6
 |   |   |   |       |-- block-buffer v0.10.3
 |   |   |   |       |   `-- generic-array v0.14.6 (*)
@@ -421,7 +304,6 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |   |   |   |   |-- quote v1.0.21 (*)
 |   |   |   |   |   `-- syn v1.0.104 (*)
 |   |   |   |   |-- glob v0.3.0
-|   |   |   |   |-- heck v0.4.0
 |   |   |   |   |-- html5ever v0.25.2
 |   |   |   |   |   |-- log v0.4.17 (*)
 |   |   |   |   |   |-- mac v0.1.1
@@ -571,16 +453,20 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |   |   |   |       |-- proc-macro2 v1.0.47 (*)
 |   |   |   |   |       |-- quote v1.0.21 (*)
 |   |   |   |   |       `-- syn v1.0.104 (*)
-|   |   |   |   |-- thiserror v1.0.37 (*)
+|   |   |   |   |-- thiserror v1.0.37
+|   |   |   |   |   `-- thiserror-impl v1.0.37 (proc-macro)
+|   |   |   |   |       |-- proc-macro2 v1.0.47 (*)
+|   |   |   |   |       |-- quote v1.0.21 (*)
+|   |   |   |   |       `-- syn v1.0.104 (*)
 |   |   |   |   |-- url v2.3.1 (*)
 |   |   |   |   `-- walkdir v2.3.2 (*)
 |   |   |   |-- thiserror v1.0.37 (*)
+|   |   |   |-- time v0.3.17 (*)
 |   |   |   |-- uuid v1.2.2
 |   |   |   |   `-- getrandom v0.2.8 (*)
 |   |   |   `-- walkdir v2.3.2 (*)
 |   |   `-- tauri-utils v1.2.1 (*)
 |   |-- tauri-runtime v0.12.1
-|   |   |-- gtk v0.15.5 (*)
 |   |   |-- http v0.2.8 (*)
 |   |   |-- http-range v0.1.5
 |   |   |-- rand v0.8.5 (*)
@@ -591,7 +477,6 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |   |   |-- brotli v3.3.4 (*)
 |   |   |   |-- ctor v0.1.26 (proc-macro) (*)
 |   |   |   |-- glob v0.3.0
-|   |   |   |-- heck v0.4.0
 |   |   |   |-- html5ever v0.25.2 (*)
 |   |   |   |-- infer v0.7.0 (*)
 |   |   |   |-- json-patch v0.2.6 (*)
@@ -608,151 +493,51 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |   |-- thiserror v1.0.37 (*)
 |   |   `-- uuid v1.2.2 (*)
 |   |-- tauri-runtime-wry v0.12.1
-|   |   |-- gtk v0.15.5 (*)
-|   |   |-- percent-encoding v2.2.0
+|   |   |-- cocoa v0.24.1 (*)
 |   |   |-- rand v0.8.5 (*)
 |   |   |-- raw-window-handle v0.5.0 (*)
 |   |   |-- tauri-runtime v0.12.1 (*)
 |   |   |-- tauri-utils v1.2.1 (*)
 |   |   |-- uuid v1.2.2 (*)
-|   |   |-- webkit2gtk v0.18.2
-|   |   |   |-- bitflags v1.3.2
-|   |   |   |-- cairo-rs v0.15.12 (*)
-|   |   |   |-- gdk v0.15.4 (*)
-|   |   |   |-- gdk-sys v0.15.1 (*)
-|   |   |   |-- gio v0.15.12 (*)
-|   |   |   |-- gio-sys v0.15.10 (*)
-|   |   |   |-- glib v0.15.12 (*)
-|   |   |   |-- glib-sys v0.15.10 (*)
-|   |   |   |-- gobject-sys v0.15.10 (*)
-|   |   |   |-- gtk v0.15.5 (*)
-|   |   |   |-- gtk-sys v0.15.3 (*)
-|   |   |   |-- javascriptcore-rs v0.16.0
-|   |   |   |   |-- bitflags v1.3.2
-|   |   |   |   |-- glib v0.15.12 (*)
-|   |   |   |   `-- javascriptcore-rs-sys v0.4.0
-|   |   |   |       |-- glib-sys v0.15.10 (*)
-|   |   |   |       |-- gobject-sys v0.15.10 (*)
-|   |   |   |       `-- libc v0.2.137
-|   |   |   |       [build-dependencies]
-|   |   |   |       `-- system-deps v5.0.0
-|   |   |   |           |-- cfg-expr v0.9.1
-|   |   |   |           |   `-- smallvec v1.10.0
-|   |   |   |           |-- heck v0.3.3
-|   |   |   |           |   `-- unicode-segmentation v1.10.0
-|   |   |   |           |-- pkg-config v0.3.26
-|   |   |   |           |-- toml v0.5.9 (*)
-|   |   |   |           `-- version-compare v0.0.11
-|   |   |   |-- libc v0.2.137
-|   |   |   |-- once_cell v1.16.0
-|   |   |   |-- soup2 v0.2.1
-|   |   |   |   |-- bitflags v1.3.2
-|   |   |   |   |-- gio v0.15.12 (*)
-|   |   |   |   |-- glib v0.15.12 (*)
-|   |   |   |   |-- libc v0.2.137
-|   |   |   |   |-- once_cell v1.16.0
-|   |   |   |   `-- soup2-sys v0.2.0
-|   |   |   |       |-- bitflags v1.3.2
-|   |   |   |       |-- gio-sys v0.15.10 (*)
-|   |   |   |       |-- glib-sys v0.15.10 (*)
-|   |   |   |       |-- gobject-sys v0.15.10 (*)
-|   |   |   |       `-- libc v0.2.137
-|   |   |   |       [build-dependencies]
-|   |   |   |       `-- system-deps v5.0.0 (*)
-|   |   |   `-- webkit2gtk-sys v0.18.0
-|   |   |       |-- atk-sys v0.15.1 (*)
-|   |   |       |-- bitflags v1.3.2
-|   |   |       |-- cairo-sys-rs v0.15.1 (*)
-|   |   |       |-- gdk-pixbuf-sys v0.15.10 (*)
-|   |   |       |-- gdk-sys v0.15.1 (*)
-|   |   |       |-- gio-sys v0.15.10 (*)
-|   |   |       |-- glib-sys v0.15.10 (*)
-|   |   |       |-- gobject-sys v0.15.10 (*)
-|   |   |       |-- gtk-sys v0.15.3 (*)
-|   |   |       |-- javascriptcore-rs-sys v0.4.0 (*)
-|   |   |       |-- libc v0.2.137
-|   |   |       |-- pango-sys v0.15.10 (*)
-|   |   |       `-- soup2-sys v0.2.0 (*)
-|   |   |       [build-dependencies]
-|   |   |       |-- pkg-config v0.3.26
-|   |   |       `-- system-deps v6.0.3 (*)
 |   |   `-- wry v0.22.5
-|   |       |-- gdk v0.15.4 (*)
-|   |       |-- gio v0.15.12 (*)
-|   |       |-- glib v0.15.12 (*)
-|   |       |-- gtk v0.15.5 (*)
+|   |       |-- block v0.1.6
+|   |       |-- cocoa v0.24.1 (*)
+|   |       |-- core-graphics v0.22.3 (*)
 |   |       |-- http v0.2.8 (*)
 |   |       |-- libc v0.2.137
 |   |       |-- log v0.4.17 (*)
+|   |       |-- objc v0.2.7 (*)
+|   |       |-- objc_id v0.1.1 (*)
 |   |       |-- once_cell v1.16.0
 |   |       |-- serde v1.0.148 (*)
 |   |       |-- serde_json v1.0.89 (*)
-|   |       |-- soup2 v0.2.1 (*)
 |   |       |-- tao v0.15.6
 |   |       |   |-- bitflags v1.3.2
-|   |       |   |-- cairo-rs v0.15.12 (*)
+|   |       |   |-- cocoa v0.24.1 (*)
+|   |       |   |-- core-foundation v0.9.3 (*)
+|   |       |   |-- core-graphics v0.22.3 (*)
 |   |       |   |-- crossbeam-channel v0.5.6
 |   |       |   |   |-- cfg-if v1.0.0
 |   |       |   |   `-- crossbeam-utils v0.8.14 (*)
-|   |       |   |-- dirs-next v2.0.0 (*)
-|   |       |   |-- gdk v0.15.4 (*)
-|   |       |   |-- gdk-pixbuf v0.15.11 (*)
-|   |       |   |-- gdk-sys v0.15.1 (*)
-|   |       |   |-- gdkx11-sys v0.15.1
-|   |       |   |   |-- gdk-sys v0.15.1 (*)
-|   |       |   |   |-- glib-sys v0.15.10 (*)
-|   |       |   |   |-- libc v0.2.137
-|   |       |   |   `-- x11 v2.20.1
-|   |       |   |       `-- libc v0.2.137
-|   |       |   |       [build-dependencies]
-|   |       |   |       `-- pkg-config v0.3.26
-|   |       |   |   [build-dependencies]
-|   |       |   |   `-- system-deps v6.0.3 (*)
-|   |       |   |-- gio v0.15.12 (*)
-|   |       |   |-- glib v0.15.12 (*)
-|   |       |   |-- glib-sys v0.15.10 (*)
-|   |       |   |-- gtk v0.15.5 (*)
+|   |       |   |-- dispatch v0.2.0
 |   |       |   |-- instant v0.1.12
 |   |       |   |   `-- cfg-if v1.0.0
 |   |       |   |-- lazy_static v1.4.0
-|   |       |   |-- libappindicator v0.7.1
-|   |       |   |   |-- glib v0.15.12 (*)
-|   |       |   |   |-- gtk v0.15.5 (*)
-|   |       |   |   |-- gtk-sys v0.15.3 (*)
-|   |       |   |   |-- libappindicator-sys v0.7.3
-|   |       |   |   |   |-- gtk-sys v0.15.3 (*)
-|   |       |   |   |   |-- libloading v0.7.4
-|   |       |   |   |   |   `-- cfg-if v1.0.0
-|   |       |   |   |   `-- once_cell v1.16.0
-|   |       |   |   `-- log v0.4.17 (*)
 |   |       |   |-- libc v0.2.137
 |   |       |   |-- log v0.4.17 (*)
-|   |       |   |-- parking_lot v0.12.1 (*)
+|   |       |   |-- objc v0.2.7 (*)
 |   |       |   |-- png v0.17.7 (*)
 |   |       |   |-- raw-window-handle v0.5.0 (*)
-|   |       |   |-- serde v1.0.148 (*)
-|   |       |   |-- uuid v1.2.2 (*)
-|   |       |   `-- x11-dl v2.20.1
-|   |       |       |-- lazy_static v1.4.0
-|   |       |       `-- libc v0.2.137
-|   |       |       [build-dependencies]
-|   |       |       `-- pkg-config v0.3.26
+|   |       |   |-- scopeguard v1.1.0
+|   |       |   `-- serde v1.0.148 (*)
 |   |       |   [build-dependencies]
 |   |       |   `-- cc v1.0.77
 |   |       |-- thiserror v1.0.37 (*)
-|   |       |-- url v2.3.1 (*)
-|   |       |-- webkit2gtk v0.18.2 (*)
-|   |       `-- webkit2gtk-sys v0.18.0 (*)
+|   |       `-- url v2.3.1 (*)
 |   |-- tauri-utils v1.2.1 (*)
-|   |-- tempfile v3.3.0
-|   |   |-- cfg-if v1.0.0
-|   |   |-- fastrand v1.8.0
-|   |   |-- libc v0.2.137
-|   |   `-- remove_dir_all v0.5.3
+|   |-- tempfile v3.3.0 (*)
 |   |-- thiserror v1.0.37 (*)
-|   |-- time v0.3.17
-|   |   |-- itoa v1.0.4
-|   |   `-- time-core v0.1.0
+|   |-- time v0.3.17 (*)
 |   |-- tokio v1.22.0
 |   |   |-- bytes v1.3.0
 |   |   |-- memchr v2.5.0
@@ -763,7 +548,6 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
 |   |   `-- autocfg v1.1.0
 |   |-- url v2.3.1 (*)
 |   |-- uuid v1.2.2 (*)
-|   |-- webkit2gtk v0.18.2 (*)
 |   `-- zip v0.6.3
 |       |-- byteorder v1.4.3
 |       `-- crc32fast v1.3.2 (*)
@@ -778,7 +562,8 @@ password-generator-pro v0.0.1 (/home/seb/Code/password-generator-pro/src-tauri)
     |-- anyhow v1.0.66
     |-- cargo_toml v0.13.0
     |   |-- serde v1.0.148 (*)
-    |   `-- toml v0.5.9 (*)
+    |   `-- toml v0.5.9
+    |       `-- serde v1.0.148 (*)
     |-- heck v0.4.0
     |-- json-patch v0.2.6 (*)
     |-- serde_json v1.0.89 (*)

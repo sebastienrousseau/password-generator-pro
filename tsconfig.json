@@ -13,8 +13,10 @@
     "useDefineForClassFields": true
   },
   "extends": "@tsconfig/svelte/tsconfig.json",
-  "include": ["webapp"],
-  "moduleResolution": "node",
+  "include": [
+    "src-web"
+  ],
+  "mosrc-websolution": "node",
   "references": [
     {
       "path": "./tsconfig.node.json"
