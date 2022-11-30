@@ -44,7 +44,7 @@
         "entitlements": "entitlements.plist",
         "exceptionDomain": "",
         "frameworks": [],
-        "minimumSystemVersion": "10.7",
+        "minimumSystemVersion": "10.13.6",
         "providerShortName": null,
         "signingIdentity": null
       },
@@ -75,10 +75,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
-        "resizable": false,
+        "height": 549,
+        "resizable": true,
         "title": "Password Generator",
-        "width": 800
+        "width": 640
       }
     ]
   }

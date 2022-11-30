@@ -1,7 +1,7 @@
 [package]
 name = "password-generator-pro"
-version = "0.0.0"
-description = "A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords."
+version = "0.0.1"
+description = "A Fast, Simple And Powerful Password Generator"
 authors = ["Sebastien Rousseau"]
 license = "MIT"
 repository = "https://github.com/sebastienrousseau/password-generator-pro"

@@ -21,7 +21,7 @@ specifiers:
   prettier-plugin-rust: ^0.1.8
   prettier-plugin-svelte: ^2.8.1
   svelte: ^3.53.1
-  svelte-check: ^2.9.2
+  svelte-check: ^2.10.0
   svelte-preprocess: ^4.10.7
   tailwindcss: ^3.2.4
   tslib: ^2.4.1
@@ -50,7 +50,7 @@ devDependencies:
   prettier-plugin-rust: registry.npmjs.org/prettier-plugin-rust/0.1.8
   prettier-plugin-svelte: registry.npmjs.org/prettier-plugin-svelte/2.8.1_3ndnxlh52lolrqe4kgjgbxb3xa
   svelte: registry.npmjs.org/svelte/3.53.1
-  svelte-check: registry.npmjs.org/svelte-check/2.9.2_mocwzvuqzrhb37u7s4hjvvzl3i
+  svelte-check: registry.npmjs.org/svelte-check/2.10.0_mocwzvuqzrhb37u7s4hjvvzl3i
   svelte-preprocess: registry.npmjs.org/svelte-preprocess/4.10.7_mvbmsfnr3ibpjsbee6imjcb33m
   tailwindcss: registry.npmjs.org/tailwindcss/3.2.4_postcss@8.4.19
   tslib: registry.npmjs.org/tslib/2.4.1
@@ -2223,7 +2223,7 @@ packages:
       debug: registry.npmjs.org/debug/4.3.4
       execa: registry.npmjs.org/execa/6.1.0
       lilconfig: registry.npmjs.org/lilconfig/2.0.6
-      listr2: registry.npmjs.org/listr2/5.0.5
+      listr2: registry.npmjs.org/listr2/5.0.6
       micromatch: registry.npmjs.org/micromatch/4.0.5
       normalize-path: registry.npmjs.org/normalize-path/3.0.0
       object-inspect: registry.npmjs.org/object-inspect/1.12.2
@@ -2235,10 +2235,10 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/listr2/5.0.5:
-    resolution: {integrity: sha512-DpBel6fczu7oQKTXMekeprc0o3XDgGMkD7JNYyX+X0xbwK+xgrx9dcyKoXKqpLSUvAWfmoePS7kavniOcq3r4w==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/listr2/-/listr2-5.0.5.tgz}
+  registry.npmjs.org/listr2/5.0.6:
+    resolution: {integrity: sha512-u60KxKBy1BR2uLJNTWNptzWQ1ob/gjMzIJPZffAENzpZqbMZ/5PrXXOomDcevIS/+IB7s1mmCEtSlT2qHWMqag==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/listr2/-/listr2-5.0.6.tgz}
     name: listr2
-    version: 5.0.5
+    version: 5.0.6
     engines: {node: ^14.13.1 || >=16.0.0}
     peerDependencies:
       enquirer: '>= 2.3.0 < 3'
@@ -3214,11 +3214,11 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  registry.npmjs.org/svelte-check/2.9.2_mocwzvuqzrhb37u7s4hjvvzl3i:
-    resolution: {integrity: sha512-DRi8HhnCiqiGR2YF9ervPGvtoYrheE09cXieCTEqeTPOTJzfoa54Py8rovIBv4bH4n5HgZYIyTQ3DDLHQLl2uQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/svelte-check/-/svelte-check-2.9.2.tgz}
-    id: registry.npmjs.org/svelte-check/2.9.2
+  registry.npmjs.org/svelte-check/2.10.0_mocwzvuqzrhb37u7s4hjvvzl3i:
+    resolution: {integrity: sha512-5iLCoja/WsithyRkNtIeDQ0euJlgWj3Zzo2IA6iuHMuuX9D9OrRYZj2WlA5ACnAFQnN5L9mxWcwUW9VxDNEoGg==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/svelte-check/-/svelte-check-2.10.0.tgz}
+    id: registry.npmjs.org/svelte-check/2.10.0
     name: svelte-check
-    version: 2.9.2
+    version: 2.10.0
     hasBin: true
     peerDependencies:
       svelte: ^3.24.0

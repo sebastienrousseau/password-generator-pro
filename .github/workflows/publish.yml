@@ -7,13 +7,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  CARGO_TERM_COLOR: always
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
-  TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
-  TAURI_PUBLIC_KEY: ${{ secrets.TAURI_PUBLIC_KEY }}
-
 jobs:
   publish-tauri:
     strategy:
@@ -104,6 +97,12 @@ jobs:
 
       - name: Publish
         uses: tauri-apps/tauri-action@v0
+        env:
+          CARGO_TERM_COLOR: always
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+          TAURI_PUBLIC_KEY: ${{ secrets.TAURI_PUBLIC_KEY }}
         with:
           tagName: password-generator-pro-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
           releaseName: "Password Generator v__VERSION__"
