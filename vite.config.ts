@@ -24,7 +24,7 @@ export default defineConfig({
   // https://tauri.studio/v1/api/config#buildconfig.beforedevcommand
   envPrefix: ['VITE_', 'TAURI_'],
   build: {
-    outDir: '../dist',
+    outDir: './dist',
     emptyOutDir: true,
     // Tauri supports es2021
     target: ['es2021', 'chrome100', 'safari13'],

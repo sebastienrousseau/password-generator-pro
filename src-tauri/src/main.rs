@@ -96,7 +96,7 @@ fn main() {
                         let window = app.get_window("main").unwrap();
                         let version = format!("Version {}", env!("CARGO_PKG_VERSION"));
                         let description = format!(env!("CARGO_PKG_DESCRIPTION"));
-                        let title = format!("Password Generator");
+                        let title = "Password Generator";
                         let copyright = format!("Copyright {}", env!("CARGO_PKG_AUTHORS"));
                         dialog::message(
                             Some(&window),
