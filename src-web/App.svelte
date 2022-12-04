@@ -23,10 +23,12 @@
     separator: defaultFormValues.separator,
   })
 
-  function onReset() {
-    formData.set(defaultFormValues)
-    password = undefined
-    hash = undefined
+  async function onReset() {
+    await invoke('play_audio', { sound: 'reset.ogg' }).then(() => {
+      formData.set(defaultFormValues)
+      password = undefined
+      hash = undefined
+    })
   }
 
   async function onGenerate() {
@@ -49,14 +51,24 @@
       // Set the password value
       password = data.password
       hash = data.hash
+
+      await sleep(250).then(() => {
+        invoke('play_audio', { sound: 'generate.ogg' })
+      })
     } catch (err) {
       // Log any error that occurs
       console.error('Failed to generate password:', err)
     }
   }
 
-  function onCopy(data: string) {
-    navigator.clipboard.writeText(data)
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms ?? 200))
+  }
+
+  async function onCopy(data: string) {
+    await invoke('play_audio', { sound: 'copy.ogg' }).then(() => {
+      navigator.clipboard.writeText(data)
+    })
   }
 
   function onCopyPassword() {

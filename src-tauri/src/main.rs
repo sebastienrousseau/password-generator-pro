@@ -1,26 +1,26 @@
 #![cfg_attr(all(not(debug_assertions), target_os = "windows"), windows_subsystem = "windows")]
 
 /// Import the convert_case crate to convert the string to the desired case.
-use convert_case::{Case, Casing};
+pub use convert_case::{Case, Casing};
 
 /// Import the random generator and the integrator random extension traits.
-use rand::{seq::SliceRandom, thread_rng, Rng};
+pub use rand::{seq::SliceRandom, thread_rng, Rng};
 
 /// Import the tauri manager.
-use tauri::Manager;
-// , Menu, MenuItem, Submenu, SystemTrayMenu};
+pub use tauri::Manager;
 
 /// Import the chrono crate to get the current date and time.
-use chrono::{DateTime, Utc};
+pub use chrono::{DateTime, Utc};
 
-use tauri::api::dialog;
+pub use tauri::api::dialog;
 
-/// Import the webbrowser crate to open the website in the default browser.
-use consts::*;
-mod consts;
-mod menu;
-mod tray;
-mod words;
+pub use std::{thread, time::Duration};
+
+/// Import modules.
+mod core;
+
+/// Import the core module.
+use crate::core::*;
 
 /// GeneratedPassword stores a randomly generated password
 /// and the bcrypt hash of the password.
@@ -49,7 +49,7 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
     // Generate `len` random words from the word list.
     for _ in 0..len {
         // Choose a random word from the list.
-        let word = if let Some(w) = words::WORD_LIST.choose(&mut rng) {
+        let word = if let Some(w) = crate::WORD_LIST.choose(&mut rng) {
             // If a word was found, return it.
             w
         } else {
@@ -80,8 +80,8 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
 /// and the system tray
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![generate_password,])
-        .system_tray(tray::system_tray())
+        .invoke_handler(tauri::generate_handler![generate_password, website, play_audio])
+        .system_tray(crate::system_tray())
         .on_system_tray_event(|app, event| {
             if let tauri::SystemTrayEvent::MenuItemClick { id, .. } = event {
                 // Get the item handle from the id of the item clicked on the system tray menu item list.
@@ -93,15 +93,21 @@ fn main() {
                 // Match the id of the item clicked.
                 match id.as_str() {
                     "about" => {
-                        let window = app.get_window("main").unwrap();
-                        let version = format!("Version {}", env!("CARGO_PKG_VERSION"));
+                        crate::logger(
+                            now.to_string().as_str(),
+                            "Info",
+                            "SystemTrayEvent",
+                            "Opening about dialog",
+                        );
+                        let copyright = format!("© 2022 {}. All rights reserved.", env!("CARGO_PKG_AUTHORS"));
                         let description = format!(env!("CARGO_PKG_DESCRIPTION"));
                         let title = "Password Generator";
-                        let copyright = format!("Copyright {}", env!("CARGO_PKG_AUTHORS"));
+                        let version = format!("Version {}", env!("CARGO_PKG_VERSION"));
+                        let window = app.get_window("main").unwrap();
                         dialog::message(
                             Some(&window),
                             title,
-                            description + "\n\n" + version.as_str() + "\n\n" + copyright.as_str(),
+                            description + "\n\n" + version.as_str() + "\n\n" + copyright.as_str()
                         );
                     }
                     "hide" => {
@@ -110,29 +116,50 @@ fn main() {
                         if window.is_visible().unwrap() {
                             window.hide().unwrap();
                             item_handle.set_title("Show Password Generator").unwrap();
-                            println!("{} [Info] SystemTrayEvent: hiding main window", now);
+                            crate::logger(
+                                now.to_string().as_str(),
+                                "Info",
+                                "SystemTrayEvent",
+                                "Hiding main window"
+                            );
                         } else {
                             // If the window is already hidden, show it.
                             window.show().unwrap();
                             item_handle.set_title("Hide Password Generator").unwrap();
-                            println!("{} [Info] SystemTrayEvent: showing main window", now);
+                            crate::logger(
+                                now.to_string().as_str(),
+                                "Info",
+                                "SystemTrayEvent",
+                                "Showing main window"
+                            );
                         }
                     }
                     "website" => {
                         // If the id is "website", open the website in the default browser.
-                        println!("{} [Info] SystemTrayEvent: opening password-generator.pro website", now);
-                        webbrowser::open("https://password-generator.pro").unwrap();
+                        crate::logger(
+                            now.to_string().as_str(),
+                            "Info",
+                            "SystemTrayEvent",
+                            "Opening website in default browser"
+                        );
+                        // crate::logger("{} [Info] SystemTrayEvent: opening password-generator.pro website", now);
+                        crate::website("https://password-generator.pro");
                     }
                     // If the id is "quit", quit the application.
                     "quit" => {
-                        println!("{} [Info] SystemTrayEvent: quitting application", now);
+                        crate::logger(
+                            now.to_string().as_str(),
+                            "Info",
+                            "SystemTrayEvent",
+                            "Quitting application"
+                        );
                         std::process::exit(0);
                     }
                     _ => {}
                 }
             }
         })
-        .menu(menu::init())
+        .menu(crate::init())
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

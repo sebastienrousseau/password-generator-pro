@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT OR Apache-2.0
+
 // * 4096 English words for generation of easy to memorize random passphrases.
 //  * This list comes from the MakePass passphrase generator developed by
 //  * Dianelos Georgoudis <dianelos at tecapro.com>, which was announced on
