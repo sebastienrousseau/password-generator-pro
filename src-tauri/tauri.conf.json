@@ -62,7 +62,8 @@
       "resources": [],
       "shortDescription": "",
       "targets": [
-        "all"
+        "deb",
+        "dmg"
       ],
       "windows": {
         "certificateThumbprint": null,
