@@ -10,6 +10,5 @@ mod tests {
     #[test]
     fn test_logger() {
         logger("2021-08-01 12:00:00", "INFO", "Test", "Test");
-        assert!(true);
     }
 }
