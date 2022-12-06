@@ -27,7 +27,7 @@
     "bundle": {
       "active": true,
       "category": "Utility",
-      "copyright": "Copyright (c) Password Generator 2022. All rights reserved.",
+      "copyright": "© Password Generator 2022. All rights reserved.",
       "deb": {
         "depends": []
       },
@@ -62,8 +62,7 @@
       "resources": [],
       "shortDescription": "",
       "targets": [
-        "deb",
-        "dmg"
+        "all"
       ],
       "windows": {
         "certificateThumbprint": null,

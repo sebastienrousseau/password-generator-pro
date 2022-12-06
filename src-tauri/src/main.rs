@@ -83,7 +83,7 @@ fn main() {
 
                 let title = "Password Generator";
                 let year = now.year();
-                let copyright = format!("Copyright (c) {} {}. All rights reserved.", year, title);
+                let copyright = format!("© {} {}. All rights reserved.", year, title);
                 let description = format!(env!("CARGO_PKG_DESCRIPTION"));
                 let version = format!("Version {}", env!("CARGO_PKG_VERSION"));
                 let window = app.get_window("main").unwrap();
