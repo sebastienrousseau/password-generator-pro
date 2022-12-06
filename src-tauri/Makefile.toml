@@ -1,0 +1,119 @@
+
+#composite tasks
+[tasks.upgrade]
+dependencies = ["upgrade-deps", "update"]
+
+# format
+[tasks.format]
+install_crate = "rustfmt"
+command = "cargo"
+args = ["fmt", "--", "--emit=files"]
+
+# cleaning
+[tasks.clean-state]
+script = """
+rm hello-*.state
+"""
+
+[tasks.clean]
+command = "cargo"
+args = ["clean"]
+
+# building
+[tasks.build]
+command = "cargo"
+args = ["build"]
+
+[tasks.build-release]
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.build-clean]
+command = "cargo"
+args = ["build"]
+dependencies = ["clean"]
+
+# testing
+[tasks.test]
+command = "cargo"
+args = ["test"]
+dependencies = ["clean"]
+
+# linting
+[tasks.lint]
+command = "cargo"
+args = ["clippy"]
+dependencies = ["build"]
+
+# fixing linting errors
+[tasks.lint-fix]
+command = "cargo"
+args = ["clippy", "--fix"]
+dependencies = ["build"]
+
+# security
+[tasks.security]
+command = "cargo"
+args = ["audit"]
+dependencies = ["build"]
+
+# misc
+[tasks.bloat]
+command = "cargo"
+args = ["bloat", "${@}"]
+dependencies = ["build"]
+
+[tasks.spellcheck]
+command = "cargo"
+args = ["spellcheck", "fix"]
+dependencies = ["build"]
+
+[tasks.udeps]
+toolchain = "nightly"
+command = "cargo"
+args = ["udeps"]
+dependencies = ["build"]
+
+[tasks.valgrind]
+command = "cargo"
+args = ["valgrind"]
+dependencies = ["build"]
+
+[tasks.cargo-check]
+dependencies = [
+	"security",
+	"bloat",
+	"udeps",
+]
+
+# dependency management
+[tasks.upgrade-deps]
+command = "cargo"
+args = ["upgrade"]
+
+[tasks.update]
+command = "cargo"
+args = ["update"]
+
+# rebuild
+[tasks.rebuild]
+dependencies = [
+	"format",
+	"build",
+	"test"
+]
+
+[tasks.rebuild-clean]
+dependencies = [
+	"format",
+	"build-clean",
+	"test"
+]
+
+# package management
+[tasks.package-macos]
+description = "Package for release using cargo-bundle"
+install_crate = { crate_name = "cargo-bundle", binary = "cargo-bundle", test_arg = "-h" }
+command = "cargo"
+args = ["bundle", "--release"]
+dependencies = ["build-release"]

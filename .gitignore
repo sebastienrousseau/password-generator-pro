@@ -11,10 +11,6 @@ lerna-debug.log*
 node_modules
 build
 
-src-tauri/target
-src-tauri/WixTools
-src-tauri/Cargo.lock
-
 *.local
 
 # Editor directories and files

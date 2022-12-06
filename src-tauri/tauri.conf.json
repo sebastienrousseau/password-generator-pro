@@ -12,12 +12,22 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "dialog": {
+        "all": true
+      },
+      "clipboard": {
+        "all": true,
+        "writeText": true,
+        "readText": true
+      },
+      "window": {
+        "setIcon": true
+      }
     },
     "bundle": {
       "active": true,
-      "category": "DeveloperTool",
-      "copyright": "Copyright © Password Generator 2022. All rights reserved.",
+      "category": "Utility",
+      "copyright": "Copyright (c) Password Generator 2022. All rights reserved.",
       "deb": {
         "depends": []
       },
@@ -38,7 +48,7 @@
         "icons/Square71x71.png",
         "icons/Square89x89.png"
       ],
-      "identifier": "com.sebastienrousseau.password-generator-pro",
+      "identifier": "com.sebastienrousseau.password-generator",
       "longDescription": "A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords",
       "macOS": {
         "entitlements": "entitlements.plist",
@@ -53,7 +63,6 @@
       "shortDescription": "",
       "targets": [
         "deb",
-        "msi",
         "dmg"
       ],
       "windows": {
@@ -67,16 +76,20 @@
     },
     "systemTray": {
       "iconAsTemplate": true,
-      "iconPath": "icons/icon.png"
+      "iconPath": "icons/icon.png",
+      "menuOnLeftClick": true
     },
     "updater": {
       "active": false
     },
     "windows": [
       {
+        "center": true,
         "fullscreen": false,
         "height": 549,
-        "resizable": true,
+        "minHeight": 549,
+        "minWidth": 640,
+        "resizable": false,
         "title": "Password Generator",
         "width": 640
       }

@@ -1,12 +1,12 @@
 <script lang="ts">
   import { writable, get } from 'svelte/store'
-
   import './app.css'
   import CopyIcon from './Icon/CopyIcon.svelte'
   import GenerateIcon from './Icon/GenerateIcon.svelte'
   import ResetIcon from './Icon/ResetIcon.svelte'
 
   import { invoke } from '@tauri-apps/api/tauri'
+  import { writeText } from '@tauri-apps/api/clipboard'
 
   import Translate from './Components/i18n'
 
@@ -24,11 +24,16 @@
   })
 
   async function onReset() {
-    await invoke('play_audio', { sound: 'reset.ogg' }).then(() => {
-      formData.set(defaultFormValues)
-      password = undefined
-      hash = undefined
-    })
+    // Play the reset sound
+    const reset = new Audio('./sounds/reset.mp3')
+    reset.play()
+
+    // Wait for the reset to finish
+    await sleep(250)
+
+    formData.set(defaultFormValues)
+    password = undefined
+    hash = undefined
   }
 
   async function onGenerate() {
@@ -48,13 +53,16 @@
 
       console.log('Returned successfully: ', data)
 
+      // Play the generate sound
+      const generate = new Audio('./sounds/generate.mp3')
+      generate.play()
+
+      // Wait for the generator to finish
+      await sleep(250)
+
       // Set the password value
       password = data.password
       hash = data.hash
-
-      await sleep(250).then(() => {
-        invoke('play_audio', { sound: 'generate.ogg' })
-      })
     } catch (err) {
       // Log any error that occurs
       console.error('Failed to generate password:', err)
@@ -66,9 +74,25 @@
   }
 
   async function onCopy(data: string) {
-    await invoke('play_audio', { sound: 'copy.ogg' }).then(() => {
-      navigator.clipboard.writeText(data)
-    })
+    // Play the copy sound
+    const copy = new Audio('./sounds/copy.mp3')
+    copy.play()
+
+    // Wait for the copy to finish
+    await sleep(250)
+
+    await writeText(data)
+
+    let result: string = ''
+    const handleClick = async () => {
+      result = await invoke('logger', {
+        time: 123,
+        info: 'Info',
+        message: 'SystemTrayEvent',
+        details: data,
+      })
+    }
+    // navigator.clipboard.writeText(data)
   }
 
   function onCopyPassword() {

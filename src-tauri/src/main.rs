@@ -1,25 +1,16 @@
 #![cfg_attr(all(not(debug_assertions), target_os = "windows"), windows_subsystem = "windows")]
 
-/// Import the convert_case crate to convert the string to the desired case.
+pub use chrono::Datelike;
 pub use convert_case::{Case, Casing};
-
-/// Import the random generator and the integrator random extension traits.
 pub use rand::{seq::SliceRandom, thread_rng, Rng};
-
-/// Import the tauri manager.
+pub use std::{thread, time::Duration};
+pub use tauri::api::dialog;
 pub use tauri::Manager;
 
-/// Import the chrono crate to get the current date and time.
-pub use chrono::{DateTime, Utc};
-
-pub use tauri::api::dialog;
-
-pub use std::{thread, time::Duration};
-
-/// Import modules.
+/// Import the core module.
 mod core;
 
-/// Import the core module.
+/// Use the core modules.
 use crate::core::*;
 
 /// GeneratedPassword stores a randomly generated password
@@ -80,7 +71,7 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
 /// and the system tray
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![generate_password, website, play_audio])
+        .invoke_handler(tauri::generate_handler![generate_password, logger, website])
         .system_tray(crate::system_tray())
         .on_system_tray_event(|app, event| {
             if let tauri::SystemTrayEvent::MenuItemClick { id, .. } = event {
@@ -88,7 +79,14 @@ fn main() {
                 let item_handle = app.tray_handle().get_item(&id);
 
                 // Get the current time and date.
-                let now: DateTime<Utc> = Utc::now();
+                let now = chrono::Utc::now();
+
+                let title = "Password Generator";
+                let year = now.year();
+                let copyright = format!("Copyright (c) {} {}. All rights reserved.", year, title);
+                let description = format!(env!("CARGO_PKG_DESCRIPTION"));
+                let version = format!("Version {}", env!("CARGO_PKG_VERSION"));
+                let window = app.get_window("main").unwrap();
 
                 // Match the id of the item clicked.
                 match id.as_str() {
@@ -99,11 +97,7 @@ fn main() {
                             "SystemTrayEvent",
                             "Opening about dialog",
                         );
-                        let copyright = format!("© 2022 {}. All rights reserved.", env!("CARGO_PKG_AUTHORS"));
-                        let description = format!(env!("CARGO_PKG_DESCRIPTION"));
-                        let title = "Password Generator";
-                        let version = format!("Version {}", env!("CARGO_PKG_VERSION"));
-                        let window = app.get_window("main").unwrap();
+
                         dialog::message(
                             Some(&window),
                             title,

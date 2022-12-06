@@ -3,7 +3,7 @@
 use tauri::{AboutMetadata, Menu, MenuItem, Submenu};
 
 pub fn init() -> Menu {
-    let app_name = "Password Generator";
+    let app_name: &str = "Password Generator";
     let mut menu = Menu::new();
     #[cfg(target_os = "macos")]
     {
