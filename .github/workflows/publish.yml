@@ -1,8 +1,10 @@
-name: Build, Test and Publish
+name: Build Password Generator Pro
+
 on:
   push:
-    branches:
-      - "*"
+    branches: [main]
+  pull_request:
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -11,14 +13,16 @@ jobs:
   publish-tauri:
     strategy:
       fail-fast: false
+
       matrix:
         platform: [macos-latest, ubuntu-latest]
         # platform: [macos-latest, ubuntu-latest, windows-latest]
+
     runs-on: ${{ matrix.platform }}
 
     steps:
       - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.2.2
+      - uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
 
@@ -28,7 +32,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
-      - name: Install dependencies
+      - name: Install pNpM dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Install Rust stable
@@ -40,29 +44,32 @@ jobs:
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update
-          sudo apt install -y libwebkit2gtk-4.0-dev \
+          sudo apt install -y \
               build-essential \
               curl \
-              wget \
               libasound2-dev \
-              libssl-dev \
-              libgtk-3-dev \
               libayatana-appindicator3-dev \
+              libgtk-3-dev \
               librsvg2-dev
+              libssl-dev \
+              libwebkit2gtk-4.0-dev \
+              wget \
 
       - name: Cache cargo registry
         uses: actions/cache@v2.1.4
         with:
           path: ~/.cargo/registry
+
           # Add date to the cache to keep it up to date
           key: ${{ matrix.platform }}-stable-cargo-registry-${{ hashFiles('**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
+
           # Restore from outdated cache for speed
           restore-keys: |
             ${{ matrix.platform }}-stable-cargo-registry-${{ hashFiles('**/Cargo.toml') }}
             ${{ matrix.platform }}-stable-cargo-registry-
 
       - name: Cache cargo index
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3.0.11
         with:
           path: ~/.cargo/git
 
@@ -75,7 +82,7 @@ jobs:
             ${{ matrix.platform }}-stable-cargo-index-
 
       - name: Cache core cargo target
-        uses: actions/cache@v2
+        uses: actions/cache@v@v3.0.11
         with:
           path: target
 

@@ -1,6 +1,7 @@
 include .config.mk
 
 MACOS_TARGET = aarch64-apple-darwin
+MACOS_TARGET = arm64-apple-darwin
 LINUX_TARGET = x86_64-unknown-linux-musl
 WINDOWS_TARGET = x86_64-pc-windows-gnu
 ASSETS_DIR = ./assets

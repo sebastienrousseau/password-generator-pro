@@ -4,6 +4,7 @@
     "beforeDevCommand": "pnpm run dev:web",
     "devPath": "http://localhost:1420",
     "distDir": "../dist",
+    "runner": "cross",
     "withGlobalTauri": true
   },
   "package": {
