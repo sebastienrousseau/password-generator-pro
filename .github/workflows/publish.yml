@@ -82,7 +82,7 @@ jobs:
             ${{ matrix.platform }}-stable-cargo-index-
 
       - name: Cache core cargo target
-        uses: actions/cache@v@v3.0.11
+        uses: actions/cache@v3.0.11
         with:
           path: target
 
