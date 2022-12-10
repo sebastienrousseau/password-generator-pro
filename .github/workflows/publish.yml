@@ -1,8 +1,10 @@
-name: Build, Test and Publish
+name: Build Password Generator Pro
+
 on:
   push:
-    branches:
-      - "*"
+    branches: [main]
+  pull_request:
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -11,14 +13,16 @@ jobs:
   publish-tauri:
     strategy:
       fail-fast: false
+
       matrix:
         platform: [macos-latest, ubuntu-latest]
         # platform: [macos-latest, ubuntu-latest, windows-latest]
+
     runs-on: ${{ matrix.platform }}
 
     steps:
       - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.2.2
+      - uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
 
@@ -28,7 +32,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
-      - name: Install dependencies
+      - name: Install pNpM dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Install Rust stable
@@ -51,18 +55,20 @@ jobs:
               librsvg2-dev
 
       - name: Cache cargo registry
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2
         with:
           path: ~/.cargo/registry
+
           # Add date to the cache to keep it up to date
           key: ${{ matrix.platform }}-stable-cargo-registry-${{ hashFiles('**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
+
           # Restore from outdated cache for speed
           restore-keys: |
             ${{ matrix.platform }}-stable-cargo-registry-${{ hashFiles('**/Cargo.toml') }}
             ${{ matrix.platform }}-stable-cargo-registry-
 
       - name: Cache cargo index
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2
         with:
           path: ~/.cargo/git
 
