@@ -15,10 +15,32 @@ jobs:
       fail-fast: false
 
       matrix:
-        # platform: [macos-latest, ubuntu-latest]
-        platform: [macos-latest, ubuntu-latest, windows-latest]
+        build:
+          - os: ubuntu-20.04
+            target: x86_64-unknown-linux-gnu
+            suffix: ubuntu-x86_64-${{ github.ref_name }}
+            rustflags: ""
+          - os: macos-12
+            target: x86_64-apple-darwin
+            suffix: macos-x86_64-${{ github.ref_name }}
+            rustflags: ""
+          - os: macos-12
+            target: aarch64-apple-darwin
+            suffix: macos-aarch64-${{ github.ref_name }}
+            rustflags: ""
+          - os: windows-2022
+            target: x86_64-pc-windows-msvc
+            suffix: windows-x86_64-${{ github.ref_name }}
+            rustflags: ""
+      # matrix:
+      # platform: [macos-latest, ubuntu-latest]
+      # platform: [macos-latest, ubuntu-latest, windows-latest]
 
-    runs-on: ${{ matrix.platform }}
+    runs-on: ${{ matrix.build.os }}
+
+    env:
+      PRODUCTION_TARGET: src-tauri/target/${{ matrix.build.target }}/release/bundle
+      RUSTFLAGS: ${{ matrix.build.rustflags }}
 
     steps:
       - uses: actions/checkout@v2
