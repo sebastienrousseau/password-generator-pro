@@ -42,7 +42,7 @@
   "private": true,
   "scripts": {
     "build:web": "vite build",
-    "build": "RUSTFLAGS=-g tauri build",
+    "build": "tauri build",
     "cargo:clean": "cd src-tauri && cargo clean",
     "cargo:docs": "cd src-tauri && cargo doc --all --no-deps",
     "cargo:test": "cd src-tauri && cargo test",
@@ -53,7 +53,7 @@
     "coverage:ts": "vitest run --dom --coverage",
     "coverage": "pnpm run coverage:ts && pnpm run coverage:rust",
     "dev:web": "vite",
-    "dev": "RUST_BACKTRACE=full tauri dev",
+    "dev": "tauri dev",
     "appimage": "open src-tauri/target/release/bundle/appimage",
     "deb": "open src-tauri/target/release/bundle/deb",
     "dmg": "open src-tauri/target/release/bundle/dmg",
