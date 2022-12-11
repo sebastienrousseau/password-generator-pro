@@ -19,15 +19,19 @@ jobs:
           - os: ubuntu-20.04
             target: x86_64-unknown-linux-gnu
             suffix: ubuntu-x86_64-${{ github.ref_name }}
+            rustflags: ""
           - os: macos-12
             target: x86_64-apple-darwin
             suffix: macos-x86_64-${{ github.ref_name }}
+            rustflags: ""
           - os: macos-12
             target: aarch64-apple-darwin
             suffix: macos-aarch64-${{ github.ref_name }}
+            rustflags: ""
           - os: windows-2022
             target: x86_64-pc-windows-msvc
             suffix: windows-x86_64-${{ github.ref_name }}
+            rustflags: ""
       # matrix:
       # platform: [macos-latest, ubuntu-latest]
       # platform: [macos-latest, ubuntu-latest, windows-latest]
@@ -35,7 +39,22 @@ jobs:
     runs-on: ${{ matrix.build.os }}
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Maximize build space
+        if: runner.os == 'Linux'
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
+      - name: git checkout
+        uses: actions/checkout@v2
+
+      # For sloth256-189 Wasm support we need `llvm-ar`, which is not available by default
+      - name: Install LLVM and Clang
+        uses: KyleMayes/install-llvm-action@v1
+        with:
+          version: "14.0"
+
       - uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
@@ -48,6 +67,25 @@ jobs:
 
       - name: Install pNpM dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: CUDA toolchain
+        uses: Jimver/cuda-toolkit@v0.2.6
+        if: runner.os == 'Linux' || runner.os == 'Windows'
+
+      - name: install libdbus-1-dev and pkg-config (Linux)
+        run: sudo apt -y --no-install-recommends install libdbus-1-dev pkg-config
+        if: runner.os == 'Linux'
+
+      # Workaround to resolve link error with C:\msys64\mingw64\bin\libclang.dll
+      - name: Remove msys64
+        run: Remove-Item -LiteralPath "C:\msys64\" -Force -Recurse
+        if: runner.os == 'Windows'
+
+      - name: install webkit2gtk and libayatana (Linux)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libwebkit2gtk-4.0-dev libayatana-appindicator3-dev
+        if: runner.os == 'Linux'
 
       - name: Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
