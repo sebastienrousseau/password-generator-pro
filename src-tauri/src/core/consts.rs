@@ -1,4 +1,5 @@
-// SPDX-License-Identifier: MIT OR Apache-2.0
+// SPDX-License-Identifier: Apache-2.0
+// SPDX-License-Identifier: MIT
 
 // Allow dead code in this module, since it's all packet constants anyways.
 #![allow(dead_code)]

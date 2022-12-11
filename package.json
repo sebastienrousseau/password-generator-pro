@@ -53,7 +53,7 @@
     "coverage:ts": "vitest run --dom --coverage",
     "coverage": "pnpm run coverage:ts && pnpm run coverage:rust",
     "dev:web": "vite",
-    "dev": "tauri dev",
+    "dev": "RUST_BACKTRACE=full tauri dev",
     "appimage": "open src-tauri/target/release/bundle/appimage",
     "deb": "open src-tauri/target/release/bundle/deb",
     "dmg": "open src-tauri/target/release/bundle/dmg",
