@@ -1,4 +1,4 @@
-name: Build Password Generator Pro
+name: "Build Password Generator Pro"
 
 on:
   push:
@@ -6,20 +6,15 @@ on:
   pull_request:
     branches: [main]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 jobs:
-  publish-tauri:
+  build-binaries:
+    name: "Build binaries"
     strategy:
       fail-fast: false
-
       matrix:
-        platform: [macos-latest, ubuntu-latest]
-        # platform: [macos-latest, ubuntu-latest, windows-latest]
+        platform: [macos-latest, ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.platform }}
-
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2.2.4
@@ -35,12 +30,13 @@ jobs:
       - name: Install pNpM dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Rust stable
-        uses: actions-rs/toolchain@v1
+      - name: install Rust stable
+        uses: actions-rs/toolchain@v1.0.6
         with:
           toolchain: stable
 
-      - name: install dependencies (ubuntu only)
+      # https://tauri.app/v1/guides/getting-started/prerequisites/
+      - name: Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update
@@ -54,47 +50,12 @@ jobs:
               libayatana-appindicator3-dev \
               librsvg2-dev
 
-      - name: Cache cargo registry
-        uses: actions/cache@v2
-        with:
-          path: ~/.cargo/registry
-
-          # Add date to the cache to keep it up to date
-          key: ${{ matrix.platform }}-stable-cargo-registry-${{ hashFiles('**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
-
-          # Restore from outdated cache for speed
-          restore-keys: |
-            ${{ matrix.platform }}-stable-cargo-registry-${{ hashFiles('**/Cargo.toml') }}
-            ${{ matrix.platform }}-stable-cargo-registry-
-
-      - name: Cache cargo index
-        uses: actions/cache@v2
-        with:
-          path: ~/.cargo/git
-
-          # Add date to the cache to keep it up to date
-          key: ${{ matrix.platform }}-stable-cargo-index-${{ hashFiles('**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
-
-          # Restore from outdated cache for speed
-          restore-keys: |
-            ${{ matrix.platform }}-stable-cargo-index-${{ hashFiles('**/Cargo.toml') }}
-            ${{ matrix.platform }}-stable-cargo-index-
-
-      - name: Cache core cargo target
-        uses: actions/cache@v2
-        with:
-          path: target
-
-          # Add date to the cache to keep it up to date
-          key: ${{ matrix.platform }}-stable-cargo-core-${{ hashFiles('core/**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
-
-          # Restore from outdated cache for speed
-          restore-keys: |
-            ${{ matrix.platform }}-stable-cargo-core-${{ hashFiles('core/**/Cargo.toml') }}
-            ${{ matrix.platform }}-stable-cargo-core-
-
-      # - name: Run tests
-      # run: pnpm run test
+      # - name: Install dependencies (windows only)
+      #   if: matrix.platform == 'windows-latest'
+      #   shell: pwsh
+      #   run: |
+      #     Invoke-WebRequest https://go.microsoft.com/fwlink/p/?LinkId=2124703 -OutFile installwebview.exe -UseBasicParsing
+      #     cmd /C start /wait installwebview.exe /silent /install
 
       - name: Install app dependencies and build it
         run: pnpm run build
@@ -105,17 +66,36 @@ jobs:
       - name: Run tests
         run: cd src-tauri && cargo test --verbose
 
-      - name: Publish
-        uses: tauri-apps/tauri-action@v0
-        env:
-          CARGO_TERM_COLOR: always
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
-          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
-          TAURI_PUBLIC_KEY: ${{ secrets.TAURI_PUBLIC_KEY }}
+      - uses: actions/upload-artifact@master
         with:
-          tagName: password-generator-pro-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
-          releaseName: "Password Generator v__VERSION__"
-          releaseBody: "See the assets to download this version and install."
-          releaseDraft: true
-          prerelease: false
+          name: binaries
+          path: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
+
+      # - name: Compress releases
+      #   run: zip -r /home/runner/work/code-macros/binaries.zip $GITHUB_WORKSPACE/src-tauri/target/release/bundle/*/password-generator-pro*
+      # - name: Delete old release
+      #   uses: Archaholic/action-delete-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+      #   with:
+      #     tag_name: rolling
+      # - name: Update tag
+      #   uses: EndBug/latest-tag@latest
+      #   with:
+      #     ref: rolling
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     name: Rolling release
+      #     prerelease: true
+      #     tag_name: rolling
+      #     body: "Latest commit: ${{ github.event.head_commit.message }}"
+      #     # files: |
+      #       # /home/runner/work/code-macros/binaries.zip
+      #       # ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
+      #     files: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
+      # - name: Upload Artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: binaries
+      #     path: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
