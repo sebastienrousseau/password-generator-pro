@@ -17,18 +17,29 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v2
-      - name: setup node
-        uses: actions/setup-node@v3.5.1
+      - uses: pnpm/action-setup@v2.2.4
         with:
-          node-version: 17
+          version: 7
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Install pNpM dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: install Rust stable
         uses: actions-rs/toolchain@v1.0.6
         with:
           toolchain: stable
+
       # https://tauri.app/v1/guides/getting-started/prerequisites/
       - name: Update repositories (Ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
         run: sudo apt-get update
+
       - name: Install dependencies (Ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
         run: sudo apt install -y \
@@ -47,9 +58,15 @@ jobs:
           webkit2gtk-4.0 \
           wget \
 
-      - run: yarn install
-      - run: yarn build
-      - run: yarn tauri build
+      - name: Install app dependencies and build it
+        run: pnpm run build
+
+      - name: Build
+        run: cd src-tauri && cargo build --verbose
+
+      - name: Run tests
+        run: cd src-tauri && cargo test --verbose
+
       - uses: actions/upload-artifact@master
         with:
           name: binaries
