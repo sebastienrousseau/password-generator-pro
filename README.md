@@ -4,16 +4,18 @@
 
 ![Made with Love](https://raw.githubusercontent.com/sebastienrousseau/password-generator-pro/master/.github/badges/made-with-love.svg)
 
-**[Website](https://password-generator.pro) • [Documentation](https://password-generator.pro/docs/)
-• [Report Bug](https://github.com/sebastienrousseau/password-generator-pro/issues)
-• [Request Feature](https://github.com/sebastienrousseau/password-generator-pro/issues)
-• [Contributing Guidelines](https://github.com/sebastienrousseau/password-generator-pro/blob/master/.github/CONTRIBUTING.md)**
+**[Website][0]
+• [Documentation][0]
+• [Report Bug][3]
+• [Request Feature][3]
+• [Contributing Guidelines][4]**
 
 ***
 
 ## 👋 Welcome to Password Generator Pro
 
-A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords.
+A fast, simple and powerful open-source cross platform utility tool for
+generating strong, unique and random passwords.
 
 ## Features
 
@@ -42,5 +44,8 @@ Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 dual licensed as above, without any additional terms or conditions.
 
+[0]: https://password-generator.pro
 [1]: http://www.apache.org/licenses/LICENSE-2.0
 [2]: http://opensource.org/licenses/MIT
+[3]: https://github.com/sebastienrousseau/password-generator-pro/issues
+[4]: https://github.com/sebastienrousseau/password-generator-pro/blob/master/.github/CONTRIBUTING.md
