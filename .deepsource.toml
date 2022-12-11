@@ -1,3 +1,4 @@
+
 version = 1
 
 [[analyzers]]
@@ -8,9 +9,8 @@ enabled = true
   msrv = "stable"
 
 [[analyzers]]
-name = "shell"
-enabled = true
-
-[[analyzers]]
 name = "javascript"
 enabled = true
+
+  [analyzers.meta]
+  plugins = ["vue"]
