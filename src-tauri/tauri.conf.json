@@ -63,11 +63,9 @@
       "resources": [],
       "shortDescription": "",
       "targets": [
-        "appimage",
         "deb",
         "dmg",
-        "msi",
-        "pkg"
+        "msi"
       ],
       "windows": {
         "certificateThumbprint": null,
