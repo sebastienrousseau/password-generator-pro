@@ -1,6 +1,14 @@
+use time::OffsetDateTime;
+
 #[tauri::command]
-pub fn logger(time: &str, info: &str, message: &str, details: &str) {
-    println!("🔒 {} - [{}] {}: {}", time, info, message, details);
+pub fn return_date_time() -> String {
+    OffsetDateTime::now_utc().to_string()
+}
+
+
+#[tauri::command]
+pub fn logger(info: &str, message: &str, details: &str) {
+    println!("🔒 {} - [{}] {}: {}", return_date_time(), info, message, details);
 }
 
 #[cfg(test)]
