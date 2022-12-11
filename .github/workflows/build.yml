@@ -1,0 +1,85 @@
+name: "Build"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-binaries:
+    name: "Build binaries"
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+    # runs-on: ubuntu-22.04
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 17
+      - name: install Rust stable
+        uses: actions-rs/toolchain@v1.0.6
+        with:
+          toolchain: stable
+      # https://tauri.app/v1/guides/getting-started/prerequisites/
+      - name: Update repositories (Ubuntu only)
+        if: matrix.platform == 'ubuntu-latest'
+        run: sudo apt-get update
+      - name: Install dependencies (Ubuntu only)
+        if: matrix.platform == 'ubuntu-latest'
+        run: sudo apt install -y \
+          build-essential \
+          curl \
+          libasound2-dev \
+          libayatana-appindicator3-dev \
+          libgtk-3-dev \
+          libinput-dev \
+          librsvg2-dev \
+          libssl-dev \
+          libudev-dev \
+          libwebkit2gtk-4.0-dev \
+          lld \
+          patchelf \
+          webkit2gtk-4.0 \
+          wget \
+
+      - run: yarn install
+      - run: yarn build
+      - run: yarn tauri build
+      - uses: actions/upload-artifact@master
+        with:
+          name: binaries
+          path: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
+
+      # - name: Compress releases
+      #   run: zip -r /home/runner/work/code-macros/binaries.zip $GITHUB_WORKSPACE/src-tauri/target/release/bundle/*/password-generator-pro*
+      # - name: Delete old release
+      #   uses: Archaholic/action-delete-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+      #   with:
+      #     tag_name: rolling
+      # - name: Update tag
+      #   uses: EndBug/latest-tag@latest
+      #   with:
+      #     ref: rolling
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     name: Rolling release
+      #     prerelease: true
+      #     tag_name: rolling
+      #     body: "Latest commit: ${{ github.event.head_commit.message }}"
+      #     # files: |
+      #       # /home/runner/work/code-macros/binaries.zip
+      #       # ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
+      #     files: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
+      # - name: Upload Artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: binaries
+      #     path: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
