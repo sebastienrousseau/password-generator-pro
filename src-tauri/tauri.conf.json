@@ -62,7 +62,13 @@
       "publisher": "",
       "resources": [],
       "shortDescription": "",
-      "targets": "all",
+      "targets": [
+        "appimage",
+        "deb",
+        "dmg",
+        "msi",
+        "pkg"
+      ],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
