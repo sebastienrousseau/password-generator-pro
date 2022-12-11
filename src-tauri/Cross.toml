@@ -1,0 +1,33 @@
+[build.env]
+
+# [target.aarch64-apple-darwin]
+# image = "aarch64-apple-darwin:latest"
+
+# [target.x86_64-unknown-linux-musl]
+# image = "x86_64-unknown-linux-musl"
+
+[target.armv7-unknown-linux-musleabihf]
+dockerfile = "../docker/Dockerfile.armv7"
+# image = "armv7-unknown-linux-musleabihf"
+
+# [target.arm-unknown-linux-musleabihf]
+# image = "arm-unknown-linux-musleabihf"
+
+# [target.aarch64-unknown-linux-musl]
+# image = "aarch64-unknown-linux-musl"
+
+# [target.aarch64-apple-darwin]
+# image = "aarch64-apple-darwin"
+
+# [target.arm64-apple-darwin]
+# image = "arm64-apple-darwin"
+
+[target.aarch64-unknown-linux-gnu]
+dockerfile = "../docker/Dockerfile.aarch64"
+# image = "aarch64-unknown-linux-gnu"
+
+# [target.x86_64-pc-windows-gnu]
+# image = "x86_64-pc-windows-gnu"
+
+# [target.x86_64-unknown-linux-gnu]
+# image = "x86_64-unknown-linux-gnu"

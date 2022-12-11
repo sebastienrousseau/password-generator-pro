@@ -1,11 +1,11 @@
 #![cfg_attr(all(not(debug_assertions), target_os = "windows"), windows_subsystem = "windows")]
 
-pub use chrono::Datelike;
 pub use convert_case::{Case, Casing};
 pub use rand::{seq::SliceRandom, thread_rng, Rng};
 pub use std::{thread, time::Duration};
 pub use tauri::api::dialog;
 pub use tauri::Manager;
+pub use time::OffsetDateTime;
 
 /// Import the core module.
 mod core;
@@ -78,11 +78,8 @@ fn main() {
                 // Get the item handle from the id of the item clicked on the system tray menu item list.
                 let item_handle = app.tray_handle().get_item(&id);
 
-                // Get the current time and date.
-                let now = chrono::Utc::now();
-
-                let title = "Password Generator";
-                let year = now.year();
+                let title = format!("{}", env!("CARGO_PKG_NAME").to_case(Case::Title));
+                let year = format!("{}", OffsetDateTime::now_utc().year());
                 let copyright = format!("© {} {}. All rights reserved.", year, title);
                 let description = format!(env!("CARGO_PKG_DESCRIPTION"));
                 let version = format!("Version {}", env!("CARGO_PKG_VERSION"));
@@ -92,7 +89,6 @@ fn main() {
                 match id.as_str() {
                     "about" => {
                         crate::logger(
-                            now.to_string().as_str(),
                             "Info",
                             "SystemTrayEvent",
                             "Opening about dialog",
@@ -111,7 +107,6 @@ fn main() {
                             window.hide().unwrap();
                             item_handle.set_title("Show Password Generator").unwrap();
                             crate::logger(
-                                now.to_string().as_str(),
                                 "Info",
                                 "SystemTrayEvent",
                                 "Hiding main window"
@@ -121,7 +116,6 @@ fn main() {
                             window.show().unwrap();
                             item_handle.set_title("Hide Password Generator").unwrap();
                             crate::logger(
-                                now.to_string().as_str(),
                                 "Info",
                                 "SystemTrayEvent",
                                 "Showing main window"
@@ -131,18 +125,15 @@ fn main() {
                     "website" => {
                         // If the id is "website", open the website in the default browser.
                         crate::logger(
-                            now.to_string().as_str(),
                             "Info",
                             "SystemTrayEvent",
                             "Opening website in default browser"
                         );
-                        // crate::logger("{} [Info] SystemTrayEvent: opening password-generator.pro website", now);
                         crate::website("https://password-generator.pro");
                     }
                     // If the id is "quit", quit the application.
                     "quit" => {
                         crate::logger(
-                            now.to_string().as_str(),
                             "Info",
                             "SystemTrayEvent",
                             "Quitting application"
