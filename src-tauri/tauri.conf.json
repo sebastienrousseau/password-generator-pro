@@ -62,10 +62,7 @@
       "publisher": "",
       "resources": [],
       "shortDescription": "",
-      "targets": [
-        "deb",
-        "dmg"
-      ],
+      "targets": "all",
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
