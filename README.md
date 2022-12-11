@@ -19,17 +19,26 @@ generating strong, unique and random passwords.
 
 ## Features
 
-- Generate passwords with a single click
-- Generate Bcrypt hashes for passwords
+- Generate strong passwords with a single click, or customize them to your
+  liking,
+- Generate Bcrypt hashes for passwords and store them in a secure way,
+- Out of the box support for many languages and locales (Arabic, Bulgarian,
+  Czech, Danish, Dutch, English, French, German, Greek, Hebrew, Hungarian,
+  Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Romanian, Russian,
+  Simplified Chinese, Spanish, Swedish, Thai, Traditional Chinese, Turkish,
+  Ukrainian),
+- Multiple themes (Dark, Light, System),
+- Support for multiple platforms (macOS, Linux and Windows in WIP),
+- PnPM and Docker support
+- Etc.
 
 ## License
 
 Password Generator Pro is distributed under the terms of both the MIT license
 and the Apache License (Version 2.0).
 
-It was originally a fork of [Password Generator](https://github.com/a-poor/password-generator) by [Austin Poor](https://github.com/a-poor).
-
-This new project is a rewrite of the original project and maintained by
+It was originally a fork of [Password Generator](https://github.com/a-poor/password-generator) by [Austin Poor](https://github.com/a-poor). This new
+project is a rewrite of the original project and currently maintained by
 [Sebastien Rousseau](https://github.com/sebastienrousseau).
 
 The project is licensed under the terms of both the MIT license and the Apache
