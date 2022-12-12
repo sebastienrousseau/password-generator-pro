@@ -140,4 +140,4 @@ jobs:
         run: |
           cd src-tauri/
           cargo install cargo-generate-rpm
-          cargo generate-rpm
+          cargo generate-rpm --target ${{ matrix.platform.target }}
