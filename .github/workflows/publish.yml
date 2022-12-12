@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-binaries:
-    name: ${{ matrix.os }}
+    name: "${{ matrix.platform.id }}"
     strategy:
       fail-fast: false
       matrix:
@@ -103,7 +103,7 @@ jobs:
 
       - name: Run cargo build for ${{ matrix.platform.target }}
         shell: bash
-        run: cd src-tauri/ && cargo $CMD build --verbose --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES --release
+        run: cd src-tauri/ && cargo $CMD build --verbose --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES --bin password-generator-pro --release
 
       - name: Create macOS DMG
         if: contains(matrix.platform.target, 'darwin')
@@ -117,25 +117,26 @@ jobs:
         run: |
           cd src-tauri/
           cargo install cargo-wix
+          cargo wix init
           cargo wix
 
       - name: Create Linux AppImage
         if: contains(matrix.platform.target, 'linux')
         run: |
           cd src-tauri/
-          cargo install cargo-make
-          cargo make
+          cargo install cargo-appimage
+          cargo appimage
 
       - name: Create Linux deb
         if: contains(matrix.platform.target, 'linux')
         run: |
           cd src-tauri/
-          cargo install cargo-make
-          cargo make
+          cargo install cargo-deb
+          cargo-deb
 
       - name: Create Linux rpm
         if: contains(matrix.platform.target, 'linux')
         run: |
           cd src-tauri/
-          cargo install cargo-make
-          cargo make
+          cargo install cargo-generate-rpm
+          cargo generate-rpm
