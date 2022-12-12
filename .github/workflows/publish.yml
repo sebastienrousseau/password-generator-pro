@@ -24,7 +24,7 @@ jobs:
 
           # Linux
           - { id: debian, target: aarch64-unknown-linux-gnu, os: debian-latest } # ARM64 Linux (kernel 4.1, glibc 2.17+)
-          - { id: debian, target: x86_64-unknown-linux-gnu, os: debian-latest } # 64-bit Linux (kernel 3.2+, glibc 2.17+)
+          - { id: debian, target: x86_64-linux-gnu-gcc, os: debian-latest } # 64-bit Linux (kernel 2.6.32, glibc 2.12+)
 
           # macOS
           - { id: macos, target: x86_64-apple-darwin, os: macos-latest } # 64-bit macOS (10.7+, Lion+)
