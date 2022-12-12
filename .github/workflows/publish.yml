@@ -42,15 +42,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: "pnpm"
 
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
+      - name: Install pNpM dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Setup Rust toolchain
         uses: actions-rs/toolchain@v1
