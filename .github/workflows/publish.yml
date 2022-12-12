@@ -42,10 +42,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
       - name: Setup Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          node-version: "16"
           target: ${{ matrix.platform.target }}
           toolchain: ${{ matrix.rust_version }}
 
@@ -108,13 +112,10 @@ jobs:
 
       - name: Release build
         uses: actions-rs/cargo@v1
-        with:
-          node-version: "16"
 
       - name: Cache cargo folder
         uses: actions/cache@v2
         with:
-          node-version: "16"
           path: ~/.cargo
           key: ${{ matrix.platform.target }}-${{ env.APP_VERSION }}-${{ hashFiles('**/Cargo.lock') }}
 
@@ -154,15 +155,15 @@ jobs:
 
       - name: Rename binary (windows)
         if: contains(matrix.platform.target, 'windows')
-        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro.exe src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ matrix.platform.id }}.exe
+        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro.exe src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ env.APP_VERSION }}.exe
 
       - name: Rename binary (macos)
         if: contains(matrix.platform.target, 'darwin')
-        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ matrix.platform.id }}
+        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ env.APP_VERSION }}.dmg
 
       - name: Rename binary (linux)
         if: contains(matrix.platform.target, 'linux')
-        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ matrix.platform.id }}
+        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ env.APP_VERSION }}.deb
 
       # - name: Install pNpM
       #   uses: pnpm/action-setup@v2.2.4
