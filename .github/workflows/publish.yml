@@ -30,10 +30,17 @@ jobs:
       - name: Install pNpM dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: install Rust stable
-        uses: actions-rs/toolchain@v1.0.6
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          profile: minimal
+          override: true
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
 
       # https://tauri.app/v1/guides/getting-started/prerequisites/
       - name: Install dependencies (ubuntu only)
@@ -66,10 +73,25 @@ jobs:
       - name: Run tests
         run: cd src-tauri && cargo test --verbose
 
-      - uses: actions/upload-artifact@master
+      - name: Tauri build
+        uses: tauri-apps/tauri-action@v0
+        # enable cache even though failed
+        # continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
         with:
-          name: binaries
-          path: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
+          tagName: v__VERSION__
+          releaseName: "Password Generator Pro v__VERSION__"
+          releaseBody: "More new features are now supported."
+          releaseDraft: true
+          prerelease: false
+
+      # - uses: actions/upload-artifact@master
+      #   with:
+      #     name: binaries
+      #     path: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
 
       # - name: Compress releases
       #   run: zip -r /home/runner/work/code-macros/binaries.zip $GITHUB_WORKSPACE/src-tauri/target/release/bundle/*/password-generator-pro*
