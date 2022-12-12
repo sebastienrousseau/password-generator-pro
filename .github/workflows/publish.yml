@@ -106,12 +106,6 @@ jobs:
           path: ~/.cargo
           key: ${{ matrix.platform.target }}-${{ env.APP_VERSION }}-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Install x86_64-unknown-linux-gnu
-        if: matrix.platform.os == 'x86_64-unknown-linux-gnu'
-        run: |
-          cargo install cross
-          cross build --target=x86_64-unknown-linux-gnu
-
       - name: Install Gtk (ubuntu only)
         if: matrix.platform.os == 'ubuntu-latest'
         run: |
