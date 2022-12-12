@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [16.x]
-        rust: [stable]
+        rust_version: [stable]
         platform:
           # Windows
           - { id: windows, target: x86_64-pc-windows-msvc, os: windows-latest }
@@ -26,8 +26,6 @@ jobs:
           - { id: macos, target: x86_64-apple-darwin, os: macos-latest }
           - { id: macos, target: aarch64-apple-darwin, os: macos-latest }
 
-    runs-on: ${{ matrix.platform.os }}
-
     env:
       APP_VERSION: "0.0.1"
       CARGO_INCREMENTAL: 0
@@ -35,9 +33,10 @@ jobs:
       CMD: ${{ matrix.platform.cmd }}
       FEATURES: ${{ format(',{0}', matrix.platform.features ) }}
       OPTIONS: ${{ matrix.platform.options }}
-      RUST_BACKTRACE: full
-      RUSTV: ${{ matrix.rust }}
+      RUST_BACKTRACE: 1
       RUSTFLAGS: "-C debuginfo=0"
+
+    runs-on: ${{ matrix.platform.os }}
 
     steps:
       - name: Checkout code
@@ -101,10 +100,6 @@ jobs:
       - name: Install GCC Multilib
         if: (matrix.platform.os == 'ubuntu-latest') && contains(matrix.platform.target, 'i686')
         run: sudo apt-get install gcc-multilib
-
-      - name: Install cargo-apk
-        if: contains(matrix.platform.target, 'android')
-        run: cargo install cargo-apk
 
       - name: Run cargo build for ${{ matrix.platform.target }}
         shell: bash
