@@ -16,13 +16,10 @@ jobs:
         platform:
           # Windows
           - { id: windows, target: x86_64-pc-windows-msvc, os: windows-latest }
-          - { id: windows, target: i686-pc-windows-msvc, os: windows-latest }
           - { id: windows, target: aarch64-pc-windows-msvc, os: windows-latest }
-          - { id: windows, target: arm64-pc-windows-msvc, os: windows-latest }
 
           # Ubuntu with default features
           - { id: ubuntu, target: x86_64-unknown-linux-gnu, os: ubuntu-latest }
-          - { id: ubuntu, target: i686-unknown-linux-gnu, os: ubuntu-latest }
 
           # macOS
           - { id: macos, target: x86_64-apple-darwin, os: macos-latest }
