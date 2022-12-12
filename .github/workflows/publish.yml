@@ -8,7 +8,8 @@ on:
 
 jobs:
   build-binaries:
-    name: "${{ matrix.platform.id }}"
+    name: "${{ matrix.platform.id }}-${{ matrix.platform.target }}"
+
     strategy:
       fail-fast: false
       matrix:
@@ -19,7 +20,7 @@ jobs:
           - { id: windows, target: x86_64-pc-windows-msvc, os: windows-latest }
           - { id: windows, target: aarch64-pc-windows-msvc, os: windows-latest }
 
-          # Ubuntu with default features
+          # Ubuntu
           - { id: ubuntu, target: x86_64-unknown-linux-gnu, os: ubuntu-latest }
 
           # macOS
