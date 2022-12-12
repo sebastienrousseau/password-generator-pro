@@ -50,37 +50,54 @@ jobs:
           target: ${{ matrix.platform.target }}
           toolchain: ${{ matrix.rust_version }}
 
-      - name: Install aarch64-apple-darwin Rust target
-        if: matrix.os == 'macos-latest'
-        run: rustup target add aarch64-apple-darwin
+      # - name: Install aarch64-apple-darwin Rust target
+      #   if: matrix.os == 'macos-latest'
+      #   run: rustup target add aarch64-apple-darwin
 
-      - name: Install x86_64-apple-darwin Rust target
-        if: matrix.os == 'macos-latest'
-        run: rustup target add x86_64-apple-darwin
+      # - name: Install x86_64-apple-darwin Rust target
+      #   if: matrix.os == 'macos-latest'
+      #   run: rustup target add x86_64-apple-darwin
 
-      - name: Install x86_64-linux-musl-gcc Rust target
+      # - name: Install x86_64-linux-musl-gcc Rust target
+      #   if: matrix.os == 'windows-latest'
+      #   run: rustup target add x86_64-linux-musl-gcc
+
+      # - name: Install x86_64-unknown-linux-musl Rust target
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: rustup target add x86_64-unknown-linux-musl
+
+      # - name: Install aarch64-unknown-linux-musl Rust target
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: rustup target add aarch64-unknown-linux-musl
+
+      # - name: Install x86_64-unknown-linux-gnu Rust target
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: rustup target add x86_64-unknown-linux-gnu
+
+      # - name: Install x86_64-pc-windows-msvc Rust target
+      #   if: matrix.os == 'windows-latest'
+      #   run: rustup target add x86_64-pc-windows-msvc
+
+      # - name: Install aarch64-pc-windows-msvc Rust target
+      #   if: matrix.os == 'windows-latest'
+      #   run: |
+      #     # Disable the download progress bar which can cause perf issues
+      #     $ProgressPreference = "SilentlyContinue"
+      #     Invoke-WebRequest https://win.rustup.rs/ -OutFile rustup-init.exe
+      #     .\rustup-init.exe -y --default-host=x86_64-pc-windows-msvc --default-toolchain=none
+      #     del rustup-init.exe
+      #     rustup target add aarch64-pc-windows-msvc
+      #     shell: powershell
+
+      - name: Install Rustup using win.rustup.rs
         if: matrix.os == 'windows-latest'
-        run: rustup target add x86_64-linux-musl-gcc
-
-      - name: Install x86_64-unknown-linux-musl Rust target
-        if: matrix.os == 'ubuntu-latest'
-        run: rustup target add x86_64-unknown-linux-musl
-
-      - name: Install aarch64-unknown-linux-musl Rust target
-        if: matrix.os == 'ubuntu-latest'
-        run: rustup target add aarch64-unknown-linux-musl
-
-      - name: Install x86_64-unknown-linux-gnu Rust target
-        if: matrix.os == 'ubuntu-latest'
-        run: rustup target add x86_64-unknown-linux-gnu
-
-      - name: Install x86_64-pc-windows-msvc Rust target
-        if: matrix.os == 'windows-latest'
-        run: rustup target add x86_64-pc-windows-msvc
-
-      - name: Install aarch64-pc-windows-msvc Rust target
-        if: matrix.os == 'windows-latest'
-        run: rustup target add aarch64-pc-windows-msvc
+        run: |
+          # Disable the download progress bar which can cause perf issues
+          $ProgressPreference = "SilentlyContinue"
+          Invoke-WebRequest https://win.rustup.rs/ -OutFile rustup-init.exe
+          .\rustup-init.exe -y --default-host=x86_64-pc-windows-msvc --default-toolchain=none
+          del rustup-init.exe
+          shell: powershell
 
       - name: Install musl tools
         if: matrix.os == 'ubuntu-latest'
