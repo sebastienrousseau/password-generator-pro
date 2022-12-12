@@ -5,7 +5,7 @@ default-run = "password-generator-pro"
 description = "A Fast, Simple And Powerful Password Generator"
 edition = "2021"
 license = "MIT OR Apache-2.0"
-license-file = "LICENSE"
+license-file = "License.txt"
 name = "password-generator-pro"
 repository = "https://github.com/sebastienrousseau/password-generator-pro"
 rust-version = "1.65.0"
@@ -67,3 +67,7 @@ opt-level = 3
 name = "password-generator-pro"
 version = "0.0.1"
 license = "MIT OR Apache-2.0"
+
+[package.metadata.deb]
+maintainer = "Sebastien Rousseau"
+copyright = "© Password Generator Pro 2022. All rights reserved"
