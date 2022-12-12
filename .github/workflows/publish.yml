@@ -6,17 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  APP_VERSION: "0.0.1"
-  CARGO_INCREMENTAL: 0
-  CARGO_TERM_COLOR: always
-  CMD: ${{ matrix.platform.cmd }}
-  FEATURES: ${{ format(',{0}', matrix.platform.features ) }}
-  OPTIONS: ${{ matrix.platform.options }}
-  RUST_BACKTRACE: full
-  RUSTV: ${{ matrix.rust }}
-  RUSTFLAGS: "-C debuginfo=0"
-
 jobs:
   build-binaries:
     name: ${{ matrix.os }}
@@ -38,6 +27,17 @@ jobs:
           - { id: macos, target: aarch64-apple-darwin, os: macos-latest }
 
     runs-on: ${{ matrix.platform.os }}
+
+    env:
+      APP_VERSION: "0.0.1"
+      CARGO_INCREMENTAL: 0
+      CARGO_TERM_COLOR: always
+      CMD: ${{ matrix.platform.cmd }}
+      FEATURES: ${{ format(',{0}', matrix.platform.features ) }}
+      OPTIONS: ${{ matrix.platform.options }}
+      RUST_BACKTRACE: full
+      RUSTV: ${{ matrix.rust }}
+      RUSTFLAGS: "-C debuginfo=0"
 
     steps:
       - name: Checkout code
