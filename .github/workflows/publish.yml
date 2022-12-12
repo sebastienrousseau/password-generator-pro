@@ -110,9 +110,6 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt-get install -y musl-tools
 
-      - name: Release build
-        uses: actions-rs/cargo@v1
-
       - name: Cache cargo folder
         uses: actions/cache@v2
         with:
@@ -149,21 +146,54 @@ jobs:
         if: contains(matrix.platform.target, 'android')
         run: cargo install cargo-apk
 
-      - name: Build
-        shell: bash
-        run: cd src-tauri/ && cargo $CMD build --verbose --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES --release
+      - name: Release build
+        uses: actions-rs/cargo@v1.0.3
+        with:
+          command: build
+          args: --release --target ${{ matrix.platform.target }}
+          run: |
+            cd src-tauri/
+            cargo $CMD build --verbose --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES --release
 
-      - name: Rename binary (windows)
-        if: contains(matrix.platform.target, 'windows')
-        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro.exe src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ env.APP_VERSION }}.exe
-
-      - name: Rename binary (macos)
+      - name: Create macOS DMG
         if: contains(matrix.platform.target, 'darwin')
-        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ env.APP_VERSION }}.dmg
+        run: |
+          cd src-tauri/
+          cargo install cargo-bundle
+          cargo bundle --release --target ${{ matrix.platform.target }}
 
-      - name: Rename binary (linux)
+      - name: Create Windows MSI
+        if: contains(matrix.platform.target, 'windows')
+        run: |
+          cd src-tauri/
+          cargo install cargo-wix
+          cargo wix --release --target ${{ matrix.platform.target }}
+
+      - name: Create Linux AppImage
         if: contains(matrix.platform.target, 'linux')
-        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ env.APP_VERSION }}.deb
+        run: |
+          cd src-tauri/
+          cargo install cargo-make
+          cargo make --release --target ${{ matrix.platform.target }} appimage
+
+      - name: Create Linux deb
+        if: contains(matrix.platform.target, 'linux')
+        run: |
+          cd src-tauri/
+          cargo install cargo-make
+          cargo make --release --target ${{ matrix.platform.target }} deb
+
+      # - name: Rename binary (windows)
+      #   if: contains(matrix.platform.target, 'windows')
+      #   run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro.exe src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ env.APP_VERSION }}.exe
+
+      # - name: Rename binary (macos)
+      #   if: contains(matrix.platform.target, 'darwin')
+      #   run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ env.APP_VERSION }}.dmg
+
+      # - name: Rename binary (linux)
+      #   if: contains(matrix.platform.target, 'linux')
+      #   run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ env.APP_VERSION }}.deb
 
       # - name: Install pNpM
       #   uses: pnpm/action-setup@v2.2.4
