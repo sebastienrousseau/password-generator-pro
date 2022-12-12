@@ -150,7 +150,7 @@ jobs:
         uses: actions-rs/cargo@v1.0.3
         with:
           command: build
-          args: --release --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES
+          args: --release --target ${{ matrix.platform.target }} --features $FEATURES
 
       - name: Create macOS DMG
         if: contains(matrix.platform.target, 'darwin')
