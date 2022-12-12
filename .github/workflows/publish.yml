@@ -19,13 +19,10 @@ jobs:
 
         platform:
           # Windows
-          - { id: windows, target: i686-pc-windows-gnu, os: windows-latest } # 32-bit MinGW (Windows 7+)
-          - { id: windows, target: i686-pc-windows-msvc, os: windows-latest } # 32-bit MSVC (Windows 7+)
           - { id: windows, target: x86_64-pc-windows-gnu, os: windows-latest } # 64-bit MinGW (Windows 7+)
           - { id: windows, target: x86_64-pc-windows-msvc, os: windows-latest } # 64-bit MSVC (Windows 7+)
 
           # Linux
-          - { id: debian, target: i686-unknown-linux-gnu, os: debian-latest } # 32-bit Linux (kernel 3.2+, glibc 2.17+)
           - { id: debian, target: aarch64-unknown-linux-gnu, os: debian-latest } # ARM64 Linux (kernel 4.1, glibc 2.17+)
           - { id: debian, target: x86_64-unknown-linux-gnu, os: debian-latest } # 64-bit Linux (kernel 3.2+, glibc 2.17+)
 
