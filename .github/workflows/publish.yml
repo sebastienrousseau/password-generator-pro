@@ -92,11 +92,6 @@ jobs:
           command: build
           args: --target ${{ matrix.platform.target }}-${{ env.APP_VERSION }} --release --all-features
 
-      - name: Build
-        with:
-          command: build
-          args: --release --all-features
-
       - name: Cache cargo folder
         uses: actions/cache@v2
         with:
