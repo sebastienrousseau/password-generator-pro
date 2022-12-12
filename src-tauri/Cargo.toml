@@ -24,7 +24,7 @@ sys-locale = "0.2.3"
 tauri = { version = "1.2.2", features = ["clipboard-all", "dialog-all", "icon-ico", "icon-png", "system-tray", "window-set-icon"] }
 time = "0.3.17"
 webbrowser = "0.8.2"
-wry = { version = "0.23.3", features = ["system-tray"] }
+wry = "0.23.3"
 
 
 [features]
