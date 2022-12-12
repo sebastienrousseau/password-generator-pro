@@ -146,14 +146,12 @@ jobs:
         if: contains(matrix.platform.target, 'android')
         run: cargo install cargo-apk
 
-      - name: Switch directory
-        run: cd src-tauri/
-
       - name: Release build
         uses: actions-rs/cargo@v1.0.3
         with:
           command: build
           args: --release --target ${{ matrix.platform.target }} --features $FEATURES
+          path: src-tauri/
 
       - name: Create macOS DMG
         if: contains(matrix.platform.target, 'darwin')
