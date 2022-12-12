@@ -89,7 +89,7 @@ jobs:
       - name: Release build
         uses: actions-rs/cargo@v1
         with:
-          command: build
+          command: cd src-tauri/ && build
           args: --target ${{ matrix.platform.target }}-${{ env.APP_VERSION }} --release --all-features
 
       - name: Cache cargo folder
