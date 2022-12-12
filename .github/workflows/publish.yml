@@ -16,6 +16,7 @@ jobs:
         platform:
           # Windows
           - { id: windows, target: x86_64-pc-windows-msvc, os: windows-latest }
+          - { id: windows, target: x86_64-linux-musl-gcc, os: windows-latest }
           - { id: windows, target: aarch64-pc-windows-msvc, os: windows-latest }
 
           # Ubuntu with default features
@@ -26,6 +27,7 @@ jobs:
           - { id: macos, target: aarch64-apple-darwin, os: macos-latest }
 
     env:
+      APP_VERSION: ${{ github.event.release.tag_name }}
       RUST_BACKTRACE: 1
       CARGO_INCREMENTAL: 0
       RUSTFLAGS: "-C debuginfo=0"
@@ -42,7 +44,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.cargo
-          key: ${{ matrix.platform.target }}-cargo-${{ matrix.rust_version }}
+          key: ${{ matrix.platform.target }}-${{ APP_VERSION }}
 
       - uses: actions-rs/toolchain@v1
         with:
