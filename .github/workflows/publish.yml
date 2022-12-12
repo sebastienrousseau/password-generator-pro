@@ -106,7 +106,7 @@ jobs:
           key: ${{ matrix.platform.target }}-${{ env.APP_VERSION }}-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Install x86_64-linux-musl-gcc
-        if: matrix.platform.os == 'x86_64-linux-musl-gcc' }}
+        if: matrix.platform.os == 'x86_64-linux-musl-gcc'
         run: |
           cargo install cross
           cross build --target=x86_64-unknown-linux-musl
