@@ -65,8 +65,8 @@ opt-level = 3
 [package.metadata.generate-rpm]
 assets = [
     { source = "target/release/password-generator-pro", dest = "/usr/bin/password-generator-pro", mode = "0755" },
-    { source = "LICENSE", dest = "/usr/share/doc/password-generator-pro/LICENSE", doc = true, mode = "0644" },
-    { source = "README.md", dest = "/usr/share/doc/password-generator-pro/README.md", doc = true, mode = "0644" }
+    { source = "LICENSE", dest = "/usr/share/doc/password-generator-pro/LICENSE", doc = true, mode = "0644" }
+    # { source = "README.md", dest = "/usr/share/doc/password-generator-pro/README.md", doc = true, mode = "0644" }
 ]
 license = "MIT OR Apache-2.0"
 name = "password-generator-pro"
