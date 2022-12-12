@@ -45,9 +45,6 @@ jobs:
       - name: Setup Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          components: rustfmt, clippy
-          override: true
-          profile: minimal
           target: ${{ matrix.platform.target }}
           toolchain: ${{ matrix.rust_version }}
 
