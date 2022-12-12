@@ -151,10 +151,6 @@ jobs:
         with:
           command: build
           args: --release --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES
-        shell: bash
-        run: |
-          cd src-tauri/
-          cargo $CMD build
 
       - name: Create macOS DMG
         if: contains(matrix.platform.target, 'darwin')
