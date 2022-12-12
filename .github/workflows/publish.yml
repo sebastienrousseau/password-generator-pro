@@ -6,14 +6,25 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  APP_VERSION: "0.0.1"
+  CARGO_INCREMENTAL: 0
+  CARGO_TERM_COLOR: always
+  CMD: ${{ matrix.platform.cmd }}
+  FEATURES: ${{ format(',{0}', matrix.platform.features ) }}
+  OPTIONS: ${{ matrix.platform.options }}
+  RUST_BACKTRACE: full
+  RUSTV: ${{ matrix.rust }}
+  RUSTFLAGS: "-C debuginfo=0"
+
 jobs:
   build-binaries:
-    name: "Build binaries"
+    name: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         node-version: [16.x]
-        rust_version: [stable]
+        rust: [stable]
         platform:
           # Windows
           - { id: windows, target: x86_64-pc-windows-msvc, os: windows-latest }
@@ -25,15 +36,6 @@ jobs:
           # macOS
           - { id: macos, target: x86_64-apple-darwin, os: macos-latest }
           - { id: macos, target: aarch64-apple-darwin, os: macos-latest }
-
-    env:
-      APP_VERSION: "0.0.1"
-      RUST_BACKTRACE: 1
-      CARGO_INCREMENTAL: 0
-      RUSTFLAGS: "-C debuginfo=0"
-      OPTIONS: ${{ matrix.platform.options }}
-      FEATURES: ${{ format(',{0}', matrix.platform.features ) }}
-      CMD: ${{ matrix.platform.cmd }}
 
     runs-on: ${{ matrix.platform.os }}
 
@@ -113,7 +115,7 @@ jobs:
         run: |
           cd src-tauri/
           cargo install cargo-bundle
-          cargo bundle --release --target ${{ matrix.platform.target }}
+          cargo bundle
 
       - name: Create Windows MSI
         if: contains(matrix.platform.target, 'windows')
@@ -127,18 +129,18 @@ jobs:
         run: |
           cd src-tauri/
           cargo install cargo-make
-          cargo make --release --target ${{ matrix.platform.target }} appimage
+          cargo make
 
       - name: Create Linux deb
         if: contains(matrix.platform.target, 'linux')
         run: |
           cd src-tauri/
           cargo install cargo-make
-          cargo make --release --target ${{ matrix.platform.target }} deb
+          cargo make
 
       - name: Create Linux rpm
         if: contains(matrix.platform.target, 'linux')
         run: |
           cd src-tauri/
           cargo install cargo-make
-          cargo make --release --target ${{ matrix.platform.target }} rpm
+          cargo make
