@@ -46,6 +46,8 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
 
       - name: Install pNpM
         uses: pnpm/action-setup@v2.2.4
@@ -61,18 +63,26 @@ jobs:
       - name: Install pNpM dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install musl tools
-        if: matrix.os == 'ubuntu-latest'
-        run: sudo apt-get install -y musl-tools
-
-      - name: Install Rust ${{ matrix.rust_version }}
+      - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
-          components: rustfmt clippy
-          override: true
-          profile: minimal
+          toolchain: stable
           target: ${{ matrix.platform.target }}
-          toolchain: ${{ matrix.rust_version }}
+          profile: minimal
+          override: true
+
+      # - name: Install musl tools
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: sudo apt-get install -y musl-tools
+
+      # - name: Install Rust ${{ matrix.rust_version }}
+      #   uses: actions-rs/toolchain@v1
+      #   with:
+      #     components: rustfmt clippy
+      #     override: true
+      #     profile: minimal
+      #     target: ${{ matrix.platform.target }}
+      #     toolchain: ${{ matrix.rust_version }}
 
       - name: Check fmt
         run: cargo fmt -- --check
