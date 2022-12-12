@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-binaries:
-    name: "${{ matrix.platform.id }}"
+    name: "${{ matrix.platform.target }}"
 
     strategy:
       fail-fast: false
