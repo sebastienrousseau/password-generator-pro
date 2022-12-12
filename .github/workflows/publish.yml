@@ -38,15 +38,73 @@ jobs:
     runs-on: ${{ matrix.platform.os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          components: rustfmt, clippy
+          override: true
+          profile: minimal
+          target: ${{ matrix.platform.target }}
+          toolchain: ${{ matrix.rust_version }}
+
+      - name: Install aarch64-apple-darwin Rust target
+        if: matrix.os == 'macos-latest'
+        run: rustup target add aarch64-apple-darwin
+
+      - name: Install x86_64-apple-darwin Rust target
+        if: matrix.os == 'macos-latest'
+        run: rustup target add x86_64-apple-darwin
+
+      - name: Install x86_64-linux-musl-gcc Rust target
+        if: matrix.os == 'windows-latest'
+        run: rustup target add x86_64-linux-musl-gcc
+
+      - name: Install x86_64-unknown-linux-musl Rust target
+        if: matrix.os == 'ubuntu-latest'
+        run: rustup target add x86_64-unknown-linux-musl
+
+      - name: Install aarch64-unknown-linux-musl Rust target
+        if: matrix.os == 'ubuntu-latest'
+        run: rustup target add aarch64-unknown-linux-musl
+
+      - name: Install x86_64-unknown-linux-gnu Rust target
+        if: matrix.os == 'ubuntu-latest'
+        run: rustup target add x86_64-unknown-linux-gnu
+
+      - name: Install x86_64-pc-windows-msvc Rust target
+        if: matrix.os == 'windows-latest'
+        run: rustup target add x86_64-pc-windows-msvc
+
+      - name: Install aarch64-pc-windows-msvc Rust target
+        if: matrix.os == 'windows-latest'
+        run: rustup target add aarch64-pc-windows-msvc
+
+      - name: Install musl tools
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get install -y musl-tools
+
+      - name: Release build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --target ${{ matrix.platform.target }}-${{ env.APP_VERSION }} --release --all-features
+
+      - name: Build
+        with:
+          command: build
+          args: --release --all-features
 
       - name: Cache cargo folder
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~/.cargo
-          key: ${{ matrix.platform.target }}-${{ env.APP_VERSION }}
+          key: ${{ matrix.platform.target }}-${{ env.APP_VERSION }}-${{ hashFiles('**/Cargo.lock') }}
 
-      - uses: actions-rs/toolchain@v1
+      - name: Install Rust stable
+        uses: actions-rs/toolchain@v1
         with:
           target: ${{ matrix.platform.target }}
           toolchain: ${{ matrix.rust_version }}
@@ -78,6 +136,18 @@ jobs:
       - name: Build
         shell: bash
         run: cd src-tauri/ && cargo $CMD build --verbose --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES --release
+
+      - name: Rename binary (windows)
+        if: contains(matrix.platform.target, 'windows')
+        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro.exe src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ matrix.platform.id }}.exe
+
+      - name: Rename binary (macos)
+        if: contains(matrix.platform.target, 'darwin')
+        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ matrix.platform.id }}
+
+      - name: Rename binary (linux)
+        if: contains(matrix.platform.target, 'linux')
+        run: mv src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro src-tauri/target/${{ matrix.platform.target }}/release/password-generator-pro-${{ matrix.platform.id }}
 
       # - name: Install pNpM
       #   uses: pnpm/action-setup@v2.2.4
