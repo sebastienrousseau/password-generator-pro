@@ -64,8 +64,7 @@
       "shortDescription": "",
       "targets": [
         "deb",
-        "dmg",
-        "msi"
+        "dmg"
       ],
       "windows": {
         "certificateThumbprint": null,
