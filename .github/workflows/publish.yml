@@ -65,6 +65,9 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt-get install -y musl-tools
 
+      - name: Release build
+        uses: actions-rs/cargo@v1
+
       - name: Cache cargo folder
         uses: actions/cache@v2
         with:
@@ -101,12 +104,9 @@ jobs:
         if: contains(matrix.platform.target, 'android')
         run: cargo install cargo-apk
 
-      - name: Release build
-        uses: actions-rs/cargo@v1.0.3
-        with:
-          command: build
-          args: --release --target ${{ matrix.platform.target }} --features $FEATURES
-          path: src-tauri/
+      - name: Run cargo build for ${{ matrix.platform.target }}
+        shell: bash
+        run: cd src-tauri/ && cargo $CMD build --verbose --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES --release
 
       - name: Create macOS DMG
         if: contains(matrix.platform.target, 'darwin')
