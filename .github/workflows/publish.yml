@@ -120,7 +120,7 @@ jobs:
         run: |
           cd src-tauri/
           cargo install cargo-wix
-          cargo wix --release --target ${{ matrix.platform.target }}
+          cargo wix
 
       - name: Create Linux AppImage
         if: contains(matrix.platform.target, 'linux')
