@@ -12,12 +12,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
+        os: [windows-latest, ubuntu-22.04, macos-latest]
 
-    runs-on: ${{ matrix.platform }}
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.2.4
+      - uses: actions/checkout@v3
+
+      - name: Install pNpM
+        uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
 
@@ -43,8 +45,8 @@ jobs:
           workspaces: src-tauri
 
       # https://tauri.app/v1/guides/getting-started/prerequisites/
-      - name: Install dependencies (ubuntu only)
-        if: matrix.platform == 'ubuntu-latest'
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
         run: |
           sudo apt update
           sudo apt install -y libwebkit2gtk-4.0-dev \
@@ -56,6 +58,35 @@ jobs:
               libgtk-3-dev \
               libayatana-appindicator3-dev \
               librsvg2-dev
+
+      - name: Add Rust build targets (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          rustup target add aarch64-pc-windows-msvc
+          rustup target add i686-pc-windows-msvc
+          rustup target add x86_64-pc-windows-msvc
+
+      - name: Add Rust build targets (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          rustup target add x86_64-unknown-linux-gnu
+      - name: Add Rust build targets (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          rustup target add aarch64-apple-darwin
+          rustup target add x86_64-apple-darwin
+
+      - name: Cache Cargo dependencies
+        id: cargo-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            src-tauri/target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       # - name: Install dependencies (windows only)
       #   if: matrix.platform == 'windows-latest'
@@ -88,6 +119,47 @@ jobs:
           releaseDraft: true
           prerelease: false
 
+      - name: Upload dist (Windows, Setup)
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v3
+        with:
+          name: win32-setup
+          path: "out/*-setup-*.exe"
+
+      - name: Upload dist (Windows, MSI)
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v3
+        with:
+          name: win32-msi
+          path: "out/*-setup-msi-*.msi"
+
+      - name: Upload dist (Windows, Standalone)
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v3
+        with:
+          name: win32-standalone
+          path: "out/*-standalone-*.exe"
+
+      - name: Upload dist (Linux, Deb)
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-deb
+          path: "out/*.deb"
+
+      - name: Upload dist (Linux, AppImage)
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-appimage
+          path: "out/*.AppImage"
+
+      - name: Upload dist (macOS)
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-dmg
+          path: "out/*.dmg"
       # - uses: actions/upload-artifact@master
       #   with:
       #     name: binaries
