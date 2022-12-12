@@ -149,7 +149,7 @@ jobs:
       - name: Release build
         uses: actions-rs/cargo@v1.0.3
         with:
-          command: build
+          command: cd src-tauri/ && build
           args: --release --target ${{ matrix.platform.target }} --features $FEATURES
 
       - name: Create macOS DMG
