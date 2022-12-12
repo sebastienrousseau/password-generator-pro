@@ -81,7 +81,7 @@ jobs:
 
       - name: Build
         shell: bash
-        run: cargo $CMD build --verbose --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES
+        run: cd src-tauri/ && cargo $CMD build --verbose --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES
 
       # - name: Install pNpM
       #   uses: pnpm/action-setup@v2.2.4
