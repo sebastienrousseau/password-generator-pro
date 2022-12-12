@@ -96,8 +96,6 @@ jobs:
 
       - name: Release build
         uses: actions-rs/cargo@v1
-        with:
-          command: build
 
       - name: Cache cargo folder
         uses: actions/cache@v2
@@ -121,10 +119,10 @@ jobs:
             libwebkit2gtk-4.0-dev \
             wget \
 
-      - name: Check
-        run: |
-          cd src-tauri/
-          cargo check --verbose
+      # - name: Check
+      #   run: |
+      #     cd src-tauri/
+      #     cargo check --verbose
 
       - name: Run cargo build for ${{ matrix.platform.target }}
         shell: bash
