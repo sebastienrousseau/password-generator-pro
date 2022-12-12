@@ -51,6 +51,10 @@ jobs:
       - name: Install pNpM dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: install libdbus-1-dev and pkg-config (Linux)
+        run: sudo apt -y --no-install-recommends install libdbus-1-dev pkg-config
+        if: runner.os == 'Linux'
+
       - name: install Rust stable
         uses: actions-rs/toolchain@v1.0.6
         with:
