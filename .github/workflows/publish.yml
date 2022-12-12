@@ -38,14 +38,19 @@ jobs:
     runs-on: ${{ matrix.platform.os }}
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install pNpM
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
-
-      - name: Checkout code
-        uses: actions/checkout@v3
 
       - name: Install pNpM dependencies
         run: pnpm install --frozen-lockfile
