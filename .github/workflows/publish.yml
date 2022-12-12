@@ -71,9 +71,6 @@ jobs:
           name: binaries
           path: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
 
-      - name: Compress releases
-        run: zip -r /home/runner/work/code-macros/binaries.zip $GITHUB_WORKSPACE/src-tauri/target/release/bundle/*/password-generator-pro*
-
       # - name: Compress releases
       #   run: zip -r /home/runner/work/code-macros/binaries.zip $GITHUB_WORKSPACE/src-tauri/target/release/bundle/*/password-generator-pro*
       # - name: Delete old release
