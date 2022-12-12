@@ -84,15 +84,15 @@ jobs:
       #     target: ${{ matrix.platform.target }}
       #     toolchain: ${{ matrix.rust_version }}
 
-      - name: Check fmt
-        run: |
-          cd src-tauri/
-          cargo fmt -- --check
+      # - name: Check fmt
+      #   run: |
+      #     cd src-tauri/
+      #     cargo fmt -- --check
 
-      - name: Check clippy
-        run: |
-          cd src-tauri/
-          cargo clippy -- -D warnings
+      # - name: Check clippy
+      #   run: |
+      #     cd src-tauri/
+      #     cargo clippy -- -D warnings
 
       - name: Release build
         uses: actions-rs/cargo@v1
