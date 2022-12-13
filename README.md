@@ -2,7 +2,7 @@
 
 ![Password Generator Pro](public/password-generator-pro.svg)
 
-## Generate strong and secure passwords with Password Generator Pro
+## A Fast, Simple And Secure Password Generator
 
 ![Made with Love][5]
 
@@ -14,10 +14,20 @@
 
 ![divider][divider]
 
-## 👋 Welcome to Password Generator Pro
+## 👋 Welcome to Password Generator Pro (v0.0.1)
 
-Password Generator Pro is a fast, simple and powerful open-source cross platform
-utility tool for generating strong, unique and random passwords.
+Password Generator Pro is a tool that automatically creates a password for you.
+
+This is useful because it can be difficult to come up with a strong, secure
+password on your own, and using Password Generator Pro ensures that your
+password will be unique and difficult for others to guess.
+
+You will have the option to specify the length and complexity of the password,
+such as including the number of words and a separator.
+
+Password Generator Pro will then create a password for you based on these
+specifications. You can then use this password to protect your online accounts
+and keep your personal information safe.
 
 ## 🖥️ Available for macOS, Linux, and Windows
 
@@ -33,6 +43,8 @@ allows you to generate Bcrypt hashes for your passwords.
 
 ### Key Features and Enhancements
 
+- **Built with [Rust][9]** — A modern programming language that is well-suited
+  for building high-performance, reliable, and secure systems.
 - **Smart Password Generation** — An intelligent password algorithm improves the
   strength of your passwords,
 - **Simple and Intuitive Interface** — A simple and intuitive interface makes it
@@ -97,4 +109,5 @@ for their help and support.
 [6]: https://github.com/sebastienrousseau/password-generator-pro/graphs/contributors
 [7]: http://semver.org/
 [8]: https://github.com/eslint/eslint#semantic-versioning-policy
+[9]: https://www.rust-lang.org/
 [divider]: https://raw.githubusercontent.com/sebastienrousseau/password-generator-pro/main/.github/badges/divider.svg "divider"

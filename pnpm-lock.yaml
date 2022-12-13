@@ -10,6 +10,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.46.0
   '@vitest/coverage-c8': ^0.25.7
   autoprefixer: ^10.4.13
+  cross-env: ^7.0.3
   eslint: ^8.29.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^4.0.0
@@ -39,6 +40,7 @@ devDependencies:
   '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser/5.46.0_ha6vam6werchizxrnqvarmz2zu
   '@vitest/coverage-c8': registry.npmjs.org/@vitest/coverage-c8/0.25.7_happy-dom@7.8.1
   autoprefixer: registry.npmjs.org/autoprefixer/10.4.13_postcss@8.4.20
+  cross-env: registry.npmjs.org/cross-env/7.0.3
   eslint: registry.npmjs.org/eslint/8.29.0
   eslint-config-prettier: registry.npmjs.org/eslint-config-prettier/8.5.0_eslint@8.29.0
   eslint-plugin-svelte3: registry.npmjs.org/eslint-plugin-svelte3/4.0.0_2aagxyyd66x6iymg5nfckajqjq
@@ -960,6 +962,16 @@ packages:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/convert-source-map/-/convert-source-map-1.9.0.tgz}
     name: convert-source-map
     version: 1.9.0
+    dev: true
+
+  registry.npmjs.org/cross-env/7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/cross-env/-/cross-env-7.0.3.tgz}
+    name: cross-env
+    version: 7.0.3
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: registry.npmjs.org/cross-spawn/7.0.3
     dev: true
 
   registry.npmjs.org/cross-spawn/7.0.3:

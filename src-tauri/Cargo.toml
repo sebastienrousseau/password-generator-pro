@@ -1,11 +1,21 @@
 [package]
 authors = ["Sebastien Rousseau"]
 build = "build.rs"
+categories = [
+    "cryptography",
+    "text-processing"
+]
 default-run = "password-generator-pro"
-description = "A Fast, Simple And Powerful Password Generator"
+description = "A Fast, Simple And Secure Password Generator"
 edition = "2021"
-homepage = "https://github.com/sebastienrousseau/password-generator-pro"
-keywords = ["password", "generator"]
+homepage = "https://password-generator.pro"
+keywords = [
+    "open-source",
+    "password-generator",
+    "password-protection",
+    "secure-password",
+    "rust-password-generator",
+]
 license = "MIT OR Apache-2.0"
 name = "password-generator-pro"
 readme = "README.md"
@@ -28,7 +38,6 @@ tauri = { version = "1.2.2", features = ["clipboard-all", "dialog-all", "icon-ic
 time = "0.3.17"
 webbrowser = "0.8.2"
 wry = "0.23.3"
-
 
 [features]
 # by default Tauri runs in production mode
@@ -77,20 +86,4 @@ version = "0.0.1"
 
 [package.metadata.deb]
 copyright = "© Password Generator Pro 2022. All rights reserved"
-maintainer = "Sebastien Rousseau"
-
-[target.x86_64-unknown-linux-gnu]
-linker = "/usr/bin/clang"
-rustflags = ["-Clink-arg=-fuse-ld=lld", "-Clink-arg=-Wl,--no-rosegment"]
-
-[target.x86_64-apple-darwin]
-rustflags = [
-    "-C", "link-arg=-undefined",
-    "-C", "link-arg=dynamic_lookup",
-]
-
-[target.aarch64-apple-darwin]
-rustflags = [
-    "-C", "link-arg=-undefined",
-    "-C", "link-arg=dynamic_lookup",
-]
+maintainer = ["Sebastien Rousseau"]
