@@ -38,6 +38,7 @@ jobs:
       FEATURES: ${{ format(',{0}', matrix.platform.features ) }}
       OPTIONS: ${{ matrix.platform.options }}
       OS: ${{ matrix.os }}
+      PKG_CONFIG_SYSROOT_DIR: src-tauri/
       RUST_BACKTRACE: 1
       RUSTFLAGS: "-C debuginfo=0"
       RUST_VERSION: ${{ matrix.rust_version }}
@@ -67,17 +68,32 @@ jobs:
       - name: Install Gtk (ubuntu only)
         if: matrix.platform.os == 'ubuntu-latest'
         run: |
-          sudo apt-get update
-          sudo apt-get install -y \
+          sudo dpkg --add-architecture i386
+          sudo apt update
+          sudo add-apt-repository universe
+          sudo dpkg --add-architecture i386
+          sudo apt update
+          sudo apt upgrade
+          # install both 32-bit and 64-bit prerequisites of tauri
+          sudo apt install -y \
             build-essential \
             curl \
+            gcc-multilib \
+            g++-multilib \
             libasound2-dev \
+            libasound2-dev:i386 \
             libayatana-appindicator3-dev \
             libgtk-3-dev \
+            libgtk-3-dev:i386 \
             librsvg2-dev \
+            librsvg2-dev:i386 \
             libsoup2.4-dev \
+            libsoup2.4-dev:i386 \
             libssl-dev \
+            libssl-dev:i386 \
             libwebkit2gtk-4.0-dev \
+            libwebkit2gtk-4.0-dev:i386 \
+            patchelf \
             wget \
 
       - name: Install Rust
