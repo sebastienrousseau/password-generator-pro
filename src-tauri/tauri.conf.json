@@ -4,11 +4,10 @@
     "beforeDevCommand": "pnpm run dev:web",
     "devPath": "http://localhost:1420",
     "distDir": "../dist",
-    "runner": "cross",
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "Password Generator",
+    "productName": "Password Generator Pro",
     "version": "../package.json"
   },
   "tauri": {
@@ -28,7 +27,7 @@
     "bundle": {
       "active": true,
       "category": "Utility",
-      "copyright": "© Password Generator 2022. All rights reserved.",
+      "copyright": "© Password Generator Pro 2022. All rights reserved.",
       "deb": {
         "depends": []
       },
@@ -49,7 +48,7 @@
         "icons/Square71x71.png",
         "icons/Square89x89.png"
       ],
-      "identifier": "com.sebastienrousseau.password-generator",
+      "identifier": "com.sebastienrousseau.password-generator-pro",
       "longDescription": "A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords",
       "macOS": {
         "entitlements": "entitlements.plist",
@@ -66,10 +65,7 @@
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
-        "timestampUrl": "http://timestamp.comodoca.com",
-        "wix": {
-          "language": "en-GB"
-        }
+        "timestampUrl": ""
       }
     },
     "security": {
@@ -91,7 +87,7 @@
         "minHeight": 549,
         "minWidth": 640,
         "resizable": false,
-        "title": "Password Generator",
+        "title": "Password Generator Pro",
         "width": 640
       }
     ]
