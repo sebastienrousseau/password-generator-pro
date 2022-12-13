@@ -144,7 +144,7 @@ fn main() {
                 }
             }
         })
-        .menu(crate::init())
+        .menu(crate::create_menu())
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
