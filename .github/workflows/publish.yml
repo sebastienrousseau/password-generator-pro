@@ -1,14 +1,12 @@
 name: Build Password Generator Pro
 
 on:
-  push:
-    branches: [main]
+  - push
+  - pull_request
+  - workflow_dispatch
 
-  pull_request:
-    branches: [main]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+env:
+  APP_NAME: "password-generator-pro"
 
 jobs:
   publish-tauri:
@@ -22,15 +20,15 @@ jobs:
 
     steps:
       - name: ✅ Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: ✅ Setup pNpM
-        uses: pnpm/action-setup@v2.2.4
+        uses: pnpm/action-setup@v2
         with:
           version: 7
 
       - name: ✅ Setup Node.js 16
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: "pnpm"
@@ -56,69 +54,19 @@ jobs:
               patchelf \
               wget \
 
-      # - name: Cache cargo registry
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ~/.cargo/registry
-
-      #     # Add date to the cache to keep it up to date
-      #     key: ${{ matrix.platform }}-stable-cargo-registry-${{ hashFiles('**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
-
-      #     # Restore from outdated cache for speed
-      #     restore-keys: |
-      #       ${{ matrix.platform }}-stable-cargo-registry-${{ hashFiles('**/Cargo.toml') }}
-      #       ${{ matrix.platform }}-stable-cargo-registry-
-
-      # - name: Cache cargo index
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ~/.cargo/git
-
-      #     # Add date to the cache to keep it up to date
-      #     key: ${{ matrix.platform }}-stable-cargo-index-${{ hashFiles('**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
-
-      #     # Restore from outdated cache for speed
-      #     restore-keys: |
-      #       ${{ matrix.platform }}-stable-cargo-index-${{ hashFiles('**/Cargo.toml') }}
-      #       ${{ matrix.platform }}-stable-cargo-index-
-      # - name: Cache core cargo target
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: target
-
-      #     # Add date to the cache to keep it up to date
-      #     key: ${{ matrix.platform }}-stable-cargo-core-${{ hashFiles('core/**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
-
-      #     # Restore from outdated cache for speed
-      #     restore-keys: |
-      #       ${{ matrix.platform }}-stable-cargo-core-${{ hashFiles('core/**/Cargo.toml') }}
-      #       ${{ matrix.platform }}-stable-cargo-core-
-
-      # - name: ✅ Run tests
-      # run: pnpm run test
-
       - name: ✅ Install pNpM dependencies
         run: pnpm install --frozen-lockfile
 
       - name: ✅ Build
         run: pnpm run build
 
-      # - name: ✅ Build
-      #   run: cd src-tauri && cargo build --verbose
-
-      # - name: ✅ Run Cargo tests
-      #   run: cd src-tauri && cargo test --verbose
-
       - name: ✅ Publish
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
-          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
-          TAURI_PUBLIC_KEY: ${{ secrets.TAURI_PUBLIC_KEY }}
         with:
-          tagName: password-generator-pro-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
+          tagName: ${{ env.APP_NAME }}-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
           releaseName: "Password Generator v__VERSION__"
-          releaseBody: "See the assets to download this version and install."
+          releaseBody: "👋 Welcome to Password Generator Pro (v__VERSION__).\n\nThis is a new release of Password Generator Pro with the following changes:\n\n- __CHANGELOG__"
           releaseDraft: true
           prerelease: false

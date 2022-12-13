@@ -20,24 +20,21 @@ license = "MIT OR Apache-2.0"
 name = "password-generator-pro"
 readme = "README.md"
 repository = "https://github.com/sebastienrousseau/password-generator-pro"
-rust-version = "1.65.0"
+rust-version = "1.57"
 version = "0.0.1"
 
 [build-dependencies]
-tauri-build = { version = "1.2.1", features = [] }
+tauri-build = { version = "1.1", features = [] }
 
 [dependencies]
-bcrypt = "0.13.0"
-chrono = "0.4.23"
-convert_case = "0.6.0"
-rand = "0.8.5"
-serde = { version = "1.0.149", features = ["derive"] }
-serde_json = "1.0.89"
-sys-locale = "0.2.3"
-tauri = { version = "1.2.2", features = ["clipboard-all", "dialog-all", "icon-ico", "icon-png", "system-tray", "window-set-icon"] }
-time = "0.3.17"
-webbrowser = "0.8.2"
-wry = "0.23.3"
+bcrypt = "0.13"
+convert_case = "0.6"
+rand = "0.8"
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+tauri = { version = "1.1", features = ["clipboard-all", "dialog-all", "icon-ico", "icon-png", "system-tray", "window-set-icon"] }
+time = "0.3"
+webbrowser = "0.8"
 
 [features]
 # by default Tauri runs in production mode
@@ -63,27 +60,9 @@ strip = "symbols"  # Automatically strip symbols from the binary.
 # Optimize these packages for perf
 [profile.release.package.flate2]
 opt-level = 3
-[profile.release.package.chrono]
-opt-level = 3
 [profile.release.package.bcrypt]
 opt-level = 3
 [profile.release.package.rand]
 opt-level = 3
-[profile.release.package.sys-locale]
-opt-level = 3
 [profile.release.package.webbrowser]
 opt-level = 3
-
-[package.metadata.generate-rpm]
-assets = [
-    { source = "target/release/password-generator-pro", dest = "/usr/bin/password-generator-pro", mode = "0755" },
-    { source = "LICENSE", dest = "/usr/share/doc/password-generator-pro/LICENSE", doc = true, mode = "0644" }
-    # { source = "README.md", dest = "/usr/share/doc/password-generator-pro/README.md", doc = true, mode = "0644" }
-]
-license = "MIT OR Apache-2.0"
-name = "password-generator-pro"
-version = "0.0.1"
-
-[package.metadata.deb]
-copyright = "© Password Generator Pro 2022. All rights reserved"
-maintainer = ["Sebastien Rousseau"]

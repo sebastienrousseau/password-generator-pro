@@ -7,7 +7,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "Password Generator",
+    "productName": "Password Generator Pro",
     "version": "../package.json"
   },
   "tauri": {
@@ -65,10 +65,7 @@
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
-        "timestampUrl": "http://timestamp.comodoca.com",
-        "wix": {
-          "language": "en-GB"
-        }
+        "timestampUrl": ""
       }
     },
     "security": {
@@ -90,7 +87,7 @@
         "minHeight": 549,
         "minWidth": 640,
         "resizable": false,
-        "title": "Password Generator",
+        "title": "Password Generator Pro",
         "width": 640
       }
     ]
