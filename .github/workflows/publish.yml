@@ -29,6 +29,21 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: ✅ Setup Node.js 16
         uses: actions/setup-node@v3
@@ -58,13 +73,13 @@ jobs:
       - name: ✅ Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: ✅ Building
-        run: pnpm run build -- --verbose
-
       - name: Set path for candle and light (windows only)
         if: matrix.platform == 'windows-latest'
         run: echo "C:\Program Files (x86)\WiX Toolset v3.11\bin" >> $GITHUB_PATH
         shell: bash
+
+      - name: ✅ Building
+        run: pnpm run build -- --verbose
 
       - name: ✅ Publishing
         uses: tauri-apps/tauri-action@v0
