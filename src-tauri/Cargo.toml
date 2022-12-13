@@ -78,3 +78,7 @@ version = "0.0.1"
 [package.metadata.deb]
 copyright = "© Password Generator Pro 2022. All rights reserved"
 maintainer = "Sebastien Rousseau"
+
+[target.x86_64-unknown-linux-gnu]
+linker = "/usr/bin/clang"
+rustflags = ["-Clink-arg=-fuse-ld=lld", "-Clink-arg=-Wl,--no-rosegment"]
