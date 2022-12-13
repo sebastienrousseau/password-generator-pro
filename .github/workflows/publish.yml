@@ -1,4 +1,4 @@
-name: "Build Password Generator Pro"
+name: Build Password Generator Pro
 
 on:
   push:
@@ -6,19 +6,22 @@ on:
   pull_request:
     branches: [main]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 jobs:
-  build-binaries:
-    name: "${{ matrix.platform.os }}"
+  publish-tauri:
     strategy:
       fail-fast: false
+
       matrix:
-        node-version: [16.x]
-        rust_version: [stable]
-        platform: [macos-latest, ubuntu-latest, windows-latest]
+        platform: [macos-latest, ubuntu-latest]
+        # platform: [macos-latest, ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.platform }}
+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
@@ -32,32 +35,62 @@ jobs:
       - name: Install pNpM dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: install Rust stable
-        uses: actions-rs/toolchain@v1.0.6
+      - name: Install Rust stable
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          target: ${{ matrix.platform.target }}
-          profile: minimal
-          override: true
 
-      - name: Install dependencies (ubuntu only)
+      - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update
-          sudo apt install -y \
-            build-essential \
-            curl \
-            gcc-multilib \
-            g++-multilib \
-            libasound2-dev \
-            libayatana-appindicator3-dev \
-            libgtk-3-dev \
-            librsvg2-dev \
-            libsoup2.4-dev \
-            libssl-dev \
-            libwebkit2gtk-4.0-dev \
-            patchelf \
-            wget \
+          sudo apt install -y libwebkit2gtk-4.0-dev \
+              build-essential \
+              curl \
+              wget \
+              libasound2-dev \
+              libssl-dev \
+              libgtk-3-dev \
+              libayatana-appindicator3-dev \
+              librsvg2-dev
+      - name: Cache cargo registry
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo/registry
+
+          # Add date to the cache to keep it up to date
+          key: ${{ matrix.platform }}-stable-cargo-registry-${{ hashFiles('**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
+
+          # Restore from outdated cache for speed
+          restore-keys: |
+            ${{ matrix.platform }}-stable-cargo-registry-${{ hashFiles('**/Cargo.toml') }}
+            ${{ matrix.platform }}-stable-cargo-registry-
+      - name: Cache cargo index
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo/git
+
+          # Add date to the cache to keep it up to date
+          key: ${{ matrix.platform }}-stable-cargo-index-${{ hashFiles('**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
+
+          # Restore from outdated cache for speed
+          restore-keys: |
+            ${{ matrix.platform }}-stable-cargo-index-${{ hashFiles('**/Cargo.toml') }}
+            ${{ matrix.platform }}-stable-cargo-index-
+      - name: Cache core cargo target
+        uses: actions/cache@v2
+        with:
+          path: target
+
+          # Add date to the cache to keep it up to date
+          key: ${{ matrix.platform }}-stable-cargo-core-${{ hashFiles('core/**/Cargo.toml') }}-${{ env.CURRENT_DATE }}
+
+          # Restore from outdated cache for speed
+          restore-keys: |
+            ${{ matrix.platform }}-stable-cargo-core-${{ hashFiles('core/**/Cargo.toml') }}
+            ${{ matrix.platform }}-stable-cargo-core-
+      # - name: Run tests
+      # run: pnpm run test
 
       - name: Install app dependencies and build it
         run: pnpm run build
@@ -68,59 +101,17 @@ jobs:
       - name: Run tests
         run: cd src-tauri && cargo test --verbose
 
-      - uses: actions/upload-artifact@master
+      - name: Publish
+        uses: tauri-apps/tauri-action@v0
+        env:
+          CARGO_TERM_COLOR: always
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+          TAURI_PUBLIC_KEY: ${{ secrets.TAURI_PUBLIC_KEY }}
         with:
-          name: "${{ matrix.platform.os }}"
-          path: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
-
-      # - name: Create release
-      #   run: |
-      #     cd src-tauri
-      #     cargo install cargo-deb
-      #     cargo deb --no-build
-      #     cd target/release/bundle
-      #     mkdir -p password-generator-pro
-      #     mv password-generator-pro_* password-generator-pro
-      #     cd password-generator-pro
-      #     tar -czvf password-generator-pro.tar.gz password-generator-pro_*
-      #     mv password-generator-pro.tar.gz ../../../../
-      #     cd ../../../../
-      #     rm -rf target/release/bundle/password-generator-pro
-      #     mv password-generator-pro.tar.gz target/release/bundle/password-generator-pro
-      #     cd target/release/bundle
-      #     zip -r password-generator-pro.zip password-generator-pro
-      #     cd ../../../../
-      #     rm -rf target/release/bundle/password-generator-pro
-      #     mv target/release/bundle/password-generator-pro.zip target/release/bundle/password-generator-pro
-      #     cd target/release/bundle
-      #     mv password-generator-pro password-generator-pro.deb
-      #     cd ../../../../
-      #     rm -rf target/release/bundle/password-generator-pro
-      #     mv target/release/bundle/password-generator-pro.deb target/release/bundle/password-generator-pro
-      #     cd target/release/bundle
-      #     mv password-generator-pro password-generator-pro.rpm
-      #     cd ../../../../
-      #     rm -rf target/release/bundle/password-generator-pro
-      #     mv target/release/bundle/password-generator-pro.rpm target/release/bundle/password-generator-pro
-      #     cd target/release/bundle
-      #     mv password-generator-pro password-generator-pro.AppImage
-      #     cd ../../../../
-      #     rm -rf target/release/bundle/password-generator-pro
-      #     mv target/release/bundle/password-generator-pro.AppImage target/release/bundle/password-generator-pro
-      #     cd target/release/bundle
-      #     mv password-generator-pro password-generator-pro.exe
-      #     cd ../../../../
-      #     rm -rf target/release/bundle/password-generator-pro
-      #     mv target/release/bundle/password-generator-pro.exe target/release/bundle/password-generator-pro
-      #     cd target/release/bundle
-      #     mv password-generator-pro password-generator-pro.dmg
-      #     cd ../../../../
-      #     rm -rf target/release/bundle/password-generator-pro
-      #     mv target/release/bundle/password-generator-pro.dmg target/release/bundle/password-generator-pro
-      #     cd target/release/bundle
-      #     mv password-generator-pro password-generator-pro.msi
-      #     cd ../../../../
-      #     rm -rf target/release/bundle/password-generator-pro
-      #     mv target/release/bundle/password-generator-pro.msi target/release/bundle/password-generator-pro
-      #     cd target/release/bundle
-      #     mv password-generator-pro password-generator-pro.snap
+          tagName: password-generator-pro-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
+          releaseName: "Password Generator v__VERSION__"
+          releaseBody: "See the assets to download this version and install."
+          releaseDraft: true
+          prerelease: false
