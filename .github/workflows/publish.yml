@@ -70,57 +70,57 @@ jobs:
 
       - uses: actions/upload-artifact@master
         with:
-          name: binaries
+          name: "${{ matrix.platform.os }}"
           path: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
 
-      - name: Create release
-        run: |
-          cd src-tauri
-          cargo install cargo-deb
-          cargo deb --no-build
-          cd target/release/bundle
-          mkdir -p password-generator-pro
-          mv password-generator-pro_* password-generator-pro
-          cd password-generator-pro
-          tar -czvf password-generator-pro.tar.gz password-generator-pro_*
-          mv password-generator-pro.tar.gz ../../../../
-          cd ../../../../
-          rm -rf target/release/bundle/password-generator-pro
-          mv password-generator-pro.tar.gz target/release/bundle/password-generator-pro
-          cd target/release/bundle
-          zip -r password-generator-pro.zip password-generator-pro
-          cd ../../../../
-          rm -rf target/release/bundle/password-generator-pro
-          mv target/release/bundle/password-generator-pro.zip target/release/bundle/password-generator-pro
-          cd target/release/bundle
-          mv password-generator-pro password-generator-pro.deb
-          cd ../../../../
-          rm -rf target/release/bundle/password-generator-pro
-          mv target/release/bundle/password-generator-pro.deb target/release/bundle/password-generator-pro
-          cd target/release/bundle
-          mv password-generator-pro password-generator-pro.rpm
-          cd ../../../../
-          rm -rf target/release/bundle/password-generator-pro
-          mv target/release/bundle/password-generator-pro.rpm target/release/bundle/password-generator-pro
-          cd target/release/bundle
-          mv password-generator-pro password-generator-pro.AppImage
-          cd ../../../../
-          rm -rf target/release/bundle/password-generator-pro
-          mv target/release/bundle/password-generator-pro.AppImage target/release/bundle/password-generator-pro
-          cd target/release/bundle
-          mv password-generator-pro password-generator-pro.exe
-          cd ../../../../
-          rm -rf target/release/bundle/password-generator-pro
-          mv target/release/bundle/password-generator-pro.exe target/release/bundle/password-generator-pro
-          cd target/release/bundle
-          mv password-generator-pro password-generator-pro.dmg
-          cd ../../../../
-          rm -rf target/release/bundle/password-generator-pro
-          mv target/release/bundle/password-generator-pro.dmg target/release/bundle/password-generator-pro
-          cd target/release/bundle
-          mv password-generator-pro password-generator-pro.msi
-          cd ../../../../
-          rm -rf target/release/bundle/password-generator-pro
-          mv target/release/bundle/password-generator-pro.msi target/release/bundle/password-generator-pro
-          cd target/release/bundle
-          mv password-generator-pro password-generator-pro.snap
+      # - name: Create release
+      #   run: |
+      #     cd src-tauri
+      #     cargo install cargo-deb
+      #     cargo deb --no-build
+      #     cd target/release/bundle
+      #     mkdir -p password-generator-pro
+      #     mv password-generator-pro_* password-generator-pro
+      #     cd password-generator-pro
+      #     tar -czvf password-generator-pro.tar.gz password-generator-pro_*
+      #     mv password-generator-pro.tar.gz ../../../../
+      #     cd ../../../../
+      #     rm -rf target/release/bundle/password-generator-pro
+      #     mv password-generator-pro.tar.gz target/release/bundle/password-generator-pro
+      #     cd target/release/bundle
+      #     zip -r password-generator-pro.zip password-generator-pro
+      #     cd ../../../../
+      #     rm -rf target/release/bundle/password-generator-pro
+      #     mv target/release/bundle/password-generator-pro.zip target/release/bundle/password-generator-pro
+      #     cd target/release/bundle
+      #     mv password-generator-pro password-generator-pro.deb
+      #     cd ../../../../
+      #     rm -rf target/release/bundle/password-generator-pro
+      #     mv target/release/bundle/password-generator-pro.deb target/release/bundle/password-generator-pro
+      #     cd target/release/bundle
+      #     mv password-generator-pro password-generator-pro.rpm
+      #     cd ../../../../
+      #     rm -rf target/release/bundle/password-generator-pro
+      #     mv target/release/bundle/password-generator-pro.rpm target/release/bundle/password-generator-pro
+      #     cd target/release/bundle
+      #     mv password-generator-pro password-generator-pro.AppImage
+      #     cd ../../../../
+      #     rm -rf target/release/bundle/password-generator-pro
+      #     mv target/release/bundle/password-generator-pro.AppImage target/release/bundle/password-generator-pro
+      #     cd target/release/bundle
+      #     mv password-generator-pro password-generator-pro.exe
+      #     cd ../../../../
+      #     rm -rf target/release/bundle/password-generator-pro
+      #     mv target/release/bundle/password-generator-pro.exe target/release/bundle/password-generator-pro
+      #     cd target/release/bundle
+      #     mv password-generator-pro password-generator-pro.dmg
+      #     cd ../../../../
+      #     rm -rf target/release/bundle/password-generator-pro
+      #     mv target/release/bundle/password-generator-pro.dmg target/release/bundle/password-generator-pro
+      #     cd target/release/bundle
+      #     mv password-generator-pro password-generator-pro.msi
+      #     cd ../../../../
+      #     rm -rf target/release/bundle/password-generator-pro
+      #     mv target/release/bundle/password-generator-pro.msi target/release/bundle/password-generator-pro
+      #     cd target/release/bundle
+      #     mv password-generator-pro password-generator-pro.snap
