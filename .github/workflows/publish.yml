@@ -1,9 +1,12 @@
 name: Build Password Generator Pro
 
 on:
-  - push
-  - pull_request
-  - workflow_dispatch
+  pull_request:
+    branches:
+      - "*"
+  push:
+    branches:
+      - "*"
 
 env:
   APP_NAME: "password-generator-pro"
@@ -19,10 +22,10 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
-      - name: ✅ Checkout
+      - name: ✅ Checkout code (main branch)
         uses: actions/checkout@v3
 
-      - name: ✅ Setup pNpM
+      - name: ✅ Setup pNpM 7
         uses: pnpm/action-setup@v2
         with:
           version: 7
@@ -33,10 +36,8 @@ jobs:
           node-version: 16
           cache: "pnpm"
 
-      - name: ✅ Install Rust stable
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
+      - name: ✅ Install Rust stable toolchain
+        uses: dtolnay/rust-toolchain@stable
 
       - name: ✅ Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-20.04'
@@ -54,19 +55,19 @@ jobs:
               patchelf \
               wget \
 
-      - name: ✅ Install pNpM dependencies
+      - name: ✅ Install ${{ env.APP_NAME }} dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: ✅ Build
+      - name: ✅ Building ${{ env.APP_NAME }}
         run: pnpm run build
 
-      - name: ✅ Publish
+      - name: ✅ Publishing ${{ env.APP_NAME }}
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: ${{ env.APP_NAME }}-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
           releaseName: "Password Generator v__VERSION__"
-          releaseBody: "👋 Welcome to Password Generator Pro (v__VERSION__).\n\nThis is a new release of Password Generator Pro with the following changes:\n\n- __CHANGELOG__"
+          releaseBody: "👋 Welcome to Password Generator Pro (v__VERSION__).\n\nThis is a new release of Password Generator Pro with the following changes:\n\n- __CHANGELOG__.\n\nSee the assets to download this version and install."
           releaseDraft: true
           prerelease: false
