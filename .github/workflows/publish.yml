@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
 
       matrix:
-        platform: [macos-latest, ubuntu-20.04, windows-latest]
+        platform: [macos-latest, ubuntu-20.04]
 
     runs-on: ${{ matrix.platform }}
 
@@ -31,14 +31,14 @@ jobs:
           version: 7
           run_install: false
 
-      - name: Get pnpm store directory
+      - name: ✅ Get pnpm store directory
         id: pnpm-cache
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: ✅ Setup pnpm cache
+        uses: actions/cache@v3
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -72,11 +72,6 @@ jobs:
 
       - name: ✅ Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Set path for candle and light (windows only)
-        if: matrix.platform == 'windows-latest'
-        run: echo "C:\Program Files (x86)\WiX Toolset v3.11\bin" >> $GITHUB_PATH
-        shell: bash
 
       - name: ✅ Building
         run: pnpm run build -- --verbose
