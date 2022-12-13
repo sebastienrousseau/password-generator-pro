@@ -5,7 +5,7 @@
     "devPath": "http://localhost:1420",
     "distDir": "../dist",
     "runner": "cross",
-    "withGlobalTauri": true
+    "withGlobalTauri": false
   },
   "package": {
     "productName": "Password Generator",
@@ -62,14 +62,11 @@
       "publisher": "",
       "resources": [],
       "shortDescription": "",
-      "targets": [
-        "deb",
-        "dmg"
-      ],
+      "targets": "all",
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
-        "timestampUrl": "",
+        "timestampUrl": "http://timestamp.comodoca.com",
         "wix": {
           "language": "en-GB"
         }

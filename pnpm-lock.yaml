@@ -16,7 +16,7 @@ specifiers:
   happy-dom: ^7.8.1
   husky: ^8.0.2
   lint-staged: ^13.1.0
-  postcss: ^8.4.19
+  postcss: ^8.4.20
   prettier: ^2.8.1
   prettier-plugin-rust: ^0.1.8
   prettier-plugin-svelte: ^2.9.0
@@ -38,21 +38,21 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': registry.npmjs.org/@typescript-eslint/eslint-plugin/5.46.0_5mle7isnkfgjmrghnnczirv6iy
   '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser/5.46.0_ha6vam6werchizxrnqvarmz2zu
   '@vitest/coverage-c8': registry.npmjs.org/@vitest/coverage-c8/0.25.7_happy-dom@7.8.1
-  autoprefixer: registry.npmjs.org/autoprefixer/10.4.13_postcss@8.4.19
+  autoprefixer: registry.npmjs.org/autoprefixer/10.4.13_postcss@8.4.20
   eslint: registry.npmjs.org/eslint/8.29.0
   eslint-config-prettier: registry.npmjs.org/eslint-config-prettier/8.5.0_eslint@8.29.0
   eslint-plugin-svelte3: registry.npmjs.org/eslint-plugin-svelte3/4.0.0_2aagxyyd66x6iymg5nfckajqjq
   happy-dom: registry.npmjs.org/happy-dom/7.8.1
   husky: registry.npmjs.org/husky/8.0.2
   lint-staged: registry.npmjs.org/lint-staged/13.1.0
-  postcss: registry.npmjs.org/postcss/8.4.19
+  postcss: registry.npmjs.org/postcss/8.4.20
   prettier: registry.npmjs.org/prettier/2.8.1
   prettier-plugin-rust: registry.npmjs.org/prettier-plugin-rust/0.1.8
   prettier-plugin-svelte: registry.npmjs.org/prettier-plugin-svelte/2.9.0_sro2v6ld777payjtkjtiuogcxi
   svelte: registry.npmjs.org/svelte/3.54.0
-  svelte-check: registry.npmjs.org/svelte-check/2.10.2_krf6rbbde7xhpjgb5hctrpnlbe
-  svelte-preprocess: registry.npmjs.org/svelte-preprocess/4.10.7_7e2edak4tqhfihu2y2hbzyk2ra
-  tailwindcss: registry.npmjs.org/tailwindcss/3.2.4_postcss@8.4.19
+  svelte-check: registry.npmjs.org/svelte-check/2.10.2_7inl5knm4mryebuxtun2mhdssu
+  svelte-preprocess: registry.npmjs.org/svelte-preprocess/4.10.7_v232mfxkjbyndtvxql6pykikdy
+  tailwindcss: registry.npmjs.org/tailwindcss/3.2.4_postcss@8.4.20
   tslib: registry.npmjs.org/tslib/2.4.1
   typescript: registry.npmjs.org/typescript/4.9.4
   vite: registry.npmjs.org/vite/3.2.5_@types+node@18.11.13
@@ -718,7 +718,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  registry.npmjs.org/autoprefixer/10.4.13_postcss@8.4.19:
+  registry.npmjs.org/autoprefixer/10.4.13_postcss@8.4.20:
     resolution: {integrity: sha512-49vKpMqcZYsJjwotvt4+h/BCjJVnhGwcLpDt5xkcaOG3eLrG/HUYLagrihYsQ+qrIBgIzX1Rw7a6L8I/ZA1Atg==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.4.13.tgz}
     id: registry.npmjs.org/autoprefixer/10.4.13
     name: autoprefixer
@@ -733,7 +733,7 @@ packages:
       fraction.js: registry.npmjs.org/fraction.js/4.2.0
       normalize-range: registry.npmjs.org/normalize-range/0.1.2
       picocolors: registry.npmjs.org/picocolors/1.0.0
-      postcss: registry.npmjs.org/postcss/8.4.19
+      postcss: registry.npmjs.org/postcss/8.4.20
       postcss-value-parser: registry.npmjs.org/postcss-value-parser/4.2.0
     dev: true
 
@@ -2473,7 +2473,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  registry.npmjs.org/postcss-import/14.1.0_postcss@8.4.19:
+  registry.npmjs.org/postcss-import/14.1.0_postcss@8.4.20:
     resolution: {integrity: sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/postcss-import/-/postcss-import-14.1.0.tgz}
     id: registry.npmjs.org/postcss-import/14.1.0
     name: postcss-import
@@ -2482,13 +2482,13 @@ packages:
     peerDependencies:
       postcss: ^8.0.0
     dependencies:
-      postcss: registry.npmjs.org/postcss/8.4.19
+      postcss: registry.npmjs.org/postcss/8.4.20
       postcss-value-parser: registry.npmjs.org/postcss-value-parser/4.2.0
       read-cache: registry.npmjs.org/read-cache/1.0.0
       resolve: registry.npmjs.org/resolve/1.22.1
     dev: true
 
-  registry.npmjs.org/postcss-js/4.0.0_postcss@8.4.19:
+  registry.npmjs.org/postcss-js/4.0.0_postcss@8.4.20:
     resolution: {integrity: sha512-77QESFBwgX4irogGVPgQ5s07vLvFqWr228qZY+w6lW599cRlK/HmnlivnnVUxkjHnCu4J16PDMHcH+e+2HbvTQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/postcss-js/-/postcss-js-4.0.0.tgz}
     id: registry.npmjs.org/postcss-js/4.0.0
     name: postcss-js
@@ -2498,10 +2498,10 @@ packages:
       postcss: ^8.3.3
     dependencies:
       camelcase-css: registry.npmjs.org/camelcase-css/2.0.1
-      postcss: registry.npmjs.org/postcss/8.4.19
+      postcss: registry.npmjs.org/postcss/8.4.20
     dev: true
 
-  registry.npmjs.org/postcss-load-config/3.1.4_postcss@8.4.19:
+  registry.npmjs.org/postcss-load-config/3.1.4_postcss@8.4.20:
     resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/postcss-load-config/-/postcss-load-config-3.1.4.tgz}
     id: registry.npmjs.org/postcss-load-config/3.1.4
     name: postcss-load-config
@@ -2517,11 +2517,11 @@ packages:
         optional: true
     dependencies:
       lilconfig: registry.npmjs.org/lilconfig/2.0.6
-      postcss: registry.npmjs.org/postcss/8.4.19
+      postcss: registry.npmjs.org/postcss/8.4.20
       yaml: registry.npmjs.org/yaml/1.10.2
     dev: true
 
-  registry.npmjs.org/postcss-nested/6.0.0_postcss@8.4.19:
+  registry.npmjs.org/postcss-nested/6.0.0_postcss@8.4.20:
     resolution: {integrity: sha512-0DkamqrPcmkBDsLn+vQDIrtkSbNkv5AD/M322ySo9kqFkCIYklym2xEmWkwo+Y3/qZo34tzEPNUw4y7yMCdv5w==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/postcss-nested/-/postcss-nested-6.0.0.tgz}
     id: registry.npmjs.org/postcss-nested/6.0.0
     name: postcss-nested
@@ -2530,7 +2530,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.14
     dependencies:
-      postcss: registry.npmjs.org/postcss/8.4.19
+      postcss: registry.npmjs.org/postcss/8.4.20
       postcss-selector-parser: registry.npmjs.org/postcss-selector-parser/6.0.11
     dev: true
 
@@ -2550,10 +2550,10 @@ packages:
     version: 4.2.0
     dev: true
 
-  registry.npmjs.org/postcss/8.4.19:
-    resolution: {integrity: sha512-h+pbPsyhlYj6N2ozBmHhHrs9DzGmbaarbLvWipMRO7RLS+v4onj26MPFXA5OBYFxyqYhUJK456SwDcY9H2/zsA==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/postcss/-/postcss-8.4.19.tgz}
+  registry.npmjs.org/postcss/8.4.20:
+    resolution: {integrity: sha512-6Q04AXR1212bXr5fh03u8aAwbLxAQNGQ/Q1LNa0VfOI06ZAlhPHtQvE4OIdpj4kLThXilalPnmDSOD65DcHt+g==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/postcss/-/postcss-8.4.20.tgz}
     name: postcss
-    version: 8.4.19
+    version: 8.4.20
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: registry.npmjs.org/nanoid/3.3.4
@@ -2965,7 +2965,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  registry.npmjs.org/svelte-check/2.10.2_krf6rbbde7xhpjgb5hctrpnlbe:
+  registry.npmjs.org/svelte-check/2.10.2_7inl5knm4mryebuxtun2mhdssu:
     resolution: {integrity: sha512-h1Tuiir0m8J5yqN+Vx6qgKKk1L871e6a9o7rMwVWfu8Qs6Wg7x2R+wcxS3SO3VpW5JCxCat90rxPsZMYgz+HaQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/svelte-check/-/svelte-check-2.10.2.tgz}
     id: registry.npmjs.org/svelte-check/2.10.2
     name: svelte-check
@@ -2981,7 +2981,7 @@ packages:
       picocolors: registry.npmjs.org/picocolors/1.0.0
       sade: registry.npmjs.org/sade/1.8.1
       svelte: registry.npmjs.org/svelte/3.54.0
-      svelte-preprocess: registry.npmjs.org/svelte-preprocess/4.10.7_7e2edak4tqhfihu2y2hbzyk2ra
+      svelte-preprocess: registry.npmjs.org/svelte-preprocess/4.10.7_v232mfxkjbyndtvxql6pykikdy
       typescript: registry.npmjs.org/typescript/4.9.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -3008,7 +3008,7 @@ packages:
       svelte: registry.npmjs.org/svelte/3.54.0
     dev: true
 
-  registry.npmjs.org/svelte-preprocess/4.10.7_7e2edak4tqhfihu2y2hbzyk2ra:
+  registry.npmjs.org/svelte-preprocess/4.10.7_v232mfxkjbyndtvxql6pykikdy:
     resolution: {integrity: sha512-sNPBnqYD6FnmdBrUmBCaqS00RyCsCpj2BG58A1JBswNF7b0OKviwxqVrOL/CKyJrLSClrSeqQv5BXNg2RUbPOw==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/svelte-preprocess/-/svelte-preprocess-4.10.7.tgz}
     id: registry.npmjs.org/svelte-preprocess/4.10.7
     name: svelte-preprocess
@@ -3056,7 +3056,7 @@ packages:
       '@types/sass': registry.npmjs.org/@types/sass/1.43.1
       detect-indent: registry.npmjs.org/detect-indent/6.1.0
       magic-string: registry.npmjs.org/magic-string/0.25.9
-      postcss: registry.npmjs.org/postcss/8.4.19
+      postcss: registry.npmjs.org/postcss/8.4.20
       sorcery: registry.npmjs.org/sorcery/0.10.0
       strip-indent: registry.npmjs.org/strip-indent/3.0.0
       svelte: registry.npmjs.org/svelte/3.54.0
@@ -3070,7 +3070,7 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  registry.npmjs.org/tailwindcss/3.2.4_postcss@8.4.19:
+  registry.npmjs.org/tailwindcss/3.2.4_postcss@8.4.20:
     resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.2.4.tgz}
     id: registry.npmjs.org/tailwindcss/3.2.4
     name: tailwindcss
@@ -3094,11 +3094,11 @@ packages:
       normalize-path: registry.npmjs.org/normalize-path/3.0.0
       object-hash: registry.npmjs.org/object-hash/3.0.0
       picocolors: registry.npmjs.org/picocolors/1.0.0
-      postcss: registry.npmjs.org/postcss/8.4.19
-      postcss-import: registry.npmjs.org/postcss-import/14.1.0_postcss@8.4.19
-      postcss-js: registry.npmjs.org/postcss-js/4.0.0_postcss@8.4.19
-      postcss-load-config: registry.npmjs.org/postcss-load-config/3.1.4_postcss@8.4.19
-      postcss-nested: registry.npmjs.org/postcss-nested/6.0.0_postcss@8.4.19
+      postcss: registry.npmjs.org/postcss/8.4.20
+      postcss-import: registry.npmjs.org/postcss-import/14.1.0_postcss@8.4.20
+      postcss-js: registry.npmjs.org/postcss-js/4.0.0_postcss@8.4.20
+      postcss-load-config: registry.npmjs.org/postcss-load-config/3.1.4_postcss@8.4.20
+      postcss-nested: registry.npmjs.org/postcss-nested/6.0.0_postcss@8.4.20
       postcss-selector-parser: registry.npmjs.org/postcss-selector-parser/6.0.11
       postcss-value-parser: registry.npmjs.org/postcss-value-parser/4.2.0
       quick-lru: registry.npmjs.org/quick-lru/5.1.1
@@ -3297,7 +3297,7 @@ packages:
     dependencies:
       '@types/node': registry.npmjs.org/@types/node/18.11.13
       esbuild: registry.npmjs.org/esbuild/0.15.18
-      postcss: registry.npmjs.org/postcss/8.4.19
+      postcss: registry.npmjs.org/postcss/8.4.20
       resolve: registry.npmjs.org/resolve/1.22.1
       rollup: registry.npmjs.org/rollup/2.79.1
     optionalDependencies:
