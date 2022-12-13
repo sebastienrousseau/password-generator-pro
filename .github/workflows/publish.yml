@@ -54,7 +54,6 @@ jobs:
               librsvg2-dev \
               libwebkit2gtk-4.0-dev \
               patchelf \
-              webkit2gtk-4.0 \
               wget \
 
       # - name: Cache cargo registry
