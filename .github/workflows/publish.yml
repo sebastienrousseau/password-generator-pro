@@ -59,7 +59,12 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: ✅ Building
-        run: pnpm run build
+        run: pnpm run build -- --verbose
+
+      - name: Set path for candle and light (windows only)
+        if: matrix.platform == 'windows-latest'
+        run: echo "C:\Program Files (x86)\WiX Toolset v3.11\bin" >> $GITHUB_PATH
+        shell: bash
 
       - name: ✅ Publishing
         uses: tauri-apps/tauri-action@v0
