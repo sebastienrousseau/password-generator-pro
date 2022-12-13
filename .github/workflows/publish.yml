@@ -9,50 +9,17 @@ on:
 jobs:
   build-binaries:
     name: "${{ matrix.platform.target }}"
-
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
         node-version: [16.x]
         rust_version: [stable]
+        platform: [macos-latest, ubuntu-latest, windows-latest]
 
-        platform:
-          # Windows
-          - { id: windows, target: x86_64-pc-windows-gnu, os: windows-latest } # 64-bit MinGW (Windows 7+)
-          - { id: windows, target: x86_64-pc-windows-msvc, os: windows-latest } # 64-bit MSVC (Windows 7+)
-
-          # Linux
-          - { id: ubuntu, target: aarch64-unknown-linux-gnu, os: ubuntu-latest } # ARM64 Linux (kernel 4.1, glibc 2.17+)
-          - { id: ubuntu, target: x86_64-unknown-linux-gnu, os: ubuntu-latest } # 64-bit Linux (kernel 3.2+, glibc 2.17+)
-
-          # macOS
-          - { id: macos, target: x86_64-apple-darwin, os: macos-latest } # 64-bit macOS (10.7+, Lion+)
-          - { id: macos, target: aarch64-apple-darwin, os: macos-latest } # ARM64 macOS (11.0+, Big Sur+)
-
-    env:
-      APP_VERSION: "0.0.1"
-      CARGO_INCREMENTAL: 0
-      CARGO_TERM_COLOR: always
-      CMD: ${{ matrix.platform.cmd }}
-      FEATURES: ${{ format(',{0}', matrix.platform.features ) }}
-      OPTIONS: ${{ matrix.platform.options }}
-      OS: ${{ matrix.os }}
-      PKG_CONFIG_SYSROOT_DIR: src-tauri/
-      RUST_BACKTRACE: 1
-      RUSTFLAGS: "-C debuginfo=0"
-      RUST_VERSION: ${{ matrix.rust_version }}
-
-    runs-on: ${{ matrix.platform.os }}
-
+    runs-on: ${{ matrix.platform }}
     steps:
-      - name: Checkout sources
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-
-      - name: Install pNpM
-        uses: pnpm/action-setup@v2.2.4
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
 
@@ -65,16 +32,18 @@ jobs:
       - name: Install pNpM dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Gtk (ubuntu only)
-        if: matrix.platform.os == 'ubuntu-latest'
+      - name: install Rust stable
+        uses: actions-rs/toolchain@v1.0.6
+        with:
+          toolchain: stable
+          target: ${{ matrix.platform.target }}
+          profile: minimal
+          override: true
+
+      - name: Install dependencies (ubuntu only)
+        if: matrix.platform == 'ubuntu-latest'
         run: |
-          sudo dpkg --add-architecture i386
           sudo apt update
-          sudo add-apt-repository universe
-          sudo dpkg --add-architecture i386
-          sudo apt update
-          sudo apt upgrade
-          # install both 32-bit and 64-bit prerequisites of tauri
           sudo apt install -y \
             build-essential \
             curl \
@@ -96,92 +65,69 @@ jobs:
             patchelf \
             wget \
 
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
+      - name: Install app dependencies and build it
+        run: pnpm run build
+
+      - name: Build
+        run: cd src-tauri && cargo build --verbose
+
+      - name: Run tests
+        run: cd src-tauri && cargo test --verbose
+
+      - uses: actions/upload-artifact@master
         with:
-          toolchain: stable
-          target: ${{ matrix.platform.target }}
-          profile: minimal
-          override: true
+          name: binaries
+          path: ${{ GITHUB.WORKSPACE }}/src-tauri/target/release/bundle/*/password-generator-pro*
 
-      # - name: Install musl tools
-      #   if: matrix.os == 'ubuntu-latest'
-      #   run: |
-      #     sudo apt-get install -y musl-tools
-      #     sudo apt-get install pkg-config xutils-dev build-essential
-
-      # - name: Install Rust ${{ matrix.rust_version }}
-      #   uses: actions-rs/toolchain@v1
-      #   with:
-      #     components: rustfmt clippy
-      #     override: true
-      #     profile: minimal
-      #     target: ${{ matrix.platform.target }}
-      #     toolchain: ${{ matrix.rust_version }}
-
-      # - name: Check fmt
-      #   run: |
-      #     cd src-tauri/
-      #     cargo fmt -- --check
-
-      # - name: Check clippy
-      #   run: |
-      #     cd src-tauri/
-      #     cargo clippy -- -D warnings
-
-      - name: Release build
-        uses: actions-rs/cargo@v1
-        with:
-          command: check
-          args: --manifest-path src-tauri/Cargo.toml
-
-      - name: Cache cargo folder
-        uses: actions/cache@v2
-        with:
-          path: ~/.cargo
-          key: ${{ matrix.platform.target }}-${{ env.APP_VERSION }}-${{ hashFiles('**/Cargo.lock') }}
-
-      # - name: Check
-      #   run: |
-      #     cd src-tauri/
-      #     cargo check --verbose
-
-      - name: Run cargo build for ${{ matrix.platform.target }}
-        shell: bash
-        run: cd src-tauri/ && cargo $CMD build --verbose --target ${{ matrix.platform.target }} $OPTIONS --features $FEATURES --bin password-generator-pro --release
-
-      - name: Create macOS DMG
-        if: contains(matrix.platform.target, 'darwin')
+      - name: Create release
         run: |
-          cd src-tauri/
-          cargo install cargo-bundle
-          cargo bundle
-
-      - name: Create Windows MSI
-        if: contains(matrix.platform.target, 'windows')
-        run: |
-          cd src-tauri/
-          cargo install cargo-wix
-          cargo wix init
-          cargo wix
-
-      - name: Create Linux AppImage
-        if: contains(matrix.platform.target, 'linux')
-        run: |
-          cd src-tauri/
-          cargo install cargo-appimage
-          cargo appimage
-
-      - name: Create Linux deb
-        if: contains(matrix.platform.target, 'linux')
-        run: |
-          cd src-tauri/
+          cd src-tauri
           cargo install cargo-deb
-          cargo-deb
+          cargo deb --no-build
+          cd target/release/bundle
+          mkdir -p password-generator-pro
+          mv password-generator-pro_* password-generator-pro
+          cd password-generator-pro
+          tar -czvf password-generator-pro.tar.gz password-generator-pro_*
+          mv password-generator-pro.tar.gz ../../../../
+          cd ../../../../
+          rm -rf target/release/bundle/password-generator-pro
+          mv password-generator-pro.tar.gz target/release/bundle/password-generator-pro
+          cd target/release/bundle
+          zip -r password-generator-pro.zip password-generator-pro
+          cd ../../../../
+          rm -rf target/release/bundle/password-generator-pro
+          mv target/release/bundle/password-generator-pro.zip target/release/bundle/password-generator-pro
+          cd target/release/bundle
+          mv password-generator-pro password-generator-pro.deb
+          cd ../../../../
+          rm -rf target/release/bundle/password-generator-pro
+          mv target/release/bundle/password-generator-pro.deb target/release/bundle/password-generator-pro
+          cd target/release/bundle
+          mv password-generator-pro password-generator-pro.rpm
+          cd ../../../../
+          rm -rf target/release/bundle/password-generator-pro
+          mv target/release/bundle/password-generator-pro.rpm target/release/bundle/password-generator-pro
+          cd target/release/bundle
+          mv password-generator-pro password-generator-pro.AppImage
+          cd ../../../../
+          rm -rf target/release/bundle/password-generator-pro
+          mv target/release/bundle/password-generator-pro.AppImage target/release/bundle/password-generator-pro
+          cd target/release/bundle
+          mv password-generator-pro password-generator-pro.exe
+          cd ../../../../
+          rm -rf target/release/bundle/password-generator-pro
+          mv target/release/bundle/password-generator-pro.exe target/release/bundle/password-generator-pro
+          cd target/release/bundle
+          mv password-generator-pro password-generator-pro.dmg
+          cd ../../../../
+          rm -rf target/release/bundle/password-generator-pro
+          mv target/release/bundle/password-generator-pro.dmg target/release/bundle/password-generator-pro
+          cd target/release/bundle
+          mv password-generator-pro password-generator-pro.msi
+          cd ../../../../
+          rm -rf target/release/bundle/password-generator-pro
+          mv target/release/bundle/password-generator-pro.msi target/release/bundle/password-generator-pro
+          cd target/release/bundle
+          mv password-generator-pro password-generator-pro.snap
 
-      - name: Create Linux rpm
-        if: contains(matrix.platform.target, 'linux')
-        run: |
-          cd src-tauri/
-          cargo install cargo-generate-rpm
-          cargo generate-rpm --target ${{ matrix.platform.target }}
