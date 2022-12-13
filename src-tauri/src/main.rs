@@ -105,7 +105,7 @@ fn main() {
                         let window = app.get_window("main").unwrap();
                         if window.is_visible().unwrap() {
                             window.hide().unwrap();
-                            item_handle.set_title("Show Password Generator").unwrap();
+                            item_handle.set_title("Show Password Generator Pro").unwrap();
                             crate::logger(
                                 "Info",
                                 "SystemTrayEvent",
@@ -114,7 +114,7 @@ fn main() {
                         } else {
                             // If the window is already hidden, show it.
                             window.show().unwrap();
-                            item_handle.set_title("Hide Password Generator").unwrap();
+                            item_handle.set_title("Hide Password Generator Pro").unwrap();
                             crate::logger(
                                 "Info",
                                 "SystemTrayEvent",
