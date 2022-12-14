@@ -5,6 +5,7 @@ use tauri::{CustomMenuItem, SystemTray, SystemTrayMenu, SystemTrayMenuItem};
 use crate::core::NAME;
 use convert_case::{Case, Casing};
 
+#[tauri::command]
 pub fn system_tray() -> SystemTray {
     let quit = CustomMenuItem::new("quit".to_string(), "Quit Password Generator   ⌘Q");
     let website: CustomMenuItem = CustomMenuItem::new("website".to_string(), "Get Started");

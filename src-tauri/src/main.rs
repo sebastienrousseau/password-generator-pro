@@ -81,6 +81,7 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
 /// This is the entry point for the application
 /// It also sets up the commands that can be called from the webview
 /// and the system tray
+#[tauri::command]
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![generate_password, logger, website])

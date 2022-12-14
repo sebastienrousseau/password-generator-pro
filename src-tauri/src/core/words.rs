@@ -57,6 +57,7 @@
 //  * default assumes that no word is shorter than 3 characters.
 //  *
 
+/// The list of words.
 pub const WORD_LIST: &[&str] = &[
     "Adam", "Afghan", "Alaska", "Alice", "Allah", "Amazon", "Andrew", "Anglo", "Angola", "Antony",
     "April", "Arab", "Arctic", "Athens", "Austin", "Bach", "Baltic", "Basque", "Berlin", "Bible",

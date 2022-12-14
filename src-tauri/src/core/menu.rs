@@ -6,6 +6,7 @@ use crate::core::NAME;
 use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
 
 // Create the menu for the application.
+#[tauri::command]
 pub fn create_menu() -> Menu {
 
     let mut menu = Menu::new();
