@@ -1,3 +1,7 @@
+# Password Generator Pro Makefile
+# Maintainer: Sebastien Rousseau
+# License: See LICENSE-APACHE and LICENSE-MIT files for details.
+
 #  SYNOPSIS
 #
 #    make <target> [flags...]
@@ -48,230 +52,224 @@
 #    UPDATEARGS_WINDOWS 	Arguments to pass to cargo update on Windows
 #
 
-# Include config.mk
-include config.mk
-
-.DEFAULT_GOAL := help
-
-# Banner function
-define banner
-	@printf "\n"
-	@string="$(1)" && printf "$$(tput bold)[$@]: %-$$((76))s *\n" "$$string"
-	@printf "\n"
-endef
+include Makefile.config.in
+include Makefile.log.in
 
 # Evaluating resource allocation of the project
 bloat:
-	$(call banner,Evaluating resource allocation of ${PROJECT} 🤔)
-	@$(CARGO) bloat ${BLOATARGS}
-	@echo "Bloat is done ✅"
+	$(call log,Evaluating resource allocation of ${PROJECT} 🤔)
+	@$(CARGO) make --makefile Makefile.toml bloat ${BLOATARGS}
+	$(call log, Completed evaluating resource allocation of ${PROJECT} ✅)
 
 # Building the project
 build:
-	$(call banner,Building ${PROJECT} 👷‍♀️)
-	@$(CARGO) build
-	@echo "Build is done ✅"
+	$(call log,Compiling ${PROJECT} and all of its dependencies 👷‍♀️)
+	@$(CARGO) make --makefile Makefile.toml build
+	$(call log, Build is done ✅)
 
 # Building all the binaries
 build-all:
-	$(call banner,Building all the binaries 🚀)
+	$(call log,Compiling ${PROJECT} for all the platforms and their dependencies 👷‍♀️)
 	@make build-macos
-	@echo "MacOS binary is built ✅"
+	$(call log, MacOS binary is built 	✅)
 	@make build-linux
-	@echo "Linux binary is built ✅"
+	$(call log, Linux binary is built 	✅)
 	@make build-windows
-	@echo "Windows binary is built ✅"
-	@echo "All binaries are now built ✅"
+	$(call log, Windows binary is built ✅)
+	$(call log, All ${PROJECT} binaries for macOS, Linux and Windows are built ✅)
 
 # Generating Linux binary
 build-linux:
-	$(call banner,Generating Linux binary 🐧)
-	@$(CARGO) build --release --target $(LINUX_TARGET) --target-dir target/linux
+	$(call log,Generating ${PROJECT} Linux binary 🐧)
+	@rustup target add $(LINUX_TARGET)
+	@$(CARGO) make --makefile Makefile.toml build-linux
 	@make move-assets BUILD_DIR=target/linux/$(LINUX_TARGET)/release/assets
-	@echo "Linux binary is built ✅"
-	@echo "Run ${GREEN}make run-linux${NC}to run the binary!"
+	$(call log, Linux binary is built 	✅)
+	$(call log, Run ${GREEN}make run-linux${NC}to run the binary!")
 
 # Generating MacOS binary
 build-macos:
-	$(call banner,Generating MacOS binary 🍎)
-	@$(CARGO) build --release --target $(MACOS_TARGET) --target-dir target/macos
+	$(call log,Generating ${PROJECT} MacOS binary 🍎)
+	@rustup target add $(MACOS_TARGET)
+	@$(CARGO) make --makefile Makefile.toml build-macos
 	@make move-assets BUILD_DIR=target/macos/$(MACOS_TARGET)/release/assets
-	@echo "MacOs binary is built ✅"
-	@echo "Run ${GREEN}make run-macos${NC}to run the binary!"
+	$(call log, MacOs binary is built 	✅)
+	$(call log, Run ${GREEN}make run-macos${NC}to run the binary!")
 
 # Build the project in release mode
 build-release:
-	$(call banner,Building ${PROJECT} in release mode)
+	$(call log,Building ${PROJECT} in release mode)
 	@$(CARGO) build-release
-	@echo "Build-release is done ✅"
+	$(call log, Build-release is done 	✅)
 
 # Generating Windows binary
 build-windows:
-	$(call banner,Generating Windows binary 🪟)
-	@$(CARGO) build --release --target $(WINDOWS_TARGET) --target-dir target/windows
+	$(call log,Generating ${PROJECT} Windows binary 🪟)
+	@rustup target add $(WINDOWS_TARGET)
+	@$(CARGO) make --makefile Makefile.toml build-windows
 	@make move-assets BUILD_DIR=target/windows/$(WINDOWS_TARGET)/release/assets
-	@echo "Windows binary is built ✅"
-	@echo "Run ${GREEN}make run-windows${NC}to run the binary!"
+	$(call log, Windows binary is built ✅)
+	$(call log, Run ${GREEN}make run-windows${NC}to run the binary!")
 
 # Clean the project
 clean:
-	$(call banner,Cleaning ${PROJECT} 🧽)
+	$(call log,Cleaning ${PROJECT} 🧽)
 	@$(CARGO) clean
-	@echo "Clean is done ✅"
+	$(call log, Clean is done ✅)
 
 # Fix code
 fix:  ## Fix code 🛠
-	$(call banner,Fixing ${PROJECT} 🛠)
+	$(call log,Fixing ${PROJECT} 🛠)
 	@$(CARGO) fix --allow-dirty || cargo fix --allow-staged
-	@echo "Fix is done ✅"
+	$(call log, Fix is done ✅)
 
 # Install required packages
 install-pkgs:
-	$(call banner,Installing ${RUST_PKGS})
+	$(call log,Installing ${RUST_PKGS})
 	@rustup component add clippy
-	@echo "Clippy is installed ✅"
+	$(call log, Clippy is installed ✅)
 	@rustup component add rustfmt
-	@echo "Rustfmt is installed ✅"
+	$(call log, Rustfmt is installed ✅)
 	@$(CARGO) install cargo-make
-	@echo "Cargo-make is installed ✅"
+	$(call log, Cargo-make is installed ✅)
 	@$(CARGO) install cargo-audit
-	@echo "Cargo-audit is installed ✅"
+	$(call log, Cargo-audit is installed ✅)
 	@$(CARGO) install cargo-bloat
-	@echo "Cargo-bloat is installed ✅"
+	$(call log, Cargo-bloat is installed ✅)
 	@$(CARGO) install cargo-udeps
-	@echo "Cargo-udeps is installed ✅"
+	$(call log, Cargo-udeps is installed ✅)
 	@$(CARGO) install cargo-valgrind
-	@echo "Cargo-valgrind is installed ✅"
+	$(call log, Cargo-valgrind is installed ✅)
 
 # Lint code
 lint:
-	$(call banner,Linting ${PROJECT} 🧹)
-	@$(CARGO) lint
-	@echo "Lint is done ✅"
+	$(call log,Checks a package to catch common mistakes and improve ${PROJECT} 🧹)
+	@$(CARGO) clippy --all-targets --all-features -- -D warnings
+	$(call log, Lint is done ✅)
 
 # Move assets
 move-assets:
-	$(call banner,Moving assets 🔥)
+	$(call log,Moving assets 🔥)
 	@cp -R $(ASSETS_DIR) $(BUILD_DIR)
-	@echo "Assets are moved ✅"
+	$(call log, Assets are moved ✅)
 
 # Icon generation
 icon:
-	$(call banner,Generating icon 🎨)
+	$(call log,Generating icon 🎨)
 	@cargo tauri icon assets/icon.png
-	@echo "Icon is generated ✅"
+	$(call log, Icon is generated ✅)
 
 # Package windows binaries (i686-pc-windows-msvc, x86_64-pc-windows-msvc)
 package-windows:
-	$(call banner,Generating Windows binaries 🪟)
+	$(call log,Generating Windows binaries 🪟)
 	@rustup target add i686-pc-windows-msvc
-	@echo "i686-pc-windows-msvc is added ✅"
+	$(call log, i686-pc-windows-msvc is added ✅)
 	@rustup target add x86_64-pc-windows-msvc
-	@echo "x86_64-pc-windows-msvc is added ✅"
+	$(call log, x86_64-pc-windows-msvc is added ✅)
 	@cargo tauri build --target i686-pc-windows-msvc
-	@echo "i686-pc-windows-msvc is built ✅"
+	$(call log, i686-pc-windows-msvc is built ✅)
 	@cargo tauri build --target x86_64-pc-windows-msvc
-	@echo "x86_64-pc-windows-msvc is built ✅"
+	$(call log, x86_64-pc-windows-msvc is built ✅)
 
 # Package macos binaries (aarch64-apple-darwin, x86_64-apple-darwin)
 package-macos:
-	$(call banner,Generating MacOS binaries 🍎)
+	$(call log,Generating MacOS binaries 🍎)
 	@rustup target add aarch64-apple-darwin
-	@echo "aarch64-apple-darwin is added ✅"
+	$(call log, aarch64-apple-darwin is added ✅)
 	@rustup target add x86_64-apple-darwin
-	@echo "x86_64-apple-darwin is added ✅"
+	$(call log, x86_64-apple-darwin is added ✅)
 	@cargo-tauri build --target aarch64-apple-darwin
-	@echo "aarch64-apple-darwin is built ✅"
+	$(call log, aarch64-apple-darwin is built ✅)
 	@cargo-tauri build --target x86_64-apple-darwin
-	@echo "x86_64-apple-darwin is built ✅"
+	$(call log, x86_64-apple-darwin is built ✅)
 	@chmod +x /Users/runner/work/syng/syng/src/native/target/x86_64-apple-darwin/release/bundle/macos/Syng.app/Contents/MacOS/Syng
-	@echo "x86_64-apple-darwin is made executable ✅"
+	$(call log, x86_64-apple-darwin is made executable ✅)
 	@chmod +x /Users/runner/work/syng/syng/src/native/target/aarch64-apple-darwin/release/bundle/macos/Syng.app/Contents/MacOS/Syng
-	@echo "aarch64-apple-darwin is made executable ✅"
+	$(call log, aarch64-apple-darwin is made executable ✅)
 
 # Package linux arm64 binaries (aarch64-unknown-linux-gnu)
 package-linux-arm64:
-	$(call banner,Packaging Linux arm64 binaries 🐧)
+	$(call log,Packaging Linux arm64 binaries 🐧)
 	@rustup target add aarch64-unknown-linux-gnu
-	@echo "aarch64-unknown-linux-gnu is added ✅"
+	$(call log, aarch64-unknown-linux-gnu is added ✅)
 	@cargo tauri build --target aarch64-unknown-linux-gnu
-	@echo "aarch64-unknown-linux-gnu is built ✅"
+	$(call log, aarch64-unknown-linux-gnu is built ✅)
 
 # Package linux amd64 binaries (x86_64-unknown-linux-gnu)
 package-linux-amd64:
-	$(call banner,Packaging Linux x86_64 binaries 🐧)
+	$(call log,Packaging Linux x86_64 binaries 🐧)
 	@rustup target add x86_64-unknown-linux-gnu
-	@echo "x86_64-unknown-linux-gnu is added ✅"
+	$(call log, x86_64-unknown-linux-gnu is added ✅)
 	@cargo tauri build --target x86_64-unknown-linux-gnu
-	@echo "x86_64-unknown-linux-gnu is built ✅"
+	$(call log, x86_64-unknown-linux-gnu is built ✅)
 
 # Package linux i686 binaries
 package-linux-i686:
-	$(call banner,Packaging Linux i686 binaries 🐧)
+	$(call log,Packaging Linux i686 binaries 🐧)
 	@rustup target add i686-unknown-linux-gnu
-	@echo "i686-unknown-linux-gnu is added ✅"
+	$(call log, i686-unknown-linux-gnu is added ✅)
 	@cargo tauri build --target i686-unknown-linux-gnu
-	@echo "i686-unknown-linux-gnu is built ✅"
+	$(call log, i686-unknown-linux-gnu is built ✅)
 
 # Rebuild the project
 rebuild:
-	$(call banner,Rebuilding ${PROJECT} 🚀)
+	$(call log,Rebuilding ${PROJECT} 🚀)
 	@$(CARGO) rebuild
-	@echo "Rebuild is done ✅"
+	$(call log, Rebuild is done ✅)
 
 # Build the project in release mode
 release:
-	$(call banner,Building ${PROJECT} in release mode 🚀)
+	$(call log,Building ${PROJECT} in release mode 🚀)
 	@$(CARGO) build --release
-	@echo "Release build is done ✅"
+	$(call log, Release build is done ✅)
 
 # Remove all builds
 remove-all-builds:
-	$(call banner,Removing all builds 🧹)
+	$(call log,Removing all builds 🧹)
 	rm -rf target
-	@echo "All builds are removed ✅"
+	$(call log, All builds are removed ✅)
 
 # Run Linux binary
 run-linux:
-	$(call banner,Running Linux binary 🐧)
+	$(call log,Running Linux binary 🐧)
 	./target/linux/x86_64-unknown-linux-musl/release/password-generator-pro
-	@echo "Running Linux binary! ✅"
+	$(call log, Running Linux binary! ✅)
 
 # Run macOS binary
 run-macos:
-	$(call banner,Running MacOS binary 🍎)
+	$(call log,Running MacOS binary 🍎)
 	./target/macos/aarch64-apple-darwin/release/password-generator-pro
-	@echo "Running MacOS binary! ✅"
+	$(call log, Running MacOS binary! ✅)
 
 # Run Windows binary
 run-windows:
-	$(call banner,Running Windows binary 🪟)
+	$(call log,Running Windows binary 🪟)
 	./target/windows/x86_64-pc-windows-gnu/release/password-generator-pro.exe
-	@echo "Running Windows binary! ✅"
+	$(call log, Running Windows binary! ✅)
 
 # Check code for security issues
 security:
-	$(call banner,Checking security of ${PROJECT} 🔐)
+	$(call log,Checking security of ${PROJECT} 🔐)
 	@$(CARGO) security
-	@echo "Security check is done ✅"
+	$(call log, Security check is done ✅)
 
 # Run tests
 test:
-	$(call banner,Testing ${PROJECT} 🧪)
+	$(call log,Testing ${PROJECT} 🧪)
 	@$(CARGO) test
-	@echo "Tests are done ✅"
+	$(call log, Tests are done ✅)
 
 # Check unused dependencies
 udeps:
-	$(call banner,Checking unused dependencies for ${PROJECT} 📦)
+	$(call log,Checking unused dependencies for ${PROJECT} 📦)
 	@$(CARGO) udeps
-	@echo "Unused dependencies check is done ✅"
+	$(call log, Unused dependencies check is done ✅)
 
 # Check memory leaks
 valgrind:
-	$(call banner,Checking memory leaks for ${PROJECT} 🧠)
+	$(call log,Checking memory leaks for ${PROJECT} 🧠)
 	@$(CARGO) valgrind
-	@echo "Memory leaks check is done ✅"
+	$(call log, Memory leaks check is done ✅)
 
 # Display the help menu
 help:

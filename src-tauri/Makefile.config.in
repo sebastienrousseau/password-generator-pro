@@ -1,0 +1,32 @@
+# Configuration settings for Password Generator Pro Makefile
+# Maintainer: Sebastien Rousseau
+# License: See LICENSE-APACHE and LICENSE-MIT files for details.
+
+# Default goal
+export .DEFAULT_GOAL := help
+
+# Valid COLOR options: {always, auto, never}
+COLOR ?= auto
+
+# Date variable
+DATE := $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+# Avoid funny character set dependencies
+unexport LC_ALL
+export LC_COLLATE=C
+export LC_NUMERIC=C
+
+# Make variables for the project
+export ASSETS_DIR = ./assets
+export BLOATARGS =  --release --crates --all-features
+export CARGO = cargo --color $(COLOR)
+export GREEN=\033[0;32m
+export LINUX_TARGET = x86_64-unknown-linux-musl
+export LINUX_TARGETS := x86_64-unknown-linux-gnu x86_64-unknown-linux-musl i686-unknown-linux-gnu i686-unknown-linux-musl
+export MACOS_TARGET = aarch64-apple-darwin
+export MACOS_TARGETS := aarch64-apple-darwin x86_64-apple-darwin arm64-apple-darwin i386-apple-darwin
+export NC=\033[0m
+export PROJECT = Password Generator Pro
+export VERSION = 1.0.0
+export WINDOWS_TARGET = x86_64-pc-windows-gnu
+export WINDOWS_TARGETS := x86_64-pc-windows-gnu x86_64-pc-windows-msvc i686-pc-windows-gnu i686-pc-windows-msvc
