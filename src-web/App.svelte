@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { writable, get } from 'svelte/store'
+  import { get, writable } from 'svelte/store'
   import './app.css'
   import CopyIcon from './Icon/CopyIcon.svelte'
   import GenerateIcon from './Icon/GenerateIcon.svelte'
   import ResetIcon from './Icon/ResetIcon.svelte'
 
-  import { invoke } from '@tauri-apps/api/tauri'
   import { writeText } from '@tauri-apps/api/clipboard'
+  import { invoke } from '@tauri-apps/api/tauri'
 
   import Translate from './Components/i18n'
 
@@ -183,13 +183,32 @@
             >{label3_i18n}</label
           >
           <input
+            type="range"
+            name="num-words"
+            class="w-full h-4 p-0 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-0 focus:shadow-none"
+            min="3"
+            max="9"
+            step="1"
+            bind:value={$formData.len}
+            id="num-words"
+          />
+          <div class="-mt-2 flex w-full justify-between">
+            <span class="p-1 text-black dark:text-white">3</span>
+            <span class="p-1 text-black dark:text-white">4</span>
+            <span class="p-1 text-black dark:text-white">5</span>
+            <span class="p-1 text-black dark:text-white">6</span>
+            <span class="p-1 text-black dark:text-white">7</span>
+            <span class="p-1 text-black dark:text-white">8</span>
+            <span class="p-1 text-black dark:text-white">9</span>
+          </div>
+          <!-- <input
             type="number"
             name="num-words"
             min="3"
             max="9"
             bind:value={$formData.len}
             class="border border-[#dedede] dark:border-[#736865] text-black dark:text-white text-right s-2 border-gray-light dark:border-gray-dark p-2 rounded-lg block mt-1 bg-white dark:bg-[#403533] w-full"
-          />
+          /> -->
         </div>
         <div class="block mb-4">
           <label for="num-words" class="text-black dark:text-white capitalize mb-2"
