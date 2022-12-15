@@ -54,6 +54,7 @@
         "entitlements": "entitlements.plist",
         "exceptionDomain": "",
         "frameworks": [],
+        "license": "../LICENSE",
         "minimumSystemVersion": "10.13.6",
         "providerShortName": null,
         "signingIdentity": null
@@ -86,7 +87,7 @@
         "height": 549,
         "minHeight": 549,
         "minWidth": 640,
-        "resizable": false,
+        "resizable": true,
         "title": "Password Generator Pro",
         "width": 640
       }

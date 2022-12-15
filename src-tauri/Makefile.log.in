@@ -1,0 +1,13 @@
+# Logger for Password Generator Pro Makefile
+# Maintainer: Sebastien Rousseau
+# License: See LICENSE-APACHE and LICENSE-MIT files for details.
+
+# Include the configuration file
+include Makefile.config.in
+
+# Log function to print messages in the terminal
+define log
+	@printf "\n"
+	@string="$(1)" && printf "$$(tput bold)🔒 ${GREEN}$(DATE)${NC} - [$@]: %-$$((76))s *\n" "$$string"
+	@printf "\n"
+endef

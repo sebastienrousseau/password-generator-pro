@@ -25,6 +25,7 @@ version = "0.0.1"
 
 [build-dependencies]
 tauri-build = { version = "1.2.1", features = [] }
+vergen = { version = "7.4.3", features = [] }
 
 [dependencies]
 bcrypt = "0.13.0"

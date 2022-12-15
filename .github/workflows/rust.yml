@@ -1,4 +1,4 @@
-name: Password Generator Pro Builds
+name: Password Generator Pro Rust Tests
 
 on:
   push:
@@ -7,21 +7,14 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  APP_NAME: "password-generator-pro"
-
 jobs:
-  build-binaries:
-    name: "${{ matrix.platform.target }}"
-
+  tests:
     strategy:
       fail-fast: false
-
       matrix:
         platform: [macos-latest, ubuntu-20.04]
 
     runs-on: ${{ matrix.platform }}
-
     steps:
       - name: ✅ Checkout code (main branch)
         uses: actions/checkout@v3
@@ -77,14 +70,7 @@ jobs:
       - name: ✅ Building
         run: pnpm run build -- --verbose
 
-      - name: ✅ Publishing
-        uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: --verbose
-          tagName: ${{ env.APP_NAME }}-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
-          releaseName: "Password Generator Pro v__VERSION__"
-          releaseBody: "👋 Welcome to Password Generator Pro (v__VERSION__).\n\n\nSee the assets to download this version and install."
-          releaseDraft: true
-          prerelease: false
+      - name: ✅ Run Cargo tests
+        run: |
+          cd src-tauri
+          cargo test

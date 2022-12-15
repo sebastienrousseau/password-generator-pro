@@ -18,8 +18,8 @@
       "type": "image/png"
     }
   ],
-  "name": "Password Generator",
-  "short_name": "Password Generator",
+  "name": "Password Generator Pro",
+  "short_name": "Password Generator Pro",
   "start_url": ".",
   "theme_color": "#000000"
 }
