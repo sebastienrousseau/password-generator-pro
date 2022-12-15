@@ -1,12 +1,14 @@
-name: Password Generator Pro Builds
+name: 🔐 Password Generator Pro ❯ Build Binaries (CI)
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [master]
 
 env:
   APP_NAME: "password-generator-pro"
 
 jobs:
-  build-binaries:
+  publish-tauri:
     name: "${{ matrix.platform.target }}"
 
     strategy:
@@ -70,12 +72,17 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: ✅ Building
+        env:
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
         run: pnpm run build -- --verbose
 
       - name: ✅ Publishing
         uses: tauri-apps/tauri-action@v0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
         with:
           args: --verbose
           tagName: ${{ env.APP_NAME }}-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version

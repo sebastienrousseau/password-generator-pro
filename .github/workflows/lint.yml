@@ -1,4 +1,4 @@
-name: Password Generator Pro Lint
+name: 🔐 Password Generator Pro ❯ Lint Code (CI)
 
 on: [push, pull_request]
 

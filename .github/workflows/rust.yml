@@ -1,9 +1,9 @@
-name: Password Generator Pro Rust Tests
+name: 🔐 Password Generator Pro ❯ Rust Tests (CI)
 
 on: [push, pull_request]
 
 jobs:
-  tests:
+  rust:
     strategy:
       fail-fast: false
       matrix:
