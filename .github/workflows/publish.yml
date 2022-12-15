@@ -1,17 +1,12 @@
-name: Password Generator Pro Builds
+name: ❯ Build Binaries (CI)
 
-on:
-  push:
-    branches: [main]
-
-  pull_request:
-    branches: [main]
+on: [push, pull_request]
 
 env:
   APP_NAME: "password-generator-pro"
 
 jobs:
-  build-binaries:
+  publish-tauri:
     name: "${{ matrix.platform.target }}"
 
     strategy:
