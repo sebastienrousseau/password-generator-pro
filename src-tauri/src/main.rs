@@ -91,11 +91,11 @@ fn main() {
                 // Get the item handle from the id of the item clicked on the system tray menu item list.
                 let item_handle = app.tray_handle().get_item(&id);
 
-                let name = format!("{}", NAME.to_case(Case::Title));
+                let name = NAME.to_case(Case::Title);
                 let year = format!("{}", OffsetDateTime::now_utc().year());
                 let copyright = format!("© {} {}\nAll rights reserved.", year, name);
-                let description = format!("{}", DESCRIPTION);
-                let sha_short = format!("{}", SHA.split_at(7).0);
+                let description = DESCRIPTION.to_string();
+                let sha_short = SHA.split_at(7).0.to_string();
                 let version = format!("Version {} ({})", VERSION, sha_short);
                 let window = app.get_window("main").unwrap();
 
@@ -158,26 +158,38 @@ fn main() {
         .menu(crate::create_menu())
         .on_menu_event(|event| match event.menu_item_id() {
             "about" => {
-                let name = format!("{}", NAME.to_case(Case::Title));
+                let name = NAME.to_case(Case::Title);
                 let year = format!("{}", OffsetDateTime::now_utc().year());
                 let copyright = format!("© {} {}\nAll rights reserved.", year, name);
-                let description = format!("{}", DESCRIPTION);
-                let sha_short = format!("{}", SHA.split_at(7).0);
+                let description = DESCRIPTION.to_string();
+                let sha_short = SHA.split_at(7).0.to_string();
                 let version = format!("Version {} ({})", VERSION, sha_short);
                 let window = event.window();
 
                 dialog::message(
-                    Some(&window),
+                    Some(window),
                     name,
                     format!("{}\n\n {}\n\n {}\n", description, version, copyright),
                 );
             }
-            "acknowledgements" => { crate::website(ACKNOWLEDGEMENTS); }
-            "documentation" => { crate::website(DOCUMENTATION); }
-            "license" => { crate::website(LICENSE_URL); }
-            "release-notes" => { crate::website(RELEASE); }
-            "report-issue" => { crate::website(ISSUE); }
-            "website" => { crate::website(HOMEPAGE); }
+            "acknowledgements" => {
+                crate::website(ACKNOWLEDGEMENTS);
+            }
+            "documentation" => {
+                crate::website(DOCUMENTATION);
+            }
+            "license" => {
+                crate::website(LICENSE_URL);
+            }
+            "release-notes" => {
+                crate::website(RELEASE);
+            }
+            "report-issue" => {
+                crate::website(ISSUE);
+            }
+            "website" => {
+                crate::website(HOMEPAGE);
+            }
             _ => {}
         })
         .run(tauri::generate_context!())
