@@ -23,9 +23,15 @@
     separator: defaultFormValues.separator,
   })
 
+  async function onRangeChange() {
+    // Play the range sound
+    const range = new Audio('./sounds/range.mp3')
+    range.play()
+  }
+
   async function onReset() {
     // Play the reset sound
-    const reset = new Audio('./sounds/reset.mp3')
+    const reset = new Audio('./sounds/whoosh.mp3')
     reset.play()
 
     // Wait for the reset to finish
@@ -96,12 +102,12 @@
   }
 
   function onCopyPassword() {
-    onCopy(password)
+    onCopy(String(password))
     document.querySelector('#generated-password')
   }
 
   function onCopyhash() {
-    onCopy(hash)
+    onCopy(String(hash))
   }
 
   const systemLanguage = Intl.DateTimeFormat().resolvedOptions().locale
@@ -147,7 +153,9 @@
         {/if}
       </span>
       <button
-        on:click={onCopyPassword}
+        on:click={async () => {
+          await onCopyPassword()
+        }}
         class="py-2 px-1 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700"
       >
         <CopyIcon />
@@ -168,7 +176,9 @@
         {/if}
       </span>
       <button
-        on:click={onCopyhash}
+        on:click={async () => {
+          await onCopyhash()
+        }}
         class="text-black dark:text-white py-2 px-1 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700"
       >
         <CopyIcon />
@@ -179,20 +189,23 @@
     <form>
       <div class="grid grid-cols-2 gap-4">
         <div class="block mb-4">
-          <label for="num-words" class="text-black dark:text-white capitalize mb-2"
+          <label for="numWords" class="text-black dark:text-white capitalize mb-2"
             >{label3_i18n}</label
           >
           <input
             type="range"
-            name="num-words"
-            class="w-full h-4 p-0 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-0 focus:shadow-none"
+            name="numWords"
+            class="align-bottom w-full h-4 p-0 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-0 focus:shadow-none"
             min="3"
             max="9"
             step="1"
             bind:value={$formData.len}
-            id="num-words"
+            on:change={async () => {
+              await onRangeChange()
+            }}
+            id="numWords"
           />
-          <div class="-mt-2 flex w-full justify-between">
+          <div class="align-bottom flex w-full justify-between">
             <span class="p-1 text-black dark:text-white">3</span>
             <span class="p-1 text-black dark:text-white">4</span>
             <span class="p-1 text-black dark:text-white">5</span>
@@ -203,7 +216,7 @@
           </div>
           <!-- <input
             type="number"
-            name="num-words"
+            name="numWords"
             min="3"
             max="9"
             bind:value={$formData.len}
@@ -211,7 +224,7 @@
           /> -->
         </div>
         <div class="block mb-4">
-          <label for="num-words" class="text-black dark:text-white capitalize mb-2"
+          <label for="numWords" class="text-black dark:text-white capitalize mb-2"
             >{label4_i18n}</label
           >
           <input
@@ -228,7 +241,10 @@
         <button
           type="button"
           class="min-w-fit flex justify-center p-2 bg-gray-light dark:bg-gray-dark hover:bg-gray-600 active:bg-gray-700 rounded-lg px-6 shadow-md shadow-gray-400 dark:shadow-none"
-          on:click={onReset}
+          on:click={async () => {
+            await onReset()
+            $formData.len = 3
+          }}
         >
           <span class="mr-2 align-bottom">
             <ResetIcon />
