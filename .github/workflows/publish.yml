@@ -2,7 +2,7 @@ name: 🔐 Password Generator Pro ❯ Build Binaries (CI)
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 env:
   APP_NAME: "password-generator-pro"
