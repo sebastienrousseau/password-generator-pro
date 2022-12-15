@@ -1,3 +1,36 @@
+# bloat: Evaluating resource allocation of the project
+[tasks.bloat]
+command = "cargo"
+args = ["bloat", "${@}"]
+dependencies = ["build"]
+
+# build: Building the project
+[tasks.build]
+command = "cargo"
+args = ["build"]
+
+# build-all: Building the project for all targets
+[tasks.build-all]
+command = "cargo"
+args = ["build", "--all-targets"]
+
+# build-linux: Building the project for linux (x86_64-unknown-linux-musl)
+[tasks.build-linux]
+command = "cargo"
+args = ["build", "--target", "x86_64-unknown-linux-musl", "--target-dir", "target/linux", "--release"]
+dependencies = ["clean"]
+
+# build-macos: Building the project for macos (aarch64-apple-darwin)
+[tasks.build-macos]
+command = "cargo"
+args = ["build", "--target", "aarch64-apple-darwin", "--target-dir", "target/macos", "--release"]
+dependencies = ["clean"]
+
+# build-windows: Building the project for windows (x86_64-pc-windows-gnu)
+[tasks.build-windows]
+command = "cargo"
+args = ["build", "--target", "x86_64-pc-windows-gnu", "--target-dir", "target/windows", "--release"]
+dependencies = ["clean"]
 
 #composite tasks
 [tasks.upgrade]
@@ -18,11 +51,6 @@ rm hello-*.state
 [tasks.clean]
 command = "cargo"
 args = ["clean"]
-
-# building
-[tasks.build]
-command = "cargo"
-args = ["build"]
 
 [tasks.build-release]
 command = "cargo"
@@ -57,11 +85,6 @@ command = "cargo"
 args = ["audit"]
 dependencies = ["build"]
 
-# misc
-[tasks.bloat]
-command = "cargo"
-args = ["bloat", "${@}"]
-dependencies = ["build"]
 
 [tasks.spellcheck]
 command = "cargo"

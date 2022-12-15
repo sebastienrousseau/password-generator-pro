@@ -1,11 +1,14 @@
-#![cfg_attr(all(not(debug_assertions), target_os = "windows"), windows_subsystem = "windows")]
+#![cfg_attr(
+    all(not(debug_assertions), target_os = "windows"),
+    windows_subsystem = "windows"
+)]
 
-pub use convert_case::{Case, Casing};
-pub use rand::{seq::SliceRandom, thread_rng, Rng};
-pub use std::{thread, time::Duration};
-pub use tauri::api::dialog;
-pub use tauri::Manager;
-pub use time::OffsetDateTime;
+use convert_case::{Case, Casing};
+use rand::{seq::SliceRandom, thread_rng, Rng};
+// use std::{thread, time::Duration};
+use tauri::api::dialog;
+use tauri::Manager;
+use time::OffsetDateTime;
 
 /// Import the core module.
 mod core;
@@ -48,7 +51,12 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
         };
 
         // Convert the word to title case and add a number to the end
-        let word = format!("{}{}{}", word.to_case(Case::Title), ascii.choose(&mut rng).unwrap(), nb);
+        let word = format!(
+            "{}{}{}",
+            word.to_case(Case::Title),
+            ascii.choose(&mut rng).unwrap(),
+            nb
+        );
         // Generate a new random number between 0 and 99.
         nb = rng.gen_range(0..99);
         // Add the word to the vector of words.
@@ -59,16 +67,21 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
     let pass = words.join(separator);
 
     // Hash the password
-    let hash = bcrypt::hash(pass.as_bytes(), HASH_COST).map_err(|_| "Failed to hash password".to_string())?;
+    let hash = bcrypt::hash(pass.as_bytes(), HASH_COST)
+        .map_err(|_| "Failed to hash password".to_string())?;
 
     // Return the password and hash
-    Ok(GeneratedPassword { password: pass, hash })
+    Ok(GeneratedPassword {
+        password: pass,
+        hash,
+    })
 }
 
 /// The main function
 /// This is the entry point for the application
 /// It also sets up the commands that can be called from the webview
 /// and the system tray
+#[tauri::command]
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![generate_password, logger, website])
@@ -78,26 +91,23 @@ fn main() {
                 // Get the item handle from the id of the item clicked on the system tray menu item list.
                 let item_handle = app.tray_handle().get_item(&id);
 
-                let title = format!("{}", env!("CARGO_PKG_NAME").to_case(Case::Title));
+                let name = format!("{}", NAME.to_case(Case::Title));
                 let year = format!("{}", OffsetDateTime::now_utc().year());
-                let copyright = format!("© {} {}. All rights reserved.", year, title);
-                let description = format!(env!("CARGO_PKG_DESCRIPTION"));
-                let version = format!("Version {}", env!("CARGO_PKG_VERSION"));
+                let copyright = format!("© {} {}\nAll rights reserved.", year, name);
+                let description = format!("{}", DESCRIPTION);
+                let sha_short = format!("{}", SHA.split_at(7).0);
+                let version = format!("Version {} ({})", VERSION, sha_short);
                 let window = app.get_window("main").unwrap();
 
                 // Match the id of the item clicked.
                 match id.as_str() {
                     "about" => {
-                        crate::logger(
-                            "Info",
-                            "SystemTrayEvent",
-                            "Opening about dialog",
-                        );
+                        crate::logger("Info", "SystemTrayEvent", "Opening about dialog");
 
                         dialog::message(
                             Some(&window),
-                            title,
-                            description + "\n\n" + version.as_str() + "\n\n" + copyright.as_str()
+                            name,
+                            format!("{}\n\n {}\n\n {}\n", description, version, copyright),
                         );
                     }
                     "hide" => {
@@ -105,46 +115,71 @@ fn main() {
                         let window = app.get_window("main").unwrap();
                         if window.is_visible().unwrap() {
                             window.hide().unwrap();
-                            item_handle.set_title("Show Password Generator Pro").unwrap();
-                            crate::logger(
-                                "Info",
-                                "SystemTrayEvent",
-                                "Hiding main window"
-                            );
+                            item_handle
+                                .set_title("Show Password Generator Pro")
+                                .unwrap();
+                            crate::logger("Info", "SystemTrayEvent", "Hiding main window");
                         } else {
                             // If the window is already hidden, show it.
                             window.show().unwrap();
-                            item_handle.set_title("Hide Password Generator Pro").unwrap();
-                            crate::logger(
-                                "Info",
-                                "SystemTrayEvent",
-                                "Showing main window"
-                            );
+                            item_handle
+                                .set_title("Hide Password Generator Pro")
+                                .unwrap();
+                            crate::logger("Info", "SystemTrayEvent", "Showing main window");
                         }
+                    }
+                    "documentation" => {
+                        // If the id is "website", open the website in the default browser.
+                        crate::logger(
+                            "Info",
+                            "SystemTrayEvent",
+                            "Opening website in default browser",
+                        );
+                        crate::website(DOCUMENTATION);
                     }
                     "website" => {
                         // If the id is "website", open the website in the default browser.
                         crate::logger(
                             "Info",
                             "SystemTrayEvent",
-                            "Opening website in default browser"
+                            "Opening website in default browser",
                         );
-                        crate::website("https://password-generator.pro");
+                        crate::website(HOMEPAGE);
                     }
                     // If the id is "quit", quit the application.
                     "quit" => {
-                        crate::logger(
-                            "Info",
-                            "SystemTrayEvent",
-                            "Quitting application"
-                        );
+                        crate::logger("Info", "SystemTrayEvent", "Quitting application");
                         std::process::exit(0);
                     }
                     _ => {}
                 }
             }
         })
-        .menu(crate::init())
+        .menu(crate::create_menu())
+        .on_menu_event(|event| match event.menu_item_id() {
+            "about" => {
+                let name = format!("{}", NAME.to_case(Case::Title));
+                let year = format!("{}", OffsetDateTime::now_utc().year());
+                let copyright = format!("© {} {}\nAll rights reserved.", year, name);
+                let description = format!("{}", DESCRIPTION);
+                let sha_short = format!("{}", SHA.split_at(7).0);
+                let version = format!("Version {} ({})", VERSION, sha_short);
+                let window = event.window();
+
+                dialog::message(
+                    Some(&window),
+                    name,
+                    format!("{}\n\n {}\n\n {}\n", description, version, copyright),
+                );
+            }
+            "acknowledgements" => { crate::website(ACKNOWLEDGEMENTS); }
+            "documentation" => { crate::website(DOCUMENTATION); }
+            "license" => { crate::website(LICENSE_URL); }
+            "release-notes" => { crate::website(RELEASE); }
+            "report-issue" => { crate::website(ISSUE); }
+            "website" => { crate::website(HOMEPAGE); }
+            _ => {}
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
