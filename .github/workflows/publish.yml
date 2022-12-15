@@ -84,6 +84,6 @@ jobs:
           args: --verbose
           tagName: ${{ env.APP_NAME }}-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
           releaseName: "Password Generator Pro v__VERSION__"
-          releaseBody: "👋 Welcome to Password Generator Pro (v__VERSION__).\n\nThis is a new release of Password Generator Pro with the following changes:\n\n- __CHANGELOG__.\n\nSee the assets to download this version and install."
+          releaseBody: "👋 Welcome to Password Generator Pro (v__VERSION__).\n\n\nSee the assets to download this version and install."
           releaseDraft: true
           prerelease: false
