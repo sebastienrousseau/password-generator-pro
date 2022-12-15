@@ -1,4 +1,4 @@
-name: 🔐 Password Generator Pro ❯ Rust Tests (CI)
+name: ❯ Rust Tests (CI)
 
 on: [push, pull_request]
 
