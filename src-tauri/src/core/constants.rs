@@ -23,7 +23,7 @@ pub const ACKNOWLEDGEMENTS: &str =
     "https://github.com/sebastienrousseau/password-generator-pro/graphs/contributors";
 pub const DOCUMENTATION: &str = "https://password-generator.pro/docs";
 pub const LICENSE_URL: &str =
-    "https://github.com/sebastienrousseau/password-generator-pro/blob/main/LICENSE";
+    "https://github.com/sebastienrousseau/password-generator-pro/blob/main/COPYRIGHT";
 pub const RELEASE: &str = "https://github.com/sebastienrousseau/password-generator-pro/releases";
 pub const ISSUE: &str = "https://github.com/sebastienrousseau/password-generator-pro/issues";
 
