@@ -85,7 +85,7 @@ fn main() {
             if let tauri::SystemTrayEvent::MenuItemClick { id, .. } = event {
                 // Get the item handle from the id of the item clicked on the system tray menu item list.
                 let item_handle = app.tray_handle().get_item(&id);
-
+                let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", id.as_str());
                 let name = NAME.to_case(Case::Title);
                 let year = format!("{}", OffsetDateTime::now_utc().year());
                 let copyright = format!("© {} {}\nAll rights reserved.", year, name);
@@ -97,7 +97,6 @@ fn main() {
                 // Match the id of the item clicked.
                 match id.as_str() {
                     "about" => {
-                        let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", "Opening about dialog");
                         logger.log();
 
                         dialog::message(
@@ -114,7 +113,6 @@ fn main() {
                             item_handle
                                 .set_title("Show Password Generator Pro")
                                 .unwrap();
-                            let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", "Hiding main window");
                             logger.log();
                         } else {
                             // If the window is already hidden, show it.
@@ -122,31 +120,21 @@ fn main() {
                             item_handle
                                 .set_title("Hide Password Generator Pro")
                                 .unwrap();
-                                let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", "Showing main window");
                                 logger.log();
                         }
                     }
                     "documentation" => {
                         // If the id is "website", open the website in the default browser.
-                        let logger = Logger::new(&get_time(), "Info",
-                            "SystemTrayEvent",
-                            "Opening website in default browser",
-                        );
                         logger.log();
                         crate::website(DOCUMENTATION);
                     }
                     "website" => {
                         // If the id is "website", open the website in the default browser.
-                        let logger = Logger::new(&get_time(), "Info",
-                            "SystemTrayEvent",
-                            "Opening website in default browser",
-                        );
                         logger.log();
                         crate::website(HOMEPAGE);
                     }
                     // If the id is "quit", quit the application.
                     "quit" => {
-                        let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", "Quitting application");
                         logger.log();
                         std::process::exit(0);
                     }
@@ -155,10 +143,9 @@ fn main() {
             }
         })
         .menu(crate::create_menu())
-        .on_menu_event(|event| match event.menu_item_id() {
-            "about" => {
-                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening about dialog");
-                logger.log();
+        .on_menu_event(|event| {
+
+                let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent",event.menu_item_id());
                 let name = NAME.to_case(Case::Title);
                 let year = format!("{}", OffsetDateTime::now_utc().year());
                 let copyright = format!("© {} {}\nAll rights reserved.", year, name);
@@ -168,6 +155,12 @@ fn main() {
                 let version = format!("Version {} ({})", VERSION, sha_short);
                 let window = event.window();
 
+            match event.menu_item_id() {
+
+            "about" => {
+
+                logger.log();
+
                 dialog::message(
                     Some(window),
                     name,
@@ -175,41 +168,35 @@ fn main() {
                 );
             }
             "acknowledgements" => {
-                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening Acknowledgements dialog");
                 logger.log();
                 crate::website(ACKNOWLEDGEMENTS);
             }
             "documentation" => {
-                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening Documentation in default browser");
                 logger.log();
                 crate::website(DOCUMENTATION);
             }
             "license" => {
-                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening License in default browser");
                 logger.log();
                 crate::website(LICENSE_URL);
             }
             "quit" => {
-                let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", "Quitting application");
                 logger.log();
                 std::process::exit(0);
             }
             "release-notes" => {
-                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening Release notes in default browser");
                 logger.log();
                 crate::website(RELEASE);
             }
             "report-issue" => {
-                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening Issue tracker in default browser");
                 logger.log();
                 crate::website(ISSUE);
             }
             "website" => {
-                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening Website in default browser");
                 logger.log();
                 crate::website(HOMEPAGE);
             }
             _ => {}
+        }
         })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
