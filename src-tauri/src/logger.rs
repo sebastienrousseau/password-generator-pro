@@ -97,10 +97,10 @@ impl Clone for Logger {
 impl Default for Logger {
     fn default() -> Self {
         Self {
-            time: String::new(),
-            info: String::new(),
-            message: String::new(),
-            details: String::new(),
+            time: String::default(),
+            info: String::default(),
+            message: String::default(),
+            details: String::default(),
         }
     }
 }
