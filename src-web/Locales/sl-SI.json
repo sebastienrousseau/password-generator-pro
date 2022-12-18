@@ -5,8 +5,10 @@
   "Label2": "Kriptovalentna šifra (Bcrypt Hash)",
   "Label3": "Število besed",
   "Label4": "Ločevalnik",
+  "Label5": "UUID",
   "Placeholder": "Geslo ni bilo ustvarjeno",
   "Placeholder2": "Ni ustvarjen hash",
+  "Placeholder3": "Ni ustvarjen UUID",
   "Subtitle": "hiter, preprost in zmogljiv generator gesel",
   "Title": "Generator gesel"
 }

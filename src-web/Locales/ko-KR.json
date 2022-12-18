@@ -5,8 +5,10 @@
   "Label2": "Bcrypt 해시",
   "Label3": "단어 수",
   "Label4": "분리 기호",
+  "Label5": "UUID",
   "Placeholder": "암호가 생성되지 않았습니다.",
   "Placeholder2": "생성된 해시 없음",
+  "Placeholder3": "생성된 UUID 없음",
   "Subtitle": "빠르고 간단하며 강력한 암호 생성기",
   "Title": "비밀번호 생성기"
 }

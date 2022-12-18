@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Žodžių skaičius",
   "Label4": "Separatorius",
+  "Label5": "UUID",
   "Placeholder": "Slaptažodis negeneruojamas",
   "Placeholder2": "Hash negeneruojamas",
+  "Placeholder3": "UUID negeneruojamas",
   "Subtitle": "Greitas, paprastas ir galingas slaptažodžių generatorius",
   "Title": "Slaptažodžių generatorius"
 }

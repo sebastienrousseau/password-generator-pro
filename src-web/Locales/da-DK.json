@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Antal ord",
   "Label4": "Separator",
+  "Label5": "UUID",
   "Placeholder": "Ingen adgangskode genereret",
   "Placeholder2": "Ingen hash genereret",
+  "Placeholder3": "Ingen UUID genereret",
   "Subtitle": "En hurtig, enkel og kraftfuld adgangskodegenerator",
   "Title": "Kodeordsgenerator"
 }

@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Vārdu skaits",
   "Label4": "Separators",
+  "Label5": "UUID",
   "Placeholder": "Parole nav ģenerēta",
   "Placeholder2": "Nav ģenerēta hash",
+  "Placeholder3": "Nav ģenerēta UUID",
   "Subtitle": "Ātrs, vienkāršs un jaudīgs paroļu ģenerators",
   "Title": "Paroļu ģenerators"
 }

@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Número de palabras",
   "Label4": "Separador",
+  "Label5": "UUID",
   "Placeholder": "No se ha generado una contraseña",
   "Placeholder2": "No se ha generado un hash",
+  "Placeholder3": "No se ha generado un UUID",
   "Subtitle": "Un generador de contraseñas rápido, sencillo y potente",
   "Title": "Generador de contraseñas"
 }

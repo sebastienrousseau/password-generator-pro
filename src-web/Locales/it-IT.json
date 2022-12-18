@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Password",
   "Label4": "Separatore",
+  "Label5": "UUID",
   "Placeholder": "Nessuna password generata",
   "Placeholder2": "Nessun hash generato",
+  "Placeholder3": "Nessun UUID generato",
   "Subtitle": "Un generatore di password veloce, semplice e potente",
   "Title": "Generatore di password"
 }

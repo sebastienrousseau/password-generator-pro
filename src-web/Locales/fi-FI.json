@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Sanojen määrä",
   "Label4": "Erotin",
+  "Label5": "UUID",
   "Placeholder": "Salasanaa ei luotu",
   "Placeholder2": "Ei tiivistettä luotu",
+  "Placeholder3": "UUID-tunnusta ei luotu",
   "Subtitle": "Nopea, yksinkertainen ja tehokas salasanageneraattori",
   "Title": "Salasanageneraattori"
 }
