@@ -1,18 +1,31 @@
+//! # Utilities for logging messages to the console.
+//! An easy-to-configure and flexible logger function.
+//! Log a message to the console with a timestamp, info, message, and details.
+//!
+//! # Usage
+//!
+//! ```rust
+//! use crate::core::logger;
+//!
+//! // Log a message to the console with a timestamp, info, message, and details
+//! let logger = logger::logger(
+//!     "2022-12-18 2:02:08.706196 +00:00:00",
+//!     "INFO",
+//!     "SystemTrayEvent",
+//!     "Showing main window"
+//! );
+//! assert_eq!(logger, ());
+//! ```
+//!
+
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-use time::OffsetDateTime;
-
 #[tauri::command]
-pub fn return_date_time() -> String {
-    OffsetDateTime::now_utc().to_string()
-}
-
-#[tauri::command]
-pub fn logger(info: &str, message: &str, details: &str) {
+pub fn set_log(time: &str, info: &str, message: &str, details: &str) {
     println!(
         "🔒 {} - [{}] {}: {}",
-        return_date_time(),
+        time,
         info,
         message,
         details
@@ -25,6 +38,11 @@ mod tests {
 
     #[test]
     fn test_logger() {
-        logger("INFO", "Test", "Test");
+        let logger = set_log(
+            "2022-22-22 22:22:22.222222 +00:00:00",
+            "INFO",
+            "SystemTrayEvent",
+            "Showing main window");
+        assert_eq!(logger, ());
     }
 }

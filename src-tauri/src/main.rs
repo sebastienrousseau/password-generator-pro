@@ -4,17 +4,12 @@
 )]
 
 use convert_case::{Case, Casing};
+use crate::core::*;
 use rand::{seq::SliceRandom, thread_rng, Rng};
-// use std::{thread, time::Duration};
 use tauri::api::dialog;
 use tauri::Manager;
-use time::OffsetDateTime;
 
-/// Import the core module.
 mod core;
-
-/// Use the core modules.
-use crate::core::*;
 
 /// GeneratedPassword stores a randomly generated password
 /// and the bcrypt hash of the password.
@@ -84,7 +79,7 @@ fn generate_password(len: u8, separator: &str) -> Result<GeneratedPassword, Stri
 #[tauri::command]
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![generate_password, logger, website])
+        .invoke_handler(tauri::generate_handler![generate_password, website])
         .system_tray(crate::system_tray())
         .on_system_tray_event(|app, event| {
             if let tauri::SystemTrayEvent::MenuItemClick { id, .. } = event {
@@ -102,7 +97,7 @@ fn main() {
                 // Match the id of the item clicked.
                 match id.as_str() {
                     "about" => {
-                        crate::logger("Info", "SystemTrayEvent", "Opening about dialog");
+                        logger::set_log(&get_time(), "Info", "SystemTrayEvent", "Opening about dialog");
 
                         dialog::message(
                             Some(&window),
@@ -118,19 +113,20 @@ fn main() {
                             item_handle
                                 .set_title("Show Password Generator Pro")
                                 .unwrap();
-                            crate::logger("Info", "SystemTrayEvent", "Hiding main window");
+                            logger::set_log(&get_time(), "Info", "SystemTrayEvent", "Hiding main window");
                         } else {
                             // If the window is already hidden, show it.
                             window.show().unwrap();
                             item_handle
                                 .set_title("Hide Password Generator Pro")
                                 .unwrap();
-                            crate::logger("Info", "SystemTrayEvent", "Showing main window");
+                            logger::set_log(&get_time(), "Info", "SystemTrayEvent", "Showing main window");
                         }
                     }
                     "documentation" => {
                         // If the id is "website", open the website in the default browser.
-                        crate::logger(
+                        logger::set_log(
+                            &get_time(),
                             "Info",
                             "SystemTrayEvent",
                             "Opening website in default browser",
@@ -139,7 +135,8 @@ fn main() {
                     }
                     "website" => {
                         // If the id is "website", open the website in the default browser.
-                        crate::logger(
+                        logger::set_log(
+                            &get_time(),
                             "Info",
                             "SystemTrayEvent",
                             "Opening website in default browser",
@@ -148,7 +145,7 @@ fn main() {
                     }
                     // If the id is "quit", quit the application.
                     "quit" => {
-                        crate::logger("Info", "SystemTrayEvent", "Quitting application");
+                        logger::set_log(&get_time(), "Info", "SystemTrayEvent", "Quitting application");
                         std::process::exit(0);
                     }
                     _ => {}
@@ -163,13 +160,14 @@ fn main() {
                 let copyright = format!("© {} {}\nAll rights reserved.", year, name);
                 let description = DESCRIPTION.to_string();
                 let sha_short = SHA.split_at(7).0.to_string();
+                let uuids = crate::core::generate_uuid();
                 let version = format!("Version {} ({})", VERSION, sha_short);
                 let window = event.window();
 
                 dialog::message(
                     Some(window),
                     name,
-                    format!("{}\n\n {}\n\n {}\n", description, version, copyright),
+                    format!("{}\n\n {}\n\n {}\n{}", description, version, copyright, uuids),
                 );
             }
             "acknowledgements" => {
