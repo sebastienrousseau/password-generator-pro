@@ -97,7 +97,8 @@ fn main() {
                 // Match the id of the item clicked.
                 match id.as_str() {
                     "about" => {
-                        logger::set_log(&get_time(), "Info", "SystemTrayEvent", "Opening about dialog");
+                        let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", "Opening about dialog");
+                        logger.log();
 
                         dialog::message(
                             Some(&window),
@@ -113,39 +114,40 @@ fn main() {
                             item_handle
                                 .set_title("Show Password Generator Pro")
                                 .unwrap();
-                            logger::set_log(&get_time(), "Info", "SystemTrayEvent", "Hiding main window");
+                            let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", "Hiding main window");
+                            logger.log();
                         } else {
                             // If the window is already hidden, show it.
                             window.show().unwrap();
                             item_handle
                                 .set_title("Hide Password Generator Pro")
                                 .unwrap();
-                            logger::set_log(&get_time(), "Info", "SystemTrayEvent", "Showing main window");
+                                let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", "Showing main window");
+                                logger.log();
                         }
                     }
                     "documentation" => {
                         // If the id is "website", open the website in the default browser.
-                        logger::set_log(
-                            &get_time(),
-                            "Info",
+                        let logger = Logger::new(&get_time(), "Info",
                             "SystemTrayEvent",
                             "Opening website in default browser",
                         );
+                        logger.log();
                         crate::website(DOCUMENTATION);
                     }
                     "website" => {
                         // If the id is "website", open the website in the default browser.
-                        logger::set_log(
-                            &get_time(),
-                            "Info",
+                        let logger = Logger::new(&get_time(), "Info",
                             "SystemTrayEvent",
                             "Opening website in default browser",
                         );
+                        logger.log();
                         crate::website(HOMEPAGE);
                     }
                     // If the id is "quit", quit the application.
                     "quit" => {
-                        logger::set_log(&get_time(), "Info", "SystemTrayEvent", "Quitting application");
+                        let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", "Quitting application");
+                        logger.log();
                         std::process::exit(0);
                     }
                     _ => {}
@@ -155,6 +157,8 @@ fn main() {
         .menu(crate::create_menu())
         .on_menu_event(|event| match event.menu_item_id() {
             "about" => {
+                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening about dialog");
+                logger.log();
                 let name = NAME.to_case(Case::Title);
                 let year = format!("{}", OffsetDateTime::now_utc().year());
                 let copyright = format!("© {} {}\nAll rights reserved.", year, name);
@@ -171,21 +175,38 @@ fn main() {
                 );
             }
             "acknowledgements" => {
+                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening Acknowledgements dialog");
+                logger.log();
                 crate::website(ACKNOWLEDGEMENTS);
             }
             "documentation" => {
+                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening Documentation in default browser");
+                logger.log();
                 crate::website(DOCUMENTATION);
             }
             "license" => {
+                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening License in default browser");
+                logger.log();
                 crate::website(LICENSE_URL);
             }
+            "quit" => {
+                let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", "Quitting application");
+                logger.log();
+                std::process::exit(0);
+            }
             "release-notes" => {
+                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening Release notes in default browser");
+                logger.log();
                 crate::website(RELEASE);
             }
             "report-issue" => {
+                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening Issue tracker in default browser");
+                logger.log();
                 crate::website(ISSUE);
             }
             "website" => {
+                let logger = Logger::new(&get_time(), "Info", "MenuEvent", "Opening Website in default browser");
+                logger.log();
                 crate::website(HOMEPAGE);
             }
             _ => {}
