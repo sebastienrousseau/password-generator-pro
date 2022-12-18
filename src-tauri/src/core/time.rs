@@ -30,6 +30,8 @@ mod tests {
     #[test]
     fn test_get_time() {
         let utc = get_time();
-        assert_eq!(utc != "", true);
+        assert!(!utc.is_empty());
+        assert_eq!(utc.len(), 36);
+        assert_eq!(utc, utc.to_string());
     }
 }
