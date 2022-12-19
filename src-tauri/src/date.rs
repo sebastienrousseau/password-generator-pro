@@ -5,9 +5,9 @@
 //! # Usage
 //!
 //! ```rust
-//! use date::Time;
+//! use date::Date;
 //!
-//! let time = Time::now();
+//! let time = Date::now();
 //! println!("The current time is: {}", time);
 //! ```
 //!
@@ -17,33 +17,33 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-/// Implements [`Time`] to get the current date and time in UTC.
+/// Implements [`Date`] to get the current date and time in UTC.
 ///
 /// # Examples
 ///
 /// ```rust
-/// use date::Time;
+/// use date::Date;
 ///
-/// let time = Time::now();
-/// println!("The current time is: {}", time);
+/// let date = Date::now();
+/// println!("The current date is: {}", date);
 /// ```
 
 use time::OffsetDateTime;
 
-/// Time in UTC.
+/// Date Utility
 ///
 /// By default, the current date and time in UTC is returned.
 #[non_exhaustive]
-pub struct Time;
+pub struct Date;
 
-impl Time {
-    /// Initializes a new [`Time`].
+impl Date {
+    /// Initializes a new [`Date`].
     ///
     /// ```no_run
-    /// use date::Time;
+    /// use date::Date;
     ///
-    /// let time = Time::now();
-    /// assert_eq!(time, "2022-22-22 22:22:22.222222 +00:00:00");
+    /// let date = Date::now();
+    /// assert_eq!(date, "2022-22-22 22:22:22.222222 +00:00:00");
     /// ```
 
     /// Returns the current date and time in UTC.
@@ -146,7 +146,7 @@ impl Time {
     /// The returned value will always be in the range `0..=999`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use date::Date;
     ///
     /// let time = Time::millisecond();
     /// assert_eq!(time, "0");
@@ -213,15 +213,15 @@ impl Time {
 }
 
 
-impl Clone for Time {
+impl Clone for Date {
     fn clone(&self) -> Self {
-        Time
+        Date
     }
 }
 
-impl Default for Time {
+impl Default for Date {
     fn default() -> Self {
-        Time
+        Date
     }
 }
 
@@ -231,14 +231,14 @@ mod tests {
     use super::*;
     #[test]
     fn test_get_time() {
-        let utc = Time::now();
+        let utc = Date::now();
         assert!(!utc.is_empty());
         assert_eq!(utc, utc.to_string());
     }
 
     #[test]
     fn test_year() {
-        // let year = Time::year();
+        // let year = Date::year();
         // assert!(!year.is_empty());
         // assert_eq!(year, "2022");
         // assert_eq!(year, year.to_string());
@@ -247,14 +247,14 @@ mod tests {
 
     #[test]
     fn test_month() {
-        let utc = Time::month();
+        let utc = Date::month();
         assert!(!utc.is_empty());
         assert_eq!(utc, utc.to_string());
     }
 
     #[test]
     fn test_day() {
-        let day = Time::day();
+        let day = Date::day();
         assert!(!day.is_empty());
         assert_eq!(day, day.to_string());
         assert_eq!(day.len(), 2);
@@ -262,51 +262,51 @@ mod tests {
 
     #[test]
     fn test_hour() {
-        let hour = Time::hour();
+        let hour = Date::hour();
         assert!(!hour.is_empty());
         assert_eq!(hour, hour.to_string());
     }
 
     #[test]
     fn test_minute() {
-        let minute = Time::minute();
+        let minute = Date::minute();
         assert!(!minute.is_empty());
         assert_eq!(minute, minute.to_string());
     }
 
     #[test]
     fn test_second() {
-        let second = Time::second();
+        let second = Date::second();
         assert!(!second.is_empty());
         assert_eq!(second, second.to_string());
     }
     #[test]
     fn test_millisecond() {
-        let utc = Time::millisecond();
+        let utc = Date::millisecond();
         assert!(!utc.is_empty());
         assert_eq!(utc, utc.to_string());
     }
     #[test]
     fn test_microsecond() {
-        let microsecond = Time::microsecond();
+        let microsecond = Date::microsecond();
         assert!(!microsecond.is_empty());
         assert_eq!(microsecond, microsecond.to_string());
     }
     #[test]
     fn test_nanosecond() {
-        let nanosecond = Time::nanosecond();
+        let nanosecond = Date::nanosecond();
         assert!(!nanosecond.is_empty());
         assert_eq!(nanosecond, nanosecond.to_string());
     }
     #[test]
     fn test_timezone() {
-        let timezone = Time::timezone();
+        let timezone = Date::timezone();
         assert!(!timezone.is_empty());
         assert_eq!(timezone, timezone.to_string());
     }
     #[test]
     fn test_weekday() {
-        let weekday = Time::weekday();
+        let weekday = Date::weekday();
         assert!(!weekday.is_empty());
         assert_eq!(weekday, weekday.to_string());
     }
@@ -316,7 +316,7 @@ mod tests {
 
 // Returns the current date and time in UTC.
 // pub fn get_time() -> String {
-//     OffsetDateTime::now_utc().to_string()
+//     OffsetDateDate::now_utc().to_string()
 // }
 
 // #[cfg(test)]
