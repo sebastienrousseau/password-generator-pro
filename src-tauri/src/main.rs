@@ -5,16 +5,18 @@
 
 use convert_case::{Case, Casing};
 use crate::core::*;
-use date::Date;
-use logger::Logger;
+use util::{date::Date, logger::Logger, uuid::UUID};
 use rand::{seq::SliceRandom, thread_rng, Rng};
 use tauri::api::dialog;
 use tauri::Manager;
 
 
 pub mod core;
-pub mod logger;
-pub mod date;
+pub mod util {
+    pub mod date;
+    pub mod logger;
+    pub mod uuid;
+}
 
 
 
@@ -73,7 +75,7 @@ fn generate_password(len: u8, separator: &str) -> Result<PasswordGenerator, Stri
     let hash = bcrypt::hash(pass.as_bytes(), HASH_COST)
         .map_err(|_| "Failed to hash password".to_string())?;
 
-    let uuid = crate::core::generate_uuid();
+    let uuid = UUID::uuid();
 
     // Return the password and hash
     Ok(PasswordGenerator {
