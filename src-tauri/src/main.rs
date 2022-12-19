@@ -5,6 +5,7 @@
 
 use convert_case::{Case, Casing};
 use crate::core::*;
+use date::Time;
 use logger::Logger;
 use rand::{seq::SliceRandom, thread_rng, Rng};
 use tauri::api::dialog;
@@ -13,6 +14,7 @@ use tauri::Manager;
 
 pub mod core;
 pub mod logger;
+pub mod date;
 
 
 
@@ -94,7 +96,8 @@ fn main() {
             if let tauri::SystemTrayEvent::MenuItemClick { id, .. } = event {
                 // Get the item handle from the id of the item clicked on the system tray menu item list.
                 let item_handle = app.tray_handle().get_item(&id);
-                let logger = Logger::new(&get_time(), "Info", "SystemTrayEvent", id.as_str());
+                let utc = Time::now();
+                let logger = Logger::new(&utc, "Info", "SystemTrayEvent", id.as_str());
                 let name = NAME.to_case(Case::Title);
                 let year = format!("{}", OffsetDateTime::now_utc().year());
                 let copyright = format!("© {} {}\nAll rights reserved.", year, name);
@@ -138,7 +141,8 @@ fn main() {
         })
         .menu(crate::create_menu())
         .on_menu_event(|event| {
-            let logger = Logger::new(&get_time(), "Info", "MenuEvent",event.menu_item_id());
+            let utc = Time::year();
+            let logger = Logger::new(&utc, "Info", "MenuEvent",event.menu_item_id());
             let name = NAME.to_case(Case::Title);
             let year = format!("{}", OffsetDateTime::now_utc().year());
             let copyright = format!("© {} {}\nAll rights reserved.", year, name);

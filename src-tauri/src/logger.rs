@@ -1,4 +1,4 @@
-//! # Logger
+//! # Logger Utility
 //!
 //! Logger provides an opinionated logger with a simple, readable output format.
 //!
