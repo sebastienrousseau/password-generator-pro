@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Liczba słów",
   "Label4": "Separator",
+  "Label5": "UUID",
   "Placeholder": "Brak wygenerowanego hasła",
   "Placeholder2": "Brak wygenerowanego hasha",
+  "Placeholder3": "Brak wygenerowanego UUID",
   "Subtitle": "Szybki, prosty i potężny generator haseł",
   "Title": "Generator haseł"
 }

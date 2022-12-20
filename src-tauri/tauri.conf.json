@@ -27,7 +27,7 @@
     "bundle": {
       "active": true,
       "category": "Utility",
-      "copyright": "© Password Generator Pro 2022. All rights reserved.",
+      "copyright": "Copyright © Password Generator Pro 2022-2023. All rights reserved.",
       "deb": {
         "depends": []
       },
@@ -84,12 +84,12 @@
       {
         "center": true,
         "fullscreen": false,
-        "height": 549,
-        "minHeight": 549,
-        "minWidth": 640,
+        "height": 600,
+        "minHeight": 600,
+        "minWidth": 600,
         "resizable": true,
         "title": "Password Generator Pro",
-        "width": 640
+        "width": 600
       }
     ]
   }

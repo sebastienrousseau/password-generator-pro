@@ -5,8 +5,10 @@
   "Label2": "Bcrypt ハッシュ",
   "Label3": "単語数",
   "Label4": "セパレーター",
+  "Label5": "UUID",
   "Placeholder": "パスワードは生成されません",
   "Placeholder2": "ハッシュは生成されません",
+  "Placeholder3": "UUID が生成されない",
   "Subtitle": "高速でシンプルかつ強力なパスワード生成ツール",
   "Title": "パスワードジェネレーター"
 }

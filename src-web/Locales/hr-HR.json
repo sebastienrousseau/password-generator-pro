@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Broj riječi",
   "Label4": "Separator",
+  "Label5": "UUID",
   "Placeholder": "Nije generirana lozinka",
   "Placeholder2": "Nije generiran hash",
+  "Placeholder3": "Nije generiran UUID",
   "Subtitle": "Brz, jednostavan i moćan generator zaporki",
   "Title": "Generator zaporki"
 }

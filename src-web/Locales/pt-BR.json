@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Número de palavras",
   "Label4": "Separador",
+  "Label5": "UUID",
   "Placeholder": "Nenhuma senha gerada",
   "Placeholder2": "Nenhum hash gerado",
+  "Placeholder3": "Nenhum UUID gerado",
   "Subtitle": "Um gerador de senhas rápido, simples e poderoso",
   "Title": "Gerador de senhas"
 }

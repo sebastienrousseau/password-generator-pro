@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Брой думи",
   "Label4": "Сепаратор",
+  "Label5": "UUID",
   "Placeholder": "Не е генерирана парола",
   "Placeholder2": "Не се генерира хеш",
+  "Placeholder3": "Няма генериран UUID",
   "Subtitle": "Бърз, прост и мощен генератор на пароли",
   "Title": "Генератор на пароли"
 }

@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Počet slov",
   "Label4": "Oddělovač",
+  "Label5": "UUID",
   "Placeholder": "Nebylo vygenerováno žádné heslo",
   "Placeholder2": "Nebyl vygenerován žádný hash",
+  "Placeholder3": "Nebylo vygenerováno žádné UUID",
   "Subtitle": "Rychlý, jednoduchý a výkonný generátor hesel",
   "Title": "Generátor hesel"
 }

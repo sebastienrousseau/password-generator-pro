@@ -17,6 +17,7 @@
 
   let password: string | undefined
   let hash: string | undefined
+  let uuid: string | undefined
 
   const formData = writable({
     len: defaultFormValues.len,
@@ -40,6 +41,7 @@
     formData.set(defaultFormValues)
     password = undefined
     hash = undefined
+    uuid = undefined
   }
 
   async function onGenerate() {
@@ -52,10 +54,13 @@
 
     try {
       // Call the backend generator
-      const data: { password: string; hash: string } = await invoke('generate_password', {
-        len,
-        separator,
-      })
+      const data: { password: string; hash: string; uuid: string } = await invoke(
+        'generate_password',
+        {
+          len,
+          separator,
+        }
+      )
 
       console.log('Returned successfully: ', data)
 
@@ -69,6 +74,7 @@
       // Set the password value
       password = data.password
       hash = data.hash
+      uuid = data.uuid
     } catch (err) {
       // Log any error that occurs
       console.error('Failed to generate password:', err)
@@ -110,6 +116,10 @@
     onCopy(String(hash))
   }
 
+  function onCopyuuid() {
+    onCopy(String(uuid))
+  }
+
   const systemLanguage = Intl.DateTimeFormat().resolvedOptions().locale
   // const systemLanguage = navigator.languages[0]
   // const systemLanguage = 'en-GB'
@@ -119,8 +129,10 @@
   const label2_i18n = Translate('Label2', systemLanguage)
   const label3_i18n = Translate('Label3', systemLanguage)
   const label4_i18n = Translate('Label4', systemLanguage)
+  const label5_i18n = Translate('Label5', systemLanguage)
   const placeholder_i18n = Translate('Placeholder', systemLanguage)
   const placeholder2_i18n = Translate('Placeholder2', systemLanguage)
+  const placeholder3_i18n = Translate('Placeholder3', systemLanguage)
   const reset_i18n = Translate('Button2', systemLanguage)
   const subtitle_i18n = Translate('Subtitle', systemLanguage)
   const title_i18n = Translate('Title', systemLanguage)
@@ -162,33 +174,59 @@
       </button>
     </div>
 
-    <p class="text-black capitalize dark:text-white mb-2">{label2_i18n}</p>
-    <div
-      class="flex border border-[#dedede] dark:border-[#736865] bg-white dark:bg-[#403533] rounded-xl w-full mb-5 overflow-hidden"
-    >
-      <span class="px-3 py-2 flex-grow select-all normal-case truncate">
-        {#if hash}
-          <span id="generated-hash" class="text-black dark:text-white">
-            {hash}
-          </span>
-        {:else}
-          <span class="text-[#b3aead] dark:text-[#706765] select-none">{placeholder2_i18n}</span>
-        {/if}
-      </span>
-      <button
-        on:click={async () => {
-          await onCopyhash()
-        }}
-        class="text-black dark:text-white py-2 px-1 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700"
+    <div class="grid grid-cols-5 gap-3">
+      <p class="text-black capitalize dark:text-white mb-2 w-fit">{label2_i18n}</p>
+      <div
+        class="col-span-4 flex border border-[#dedede] dark:border-[#736865] bg-white dark:bg-[#403533] rounded-xl w-full mb-5 overflow-hidden"
       >
-        <CopyIcon />
-      </button>
+        <span class="px-3 py-2 flex-grow select-all normal-case truncate">
+          {#if hash}
+            <span id="generated-hash" class="text-black dark:text-white">
+              {hash}
+            </span>
+          {:else}
+            <span class="text-[#b3aead] dark:text-[#706765] select-none">{placeholder2_i18n}</span>
+          {/if}
+        </span>
+        <button
+          on:click={async () => {
+            await onCopyhash()
+          }}
+          class="text-black dark:text-white py-2 px-1 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700"
+        >
+          <CopyIcon />
+        </button>
+      </div>
+    </div>
+    <div class="grid grid-cols-5 gap-3">
+      <p class="text-black capitalize dark:text-white mb-2 w-fit">{label5_i18n}</p>
+      <div
+        class="col-span-4 flex border border-[#dedede] dark:border-[#736865] bg-white dark:bg-[#403533] rounded-xl w-full mb-5 overflow-hidden"
+      >
+        <span class="px-3 py-2 flex-grow select-all normal-case truncate">
+          {#if uuid}
+            <span id="generated-hash" class="text-black dark:text-white">
+              {uuid}
+            </span>
+          {:else}
+            <span class="text-[#b3aead] dark:text-[#706765] select-none">{placeholder3_i18n}</span>
+          {/if}
+        </span>
+        <button
+          on:click={async () => {
+            await onCopyuuid()
+          }}
+          class="text-black dark:text-white py-2 px-1 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700"
+        >
+          <CopyIcon />
+        </button>
+      </div>
     </div>
 
     <!-- Page Header -->
     <form>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="block mb-4">
+      <div class="grid grid-cols-5 gap-3">
+        <div class="col-span-4 block mb-4">
           <label for="numWords" class="text-black dark:text-white capitalize mb-2"
             >{label3_i18n}</label
           >
@@ -224,7 +262,36 @@
           /> -->
         </div>
         <div class="block mb-4">
-          <label for="numWords" class="text-black dark:text-white capitalize mb-2"
+          <label for="large" class="text-black dark:text-white capitalize mb-2">{label4_i18n}</label
+          >
+
+          <select
+            class="w-full h-10 p-0 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700 border border-gray-300 rounded-lg"
+            bind:value={$formData.separator}
+            on:change={async () => {
+              await onRangeChange()
+            }}
+          >
+            <option class="" value="!">!</option>
+            <option value="@">@</option>
+            <option value="$">$</option>
+            <option value="%">%</option>
+            <option value="^">^</option>
+            <option value="&">&</option>
+            <option value="*">*</option>
+            <option selected value="-">-</option>
+            <option value="_">_</option>
+            <option value="+">+</option>
+            <option value="=">=</option>
+            <option value=":">:</option>
+            <option value="|">|</option>
+            <option value="~">~</option>
+            <option value="?">?</option>
+            <option value="/">/</option>
+            <option value=".">.</option>
+            <option value=";">;</option>
+          </select>
+          <!-- <label for="numWords" class="text-black dark:text-white capitalize mb-2"
             >{label4_i18n}</label
           >
           <input
@@ -233,7 +300,7 @@
             maxlength="1"
             bind:value={$formData.separator}
             class="border border-[#dedede] dark:border-[#736865] text-black dark:text-white text-right s-2 border-gray-light dark:border-gray-dark p-2 rounded-lg block mt-1 bg-white dark:bg-[#403533] w-full"
-          />
+          /> -->
         </div>
       </div>
       <!-- Action Buttons -->
