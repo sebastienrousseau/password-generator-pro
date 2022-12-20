@@ -3,14 +3,17 @@
     windows_subsystem = "windows"
 )]
 
+pub use crate::core::*;
+extern crate clipboard;
+use clipboard::ClipboardProvider;
+use clipboard::ClipboardContext;
 use convert_case::{Case, Casing};
-use crate::core::*;
-use util::{constant::*, date::Date, logger::Logger, uuid::UUID};
 use rand::{seq::SliceRandom, thread_rng, Rng};
 use tauri::api::dialog;
 use tauri::Manager;
+use time::OffsetDateTime;
+use util::{constant::*, date::Date, logger::Logger, uuid::UUID};
 
-pub use time::OffsetDateTime;
 pub mod core;
 pub mod util {
     pub mod constant;
@@ -106,7 +109,7 @@ fn main() {
                 let sha_short = SHA.split_at(7).0.to_string();
                 let version = format!("Version {} ({})", VERSION, sha_short);
                 let window = app.get_window("main").unwrap();
-
+                let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
                 // Match the id of the item clicked.
                 match id.as_str() {
                     "about" => { logger.log(); dialog::message(
@@ -116,6 +119,8 @@ fn main() {
                         );
                     }
                     "documentation" => {logger.log(); crate::website(DOCUMENTATION);}
+                    "quick_password" => { logger.log(); ctx.set_contents(generate_password(4, "-").unwrap().password).unwrap();}
+                    "quick_uuid" => { logger.log(); ctx.set_contents(UUID::uuid().to_string()).unwrap();}
                     "hide" => {
                         // If the id is "hide", hide the window.
                         let window = app.get_window("main").unwrap();
