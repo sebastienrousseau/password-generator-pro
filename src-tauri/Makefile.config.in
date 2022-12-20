@@ -8,9 +8,6 @@ export .DEFAULT_GOAL := help
 # Valid COLOR options: {always, auto, never}
 COLOR ?= auto
 
-# Date variable
-DATE := $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
-
 # Avoid funny character set dependencies
 unexport LC_ALL
 export LC_COLLATE=C
