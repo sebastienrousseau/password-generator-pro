@@ -14,7 +14,7 @@
 
 ![divider][divider]
 
-## 👋 Welcome to Password Generator Pro (v0.0.1)
+## 👋 Welcome to Password Generator Pro
 
 Password Generator Pro is a tool that automatically creates a password for you.
 
