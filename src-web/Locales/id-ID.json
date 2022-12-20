@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Jumlah kata",
   "Label4": "Pemisah",
+  "Label5": "UUID",
   "Placeholder": "Tidak ada kata sandi yang dihasilkan",
   "Placeholder2": "Tidak ada hash yang dihasilkan",
+  "Placeholder3": "Tidak ada UUID dihasilkan",
   "Subtitle": "Generator kata sandi yang cepat, sederhana dan kuat",
   "Title": "Penghasil Kata Sandi"
 }

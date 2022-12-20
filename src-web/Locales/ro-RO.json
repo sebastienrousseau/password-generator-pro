@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Număr de cuvinte",
   "Label4": "Separatorul",
+  "Label5": "UUID",
   "Placeholder": "Nici o parolă generată",
   "Placeholder2": "Nu este generat niciun hash",
+  "Placeholder3": "Nu este generat niciun UUID",
   "Subtitle": "Un generator de parole rapid, simplu și puternic",
   "Title": "Generator de parole"
 }

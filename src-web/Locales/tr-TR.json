@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Kelime sayısı",
   "Label4": "Ayırıcı",
+  "Label5": "UUID",
   "Placeholder": "Parola oluşturulmadı",
   "Placeholder2": "Hash oluşturulmadı",
+  "Placeholder3": "UUID oluşturulmadı",
   "Subtitle": "Hızlı, basit ve güçlü bir parola oluşturucu",
   "Title": "Şifre Oluşturucu"
 }

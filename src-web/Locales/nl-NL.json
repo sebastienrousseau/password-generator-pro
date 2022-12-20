@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "Aantal woorden",
   "Label4": "Scheider",
+  "Label5": "UUID",
   "Placeholder": "Geen wachtwoord gegenereerd",
   "Placeholder2": "Geen hash gegenereerd",
+  "Placeholder3": "Geen UUID gegenereerd",
   "Subtitle": "Een snelle, eenvoudige en krachtige wachtwoordgenerator",
   "Title": "Wachtwoord Generator"
 }

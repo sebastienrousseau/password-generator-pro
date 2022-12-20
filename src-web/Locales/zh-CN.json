@@ -5,8 +5,10 @@
   "Label2": "Bcrypt Hash",
   "Label3": "字数",
   "Label4": "分离器",
+  "Label5": "UUID",
   "Placeholder": "没有生成密码",
   "Placeholder2": "没有生成哈希值",
+  "Placeholder3": "没有生成 UUID",
   "Subtitle": "一个快速、简单和强大的密码生成器",
   "Title": "密码生成器"
 }
