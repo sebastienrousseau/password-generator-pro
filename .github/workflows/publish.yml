@@ -1,6 +1,9 @@
 name: ❯ Build Binaries (CI)
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - release
 
 env:
   APP_NAME: "password-generator-pro"

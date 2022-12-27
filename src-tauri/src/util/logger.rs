@@ -33,6 +33,7 @@
 ///
 
 #[non_exhaustive]
+#[derive(Default)]
 pub struct Logger {
     time: String,
     info: String,
@@ -94,16 +95,16 @@ impl Clone for Logger {
     }
 }
 
-impl Default for Logger {
-    fn default() -> Self {
-        Self {
-            time: String::default(),
-            info: String::default(),
-            message: String::default(),
-            details: String::default(),
-        }
-    }
-}
+// impl Default for Logger {
+//     fn default() -> Self {
+//         Self {
+//             time: String::default(),
+//             info: String::default(),
+//             message: String::default(),
+//             details: String::default(),
+//         }
+//     }
+// }
 
 #[cfg(test)]
 mod tests {

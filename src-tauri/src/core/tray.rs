@@ -16,6 +16,7 @@ pub fn system_tray() -> SystemTray {
     let name = format!("About {}", NAME.to_case(Case::Title));
     let quick_password: CustomMenuItem = CustomMenuItem::new("quick_password".to_string(), "Copy Password to Clipboard");
     let quick_uuid: CustomMenuItem = CustomMenuItem::new("quick_uuid".to_string(), "Copy UUID to Clipboard");
+    let quick_qrcode: CustomMenuItem = CustomMenuItem::new("quick_qrcode".to_string(), "Save QR Code to File");
     let tray_menu = SystemTrayMenu::new()
         .add_item(CustomMenuItem::new("about", name))
         .add_item(website)
@@ -23,6 +24,7 @@ pub fn system_tray() -> SystemTray {
         .add_native_item(SystemTrayMenuItem::Separator)
         .add_item(quick_password)
         .add_item(quick_uuid)
+        .add_item(quick_qrcode)
         .add_native_item(SystemTrayMenuItem::Separator)
         .add_item(hide)
         .add_native_item(SystemTrayMenuItem::Separator)

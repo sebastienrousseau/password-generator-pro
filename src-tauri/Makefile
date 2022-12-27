@@ -16,27 +16,27 @@
 #    build-windows     		Generating Windows binary
 #    clean             		Clean the project
 #    fix               		Fix code
+#	 help              		Show this help
 #    install-pkgs      		Install required packages
 #    lint              		Lint code
 #    move-assets       		Move assets
+#	 icon			  		Generate icon
+#    package-windows   		Package Windows binary
 #    package-macos     		Package macOS binary
+#    package-linux-arm64 	Package Linux ARM64 binary
+#    package-linux-amd64 	Package Linux AMD64 binary
+#    package-linux-i686  	Package Linux I686 binary
 #    rebuild           		Rebuild the project
 #    release           		Build the project in release mode
 #    remove-all-builds 		Remove all builds
 #    run-linux         		Run Linux binary
 #    run-macos         		Run macOS binary
 #    run-windows       		Run Windows binary
+#    security          		Security checks
 #    test              		Run tests
-#    test-all          		Run all tests
-#    test-linux        		Run Linux tests
-#    test-macos        		Run macOS tests
-#    test-windows      		Run Windows tests
-#    update            		Update dependencies
-#    update-all        		Update all dependencies
-#    update-linux      		Update Linux dependencies
-#    update-macos      		Update macOS dependencies
-#    update-windows    		Update Windows dependencies
-#    version           		Print version
+#    udeps			 		Find unused dependencies
+#    valgrind          		Run Valgrind
+#
 #
 #  FLAGS
 #    BLOATARGS         		Arguments to pass to cargo bloat
@@ -273,7 +273,7 @@ valgrind:
 
 # Display the help menu
 help:
-	@echo "\n$$(tput bold)Welcome to Password Generator Pro! - A Fast, Simple And Secure Password Generator$$(tput sgr0)\n"
+	@echo "\n$$(tput bold)Welcome to Password Generator Pro!$$(tput sgr0)\nFast, Simple And Secure Password Generator$$(tput sgr0)\n"
 	@ echo '  Usage:'
 	@ echo ''
 	@ echo '    make <target> [flags...]'
@@ -293,5 +293,6 @@ help:
 	@ echo '    MACOS_TARGET 	Target for MacOS'
 	@ echo '    WINDOWS_TARGET 	Target for Windows'
 	@ echo ''
+
 
 .PHONY: bloat build build-all build-linux build-macos build-release build-windows clean fix help install-pkgs lint move-assets package-macos rebuild release remove-all-builds run-linux run-macos run-windows security test udeps valgrind

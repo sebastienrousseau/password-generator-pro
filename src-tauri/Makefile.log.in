@@ -8,6 +8,6 @@ include Makefile.config.in
 # Log function to print messages in the terminal
 define log
 	@printf "\n"
-	@string="$(1)" && printf "$$(tput bold)🔒 ${GREEN}$(DATE)${NC} - [$@]: %-$$((76))s *\n" "$$string"
+	@string="$(1)" && printf "$$(tput bold)🔒 ${GREEN}$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")${NC} - [$@]: %-$$((76))s *\n" "$$string"
 	@printf "\n"
 endef
