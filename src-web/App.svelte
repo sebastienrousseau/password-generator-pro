@@ -16,6 +16,7 @@
   }
 
   let password: string | undefined
+  let qrcode: string | undefined
   let hash: string | undefined
   let uuid: string | undefined
 
@@ -30,6 +31,21 @@
     range.play()
   }
 
+  async function onGenerateQRCode() {
+    alert('Generate QR Code')
+
+    const data: { qr_code: string } = await invoke('qr', {
+      data: 'Hello World!',
+    })
+    console.log('Returned successfully: ', data)
+
+    // alert(qrcode)
+
+    // Generate QR Code
+    // const data: { qr_code: string } = await invoke('generate_qr_code', {})
+    // console.log('Returned successfully: ', data)
+  }
+
   async function onReset() {
     // Play the reset sound
     const reset = new Audio('./sounds/whoosh.mp3')
@@ -41,6 +57,7 @@
     formData.set(defaultFormValues)
     password = undefined
     hash = undefined
+    qrcode = undefined
     uuid = undefined
   }
 
@@ -54,7 +71,7 @@
 
     try {
       // Call the backend generator
-      const data: { password: string; hash: string; uuid: string } = await invoke(
+      const data: { password: string; hash: string; qrcode: string; uuid: string } = await invoke(
         'generate_password',
         {
           len,
@@ -75,13 +92,14 @@
       password = data.password
       hash = data.hash
       uuid = data.uuid
+      qrcode = data.qrcode
     } catch (err) {
       // Log any error that occurs
       console.error('Failed to generate password:', err)
     }
   }
 
-  function sleep(ms) {
+  function sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms ?? 200))
   }
 
@@ -266,7 +284,28 @@
           >
 
           <select
-            class="w-full h-10 p-0 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700 border border-gray-300 rounded-lg"
+            class="
+            appearance-none
+            active:bg-blue-700
+            bg-blue-light dark:bg-blue-dark
+            block
+            cursor-pointer
+            ease-in-out
+            focus:outline-none
+            focus:ring-0
+            focus:shadow-none
+            font-normal
+            form-select
+            form-select-lg
+            hover:bg-blue-600
+            px-4
+            py-2
+            rounded-lg
+            text-xl
+            text-center
+            transition
+            w-full
+            "
             bind:value={$formData.separator}
             on:change={async () => {
               await onRangeChange()
@@ -323,7 +362,8 @@
           type="button"
           class="min-w-fit flex justify-center p-2 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700 rounded-lg px-6 shadow-md shadow-gray-400 dark:shadow-none"
           on:click={async () => {
-            await onGenerate()
+            // await onGenerate()
+            await onGenerateQRCode()
           }}
         >
           <span class="mr-2 align-bottom">

@@ -5,6 +5,7 @@
 
 pub use crate::core::*;
 extern crate clipboard;
+
 use clipboard::ClipboardProvider;
 use clipboard::ClipboardContext;
 use convert_case::{Case, Casing};
@@ -12,15 +13,23 @@ use rand::{seq::SliceRandom, thread_rng, Rng};
 use tauri::api::dialog;
 use tauri::Manager;
 use time::OffsetDateTime;
-use util::{constant::*, date::Date, logger::Logger, uuid::UUID};
+use util::{
+    constant::*,
+    date::Date,
+    logger::Logger,
+    qrcode::QRCode,
+    uuid::UUID};
 
 pub mod core;
 pub mod util {
     pub mod constant;
     pub mod date;
     pub mod logger;
+    pub mod qrcode;
     pub mod uuid;
 }
+
+
 
 /// PasswordGenerator stores a randomly generated password
 /// and the bcrypt hash of the password.
@@ -30,6 +39,9 @@ struct PasswordGenerator {
     hash: String,
     uuid: String,
 }
+
+
+
 
 /// Generates a random password from the word list, made up of `len`
 /// words, joined together by `separator`.
@@ -79,6 +91,8 @@ fn generate_password(len: u8, separator: &str) -> Result<PasswordGenerator, Stri
 
     let uuid = UUID::uuid();
 
+    // let qrcode = QRCode::qrcode(&uuid);
+
     // Return the password and hash
     Ok(PasswordGenerator {
         password: pass,
@@ -110,6 +124,7 @@ fn main() {
                 let version = format!("Version {} ({})", VERSION, sha_short);
                 let window = app.get_window("main").unwrap();
                 let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
+
                 // Match the id of the item clicked.
                 match id.as_str() {
                     "about" => { logger.log(); dialog::message(
@@ -121,6 +136,43 @@ fn main() {
                     "documentation" => {logger.log(); crate::website(DOCUMENTATION);}
                     "quick_password" => { logger.log(); ctx.set_contents(generate_password(4, "-").unwrap().password).unwrap();}
                     "quick_uuid" => { logger.log(); ctx.set_contents(UUID::uuid().to_string()).unwrap();}
+                    "quick_qrcode" => {
+                        logger.log();
+                        let data = generate_password(4, "-").unwrap().password;
+                        dialog::message(
+                            Some(&window),
+                            "QRCode",
+                            "QRCode saved to file.",
+                        );
+                        // ctx.set_contents(
+                            println!("{}", data);
+                            let name = &UUID::uuid().split_at(7).0.to_string();
+                            let name = [&name, ".svg"].join("").to_string();
+                            QRCode::export(
+                                &data,
+                                &name,
+                            );
+                        // ).unwrap();
+
+
+
+
+
+                            // let svg_data = code
+                            //     .render()
+                            //     .min_dimensions(300, 300)
+                            //     .max_dimensions(300, 300)
+                            //     .dark_color(svg::Color("#000000"))
+                            //     .light_color(svg::Color("#ffffff"))
+                            //     .build();
+
+
+                            // ctx.set_contents(
+                            //     result
+                            // );
+                        // );
+                    }
+                    // => { logger.log(); ctx.set_contents(QRCode::qrcode(&generate_password(4, "-").unwrap().password).to_string()).unwrap();}
                     "hide" => {
                         // If the id is "hide", hide the window.
                         let window = app.get_window("main").unwrap();
