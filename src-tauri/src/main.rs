@@ -147,30 +147,11 @@ fn main() {
                         // ctx.set_contents(
                             println!("{}", data);
                             let name = &UUID::uuid().split_at(7).0.to_string();
-                            let name = [&name, ".svg"].join("").to_string();
+                            let name = [&name, ".svg"].concat().to_string();
                             QRCode::export(
                                 &data,
                                 &name,
                             );
-                        // ).unwrap();
-
-
-
-
-
-                            // let svg_data = code
-                            //     .render()
-                            //     .min_dimensions(300, 300)
-                            //     .max_dimensions(300, 300)
-                            //     .dark_color(svg::Color("#000000"))
-                            //     .light_color(svg::Color("#ffffff"))
-                            //     .build();
-
-
-                            // ctx.set_contents(
-                            //     result
-                            // );
-                        // );
                     }
                     // => { logger.log(); ctx.set_contents(QRCode::qrcode(&generate_password(4, "-").unwrap().password).to_string()).unwrap();}
                     "hide" => {
