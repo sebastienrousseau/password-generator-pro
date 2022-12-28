@@ -32,7 +32,7 @@
 #    run-linux         		Run Linux binary
 #    run-macos         		Run macOS binary
 #    run-windows       		Run Windows binary
-#    security          		Security checks
+#    audit          		Audit dependencies
 #    test              		Run tests
 #    udeps			 		Find unused dependencies
 #    valgrind          		Run Valgrind
@@ -268,7 +268,7 @@ udeps:
 # Check memory leaks
 valgrind:
 	$(call log,Checking memory leaks for ${PROJECT} 🧠)
-	@$(CARGO) valgrind
+	@$(CARGO) make --makefile Makefile.toml valgrind
 	$(call log, Memory leaks check is done ✅)
 
 # Display the help menu
@@ -295,4 +295,4 @@ help:
 	@ echo ''
 
 
-.PHONY: bloat build build-all build-linux build-macos build-release build-windows clean fix help install-pkgs lint move-assets package-macos rebuild release remove-all-builds run-linux run-macos run-windows security test udeps valgrind
+.PHONY: bloat build build-all build-linux build-macos build-release build-windows clean fix help install-pkgs lint move-assets package-macos rebuild release remove-all-builds run-linux run-macos run-windows audit test udeps valgrind
