@@ -31,21 +31,6 @@
     range.play()
   }
 
-  async function onGenerateQRCode() {
-    alert('Generate QR Code')
-
-    const data: { qr_code: string } = await invoke('qr', {
-      data: 'Hello World!',
-    })
-    console.log('Returned successfully: ', data)
-
-    // alert(qrcode)
-
-    // Generate QR Code
-    // const data: { qr_code: string } = await invoke('generate_qr_code', {})
-    // console.log('Returned successfully: ', data)
-  }
-
   async function onReset() {
     // Play the reset sound
     const reset = new Audio('./sounds/whoosh.mp3')
@@ -362,8 +347,7 @@
           type="button"
           class="min-w-fit flex justify-center p-2 bg-blue-light dark:bg-blue-dark hover:bg-blue-600 active:bg-blue-700 rounded-lg px-6 shadow-md shadow-gray-400 dark:shadow-none"
           on:click={async () => {
-            // await onGenerate()
-            await onGenerateQRCode()
+            await onGenerate()
           }}
         >
           <span class="mr-2 align-bottom">

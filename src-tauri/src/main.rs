@@ -10,6 +10,8 @@ use clipboard::ClipboardProvider;
 use clipboard::ClipboardContext;
 use convert_case::{Case, Casing};
 use rand::{seq::SliceRandom, thread_rng, Rng};
+use std::fs;
+use std::path::Path;
 use tauri::api::dialog;
 use tauri::Manager;
 use time::OffsetDateTime;
@@ -137,21 +139,24 @@ fn main() {
                     "quick_password" => { logger.log(); ctx.set_contents(generate_password(4, "-").unwrap().password).unwrap();}
                     "quick_uuid" => { logger.log(); ctx.set_contents(UUID::uuid().to_string()).unwrap();}
                     "quick_qrcode" => {
-                        logger.log();
-                        let data = generate_password(4, "-").unwrap().password;
-                        dialog::message(
-                            Some(&window),
-                            "QRCode",
-                            "QRCode saved to file.",
-                        );
-                        // ctx.set_contents(
-                            println!("{}", data);
-                            let name = &UUID::uuid().split_at(7).0.to_string();
-                            let name = [&name, ".svg"].concat().to_string();
-                            QRCode::export(
-                                &data,
-                                &name,
-                            );
+                        println!("Save as...");
+                        dialog::FileDialogBuilder::default()
+                        .add_filter("SVG", &["svg"])
+                        .save_file(|path_buf| match path_buf {
+                            Some(
+                                path_buf,
+                            ) => {
+                                let path = path_buf.to_str().unwrap();
+                                let qrcode = QRCode::qrcode(&generate_password(4, "-").unwrap().password);
+                                fs::write(path, qrcode.to_string()).unwrap();
+                                println!("Saved as {}", path);
+                            }
+                            None => println!("No path selected"),
+                            _ => {}
+                        });
+
+
+
                     }
                     // => { logger.log(); ctx.set_contents(QRCode::qrcode(&generate_password(4, "-").unwrap().password).to_string()).unwrap();}
                     "hide" => {
