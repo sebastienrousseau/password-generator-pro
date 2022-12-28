@@ -4,14 +4,11 @@
 )]
 
 pub use crate::core::*;
-extern crate clipboard;
 
-use clipboard::ClipboardProvider;
-use clipboard::ClipboardContext;
+use cli_clipboard::{ClipboardContext, ClipboardProvider};
 use convert_case::{Case, Casing};
 use rand::{seq::SliceRandom, thread_rng, Rng};
 use std::fs;
-use std::path::Path;
 use tauri::api::dialog;
 use tauri::Manager;
 use time::OffsetDateTime;
@@ -151,8 +148,9 @@ fn main() {
                                 fs::write(path, qrcode.to_string()).unwrap();
                                 println!("Saved as {}", path);
                             }
-                            None => println!("No path selected"),
-                            _ => {}
+                            None => {
+                                println!("No file selected");
+                            }
                         });
 
 

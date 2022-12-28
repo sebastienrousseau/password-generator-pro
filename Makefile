@@ -33,7 +33,7 @@
 #   run-linux: Run Linux binary
 #   run-macos: Run macOS binary
 #   run-windows: Run Windows binary
-#   security: Security checks
+#   audit: Audit dependencies
 #   test: Run tests
 #   udeps: Find unused dependencies
 #   valgrind: Run Valgrind
@@ -141,9 +141,9 @@ run-macos:
 run-windows:
 	cd src-tauri/ && $(MAKE) run-windows
 
-# security: Security checks
-security:
-	cd src-tauri/ && $(MAKE) security
+# audit: Audit dependencies
+audit:
+	cd src-tauri/ && $(MAKE) audit
 
 # test: Run tests
 test:

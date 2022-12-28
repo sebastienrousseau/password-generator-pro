@@ -79,12 +79,11 @@ command = "cargo"
 args = ["clippy", "--fix"]
 dependencies = ["build"]
 
-# security
-[tasks.security]
+# audit
+[tasks.audit]
 command = "cargo"
 args = ["audit"]
 dependencies = ["build"]
-
 
 [tasks.spellcheck]
 command = "cargo"

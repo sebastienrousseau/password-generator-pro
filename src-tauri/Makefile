@@ -247,10 +247,10 @@ run-windows:
 	./target/windows/x86_64-pc-windows-gnu/release/password-generator-pro.exe
 	$(call log, Running Windows binary! ✅)
 
-# Check code for security issues
-security:
+# Check code for audit dependencies
+audit:
 	$(call log,Checking security of ${PROJECT} 🔐)
-	@$(CARGO) security
+	@$(CARGO) audit
 	$(call log, Security check is done ✅)
 
 # Run tests
