@@ -3,6 +3,7 @@
     "beforeBuildCommand": "pnpm run build:web",
     "beforeDevCommand": "pnpm run dev:web",
     "devPath": "http://localhost:1420",
+    "distDir": "../dist",
     "withGlobalTauri": false
   },
   "package": {
