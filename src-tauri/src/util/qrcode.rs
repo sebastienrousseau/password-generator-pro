@@ -49,7 +49,7 @@ impl QRCode {
             .dark_color(svg::Color("#000000"))
             .light_color(svg::Color("#ffffff"))
             .build();
-        return svg_data.to_string();
+        svg_data
     }
 
     pub fn export(content: &str, name: &str) {
