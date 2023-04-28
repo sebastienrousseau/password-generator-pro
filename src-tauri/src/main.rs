@@ -3,8 +3,6 @@
     windows_subsystem = "windows"
 )]
 
-// use rand::{seq::SliceRandom, thread_rng, Rng};
-// use std::{fs, hash};
 extern crate cmn;
 extern crate psph;
 pub use crate::core::*;
@@ -19,12 +17,19 @@ use tauri::Manager;
 use time::OffsetDateTime;
 use util::{constant::*, date::Date, logger::Logger, qrcode::QRCode, uuid::UUID};
 
+/// The core module
 pub mod core;
+/// The util module
 pub mod util {
+    /// The constant module
     pub mod constant;
+    /// The date module
     pub mod date;
+    /// The logger module
     pub mod logger;
+    /// The qrcode module
     pub mod qrcode;
+    /// The uuid module
     pub mod uuid;
 }
 

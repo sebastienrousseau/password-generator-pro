@@ -1107,7 +1107,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: registry.npmjs.org/caniuse-lite@1.0.30001481
-      electron-to-chromium: registry.npmjs.org/electron-to-chromium@1.4.375
+      electron-to-chromium: registry.npmjs.org/electron-to-chromium@1.4.376
       node-releases: registry.npmjs.org/node-releases@2.0.10
       update-browserslist-db: registry.npmjs.org/update-browserslist-db@1.0.11(browserslist@4.21.5)
     dev: true
@@ -1443,10 +1443,10 @@ packages:
     version: 0.2.0
     dev: true
 
-  registry.npmjs.org/electron-to-chromium@1.4.375:
-    resolution: {integrity: sha512-czSmDyWG5qmb4TcwD5lhVDP6viDPtHfrIzw0CnzisRpziiUaq+ffptBHs70d9YkFtrxzaDvOmFPeVRVNwMt2rQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.375.tgz}
+  registry.npmjs.org/electron-to-chromium@1.4.376:
+    resolution: {integrity: sha512-TFeOKd98TpJzRHkr4Aorn16QkMnuCQuGAE6IZ0wYF+qkbSfMPqjplvRppR02tMUpVxZz8nyBNvVm9lIZsqrbPQ==, registry: https://npm.pkg.github.com/sebastienrousseau, tarball: https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.376.tgz}
     name: electron-to-chromium
-    version: 1.4.375
+    version: 1.4.376
     dev: true
 
   registry.npmjs.org/emoji-regex@8.0.0:
