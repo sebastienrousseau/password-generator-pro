@@ -52,6 +52,7 @@ impl QRCode {
         svg_data
     }
 
+    // Export the QRCode to a file.
     pub fn export(content: &str, name: &str) {
         fs::write(name, QRCode::qrcode(content)).unwrap();
     }
