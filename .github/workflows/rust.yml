@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, ubuntu-20.04]
+        platform: [macos-latest, ubuntu-latest]
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -44,7 +44,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: ✅ Install dependencies (ubuntu only)
-        if: matrix.platform == 'ubuntu-20.04'
+        if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt update
           sudo apt upgrade -y
