@@ -3,35 +3,35 @@
     windows_subsystem = "windows"
 )]
 
+extern crate cmn;
+extern crate psph;
 pub use crate::core::*;
-extern crate clipboard;
-
-use clipboard::ClipboardProvider;
-use clipboard::ClipboardContext;
+use cli_clipboard::{ClipboardContext, ClipboardProvider};
+use cmn::Constants;
 use convert_case::{Case, Casing};
-use rand::{seq::SliceRandom, thread_rng, Rng};
+use psph::Password;
+use serde;
 use std::fs;
-use std::path::Path;
 use tauri::api::dialog;
 use tauri::Manager;
 use time::OffsetDateTime;
-use util::{
-    constant::*,
-    date::Date,
-    logger::Logger,
-    qrcode::QRCode,
-    uuid::UUID};
+use util::{constant::*, date::Date, logger::Logger, qrcode::QRCode, uuid::UUID};
 
+/// The core module
 pub mod core;
+/// The util module
 pub mod util {
+    /// The constant module
     pub mod constant;
+    /// The date module
     pub mod date;
+    /// The logger module
     pub mod logger;
+    /// The qrcode module
     pub mod qrcode;
+    /// The uuid module
     pub mod uuid;
 }
-
-
 
 /// PasswordGenerator stores a randomly generated password
 /// and the bcrypt hash of the password.
@@ -42,54 +42,30 @@ struct PasswordGenerator {
     uuid: String,
 }
 
-
-
-
-/// Generates a random password from the word list, made up of `len`
-/// words, joined together by `separator`.
+/// Generates a random password using a given length and separator.
 #[tauri::command]
 fn generate_password(len: u8, separator: &str) -> Result<PasswordGenerator, String> {
-    // Setup a random number generator
-    let mut rng = thread_rng();
+    // Initialize the constants, specifically the special characters.
+    let new_constant = Constants::new();
+    let constants = new_constant.constants();
+    let special_chars: Vec<char> = constants
+        .iter()
+        .find(|&c| c.name == "SPECIAL_CHARS")
+        .unwrap()
+        .value
+        .chars()
+        .collect();
 
-    // Generate a random number between 0 and 99.
-    let mut nb: i32 = rng.gen_range(0..=999);
+    // Generate a random password with the given length, separator, and
+    // special characters.
+    let password = Password::new(len, separator, special_chars);
 
-    // Create a new vector to store the words in.
-    let mut words: Vec<String> = Vec::new();
-
-    // Convert the special characters to a vector of chars.
-    let ascii: Vec<char> = SPECIAL.iter().map(|&c| c as char).collect();
-
-    // Generate `len` random words from the word list.
-    for _ in 0..len {
-        // Choose a random word from the list.
-        let word = if let Some(w) = crate::WORD_LIST.choose(&mut rng) {
-            // If a word was found, return it.
-            w
-        } else {
-            return Err("No words found".to_string());
-        };
-
-        // Convert the word to title case and add a number to the end
-        let word = format!(
-            "{}{}{}",
-            word.to_case(Case::Title),
-            ascii.choose(&mut rng).unwrap(),
-            nb
-        );
-        // Generate a new random number between 0 and 99.
-        nb = rng.gen_range(0..99);
-        // Add the word to the vector of words.
-        words.push(word);
-    }
-
-    // Join the words together with the separator
-    let pass = words.join(separator);
+    // Convert the password to a string
+    let pass = password.to_string();
 
     // Hash the password
-    let hash = bcrypt::hash(pass.as_bytes(), HASH_COST)
-        .map_err(|_| "Failed to hash password".to_string())?;
+    let hash =
+        bcrypt::hash(pass.as_bytes(), 8).map_err(|_| "Failed to hash password".to_string())?;
 
     let uuid = UUID::uuid();
 
@@ -122,41 +98,52 @@ fn main() {
                 let year = format!("{}", OffsetDateTime::now_utc().year());
                 let copyright = format!("© {} {}\nAll rights reserved.", year, name);
                 let description = DESCRIPTION.to_string();
-                let sha_short = SHA.split_at(7).0.to_string();
+                let sha_short = "";
+                // SHA.split_at(7).0.to_string();
                 let version = format!("Version {} ({})", VERSION, sha_short);
                 let window = app.get_window("main").unwrap();
                 let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
 
                 // Match the id of the item clicked.
                 match id.as_str() {
-                    "about" => { logger.log(); dialog::message(
+                    "about" => {
+                        logger.log();
+                        dialog::message(
                             Some(&window),
                             name,
                             format!("{}\n\n {}\n\n {}\n", description, version, copyright),
                         );
                     }
-                    "documentation" => {logger.log(); crate::website(DOCUMENTATION);}
-                    "quick_password" => { logger.log(); ctx.set_contents(generate_password(4, "-").unwrap().password).unwrap();}
-                    "quick_uuid" => { logger.log(); ctx.set_contents(UUID::uuid().to_string()).unwrap();}
+                    "documentation" => {
+                        logger.log();
+                        crate::website(DOCUMENTATION);
+                    }
+                    "quick_password" => {
+                        logger.log();
+                        ctx.set_contents(generate_password(4, "-").unwrap().password)
+                            .unwrap();
+                    }
+                    "quick_uuid" => {
+                        logger.log();
+                        ctx.set_contents(UUID::uuid()).unwrap();
+                    }
                     "quick_qrcode" => {
                         println!("Save as...");
                         dialog::FileDialogBuilder::default()
-                        .add_filter("SVG", &["svg"])
-                        .save_file(|path_buf| match path_buf {
-                            Some(
-                                path_buf,
-                            ) => {
-                                let path = path_buf.to_str().unwrap();
-                                let qrcode = QRCode::qrcode(&generate_password(4, "-").unwrap().password);
-                                fs::write(path, qrcode.to_string()).unwrap();
-                                println!("Saved as {}", path);
-                            }
-                            None => println!("No path selected"),
-                            _ => {}
-                        });
-
-
-
+                            .add_filter("SVG", &["svg"])
+                            .save_file(|path_buf| match path_buf {
+                                Some(path_buf) => {
+                                    let path = path_buf.to_str().unwrap();
+                                    let qrcode = QRCode::qrcode(
+                                        &generate_password(4, "-").unwrap().password,
+                                    );
+                                    fs::write(path, qrcode).unwrap();
+                                    println!("Saved as {}", path);
+                                }
+                                None => {
+                                    println!("No file selected");
+                                }
+                            });
                     }
                     // => { logger.log(); ctx.set_contents(QRCode::qrcode(&generate_password(4, "-").unwrap().password).to_string()).unwrap();}
                     "hide" => {
@@ -174,11 +161,17 @@ fn main() {
                             item_handle
                                 .set_title("Hide Password Generator Pro")
                                 .unwrap();
-                                logger.log();
+                            logger.log();
                         }
                     }
-                    "quit" => { logger.log(); std::process::exit(0);}
-                    "website" => {logger.log(); crate::website(HOMEPAGE);}
+                    "quit" => {
+                        logger.log();
+                        std::process::exit(0);
+                    }
+                    "website" => {
+                        logger.log();
+                        crate::website(HOMEPAGE);
+                    }
                     _ => {}
                 }
             }
@@ -186,24 +179,53 @@ fn main() {
         .menu(crate::create_menu())
         .on_menu_event(|event| {
             let utc = Date::now();
-            let logger = Logger::new(&utc, "Info", "MenuEvent",event.menu_item_id());
+            let logger = Logger::new(&utc, "Info", "MenuEvent", event.menu_item_id());
             let name = NAME.to_case(Case::Title);
             let year = format!("{}", OffsetDateTime::now_utc().year());
             let copyright = format!("© {} {}\nAll rights reserved.", year, name);
             let description = DESCRIPTION.to_string();
-            let sha_short = SHA.split_at(7).0.to_string();
+            let sha_short = "";
+            // SHA.split_at(7).0.to_string();
             let version = format!("Version {} ({})", VERSION, sha_short);
             let window = event.window();
 
             match event.menu_item_id() {
-                "about" => { logger.log(); dialog::message(Some(window), name, format!("{}\n\n {}\n\n {}\n", description, version, copyright));}
-                "acknowledgements" => { logger.log(); crate::website(ACKNOWLEDGEMENTS);}
-                "documentation" => { logger.log(); crate::website(DOCUMENTATION);}
-                "license" => { logger.log(); crate::website(LICENSE_URL);}
-                "quit" => { logger.log(); std::process::exit(0);}
-                "release-notes" => { logger.log(); crate::website(RELEASE);}
-                "report-issue" => { logger.log(); crate::website(ISSUE);}
-                "website" => { logger.log(); crate::website(HOMEPAGE);}
+                "about" => {
+                    logger.log();
+                    dialog::message(
+                        Some(window),
+                        name,
+                        format!("{}\n\n {}\n\n {}\n", description, version, copyright),
+                    );
+                }
+                "acknowledgements" => {
+                    logger.log();
+                    crate::website(ACKNOWLEDGEMENTS);
+                }
+                "documentation" => {
+                    logger.log();
+                    crate::website(DOCUMENTATION);
+                }
+                "license" => {
+                    logger.log();
+                    crate::website(LICENSE_URL);
+                }
+                "quit" => {
+                    logger.log();
+                    std::process::exit(0);
+                }
+                "release-notes" => {
+                    logger.log();
+                    crate::website(RELEASE);
+                }
+                "report-issue" => {
+                    logger.log();
+                    crate::website(ISSUE);
+                }
+                "website" => {
+                    logger.log();
+                    crate::website(HOMEPAGE);
+                }
                 _ => {}
             }
         })

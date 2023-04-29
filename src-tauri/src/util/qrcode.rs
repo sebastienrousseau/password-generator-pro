@@ -49,9 +49,10 @@ impl QRCode {
             .dark_color(svg::Color("#000000"))
             .light_color(svg::Color("#ffffff"))
             .build();
-        return svg_data.to_string();
+        svg_data
     }
 
+    /// Export the QRCode to a file.
     pub fn export(content: &str, name: &str) {
         fs::write(name, QRCode::qrcode(content)).unwrap();
     }

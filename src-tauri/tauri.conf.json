@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Password Generator Pro",
-    "version": "../package.json"
+    "version": "0.0.4"
   },
   "tauri": {
     "allowlist": {
