@@ -1,6 +1,12 @@
-# 🔐 Password Generator Pro
+<!-- markdownlint-disable MD033 MD041 -->
 
-![Password Generator Pro](public/password-generator-pro.svg)
+<img src="https://kura.pro/password-generator-pro/images/logos/password-generator-pro.svg" alt="Password Generator Pro logo" width="261" align="right" />
+
+<!-- markdownlint-enable MD033 MD041 -->
+
+# Password Generator Pro 🔐
+
+![Password Generator Pro banner][banner]
 
 ## A Fast, Simple And Secure Password Generator
 
@@ -117,3 +123,4 @@ A big thank you to all the awesome contributors of
 [8]: https://github.com/eslint/eslint#semantic-versioning-policy "ESLint's Semantic Versioning Policy"
 [9]: https://www.rust-lang.org/ "Rust"
 [divider]: https://raw.githubusercontent.com/sebastienrousseau/password-generator-pro/main/.github/badges/divider.svg "Divider"
+[banner]: https://kura.pro/password-generator-pro/images/titles/title-password-generator-pro.svg
