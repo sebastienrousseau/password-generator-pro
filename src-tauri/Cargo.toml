@@ -21,26 +21,26 @@ name = "password-generator-pro"
 readme = "README.md"
 repository = "https://github.com/sebastienrousseau/password-generator-pro"
 rust-version = "1.60"
-version = "0.0.4"
+version = "0.0.5"
 
 [build-dependencies]
-tauri-build = { version = "1.2.1", features = [] }
+tauri-build = { version = "1.4.0", features = [] }
 
 [dependencies]
-bcrypt = "0.14.0"
+bcrypt = "0.15.0"
 cli-clipboard = "0.4.0"
-cmn = "0.0.2"
+cmn = "0.0.3"
 convert_case = "0.6.0"
 psph = "0.0.1"
 qrcode = "0.12.0"
-serde = { version = "1.0.160", features = ["derive"] }
+serde = { version = "1.0.188", features = ["derive"] }
 svg = "0.13.1"
-tauri = { version = "1.2.4", features = ["clipboard-all", "dialog-all", "icon-ico", "icon-png", "system-tray", "window-set-icon"] }
-time = "0.3.20"
-webbrowser = "0.8.9"
+tauri = { version = "1.4.1", features = ["clipboard-all", "dialog-all", "icon-ico", "icon-png", "system-tray", "window-set-icon"] }
+time = "0.3.28"
+webbrowser = "0.8.11"
 
 [dependencies.uuid]
-version = "1.3.1"
+version = "1.4.1"
 features = [
     "v4",                # Lets you generate random UUIDs
     "fast-rng",          # Use a faster (but still sufficiently random) RNG
