@@ -25,12 +25,14 @@
     separator: defaultFormValues.separator,
   })
 
+  // This function is used to play the range sound.
   async function onRangeChange() {
     // Play the range sound
     const range = new Audio('./sounds/range.mp3')
     range.play()
   }
 
+  // This function is used to reset the form data.
   async function onReset() {
     // Play the reset sound
     const reset = new Audio('./sounds/whoosh.mp3')
@@ -39,6 +41,7 @@
     // Wait for the reset to finish
     await sleep(250)
 
+    // Reset the form data
     formData.set(defaultFormValues)
     password = undefined
     hash = undefined
@@ -46,6 +49,7 @@
     uuid = undefined
   }
 
+  // This function is used to generate a password.
   async function onGenerate() {
     // Log that it was generated...
     console.log('Calling on-generate...')
@@ -84,10 +88,12 @@
     }
   }
 
+  // This function is used to sleep for a given amount of time.
   function sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms ?? 200))
   }
 
+  // This function is used to copy the given data to the clipboard.
   async function onCopy(data: string) {
     // Play the copy sound
     const copy = new Audio('./sounds/copy.mp3')
@@ -110,23 +116,23 @@
     // navigator.clipboard.writeText(data)
   }
 
+  // This function is used to copy the password to the clipboard.
   function onCopyPassword() {
     onCopy(String(password))
     document.querySelector('#generated-password')
   }
 
+  // This function is used to copy the hash to the clipboard.
   function onCopyhash() {
     onCopy(String(hash))
   }
 
+  // This function is used to copy the uuid to the clipboard.
   function onCopyuuid() {
     onCopy(String(uuid))
   }
 
   const systemLanguage = Intl.DateTimeFormat().resolvedOptions().locale
-  // const systemLanguage = navigator.languages[0]
-  // const systemLanguage = 'en-GB'
-
   const generate_i18n = Translate('Button', systemLanguage)
   const label_i18n = Translate('Label', systemLanguage)
   const label2_i18n = Translate('Label2', systemLanguage)
