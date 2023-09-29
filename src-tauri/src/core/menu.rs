@@ -21,7 +21,7 @@ pub fn create_menu() -> Menu {
     {
         menu = menu.add_submenu(create_macos_menu(&formatted_name));
     }
-
+ 
     // Add the File, Window, and Help menus.
     menu = menu.add_submenu(create_file_menu());
     menu = menu.add_submenu(create_window_menu());
@@ -30,6 +30,7 @@ pub fn create_menu() -> Menu {
     menu
 }
 
+#[allow(dead_code)]
 /// Create the macOS-specific menu.
 ///
 /// This function returns a `Submenu` tailored for macOS, including

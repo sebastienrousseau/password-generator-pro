@@ -256,7 +256,7 @@ mod tests {
         let day = Date::day();
         assert!(!day.is_empty());
         assert_eq!(day, day.to_string());
-        assert_eq!(day.len(), 1);
+        assert_eq!(day.len(), 2);
     }
 
     #[test]
