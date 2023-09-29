@@ -10,7 +10,6 @@ use cli_clipboard::{ClipboardContext, ClipboardProvider};
 use cmn::Constants;
 use convert_case::{Case, Casing};
 use psph::Password;
-use serde;
 use std::fs;
 use tauri::api::dialog;
 use tauri::Manager;
