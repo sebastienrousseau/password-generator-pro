@@ -384,6 +384,7 @@ const locales = {
   'zh-TW': zhLocaleJSON,
 }
 
+/// Translate a key to a locale
 function Translate(key: string, locale: string) {
   return locales[locale][key]
 }

@@ -2,11 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-pub mod menu; // src-tauri/src/core/menu.rs
-pub mod tray; // src-tauri/src/core/tray.rs
-pub mod website; // src-tauri/src/core/website.rs
-pub mod words; // src-tauri/src/words.rs
+/// Menu module
+pub mod menu;
+/// Tray module
+pub mod tray;
+/// Website module
+pub mod website;
+/// Words module
+pub mod words;
 
+/// Re-exported modules
 pub use {
     menu::*,
     tray::*,
