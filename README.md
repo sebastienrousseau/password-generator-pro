@@ -122,5 +122,5 @@ A big thank you to all the awesome contributors of
 [7]: http://semver.org/ "Semantic Versioning"
 [8]: https://github.com/eslint/eslint#semantic-versioning-policy "ESLint's Semantic Versioning Policy"
 [9]: https://www.rust-lang.org/ "Rust"
-[divider]: https://raw.githubusercontent.com/sebastienrousseau/password-generator-pro/main/.github/badges/divider.svg "Divider"
-[banner]: https://kura.pro/password-generator-pro/images/titles/title-password-generator-pro.svg
+[divider]: https://raw.githubusercontent.com/sebastienrousseau/vault/main/assets/elements/divider.svg "divider"
+[banner]: https://kura.pro/password-generator-pro/images/banners/banner-password-generator-pro.svg
