@@ -1,26 +1,28 @@
 <!-- markdownlint-disable MD033 MD041 -->
 
-<img src="https://kura.pro/password-generator-pro/images/logos/password-generator-pro.svg" alt="Password Generator Pro logo" width="261" align="right" />
+<img
+  src="https://kura.pro/password-generator-pro/images/logos/password-generator-pro.svg"
+  alt="RustLogs (RLG) logo"
+  height="261"
+  width="261"
+  align="right" />
 
 <!-- markdownlint-enable MD033 MD041 -->
 
 # Password Generator Pro 🔐
 
-![Password Generator Pro banner][banner]
+A Fast, Simple And Secure Password Generator Available For macOS, Linux, and
+Windows.
 
-## A Fast, Simple And Secure Password Generator
-
-![Made with Love][5]
-
-**[Website][0]
-• [Documentation][0]
-• [Report Bug][3]
-• [Request Feature][3]
-• [Contributing Guidelines][4]**
+**[Website][00]
+• [Documentation][00]
+• [Report Bug][03]
+• [Request Feature][03]
+• [Contributing Guidelines][04]**
 
 ![divider][divider]
 
-## Overview 📖
+## Overview
 
 Password Generator Pro is a tool that automatically creates a password
 for you.
@@ -36,13 +38,17 @@ Password Generator Pro will then create a password for you based on
 these specifications. You can then use this password to protect your
 online accounts and keep your personal information safe.
 
-## 🖥️ Available for macOS, Linux, and Windows
+![divider][divider]
+
+## Available for macOS, Linux, and Windows
 
 Password Generator Pro supports macOS, Linux, and Windows - so you can
 hit the ground running, no matter the platform. It's also available as
 a Docker image.
 
-## Features ✨
+![divider][divider]
+
+## Features
 
 At its heart, Password Generator Pro is a simple and intuitive interface
 that makes it easy to generate strong and secure passwords. It generates
@@ -52,7 +58,7 @@ passwords.
 
 ### Key Features and Enhancements
 
-- **Built with [Rust][9]** — A modern programming language that is well-
+- **Built with [Rust][08]** — A modern programming language that is well-
   suited for building high-performance, reliable, and secure systems.
 - **Smart Password Generation** — An intelligent password algorithm
   improves the strength of your passwords,
@@ -77,11 +83,15 @@ passwords.
   reliable dependency management and enables Docker support for easy
   deployment.
 
-## 🚥 Semantic Versioning Policy
+![divider][divider]
+
+## Semantic Versioning Policy
 
 For transparency into our release cycle and in striving to maintain
 backward compatibility, `Password Generator Pro` follows
-[semantic versioning][7] and [ESLint's Semantic Versioning Policy][8].
+[semantic versioning][06] and [ESLint's Semantic Versioning Policy][07].
+
+![divider][divider]
 
 ## License
 
@@ -97,8 +107,10 @@ of the original project and currently maintained by
 The project is licensed under the terms of both the MIT license and the
 Apache License (Version 2.0).
 
-- [Apache License, Version 2.0][1]
-- [MIT license][2]
+- [Apache License, Version 2.0][01]
+- [MIT license][02]
+
+![divider][divider]
 
 ## Contribution
 
@@ -107,20 +119,20 @@ submitted for inclusion in the work by you, as defined in the Apache-2.0
 license, shall be dual licensed as above, without any additional terms
 or conditions.
 
-## 💙 Acknowledgements
+![divider][divider]
+
+## Acknowledgements
 
 A big thank you to all the awesome contributors of
-[Password Generator Pro][6] for their help and support.
+[Password Generator Pro][05] for their help and support.
 
-[0]: https://password-generator.pro "Password Generator Pro"
-[1]: http://www.apache.org/licenses/LICENSE-2.0 "Apache License, Version 2.0"
-[2]: http://opensource.org/licenses/MIT "MIT license"
-[3]: https://github.com/sebastienrousseau/password-generator-pro/issues "Report Bug or Request Feature"
-[4]: https://raw.githubusercontent.com/sebastienrousseau/password-generator-pro/main/.github/CONTRIBUTING.md "Contributing Guidelines"
-[5]: https://raw.githubusercontent.com/sebastienrousseau/password-generator-pro/main/.github/badges/made-with-love.svg "Made with Love"
-[6]: https://github.com/sebastienrousseau/password-generator-pro/graphs/contributors "Contributors"
-[7]: http://semver.org/ "Semantic Versioning"
-[8]: https://github.com/eslint/eslint#semantic-versioning-policy "ESLint's Semantic Versioning Policy"
-[9]: https://www.rust-lang.org/ "Rust"
-[divider]: https://raw.githubusercontent.com/sebastienrousseau/vault/main/assets/elements/divider.svg "divider"
-[banner]: https://kura.pro/password-generator-pro/images/banners/banner-password-generator-pro.svg
+[00]: https://password-generator.pro "Password Generator Pro"
+[01]: http://www.apache.org/licenses/LICENSE-2.0 "Apache License, Version 2.0"
+[02]: http://opensource.org/licenses/MIT "MIT license"
+[03]: https://github.com/sebastienrousseau/password-generator-pro/issues "Report Bug or Request Feature for Password Generator Pro"
+[04]: https://raw.githubusercontent.com/sebastienrousseau/password-generator-pro/main/.github/CONTRIBUTING.md "Contributing Guidelines for Password Generator Pro"
+[05]: https://github.com/sebastienrousseau/password-generator-pro/graphs/contributors "Contributors to Password Generator Pro"
+[06]: http://semver.org/ "Semantic Versioning 2.0.0"
+[07]: https://github.com/eslint/eslint#semantic-versioning-policy "ESLint's Semantic Versioning Policy (ESVP)"
+[08]: https://www.rust-lang.org/ "Rust Programming Language"
+[divider]: https://kura.pro/common/images/elements/divider.svg "Divider"
