@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+    branches: [main, "feat/**"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Rust backend CI
+  rust-ci:
+    name: Rust CI
+    uses: sebastienrousseau/pipelines/.github/workflows/rust-ci.yml@main
+    with:
+      rust-version: 'stable'
+      run-clippy: true
+      run-fmt: true
+      run-audit: true
+      run-coverage: false
+      cargo-features: ''
+    secrets: inherit
+
+  # TypeScript/Svelte frontend CI
+  node-ci:
+    name: Node CI
+    uses: sebastienrousseau/pipelines/.github/workflows/node-ci.yml@main
+    with:
+      node-version: '20'
+      package-manager: 'pnpm'
+      run-lint: true
+      run-typecheck: true
+      run-tests: true
+      run-build: true
+      test-coverage: true
+    secrets: inherit
