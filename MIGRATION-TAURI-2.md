@@ -103,7 +103,17 @@ These were pre-existing; the migration surfaced them.
 5. **The mount point was assumed to exist.** `new App({ target:
    document.getElementById('app') })` passes `null` when `#app` is
    missing, failing deep inside Svelte. It now throws with the cause.
-6. **The release profile would have been silently dropped.** Cargo
+6. **`webbrowser` carried an unpatched advisory.** RUSTSEC-2026-0257:
+   on Unix, the URL was substituted into the `BROWSER` environment
+   template *before* tokenising, so a URL retaining spaces became extra
+   browser arguments — reproduced upstream by injecting
+   `--remote-debugging-port` and `--proxy-server` into Chromium. The
+   scheme guard added to `website()` blocks the non-HTTP(S) URLs the
+   advisory needs, but the crate is bumped 0.8 → 1.2.4 regardless.
+   `cargo audit` goes from 1 vulnerability to 0. The 17 remaining
+   notices are `unmaintained`/`unsound` flags on the gtk-rs stack that
+   Tauri pulls in transitively on Linux; they are not fixable here.
+7. **The release profile would have been silently dropped.** Cargo
    ignores `[profile.*]` in a non-root workspace member and only warns.
    Adding the workspace root would have discarded `lto`, `opt-level =
    "s"`, `panic = "abort"` and `strip` — shipping a larger, slower

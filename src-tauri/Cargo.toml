@@ -53,7 +53,7 @@ tauri-plugin-dialog = "2.7"
 # was the `clipboard` allowlist entry, in Tauri 2 it is a plugin.
 tauri-plugin-clipboard-manager = "2"
 time = "0.3.31"
-webbrowser = "0.8.12"
+webbrowser = "1.2.2"
 
 [dependencies.uuid]
 version = "1.6.1"
