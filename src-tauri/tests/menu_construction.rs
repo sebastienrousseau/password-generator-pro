@@ -51,8 +51,8 @@ fn collect_ids<R: tauri::Runtime>(items: &[MenuItemKind<R>], out: &mut Vec<Strin
                 if let Ok(children) = s.items() {
                     collect_ids(&children, out);
                 }
-            },
-            _ => {},
+            }
+            _ => {}
         }
     }
 }

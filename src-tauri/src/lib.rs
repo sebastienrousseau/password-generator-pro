@@ -129,24 +129,24 @@ pub fn perform<R: Runtime>(app: &AppHandle<R>, id: &str) {
                 .title(name)
                 .buttons(MessageDialogButtons::Ok)
                 .show(|_| {});
-        },
+        }
         Action::OpenUrl(url) => {
             // A failed open is logged by the helper's return value; it
             // is not worth interrupting the user over.
             let _ = crate::website(url);
-        },
+        }
         Action::CopyPassword => {
             if let Ok(generated) = generate_password(4, "-") {
                 if let Ok(mut ctx) = ClipboardContext::new() {
                     let _ = ctx.set_contents(generated.password);
                 }
             }
-        },
+        }
         Action::CopyUuid => {
             if let Ok(mut ctx) = ClipboardContext::new() {
                 let _ = ctx.set_contents(UUID::uuid());
             }
-        },
+        }
         Action::SaveQrCode => {
             app.dialog()
                 .file()
@@ -161,19 +161,19 @@ pub fn perform<R: Runtime>(app: &AppHandle<R>, id: &str) {
                         let _ = fs::write(path, qrcode);
                     }
                 });
-        },
+        }
         Action::ToggleWindow => {
             if let Some(window) = app.get_webview_window("main") {
                 match window.is_visible() {
                     Ok(true) => {
                         let _ = window.hide();
-                    },
+                    }
                     _ => {
                         let _ = window.show();
-                    },
+                    }
                 }
             }
-        },
+        }
         Action::Quit => app.exit(0),
     }
 }
