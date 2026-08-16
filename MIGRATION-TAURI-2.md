@@ -113,7 +113,15 @@ These were pre-existing; the migration surfaced them.
    `cargo audit` goes from 1 vulnerability to 0. The 17 remaining
    notices are `unmaintained`/`unsound` flags on the gtk-rs stack that
    Tauri pulls in transitively on Linux; they are not fixable here.
-7. **The release profile would have been silently dropped.** Cargo
+7. **Windows and Linux had no "About" item at all.** It was built only
+   inside the macOS application submenu, which is `#[cfg(target_os =
+   "macos")]`, so on every other platform there was no route to the
+   version, copyright or licence. It is now appended to the Help menu
+   on non-macOS, where both platforms conventionally put it. This was
+   caught by `every_emitted_id_has_an_action` failing on the ubuntu
+   runner — the menu builds fine, it was simply missing an entry, which
+   is invisible without a test that enumerates it.
+8. **The release profile would have been silently dropped.** Cargo
    ignores `[profile.*]` in a non-root workspace member and only warns.
    Adding the workspace root would have discarded `lto`, `opt-level =
    "s"`, `panic = "abort"` and `strip` — shipping a larger, slower

@@ -135,23 +135,36 @@ pub fn create_help_menu<R: Runtime, M: Manager<R>>(
     )?;
     let quit = MenuItem::with_id(app, QUIT, format!("Quit {name}"), true, Some("CmdOrCtrl+Q"))?;
 
-    Submenu::with_items(
-        app,
-        "Help",
-        true,
-        &[
-            &website,
-            &documentation,
-            &release_notes,
-            &PredefinedMenuItem::separator(app)?,
-            &report_issue,
-            &PredefinedMenuItem::separator(app)?,
-            &license,
-            &acknowledgements,
-            &PredefinedMenuItem::separator(app)?,
-            &quit,
-        ],
-    )
+    // "About" lives in the application submenu on macOS, which does not
+    // exist on Windows or Linux — so on those platforms the item was
+    // absent from the whole menu bar and there was no way to reach the
+    // version, copyright or licence. Help is where both platforms put
+    // it by convention.
+    #[cfg(not(target_os = "macos"))]
+    let about = MenuItem::with_id(app, ABOUT, format!("About {name}"), true, None::<&str>)?;
+
+    let mut items: Vec<&dyn tauri::menu::IsMenuItem<R>> = Vec::new();
+    let separator = PredefinedMenuItem::separator(app)?;
+
+    items.push(&website);
+    items.push(&documentation);
+    items.push(&release_notes);
+    items.push(&separator);
+    items.push(&report_issue);
+    items.push(&separator);
+    items.push(&license);
+    items.push(&acknowledgements);
+
+    #[cfg(not(target_os = "macos"))]
+    {
+        items.push(&separator);
+        items.push(&about);
+    }
+
+    items.push(&separator);
+    items.push(&quit);
+
+    Submenu::with_items(app, "Help", true, &items)
 }
 
 #[cfg(test)]
