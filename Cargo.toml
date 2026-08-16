@@ -1,0 +1,48 @@
+# Copyright © 2022-2026 Password Generator Pro. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
+
+# Workspace root.
+#
+# The crate itself lives in `src-tauri/`, which is the Tauri convention.
+# Without a manifest here, every `cargo` invocation from the repository
+# root fails with:
+#
+#     error: could not find `Cargo.toml` in `/…/password-generator-pro`
+#           or any parent directory
+#
+# The shared `rust-ci.yml` pipeline runs cargo from the root and has no
+# working-directory input, so Rust CI has never actually compiled or
+# tested this project. This manifest makes `cargo test --workspace`,
+# `cargo clippy --workspace` and `cargo fmt` work from the root without
+# changing the shared pipeline.
+[workspace]
+members = ["src-tauri"]
+resolver = "2"
+
+# Release profile.
+#
+# These lived in `src-tauri/Cargo.toml`. Cargo ignores `[profile.*]` in
+# a non-root workspace member and only says so as a warning, so adding
+# the workspace root above would have silently dropped every one of
+# them — shipping a binary without LTO, without size optimisation and
+# with unwinding panics still linked in. They are reproduced here
+# verbatim so the release build is unchanged by the migration.
+[profile.release]
+codegen-units = 1 # Compile crates one after another so the compiler can optimize better
+debug = false # Disable debug information
+incremental = false # Disable incremental compilation
+lto = true # Enables link to optimizations
+opt-level = "s" # Optimize for binary size
+panic = "abort" # Strip expensive panic clean-up logic
+strip = "symbols"  # Automatically strip symbols from the binary.
+
+# Optimize these packages for perf
+[profile.release.package.flate2]
+opt-level = 3
+[profile.release.package.bcrypt]
+opt-level = 3
+[profile.release.package.rand]
+opt-level = 3
+[profile.release.package.webbrowser]
+opt-level = 3

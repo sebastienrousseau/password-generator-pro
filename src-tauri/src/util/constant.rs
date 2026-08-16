@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-/// Constant values used in the application.
+//! Constant values used in the application.
 
 /// Acknowledgements URL.
 pub const ACKNOWLEDGEMENTS: &str =
@@ -33,7 +33,7 @@ pub const NAME: &str = env!("CARGO_PKG_NAME");
 /// Release URL.
 pub const RELEASE: &str = "https://github.com/sebastienrousseau/password-generator-pro/releases";
 
-/// pub const SHA: &str = env!("VERGEN_GIT_SHA");
+// pub const SHA: &str = env!("VERGEN_GIT_SHA");
 
 /// Special characters.
 pub const SPECIAL: &[u8] = b"!@#$%^&*()_+-=[]{};':,./<>?";

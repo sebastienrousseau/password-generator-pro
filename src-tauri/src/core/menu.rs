@@ -1,112 +1,168 @@
-// Copyright © 2022-2023 Password Generator Pro. All rights reserved.
+// Copyright © 2022-2026 Password Generator Pro. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
+//! Application menu construction.
+//!
+//! Tauri 2 unified the menu types: `CustomMenuItem` became
+//! [`MenuItem`], the native `MenuItem::Quit`-style variants became
+//! [`PredefinedMenuItem`] constructors, and every item is built against
+//! a [`Manager`] rather than as a free value. The shape of the menu is
+//! unchanged from v1 — the same submenus, in the same order, emitting
+//! the same identifiers.
+
+use crate::core::ids::*;
 use crate::NAME;
 use convert_case::{Case, Casing};
-use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
+use tauri::menu::{Menu, MenuItem, PredefinedMenuItem, Submenu};
+use tauri::{Manager, Runtime};
 
-/// Create the main application menu.
-///
-/// This function constructs the menu by adding various submenus.
-/// Platform-specific menus and options are conditionally compiled.
-#[tauri::command]
-pub fn create_menu() -> Menu {
-    let mut menu = Menu::new();
-    // Format the application name for consistent display.
-    let formatted_name = NAME.to_string().to_case(Case::Title);
-
-    // Add macOS-specific menu items.
-    #[cfg(target_os = "macos")]
-    {
-        menu = menu.add_submenu(create_macos_menu(&formatted_name));
-    }
- 
-    // Add the File, Window, and Help menus.
-    menu = menu.add_submenu(create_file_menu());
-    menu = menu.add_submenu(create_window_menu());
-    menu = menu.add_submenu(create_help_menu(&formatted_name));
-
-    menu
+/// The application name, title-cased for display.
+#[must_use]
+pub fn display_name() -> String {
+    NAME.to_string().to_case(Case::Title)
 }
 
-#[allow(dead_code)]
-/// Create the macOS-specific menu.
+/// Build the main application menu.
 ///
-/// This function returns a `Submenu` tailored for macOS, including
-/// 'About' and 'Quit' options.
-fn create_macos_menu(formatted_name: &str) -> Submenu {
-    Submenu::new(
-        formatted_name.to_string(),
-        Menu::new()
-            .add_item(CustomMenuItem::new("about".to_string(), format!("About {}", formatted_name)))
-            .add_native_item(MenuItem::Separator)
-            .add_native_item(MenuItem::Hide)
-            .add_native_item(MenuItem::HideOthers)
-            .add_native_item(MenuItem::ShowAll)
-            .add_native_item(MenuItem::Separator)
-            .add_native_item(MenuItem::Quit),
+/// The macOS application submenu is compiled in only on macOS, matching
+/// the platform convention; other platforms get `Quit` on the File menu
+/// instead.
+///
+/// # Errors
+///
+/// Returns [`tauri::Error`] if a menu item cannot be registered with the
+/// application.
+pub fn create_menu<R: Runtime, M: Manager<R>>(app: &M) -> tauri::Result<Menu<R>> {
+    let name = display_name();
+    let menu = Menu::new(app)?;
+
+    #[cfg(target_os = "macos")]
+    menu.append(&create_macos_menu(app, &name)?)?;
+
+    menu.append(&create_file_menu(app)?)?;
+    menu.append(&create_window_menu(app)?)?;
+    menu.append(&create_help_menu(app, &name)?)?;
+
+    Ok(menu)
+}
+
+/// Build the macOS application submenu.
+///
+/// # Errors
+///
+/// Returns [`tauri::Error`] if a menu item cannot be registered.
+#[cfg(target_os = "macos")]
+pub fn create_macos_menu<R: Runtime, M: Manager<R>>(
+    app: &M,
+    name: &str,
+) -> tauri::Result<Submenu<R>> {
+    let about = MenuItem::with_id(app, ABOUT, format!("About {name}"), true, None::<&str>)?;
+    Submenu::with_items(
+        app,
+        name,
+        true,
+        &[
+            &about,
+            &PredefinedMenuItem::separator(app)?,
+            &PredefinedMenuItem::hide(app, None)?,
+            &PredefinedMenuItem::hide_others(app, None)?,
+            &PredefinedMenuItem::show_all(app, None)?,
+            &PredefinedMenuItem::separator(app)?,
+            &PredefinedMenuItem::quit(app, None)?,
+        ],
     )
 }
 
-/// Create the File menu.
+/// Build the File submenu.
 ///
-/// This function returns a `Submenu` that contains common file operations.
-/// Platform-specific options are conditionally compiled.
-fn create_file_menu() -> Submenu {
-    let mut file_menu = Menu::new();
-    file_menu = file_menu.add_native_item(MenuItem::CloseWindow);
-    
-    // Add a Quit option for non-macOS platforms.
-    #[cfg(not(target_os = "macos"))]
-    {
-        file_menu = file_menu.add_native_item(MenuItem::Quit);
-    }
-
-    Submenu::new("File", file_menu)
-}
-
-/// Create the Window menu.
+/// # Errors
 ///
-/// This function returns a `Submenu` that contains window management options.
-/// macOS-specific options are conditionally compiled.
-fn create_window_menu() -> Submenu {
-    let mut window_menu = Menu::new();
-    window_menu = window_menu.add_native_item(MenuItem::Minimize);
+/// Returns [`tauri::Error`] if a menu item cannot be registered.
+pub fn create_file_menu<R: Runtime, M: Manager<R>>(app: &M) -> tauri::Result<Submenu<R>> {
+    let close = PredefinedMenuItem::close_window(app, None)?;
 
-    // Add a Zoom option for macOS platforms.
     #[cfg(target_os = "macos")]
-    {
-        window_menu = window_menu.add_native_item(MenuItem::Zoom);
-    }
+    let items: Vec<&dyn tauri::menu::IsMenuItem<R>> = vec![&close];
 
-    Submenu::new("Window", window_menu)
+    #[cfg(not(target_os = "macos"))]
+    let quit = PredefinedMenuItem::quit(app, None)?;
+    #[cfg(not(target_os = "macos"))]
+    let items: Vec<&dyn tauri::menu::IsMenuItem<R>> = vec![&close, &quit];
+
+    Submenu::with_items(app, "File", true, &items)
 }
 
-/// Create the Help menu.
+/// Build the Window submenu.
 ///
-/// This function returns a `Submenu` that contains links to documentation,
-/// release notes, and other useful resources.
-fn create_help_menu(formatted_name: &str) -> Submenu {
-    let mut help_menu = Menu::new();
-    help_menu = help_menu
-        .add_item(CustomMenuItem::new("website".to_string(), "Get Started"))
-        .add_item(CustomMenuItem::new("documentation".to_string(), "Documentation"))
-        .add_item(CustomMenuItem::new("release-notes".to_string(), "Release Notes"))
-        .add_native_item(MenuItem::Separator)
-        .add_item(CustomMenuItem::new("report-issue".to_string(), "Report Issue"))
-        .add_native_item(MenuItem::Separator)
-        .add_item(CustomMenuItem::new("license".to_string(), "License Agreement"))
-        .add_item(CustomMenuItem::new("acknowledgements".to_string(), "Acknowledgements"))
-        .add_native_item(MenuItem::Separator)
-        .add_item(
-            CustomMenuItem::new(
-                "quit".to_string(),
-                format!("Quit {}", formatted_name),
-            )
-            .accelerator("CmdOrCtrl+Q"),
-        );
+/// # Errors
+///
+/// Returns [`tauri::Error`] if a menu item cannot be registered.
+pub fn create_window_menu<R: Runtime, M: Manager<R>>(app: &M) -> tauri::Result<Submenu<R>> {
+    let minimize = PredefinedMenuItem::minimize(app, None)?;
 
-    Submenu::new("Help", help_menu)
+    #[cfg(target_os = "macos")]
+    let maximize = PredefinedMenuItem::maximize(app, None)?;
+    #[cfg(target_os = "macos")]
+    let items: Vec<&dyn tauri::menu::IsMenuItem<R>> = vec![&minimize, &maximize];
+
+    #[cfg(not(target_os = "macos"))]
+    let items: Vec<&dyn tauri::menu::IsMenuItem<R>> = vec![&minimize];
+
+    Submenu::with_items(app, "Window", true, &items)
 }
 
+/// Build the Help submenu.
+///
+/// # Errors
+///
+/// Returns [`tauri::Error`] if a menu item cannot be registered.
+pub fn create_help_menu<R: Runtime, M: Manager<R>>(
+    app: &M,
+    name: &str,
+) -> tauri::Result<Submenu<R>> {
+    let website = MenuItem::with_id(app, WEBSITE, "Get Started", true, None::<&str>)?;
+    let documentation = MenuItem::with_id(app, DOCUMENTATION, "Documentation", true, None::<&str>)?;
+    let release_notes = MenuItem::with_id(app, RELEASE_NOTES, "Release Notes", true, None::<&str>)?;
+    let report_issue = MenuItem::with_id(app, REPORT_ISSUE, "Report Issue", true, None::<&str>)?;
+    let license = MenuItem::with_id(app, LICENSE, "License Agreement", true, None::<&str>)?;
+    let acknowledgements = MenuItem::with_id(
+        app,
+        ACKNOWLEDGEMENTS,
+        "Acknowledgements",
+        true,
+        None::<&str>,
+    )?;
+    let quit = MenuItem::with_id(app, QUIT, format!("Quit {name}"), true, Some("CmdOrCtrl+Q"))?;
+
+    Submenu::with_items(
+        app,
+        "Help",
+        true,
+        &[
+            &website,
+            &documentation,
+            &release_notes,
+            &PredefinedMenuItem::separator(app)?,
+            &report_issue,
+            &PredefinedMenuItem::separator(app)?,
+            &license,
+            &acknowledgements,
+            &PredefinedMenuItem::separator(app)?,
+            &quit,
+        ],
+    )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn display_name_is_title_cased() {
+        let name = display_name();
+        assert!(!name.is_empty());
+        assert!(!name.contains('-'), "name kept a hyphen: {name:?}");
+        assert!(!name.contains('_'), "name kept an underscore: {name:?}");
+    }
+}

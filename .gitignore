@@ -26,3 +26,6 @@ Icon?
 *.sw?
 Icon
 Icon
+
+# Tauri 2 regenerates these from `capabilities/` on every build.
+src-tauri/gen/schemas/

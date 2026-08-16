@@ -20,11 +20,22 @@ license = "MIT OR Apache-2.0"
 name = "password-generator-pro"
 readme = "README.md"
 repository = "https://github.com/sebastienrousseau/password-generator-pro"
-rust-version = "1.72"
+rust-version = "1.77"
 version = "0.0.7"
 
+[lib]
+# A library plus a thin binary: integration tests cannot link against a
+# bin-only crate, which is why the menu/tray/dispatch code had no
+# coverage under Tauri 1.
+name = "password_generator_pro"
+path = "src/lib.rs"
+
+[[bin]]
+name = "password-generator-pro"
+path = "src/main.rs"
+
 [build-dependencies]
-tauri-build = { version = "1.5.1", features = [] }
+tauri-build = { version = "2.6", features = [] }
 
 [dependencies]
 bcrypt = "0.15.0"
@@ -35,7 +46,12 @@ psph = "0.0.1"
 qrcode = "0.13.0"
 serde = { version = "1.0.193", features = ["derive"] }
 svg = "0.14.0"
-tauri = { version = "1.5.4", features = ["clipboard-all", "dialog-all", "icon-ico", "icon-png", "system-tray", "window-set-icon"] }
+tauri = { version = "2.11", features = ["tray-icon", "image-ico", "image-png"] }
+# Dialogs moved out of core into a plugin in Tauri 2.
+tauri-plugin-dialog = "2.7"
+# The webview calls writeText (src-web/App.svelte); in Tauri 1 that
+# was the `clipboard` allowlist entry, in Tauri 2 it is a plugin.
+tauri-plugin-clipboard-manager = "2"
 time = "0.3.31"
 webbrowser = "0.8.12"
 
@@ -59,21 +75,24 @@ custom-protocol = [ "tauri/custom-protocol" ]
 name = "Password Generator Pro"
 identifier = "com.sebastienrousseau.password-generator-pro"
 
-[profile.release]
-codegen-units = 1 # Compile crates one after another so the compiler can optimize better
-debug = false # Disable debug information
-incremental = false # Disable incremental compilation
-lto = true # Enables link to optimizations
-opt-level = "s" # Optimize for binary size
-panic = "abort" # Strip expensive panic clean-up logic
-strip = "symbols"  # Automatically strip symbols from the binary.
+[[test]]
+# muda refuses to build a menu off the main thread on macOS, and the
+# default harness runs every test on a spawned thread. harness = false
+# makes this file's `main` the test binary, which runs on the main
+# thread.
+name = "menu_construction"
+path = "tests/menu_construction.rs"
+harness = false
 
-# Optimize these packages for perf
-[profile.release.package.flate2]
-opt-level = 3
-[profile.release.package.bcrypt]
-opt-level = 3
-[profile.release.package.rand]
-opt-level = 3
-[profile.release.package.webbrowser]
-opt-level = 3
+[dev-dependencies]
+# `test` gives us tauri::test::mock_builder(), a headless runtime.
+# Without it the menu, tray and dispatch code can only be exercised
+# by launching a real window, so it went untested under Tauri 1.
+tauri = { version = "2.11", features = ["test"] }
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+# Criterion supplies its own harness.
+name = "generation"
+path = "benches/generation.rs"
+harness = false

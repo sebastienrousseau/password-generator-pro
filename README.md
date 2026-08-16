@@ -2,7 +2,7 @@
 
 <img
   src="https://kura.pro/password-generator-pro/images/logos/password-generator-pro.svg"
-  alt="RustLogs (RLG) logo"
+  alt="Password Generator Pro logo"
   height="261"
   width="261"
   align="right" />
