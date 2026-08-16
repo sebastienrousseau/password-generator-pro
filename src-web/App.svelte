@@ -5,8 +5,8 @@
   import GenerateIcon from './Icon/GenerateIcon.svelte'
   import ResetIcon from './Icon/ResetIcon.svelte'
 
-  import { writeText } from '@tauri-apps/api/clipboard'
-  import { invoke } from '@tauri-apps/api/tauri'
+  import { writeText } from '@tauri-apps/plugin-clipboard-manager'
+  import { invoke } from '@tauri-apps/api/core'
 
   import Translate from './Components/i18n'
 

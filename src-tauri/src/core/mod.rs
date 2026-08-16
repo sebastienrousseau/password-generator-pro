@@ -2,6 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
+/// Action module
+pub mod action;
+/// Menu identifiers
+pub mod ids;
 /// Menu module
 pub mod menu;
 /// Tray module
@@ -12,9 +16,4 @@ pub mod website;
 pub mod words;
 
 /// Re-exported modules
-pub use {
-    menu::*,
-    tray::*,
-    website::*,
-    words::*,
-};
+pub use {action::*, ids::*, menu::*, tray::*, website::*, words::*};

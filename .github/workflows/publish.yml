@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: ✅ Checkout code (main branch)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: 'recursive'
           path: ${{ env.SOURCE_PATH }}
@@ -34,10 +34,10 @@ jobs:
         if: runner.os == 'macOS'
         run: rustup target add aarch64-apple-darwin
 
-      - name: ✅ Setup pNpM 7
-        uses: pnpm/action-setup@v2
+      - name: ✅ Setup pnpm 8
+        uses: pnpm/action-setup@v4
         with:
-          version: 7
+          version: 8
           run_install: false
 
       - name: ✅ Get pnpm store directory
@@ -47,17 +47,17 @@ jobs:
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
       - name: ✅ Setup pnpm cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: ✅ Setup Node.js 16
-        uses: actions/setup-node@v3
+      - name: ✅ Setup Node.js 20
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
           cache: "pnpm"
 
       - name: ✅ Install Rust stable toolchain
@@ -67,7 +67,9 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get -y update
-          sudo apt-get -y install libwebkit2gtk-4.0-dev \
+          sudo apt-get -y install libwebkit2gtk-4.1-dev \
+            libjavascriptcoregtk-4.1-dev \
+            libsoup-3.0-dev \
             build-essential \
             curl \
             wget \
@@ -86,7 +88,14 @@ jobs:
       - name: Update version number
         id: update-version
         run: |
-          NEW_VERSION=$(grep version Cargo.toml | sed -n 2p | cut -d '"' -f 2)
+          # The crate manifest lives in src-tauri/; the root manifest is
+          # the workspace and carries no version. Anchor to the first
+          # top-level `version =` so a dependency's version cannot match.
+          NEW_VERSION=$(grep -m1 '^version = ' src-tauri/Cargo.toml | cut -d '"' -f 2)
+          if [ -z "$NEW_VERSION" ]; then
+            echo "could not read a version from src-tauri/Cargo.toml" >&2
+            exit 1
+          fi
           echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
         shell: /bin/bash -e {0}
 

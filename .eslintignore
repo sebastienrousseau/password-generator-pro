@@ -1,0 +1,6 @@
+# Generated output — never lint it.
+coverage/
+dist/
+node_modules/
+src-tauri/target/
+src-tauri/gen/

@@ -5,7 +5,7 @@
 //! # Usage
 //!
 //! ```rust
-//! use logger::Logger;
+//! use password_generator_pro::util::logger::Logger;
 //!
 //! // Log a message to the console with a timestamp, info, message, and details to stderr.
 //! let logger = Logger::new(
@@ -14,7 +14,7 @@
 //!     "SystemTrayEvent",
 //!     "Showing main window"
 //! );
-//! assert_eq!(logger, ());
+//! logger.log();
 //! ```
 //!
 
@@ -30,8 +30,6 @@
 /// * `info` - A string slice that holds the info.
 /// * `message` - A string slice that holds the message.
 /// * `details` - A string slice that holds the details.
-///
-
 #[non_exhaustive]
 #[derive(Default)]
 pub struct Logger {
@@ -45,7 +43,7 @@ impl Logger {
     /// Initializes a new [`Logger`].
     ///
     /// ```no_run
-    /// use logger::Logger;
+    /// use password_generator_pro::util::logger::Logger;
     /// Logger::new(
     ///     "2022-22-22 22:22:22.222222 +00:00:00",
     ///     "INFO",
@@ -67,7 +65,7 @@ impl Logger {
     /// Logs a message to the console with a simple, readable output format.
     ///
     /// ```no_run
-    /// use logger::Logger;
+    /// use password_generator_pro::util::logger::Logger;
     /// Logger::new(
     ///     "2022-22-22 22:22:22.222222 +00:00:00",
     ///     "INFO",

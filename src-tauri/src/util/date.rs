@@ -5,7 +5,7 @@
 //! # Usage
 //!
 //! ```rust
-//! use date::Date;
+//! use password_generator_pro::util::date::Date;
 //!
 //! let time = Date::now();
 //! println!("The current time is: {}", time);
@@ -21,12 +21,11 @@
 /// # Examples
 ///
 /// ```rust
-/// use date::Date;
+/// use password_generator_pro::util::date::Date;
 ///
 /// let date = Date::now();
 /// println!("The current date is: {}", date);
 /// ```
-
 use time::OffsetDateTime;
 
 /// Date Utility
@@ -39,12 +38,12 @@ impl Date {
     /// Initializes a new [`Date`].
     ///
     /// ```no_run
-    /// use date::Date;
+    /// use password_generator_pro::util::date::Date;
     ///
     /// let date = Date::now();
-    /// assert_eq!(date, "2022-22-22 22:22:22.222222 +00:00:00");
+    /// assert!(!date.is_empty());
     /// ```
-
+    ///
     /// Returns the current date and time in UTC.
     ///
     /// The returned value will always be from the range `0001-01-01 00:00:00.000000 +00:00:00` to `9999-12-31 23:59:59.999999 +00:00:00`.
@@ -57,10 +56,11 @@ impl Date {
     /// The returned value will always be in the range `1..=9999`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let year = Time::year();
-    /// assert_eq!(year, "2022");
+    /// let year = Date::year();
+    /// assert_eq!(year.len(), 4);
+    /// assert!(year.parse::<i32>().is_ok());
     /// ```
     #[inline]
     pub fn year() -> String {
@@ -75,10 +75,11 @@ impl Date {
     /// The returned value will always be in the range `1..=12`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let month = Time::month();
-    /// assert_eq!(month, "01");
+    /// let month = Date::month();
+    /// // `time` Displays a Month as its name, e.g. "August".
+    /// assert!(month.chars().all(|c| c.is_ascii_alphabetic()));
     /// ```
     pub fn month() -> String {
         OffsetDateTime::now_utc().month().to_string()
@@ -89,10 +90,12 @@ impl Date {
     /// The returned value will always be in the range `1..=31`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let day = Time::day();
-    /// assert_eq!(day, "02");
+    /// let day = Date::day();
+    /// // Unpadded: "3" rather than "03".
+    /// let n: u8 = day.parse().unwrap();
+    /// assert!((1..=31).contains(&n));
     /// ```
     pub fn day() -> String {
         OffsetDateTime::now_utc().day().to_string()
@@ -103,10 +106,12 @@ impl Date {
     /// The returned value will always be in the range `0..=23`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let hour = Time::hour();
-    /// assert_eq!(hour, "0");
+    /// let hour = Date::hour();
+    /// // Unpadded: "3" rather than "03".
+    /// let n: u8 = hour.parse().unwrap();
+    /// assert!((0..=23).contains(&n));
     /// ```
     pub fn hour() -> String {
         OffsetDateTime::now_utc().hour().to_string()
@@ -117,10 +122,10 @@ impl Date {
     /// The returned value will always be in the range `0..=59`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let time = Time::minute();
-    /// assert_eq!(time, "0");
+    /// let time = Date::minute();
+    /// assert!(!time.is_empty());
     /// ```
     pub fn minute() -> String {
         OffsetDateTime::now_utc().minute().to_string()
@@ -131,10 +136,10 @@ impl Date {
     /// The returned value will always be in the range `0..=59`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let time = Time::second();
-    /// assert_eq!(time, "0");
+    /// let time = Date::second();
+    /// assert!(!time.is_empty());
     /// ```
     pub fn second() -> String {
         OffsetDateTime::now_utc().second().to_string()
@@ -145,10 +150,10 @@ impl Date {
     /// The returned value will always be in the range `0..=999`.
     ///
     /// ```rust
-    /// use date::Date;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let time = Time::millisecond();
-    /// assert_eq!(time, "0");
+    /// let time = Date::millisecond();
+    /// assert!(!time.is_empty());
     /// ```
     pub fn millisecond() -> String {
         OffsetDateTime::now_utc().millisecond().to_string()
@@ -159,10 +164,10 @@ impl Date {
     /// The returned value will always be in the range `0..=999`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let time = Time::microsecond();
-    /// assert_eq!(time, "0");
+    /// let time = Date::microsecond();
+    /// assert!(!time.is_empty());
     /// ```
     pub fn microsecond() -> String {
         OffsetDateTime::now_utc().microsecond().to_string()
@@ -173,10 +178,10 @@ impl Date {
     /// The returned value will always be in the range `0..=999`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let time = Time::nanosecond();
-    /// assert_eq!(time, "0");
+    /// let time = Date::nanosecond();
+    /// assert!(!time.is_empty());
     /// ```
     pub fn nanosecond() -> String {
         OffsetDateTime::now_utc().nanosecond().to_string()
@@ -187,10 +192,10 @@ impl Date {
     /// The returned value will always be in the range `0..=14`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let time = Time::timezone();
-    /// assert_eq!(time, "0");
+    /// let time = Date::timezone();
+    /// assert!(!time.is_empty());
     /// ```
     pub fn timezone() -> String {
         OffsetDateTime::now_utc().offset().to_string()
@@ -201,16 +206,15 @@ impl Date {
     /// The returned value will always be in the range `0..=6`.
     ///
     /// ```rust
-    /// use date::Time;
+    /// use password_generator_pro::util::date::Date;
     ///
-    /// let time = Time::weekday();
-    /// assert_eq!(time, "0");
+    /// let time = Date::weekday();
+    /// assert!(!time.is_empty());
     /// ```
     pub fn weekday() -> String {
         OffsetDateTime::now_utc().weekday().to_string()
     }
 }
-
 
 impl Clone for Date {
     fn clone(&self) -> Self {
@@ -223,7 +227,6 @@ impl Default for Date {
         Date
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -309,9 +312,53 @@ mod tests {
         assert!(!weekday.is_empty());
         assert_eq!(weekday, weekday.to_string());
     }
+    #[test]
+    fn every_accessor_returns_a_parseable_value() {
+        // Each accessor was individually covered, but nothing asserted
+        // the whole surface stays consistent — a new accessor returning
+        // an empty string would have slipped through.
+        assert_eq!(Date::year().len(), 4);
+        assert!(Date::month().chars().all(|c| c.is_ascii_alphabetic()));
+        for (name, value, lo, hi) in [
+            ("day", Date::day(), 1u8, 31u8),
+            ("hour", Date::hour(), 0, 23),
+            ("minute", Date::minute(), 0, 59),
+            ("second", Date::second(), 0, 59),
+        ] {
+            let n: u8 = value
+                .parse()
+                .unwrap_or_else(|_| panic!("{name} is not numeric: {value}"));
+            assert!((lo..=hi).contains(&n), "{name} out of range: {n}");
+        }
+    }
+
+    #[test]
+    fn sub_second_accessors_are_numeric() {
+        for (name, value) in [
+            ("millisecond", Date::millisecond()),
+            ("microsecond", Date::microsecond()),
+            ("nanosecond", Date::nanosecond()),
+        ] {
+            assert!(
+                value.chars().all(|c| c.is_ascii_digit()),
+                "{name} is not numeric: {value}"
+            );
+        }
+    }
+
+    #[test]
+    fn timezone_and_weekday_are_non_empty() {
+        assert!(!Date::timezone().is_empty());
+        assert!(!Date::weekday().is_empty());
+    }
+
+    #[test]
+    fn now_contains_a_date_and_a_time() {
+        let now = Date::now();
+        assert!(now.contains('-'), "no date part in {now}");
+        assert!(now.contains(':'), "no time part in {now}");
+    }
 }
-
-
 
 // Returns the current date and time in UTC.
 // pub fn get_time() -> String {
@@ -328,4 +375,4 @@ mod tests {
 //         assert!(!utc.is_empty());
 //         assert_eq!(utc, utc.to_string());
 //     }
-// }
+//

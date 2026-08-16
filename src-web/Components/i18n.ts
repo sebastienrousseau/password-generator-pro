@@ -30,7 +30,15 @@ import trLocaleJSON from '../Locales/tr-TR.json'
 import ukLocaleJSON from '../Locales/uk-UA.json'
 import zhLocaleJSON from '../Locales/zh-CN.json'
 
-const locales = {
+/// A single locale's table of user-facing strings.
+type LocaleTable = Record<string, string>
+
+/// Every shipped locale, keyed by BCP 47 tag.
+///
+/// Annotated rather than inferred: the tag comes from
+/// `Intl.DateTimeFormat().resolvedOptions().locale` at runtime, so it
+/// is a `string` and cannot index an inferred object literal type.
+const locales: Record<string, LocaleTable> = {
   'ar-AE': arLocaleJSON,
   'ar-BH': arLocaleJSON,
   'ar-CL': arLocaleJSON,
@@ -384,9 +392,40 @@ const locales = {
   'zh-TW': zhLocaleJSON,
 }
 
-/// Translate a key to a locale
-function Translate(key: string, locale: string) {
-  return locales[locale][key]
+/// The locale used when the system locale is not one we ship.
+export const FALLBACK_LOCALE = 'en-GB'
+
+/// Resolve a system locale to one of the shipped locale tables.
+///
+/// `Intl.DateTimeFormat().resolvedOptions().locale` returns whatever
+/// the operating system is set to, which is frequently a locale this
+/// application has no table for — `nb-NO`, `he-IL`, `vi-VN` and every
+/// other unlisted tag. The previous implementation indexed the map
+/// directly, so those users got `undefined[key]`, a TypeError thrown
+/// from App.svelte's script block, and a blank window.
+///
+/// Resolution is: exact tag, then any shipped tag sharing the language
+/// subtag (so `fr-XX` still gets French), then `en-GB`.
+export function resolveLocale(locale: string): string {
+  if (locale in locales) return locale
+
+  const language = locale.split('-')[0].toLowerCase()
+  const sameLanguage = Object.keys(locales).find(
+    (tag) => tag.split('-')[0].toLowerCase() === language,
+  )
+
+  return sameLanguage ?? FALLBACK_LOCALE
+}
+
+/// Translate a key to a locale.
+///
+/// Never throws: an unknown locale falls back per [resolveLocale], and
+/// an unknown key falls back to the same key in `en-GB` before giving
+/// up and returning the key itself, which is more useful on screen
+/// than `undefined`.
+function Translate(key: string, locale: string): string {
+  const table = locales[resolveLocale(locale)]
+  return table[key] ?? locales[FALLBACK_LOCALE][key] ?? key
 }
 
 export default Translate

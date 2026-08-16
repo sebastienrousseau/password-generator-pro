@@ -4,14 +4,12 @@
 //!
 //! # Examples
 //!
+//! ```rust
+//! use password_generator_pro::util::qrcode::QRCode;
+//!
+//! let svg = QRCode::qrcode("Hello World");
+//! assert!(svg.contains("<svg"));
 //! ```
-//! use qrcode::QrCode;
-//!
-//! let qrcode = QrCode::new("Hello World");
-//!
-//! ```"
-//!
-//!
 
 use qrcode::{render::svg, QrCode};
 use std::fs;
@@ -35,9 +33,10 @@ impl QRCode {
     /// # Example
     ///
     /// ```
-    /// use util::qrcode::QRCode;
+    /// use password_generator_pro::util::qrcode::QRCode;
     ///
-    /// let qrcode = QRCode::new("Hello World!");
+    /// let qrcode = QRCode::qrcode("Hello World!");
+    /// assert!(qrcode.contains("<svg"));
     ///
     /// ```
     pub fn qrcode(content: &str) -> String {

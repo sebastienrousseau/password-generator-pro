@@ -1,59 +1,108 @@
-// Copyright © 2022-2023 Password Generator Pro. All rights reserved.
+// Copyright © 2022-2026 Password Generator Pro. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-// Import necessary modules and libraries
+//! System-tray menu construction.
+//!
+//! Tauri 2 replaced the `SystemTray` / `SystemTrayMenu` types with the
+//! generic [`tauri::menu`] API shared by the tray and the application
+//! menu. Menu items are now built against a [`Manager`], because each
+//! item is registered with the running app rather than being a free
+//! value, so the builder takes an app handle where the v1 version took
+//! nothing.
+
+use crate::core::ids::*;
 use crate::NAME;
 use convert_case::{Case, Casing};
-use tauri::{CustomMenuItem, SystemTray, SystemTrayMenu, SystemTrayMenuItem};
+use tauri::menu::{Menu, MenuItem, PredefinedMenuItem};
+use tauri::{Manager, Runtime};
 
-// Constants for menu item identifiers
-const QUIT: &str = "quit";
-const WEBSITE: &str = "website";
-const DOCUMENTATION: &str = "documentation";
-const HIDE: &str = "hide";
-const QUICK_PASSWORD: &str = "quick_password";
-const QUICK_UUID: &str = "quick_uuid";
-const QUICK_QRCODE: &str = "quick_qrcode";
-const ABOUT: &str = "about";
-
-/// Create and configure the system tray.
+/// The label shown for the "About" entry, e.g. `About Password Generator Pro`.
 ///
-/// This function sets up the system tray with custom and native menu items.
-/// Custom items include quick actions for generating passwords, UUIDs, and QR codes,
-/// as well as options for opening the website and documentation.
+/// Split out from menu construction so it can be asserted without a
+/// running application.
+#[must_use]
+pub fn about_label() -> String {
+    format!("About {}", NAME.to_case(Case::Title))
+}
+
+/// Build the system-tray menu.
 ///
-/// Returns a `SystemTray` object with the configured menu.
-#[tauri::command]
-pub fn system_tray() -> SystemTray {
-    // Create menu items for basic operations
-    let quit = CustomMenuItem::new(QUIT.to_string(), "Quit Password Generator   ⌘Q");
-    let website = CustomMenuItem::new(WEBSITE.to_string(), "Get Started");
-    let documentation = CustomMenuItem::new(DOCUMENTATION.to_string(), "Documentation");
-    let hide = CustomMenuItem::new(HIDE.to_string(), "Hide Password Generator   ⌘H");
+/// # Errors
+///
+/// Returns [`tauri::Error`] if any menu item cannot be registered with
+/// the application — for example when the platform menu backend is
+/// unavailable.
+pub fn build_tray_menu<R: Runtime, M: Manager<R>>(app: &M) -> tauri::Result<Menu<R>> {
+    let about = MenuItem::with_id(app, ABOUT, about_label(), true, None::<&str>)?;
+    let website = MenuItem::with_id(app, WEBSITE, "Get Started", true, None::<&str>)?;
+    let documentation = MenuItem::with_id(app, DOCUMENTATION, "Documentation", true, None::<&str>)?;
+    let quick_password = MenuItem::with_id(
+        app,
+        QUICK_PASSWORD,
+        "Copy Password to Clipboard",
+        true,
+        None::<&str>,
+    )?;
+    let quick_uuid = MenuItem::with_id(
+        app,
+        QUICK_UUID,
+        "Copy UUID to Clipboard",
+        true,
+        None::<&str>,
+    )?;
+    let quick_qrcode = MenuItem::with_id(
+        app,
+        QUICK_QRCODE,
+        "Save QR Code to File",
+        true,
+        None::<&str>,
+    )?;
+    // The accelerator is declared rather than baked into the label, so
+    // the platform renders it in its own convention.
+    let hide = MenuItem::with_id(
+        app,
+        HIDE,
+        "Hide Password Generator",
+        true,
+        Some("CmdOrCtrl+H"),
+    )?;
+    let quit = MenuItem::with_id(
+        app,
+        QUIT,
+        "Quit Password Generator",
+        true,
+        Some("CmdOrCtrl+Q"),
+    )?;
 
-    // Create an "About" menu item with a dynamically generated name
-    let name = format!("About {}", NAME.to_case(Case::Title));
+    Menu::with_items(
+        app,
+        &[
+            &about,
+            &website,
+            &documentation,
+            &PredefinedMenuItem::separator(app)?,
+            &quick_password,
+            &quick_uuid,
+            &quick_qrcode,
+            &PredefinedMenuItem::separator(app)?,
+            &hide,
+            &PredefinedMenuItem::separator(app)?,
+            &quit,
+        ],
+    )
+}
 
-    // Create menu items for quick actions
-    let quick_password = CustomMenuItem::new(QUICK_PASSWORD.to_string(), "Copy Password to Clipboard");
-    let quick_uuid = CustomMenuItem::new(QUICK_UUID.to_string(), "Copy UUID to Clipboard");
-    let quick_qrcode = CustomMenuItem::new(QUICK_QRCODE.to_string(), "Save QR Code to File");
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-    // Assemble the menu items into a system tray menu
-    let tray_menu = SystemTrayMenu::new()
-        .add_item(CustomMenuItem::new(ABOUT, name))
-        .add_item(website)
-        .add_item(documentation)
-        .add_native_item(SystemTrayMenuItem::Separator)
-        .add_item(quick_password)
-        .add_item(quick_uuid)
-        .add_item(quick_qrcode)
-        .add_native_item(SystemTrayMenuItem::Separator)
-        .add_item(hide)
-        .add_native_item(SystemTrayMenuItem::Separator)
-        .add_item(quit);
-
-    // Initialize and return the system tray with the constructed menu
-    SystemTray::new().with_menu(tray_menu)
+    #[test]
+    fn about_label_is_title_cased() {
+        let label = about_label();
+        assert!(label.starts_with("About "), "got {label:?}");
+        // NAME is kebab/snake in the manifest; the label must not leak that.
+        assert!(!label.contains('-'), "label kept a hyphen: {label:?}");
+        assert!(!label.contains('_'), "label kept an underscore: {label:?}");
+    }
 }

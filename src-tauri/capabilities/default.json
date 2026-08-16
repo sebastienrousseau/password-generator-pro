@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schema.tauri.app/config/2/capability",
+  "identifier": "default",
+  "description": "Permissions for the main window. This replaces the Tauri 1 `allowlist`, which granted dialog:all, clipboard:all and window:setIcon. Each is expressed here as the narrowest v2 permission that preserves what the application actually does: the webview writes to the clipboard (src-web/App.svelte), shows message dialogs, opens a save dialog, and toggles the main window.",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    "core:window:allow-set-icon",
+    "core:window:allow-show",
+    "core:window:allow-hide",
+    "core:window:allow-is-visible",
+    "dialog:allow-message",
+    "dialog:allow-save",
+    "clipboard-manager:allow-write-text"
+  ]
+}

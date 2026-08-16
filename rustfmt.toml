@@ -1,0 +1,10 @@
+# Formatting is pinned here so that it does not depend on whoever runs
+# it. With no `rustfmt.toml` in the repository, rustfmt falls back to
+# the user's `~/.rustfmt.toml`, so a contributor with a personal config
+# formats differently from CI — `cargo fmt --check` then passes locally
+# and fails in the pipeline with a diff nobody can reproduce.
+#
+# These are stable rustfmt defaults, stated explicitly. Adding options
+# here changes every file, so it is a deliberate decision, not a
+# side effect of someone's dotfiles.
+edition = "2021"

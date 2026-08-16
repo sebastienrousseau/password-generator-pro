@@ -11,18 +11,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Rust backend CI
-  rust-ci:
-    name: Rust CI
-    uses: sebastienrousseau/pipelines/.github/workflows/rust-ci.yml@main
-    with:
-      rust-version: 'stable'
-      run-clippy: true
-      run-fmt: true
-      run-audit: true
-      run-coverage: false
-      cargo-features: ''
-    secrets: inherit
+  # Rust backend CI lives in `rust.yml`, not in the shared pipeline.
+  #
+  # The shared `rust-ci.yml` runs cargo on a bare ubuntu runner and
+  # takes no system-package input, so it cannot build a GTK/webkit
+  # crate:
+  #
+  #     The system library `glib-2.0` required by crate `glib-sys` was
+  #     not found.
+  #
+  # It failed on every run for that reason, never having compiled this
+  # project. `rust.yml` installs the webkit2gtk 4.1 stack first and
+  # gates on fmt, clippy, the full workspace test run and the
+  # benchmarks, on both ubuntu and macOS.
 
   # TypeScript/Svelte frontend CI
   node-ci:
@@ -34,6 +35,9 @@ jobs:
       run-lint: true
       run-typecheck: true
       run-tests: true
-      run-build: true
+      # `pnpm build` is `tauri build`, which needs the webkit2gtk stack
+      # this runner does not have. The application build is rust.yml's
+      # job; node-ci covers lint, types, tests and coverage.
+      run-build: false
       test-coverage: true
     secrets: inherit

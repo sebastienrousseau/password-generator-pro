@@ -1,85 +1,15 @@
 {
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Password Generator Pro",
+  "version": "0.0.7",
+  "identifier": "com.sebastienrousseau.password-generator-pro",
   "build": {
     "beforeBuildCommand": "pnpm run build:web",
     "beforeDevCommand": "pnpm run dev:web",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist",
-    "withGlobalTauri": false
+    "devUrl": "http://localhost:1420",
+    "frontendDist": "../dist"
   },
-  "package": {
-    "productName": "Password Generator Pro",
-    "version": "0.0.7"
-  },
-  "tauri": {
-    "allowlist": {
-      "dialog": {
-        "all": true
-      },
-      "clipboard": {
-        "all": true,
-        "writeText": true,
-        "readText": true
-      },
-      "window": {
-        "setIcon": true
-      }
-    },
-    "bundle": {
-      "active": true,
-      "category": "Utility",
-      "copyright": "Copyright © Password Generator Pro 2022-2023. All rights reserved.",
-      "deb": {
-        "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/icon.icns",
-        "icons/icon.ico",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/32x32.png",
-        "icons/Square107x107.png",
-        "icons/Square142x142.png",
-        "icons/Square150x150.png",
-        "icons/Square284x284.png",
-        "icons/Square30x30.png",
-        "icons/Square310x310.png",
-        "icons/Square44x44.png",
-        "icons/Square71x71.png",
-        "icons/Square89x89.png"
-      ],
-      "identifier": "com.sebastienrousseau.password-generator-pro",
-      "longDescription": "A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords",
-      "macOS": {
-        "entitlements": "entitlements.plist",
-        "exceptionDomain": "",
-        "frameworks": [],
-        "license": "../COPYRIGHT",
-        "minimumSystemVersion": "10.13.6",
-        "providerShortName": null,
-        "signingIdentity": null
-      },
-      "publisher": "",
-      "resources": [],
-      "shortDescription": "",
-      "targets": "all",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
-      }
-    },
-    "security": {
-      "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
-    },
-    "systemTray": {
-      "iconAsTemplate": true,
-      "iconPath": "icons/icon.png",
-      "menuOnLeftClick": true
-    },
-    "updater": {
-      "active": false
-    },
+  "app": {
     "windows": [
       {
         "center": true,
@@ -91,6 +21,61 @@
         "title": "Password Generator Pro",
         "width": 600
       }
-    ]
-  }
+    ],
+    "security": {
+      "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
+    },
+    "trayIcon": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true,
+      "menuOnLeftClick": true
+    },
+    "withGlobalTauri": false
+  },
+  "bundle": {
+    "active": true,
+    "category": "Utility",
+    "copyright": "Copyright \u00a9 Password Generator Pro 2022-2023. All rights reserved.",
+    "externalBin": [],
+    "icon": [
+      "icons/icon.icns",
+      "icons/icon.ico",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/32x32.png",
+      "icons/Square107x107.png",
+      "icons/Square142x142.png",
+      "icons/Square150x150.png",
+      "icons/Square284x284.png",
+      "icons/Square30x30.png",
+      "icons/Square310x310.png",
+      "icons/Square44x44.png",
+      "icons/Square71x71.png",
+      "icons/Square89x89.png"
+    ],
+    "longDescription": "A fast, simple and powerful open-source cross platform utility tool for generating strong, unique and random passwords",
+    "macOS": {
+      "entitlements": "entitlements.plist",
+      "frameworks": [],
+      "minimumSystemVersion": "10.13.6",
+      "providerShortName": null,
+      "signingIdentity": null
+    },
+    "publisher": "",
+    "resources": [],
+    "shortDescription": "",
+    "targets": "all",
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    },
+    "linux": {
+      "deb": {
+        "depends": []
+      }
+    },
+    "licenseFile": "../COPYRIGHT"
+  },
+  "plugins": {}
 }
