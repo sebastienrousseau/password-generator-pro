@@ -15,11 +15,13 @@
 //! The other three are effectively free and are measured so a
 //! regression in them would stand out rather than hide behind bcrypt.
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion, Throughput};
+use criterion::{criterion_group, criterion_main, Criterion, Throughput};
+// criterion::black_box is deprecated in 0.8 in favour of the std one.
 use password_generator_pro::core::action::action_for;
 use password_generator_pro::core::ids::{MENU_ITEM_IDS, TRAY_ITEM_IDS};
 use password_generator_pro::util::qrcode::QRCode;
 use password_generator_pro::util::uuid::UUID;
+use std::hint::black_box;
 
 /// bcrypt at the cost factor the application ships.
 ///
