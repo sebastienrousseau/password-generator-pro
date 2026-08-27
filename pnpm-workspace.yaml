@@ -1,5 +1,14 @@
 # pnpm workspace configuration.
 #
+# This is a single-package repository, not a monorepo -- the file exists
+# because pnpm 10+ reads `overrides` and `allowBuilds` from here rather
+# than from package.json. pnpm still requires `packages`, so it names the
+# root and nothing else.
+packages:
+  - "."
+
+# pnpm workspace configuration.
+#
 # `overrides` lives here, not in package.json's `pnpm` field. pnpm 10
 # stopped reading that field and says so only as a warning:
 #
