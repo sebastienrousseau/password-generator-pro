@@ -38,22 +38,22 @@ path = "src/main.rs"
 tauri-build = { version = "2.6", features = [] }
 
 [dependencies]
-bcrypt = "0.15.0"
+bcrypt = "0.19.3"
 cli-clipboard = "0.4.0"
-cmn = "0.0.3"
-convert_case = "0.6.0"
+cmn = "0.0.6"
+convert_case = "0.12.0"
 psph = "0.0.1"
-qrcode = "0.13.0"
-serde = { version = "1.0.193", features = ["derive"] }
-svg = "0.14.0"
-tauri = { version = "2.11", features = ["tray-icon", "image-ico", "image-png"] }
+qrcode = "0.14.1"
+serde = { version = "1.0.229", features = ["derive"] }
+svg = "0.18.0"
+tauri = { version = "2.11.5", features = ["tray-icon", "image-ico", "image-png"] }
 # Dialogs moved out of core into a plugin in Tauri 2.
-tauri-plugin-dialog = "2.7"
+tauri-plugin-dialog = "2.7.2"
 # The webview calls writeText (src-web/App.svelte); in Tauri 1 that
 # was the `clipboard` allowlist entry, in Tauri 2 it is a plugin.
-tauri-plugin-clipboard-manager = "2"
-time = "0.3.31"
-webbrowser = "1.2.2"
+tauri-plugin-clipboard-manager = "2.3.2"
+time = "0.3.55"
+webbrowser = "1.2.4"
 
 [dependencies.uuid]
 version = "1.6.1"
@@ -88,8 +88,8 @@ harness = false
 # `test` gives us tauri::test::mock_builder(), a headless runtime.
 # Without it the menu, tray and dispatch code can only be exercised
 # by launching a real window, so it went untested under Tauri 1.
-tauri = { version = "2.11", features = ["test"] }
-criterion = { version = "0.5", features = ["html_reports"] }
+tauri = { version = "2.11.5", features = ["test"] }
+criterion = { version = "0.8.2", features = ["html_reports"] }
 
 [[bench]]
 # Criterion supplies its own harness.

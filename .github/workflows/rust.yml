@@ -14,10 +14,13 @@ jobs:
       - name: ✅ Checkout code (main branch)
         uses: actions/checkout@v4
 
-      - name: ✅ Setup pnpm 8
+      - name: ✅ Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 8
+          # No `version:` here -- pnpm/action-setup reads
+          # `packageManager` from package.json, so CI and a local
+          # install cannot drift. Pinning 8 is what hid the fact
+          # that pnpm 10+ ignores `pnpm.overrides`.
           run_install: false
 
       - name: ✅ Get pnpm store directory
@@ -34,10 +37,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: ✅ Setup Node.js 20
+      - name: ✅ Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: "pnpm"
 
       - name: ✅ Install Rust stable toolchain
