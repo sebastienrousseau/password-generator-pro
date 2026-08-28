@@ -376,3 +376,30 @@ mod tests {
 //         assert_eq!(utc, utc.to_string());
 //     }
 //
+
+#[cfg(test)]
+mod trait_impl_tests {
+    use super::*;
+
+    #[test]
+    fn clone_yields_an_equivalent_date() {
+        // `Date` is a unit struct reading the clock on demand, so a clone
+        // is interchangeable with the original rather than a snapshot.
+        let original = Date;
+        let cloned = original.clone();
+        assert_eq!(
+            std::mem::size_of_val(&cloned),
+            std::mem::size_of_val(&original)
+        );
+    }
+
+    #[test]
+    fn default_is_constructible_and_usable() {
+        // `Date`'s accessors are associated functions reading the clock,
+        // so a defaulted value is interchangeable with a direct one; the
+        // point here is that Default is constructible at all.
+        let date = Date::default();
+        assert_eq!(std::mem::size_of_val(&date), 0);
+        assert!(!Date::year().is_empty());
+    }
+}

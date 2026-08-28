@@ -6,7 +6,7 @@
 //!
 //! Tauri 2 replaced the `SystemTray` / `SystemTrayMenu` types with the
 //! generic [`tauri::menu`] API shared by the tray and the application
-//! menu. Menu items are now built against a [`Manager`], because each
+//! menu. Menu items are now built against a [`tauri::Manager`], because each
 //! item is registered with the running app rather than being a free
 //! value, so the builder takes an app handle where the v1 version took
 //! nothing.

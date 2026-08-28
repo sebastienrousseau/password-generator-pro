@@ -5,9 +5,9 @@
 //! Application menu construction.
 //!
 //! Tauri 2 unified the menu types: `CustomMenuItem` became
-//! [`MenuItem`], the native `MenuItem::Quit`-style variants became
-//! [`PredefinedMenuItem`] constructors, and every item is built against
-//! a [`Manager`] rather than as a free value. The shape of the menu is
+//! [`tauri::menu::MenuItem`], the native `MenuItem::Quit`-style variants became
+//! [`tauri::menu::PredefinedMenuItem`] constructors, and every item is built against
+//! a [`tauri::Manager`] rather than as a free value. The shape of the menu is
 //! unchanged from v1 — the same submenus, in the same order, emitting
 //! the same identifiers.
 
