@@ -39,7 +39,6 @@ tauri-build = { version = "2.6", features = [] }
 
 [dependencies]
 bcrypt = "0.19.3"
-cli-clipboard = "0.4.0"
 cmn = "0.0.6"
 convert_case = "0.12.0"
 psph = "0.0.1"
