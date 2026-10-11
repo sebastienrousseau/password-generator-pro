@@ -22,7 +22,6 @@ extern crate cmn;
 extern crate psph;
 
 pub use crate::core::*;
-use cli_clipboard::{ClipboardContext, ClipboardProvider};
 use cmn::Constants;
 use convert_case::{Case, Casing};
 use psph::Password;
@@ -30,6 +29,7 @@ use std::fs;
 use tauri::menu::MenuEvent;
 use tauri::tray::TrayIconBuilder;
 use tauri::{AppHandle, Manager, Runtime};
+use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons};
 use time::OffsetDateTime;
 use util::{constant::*, date::Date, logger::Logger, qrcode::QRCode, uuid::UUID};
@@ -137,15 +137,11 @@ pub fn perform<R: Runtime>(app: &AppHandle<R>, id: &str) {
         }
         Action::CopyPassword => {
             if let Ok(generated) = generate_password(4, "-") {
-                if let Ok(mut ctx) = ClipboardContext::new() {
-                    let _ = ctx.set_contents(generated.password);
-                }
+                let _ = app.clipboard().write_text(generated.password);
             }
         }
         Action::CopyUuid => {
-            if let Ok(mut ctx) = ClipboardContext::new() {
-                let _ = ctx.set_contents(UUID::uuid());
-            }
+            let _ = app.clipboard().write_text(UUID::uuid());
         }
         Action::SaveQrCode => {
             app.dialog()
