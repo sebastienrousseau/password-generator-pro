@@ -194,7 +194,8 @@ change to `HASH_COST` is a visible decision rather than a silent one.
 
 ## Toolchain
 
-`rust-version` is 1.77 (`OnceLock`, C-string literals in the v2 macro
-expansion). CI pins pnpm 7 via `pnpm/action-setup@v2`; the lockfile is
+`rust-version` is 1.89, one floor shared with the maintainer's other
+Rust crates; the code itself needs 1.77 (`OnceLock`, C-string literals
+in the v2 macro expansion). CI pins pnpm 7 via `pnpm/action-setup@v2`; the lockfile is
 `lockfileVersion: '6.0'` and was regenerated with pnpm 8 to keep that
 format — a newer pnpm rewrites it to `9.0`, which CI cannot read.
