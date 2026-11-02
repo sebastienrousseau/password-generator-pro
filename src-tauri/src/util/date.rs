@@ -259,7 +259,9 @@ mod tests {
         let day = Date::day();
         assert!(!day.is_empty());
         assert_eq!(day, day.to_string());
-        assert_eq!(day.len(), 2);
+        // Unpadded, so one digit on the 1st to the 9th.
+        let n: u8 = day.parse().unwrap();
+        assert!((1..=31).contains(&n));
     }
 
     #[test]
